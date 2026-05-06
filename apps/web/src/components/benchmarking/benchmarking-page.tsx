@@ -579,11 +579,11 @@ export function BenchmarkingPage() {
                     }}
                   />
                   <Legend
-                    formatter={v => ({
+                    formatter={(v: string) => ({
                       recettes: 'Recettes', dépenses: 'Dépenses', solde: 'Solde net',
                       tendanceRecettes: 'Tendance recettes (régression)',
                       tendanceDépenses: 'Tendance dépenses (régression)',
-                    }[v] ?? v)}
+                    } as Record<string, string>)[v] ?? v}
                   />
                   {/* Actual data */}
                   <Line type="monotone" dataKey="recettes" stroke="#10b981" strokeWidth={2.5} dot={{ r: 4, fill: '#10b981' }} connectNulls activeDot={{ r: 6 }} />
