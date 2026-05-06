@@ -1,0 +1,38 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build outputs
+.next/
+dist/
+out/
+
+# Environment files — NE JAMAIS commiter
+.env
+.env.local
+.env.*.local
+.env.production
+packages/db/.env
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# Turbo cache
+.turbo/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Prisma
+packages/db/generated/
+
+# Uploads
+apps/web/public/uploads/
+
+# IDE
+.vscode/
+.idea/
+*.swp
