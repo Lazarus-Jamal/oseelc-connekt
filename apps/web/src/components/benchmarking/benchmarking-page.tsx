@@ -418,7 +418,7 @@ export function BenchmarkingPage() {
                       formatCurrency(value),
                       name === 'recettes' ? 'Recettes' : name === 'dépenses' ? 'Dépenses' : 'Solde net',
                     ]}
-                    labelFormatter={(_, payload) => payload?.[0]?.payload?.fullName ?? ''}
+                    labelFormatter={(_: any, payload: any[]) => payload?.[0]?.payload?.fullName ?? ''}
                   />
                   <Legend formatter={v => v === 'recettes' ? 'Recettes' : v === 'dépenses' ? 'Dépenses' : 'Solde net'} />
                   <Bar dataKey="recettes" fill="#10b981" radius={[4, 4, 0, 0]} />
