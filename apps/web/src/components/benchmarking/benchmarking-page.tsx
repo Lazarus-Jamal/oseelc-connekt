@@ -420,7 +420,7 @@ export function BenchmarkingPage() {
                     ]}
                     labelFormatter={(_: any, payload: any[]) => payload?.[0]?.payload?.fullName ?? ''}
                   />
-                  <Legend formatter={v => v === 'recettes' ? 'Recettes' : v === 'dépenses' ? 'Dépenses' : 'Solde net'} />
+                  <Legend formatter={(v: string) => v === 'recettes' ? 'Recettes' : v === 'dépenses' ? 'Dépenses' : 'Solde net'} />
                   <Bar dataKey="recettes" fill="#10b981" radius={[4, 4, 0, 0]} />
                   <Bar dataKey="dépenses" fill="#ef4444" radius={[4, 4, 0, 0]} />
                   <Bar dataKey="solde" fill="#3b82f6" radius={[4, 4, 0, 0]} />
