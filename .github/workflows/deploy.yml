@@ -16,13 +16,13 @@ jobs:
       - name: 🚀 Déploiement via SSH
         uses: appleboy/ssh-action@v1
         with:
-          host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USER }}
-          key: ${{ secrets.VPS_SSH_KEY }}
+          host: ${{ secrets.CPANEL_HOST }}
+          username: ${{ secrets.CPANEL_USER }}
+          key: ${{ secrets.CPANEL_SSH_KEY }}
           port: 22
           script: |
             set -e
-            cd /var/www/oseelc-connekt
+            cd ~/oseelc-connekt
 
             echo "==> Pull du code..."
             git pull origin main
@@ -33,16 +33,14 @@ jobs:
             echo "==> Génération du client Prisma..."
             pnpm db:generate
 
+            echo "==> Migrations base de données..."
+            pnpm db:push
+
             echo "==> Build de l'application..."
             pnpm build
 
-            echo "==> Synchronisation de la base de données..."
-            cd packages/db && pnpm db:push && cd ../..
-
-            echo "==> Redémarrage de l'application..."
-            pm2 restart oseelc-connekt || pm2 start pnpm \
-              --name "oseelc-connekt" \
-              --cwd /var/www/oseelc-connekt/apps/web \
-              -- start
+            echo "==> Redémarrage de l'application (Passenger)..."
+            mkdir -p apps/web/tmp
+            touch apps/web/tmp/restart.txt
 
             echo "==> ✅ Déploiement terminé"
