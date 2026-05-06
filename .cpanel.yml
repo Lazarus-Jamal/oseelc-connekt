@@ -4,6 +4,5 @@ deployment:
     - /bin/bash -l -c "pnpm install --frozen-lockfile"
     - /bin/bash -l -c "pnpm db:generate"
     - /bin/bash -l -c "pnpm db:push"
-    - /bin/bash -l -c "pnpm build"
     - mkdir -p apps/web/tmp
     - touch apps/web/tmp/restart.txt
