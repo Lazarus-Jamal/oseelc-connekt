@@ -3,6 +3,7 @@ import { StatSheetEditPage } from '@/components/statistics/stat-sheet-edit-page'
 
 export const metadata: Metadata = { title: 'Continuer la saisie' }
 
-export default function StatSheetEditRoutePage({ params }: { params: { id: string } }) {
-  return <StatSheetEditPage id={params.id} />
+export default async function StatSheetEditRoutePage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params
+  return <StatSheetEditPage id={id} />
 }
