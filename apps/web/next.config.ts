@@ -1,8 +1,8 @@
 import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
-  transpilePackages: ['@care-connekt/shared'],
-  serverExternalPackages: ['@prisma/client', '@prisma/adapter-pg', '@care-connekt/db', 'pg', 'bcryptjs'],
+  transpilePackages: ['@care-connekt/shared', '@care-connekt/db'],
+  serverExternalPackages: ['@prisma/client', '@prisma/adapter-pg', 'pg', 'bcryptjs'],
   images: {
     remotePatterns: [],
   },
