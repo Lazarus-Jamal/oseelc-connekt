@@ -11,11 +11,14 @@
   },
   "dependencies": {
     "@prisma/client": "^6.2.1",
+    "@prisma/adapter-pg": "^6.2.1",
+    "pg": "^8.13.1",
     "bcryptjs": "^2.4.3"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",
     "@types/node": "^22.10.7",
+    "@types/pg": "^8.11.10",
     "prisma": "^6.2.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.7.3"
