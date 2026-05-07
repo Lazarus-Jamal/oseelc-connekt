@@ -36,7 +36,7 @@ export async function GET() {
 
   const deadlines = await prisma.statDeadline.findMany({ where })
 
-  const alerts = deadlines.map(d => {
+  const alerts = deadlines.map((d: typeof deadlines[number]) => {
     // Due date = dueDay of the month after the stat period
     const dueMonth  = currentMonth === 12 ? 1 : currentMonth + 1
     const dueYear   = currentMonth === 12 ? currentYear + 1 : currentYear
@@ -46,7 +46,7 @@ export async function GET() {
     const isAlert   = diffDays >= 0 && diffDays <= d.alertDays
 
     return { id: d.id, dueDate, diffDays, isMissed, isAlert, note: d.note }
-  }).filter(a => a.isMissed || a.isAlert)
+  }).filter((a: { isMissed: boolean; isAlert: boolean }) => a.isMissed || a.isAlert)
 
   return NextResponse.json({ success: true, data: alerts })
 }
