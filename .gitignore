@@ -27,8 +27,9 @@ pnpm-debug.log*
 .DS_Store
 Thumbs.db
 
-# Prisma
-packages/db/generated/
+# Prisma — generated client commité (JS only, pas les binaires)
+packages/db/generated/client/*.node
+packages/db/generated/client/*.dll.node
 
 # Uploads
 apps/web/public/uploads/

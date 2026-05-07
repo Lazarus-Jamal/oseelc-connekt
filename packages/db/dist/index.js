@@ -5,7 +5,7 @@ exports.prisma = void 0
 
 const { PrismaPg } = require('@prisma/adapter-pg')
 const { Pool } = require('pg')
-const { PrismaClient } = require('@prisma/client')
+const { PrismaClient } = require('../generated/client')
 
 const globalForPrisma = globalThis
 
@@ -24,7 +24,7 @@ if (process.env.NODE_ENV !== 'production') {
   globalForPrisma.prisma = exports.prisma
 }
 
-const prismaClientExports = require('@prisma/client')
+const prismaClientExports = require('../generated/client')
 for (const key of Object.keys(prismaClientExports)) {
   if (!(key in exports)) {
     Object.defineProperty(exports, key, {

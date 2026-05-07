@@ -3,7 +3,6 @@ deployment:
   tasks:
     - /bin/bash -l -c "npm install -g pnpm --silent"
     - /bin/bash -l -c "pnpm install"
-    - /bin/bash -l -c "pnpm db:generate"
-    - /bin/bash -l -c "pnpm db:push"
+    - /bin/bash -l -c "cd packages/db && ./node_modules/.bin/prisma generate"
     - mkdir -p apps/web/tmp
     - touch apps/web/tmp/restart.txt
