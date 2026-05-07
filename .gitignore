@@ -27,9 +27,14 @@ pnpm-debug.log*
 .DS_Store
 Thumbs.db
 
-# Prisma — generated client commité (JS only, pas les binaires)
+# Prisma — generated client commité (JS only + binaire Linux, pas Windows)
 packages/db/generated/client/*.node
+!packages/db/generated/client/libquery_engine-debian-openssl-1.1.x.so.node
 packages/db/generated/client/*.dll.node
+
+# Prisma engine binary pour le mode bundlé (apps/web/generated/client/)
+apps/web/generated/client/*.node
+!apps/web/generated/client/libquery_engine-debian-openssl-1.1.x.so.node
 
 # Uploads
 apps/web/public/uploads/

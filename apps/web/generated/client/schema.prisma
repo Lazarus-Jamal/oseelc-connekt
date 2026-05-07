@@ -1,0 +1,575 @@
+generator client {
+  provider      = "prisma-client-js"
+  output        = "../generated/client"
+  binaryTargets = ["native", "debian-openssl-1.1.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ─── ENUMS ───────────────────────────────────────────────────────────────────
+
+enum Role {
+  SUPER_ADMIN // Informaticien - accès total
+  DATA_ADMIN // Admin national des data managers — gère tout le volet stats
+  DIRECTION // Direction de l'oeuvre - supervision nationale
+  REGIONAL_DIRECTOR // Directeur régional
+  FACILITY_CHIEF // Chef de centre / directeur d'hôpital
+  FINANCIER // Financier d'un centre ou hôpital
+  DATA_MANAGER // Responsable data régional (regionId) ou de centre (facilityId)
+}
+
+enum FacilityType {
+  HOSPITAL
+  HEALTH_CENTER
+}
+
+enum DeclarationPeriodType {
+  DAILY
+  WEEKLY
+  MONTHLY
+}
+
+enum DeclarationType {
+  REVENUE
+  EXPENSE
+}
+
+enum DeclarationStatus {
+  DRAFT
+  SUBMITTED
+  REVIEWED // Vu par le chef de centre
+  VALIDATED // Validé par la région
+  REJECTED
+}
+
+enum StatSheetStatus {
+  DRAFT
+  SUBMITTED
+  VALIDATED
+  REJECTED
+}
+
+enum NotificationType {
+  DECLARATION_SUBMITTED
+  DECLARATION_REVIEWED
+  DECLARATION_VALIDATED
+  DECLARATION_REJECTED
+  STAT_SUBMITTED
+  STAT_VALIDATED
+  STAT_REJECTED
+  DEADLINE_APPROACHING
+  DEADLINE_MISSED
+}
+
+enum MessageCategory {
+  CIRCULAIRE
+  BULLETIN_PAIE
+  PIECE_COMPTABLE
+  NOTE_SERVICE
+  RAPPORT
+  AUTRE
+}
+
+enum MessagePriority {
+  NORMAL
+  IMPORTANT
+  URGENT
+}
+
+enum AuditAction {
+  CREATE
+  UPDATE
+  DELETE
+  LOGIN
+  LOGOUT
+  EXPORT
+}
+
+// ─── ORGANISATION ─────────────────────────────────────────────────────────────
+
+model Organization {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  address     String?
+  phone       String?
+  email       String?
+  logoUrl     String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  regions Region[]
+  users   User[]
+
+  @@map("organizations")
+}
+
+model Region {
+  id             String   @id @default(cuid())
+  name           String
+  code           String   @unique
+  organizationId String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  organization   Organization              @relation(fields: [organizationId], references: [id])
+  facilities     Facility[]
+  users          User[]
+  periodConfigs  DeclarationPeriodConfig[]
+  statDeadlines  StatDeadline[]
+  planningEvents PlanningEvent[]
+
+  @@map("regions")
+}
+
+model Facility {
+  id        String       @id @default(cuid())
+  name      String
+  code      String       @unique
+  type      FacilityType
+  regionId  String
+  address   String?
+  phone     String?
+  email     String?
+  latitude  Float?
+  longitude Float?
+  isActive  Boolean      @default(true)
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+
+  region         Region                    @relation(fields: [regionId], references: [id])
+  users          User[]
+  declarations   Declaration[]
+  periodConfigs  DeclarationPeriodConfig[]
+  statSheets     StatSheet[]
+  budgets        Budget[]
+  statDeadlines  StatDeadline[]
+  planningEvents PlanningEvent[]
+
+  @@map("facilities")
+}
+
+// ─── UTILISATEURS ─────────────────────────────────────────────────────────────
+
+model User {
+  id             String    @id @default(cuid())
+  email          String    @unique
+  name           String
+  passwordHash   String
+  role           Role
+  isActive       Boolean   @default(true)
+  phone          String?
+  avatarUrl      String?
+  lastLoginAt    DateTime?
+  twoFAEnabled   Boolean   @default(false)
+  twoFAOtp       String?
+  twoFAOtpExpiry DateTime?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  // Appartenance organisationnelle (selon le rôle)
+  organizationId String?
+  regionId       String?
+  facilityId     String?
+
+  organization Organization? @relation(fields: [organizationId], references: [id])
+  region       Region?       @relation(fields: [regionId], references: [id])
+  facility     Facility?     @relation(fields: [facilityId], references: [id])
+
+  declarations         Declaration[]           @relation("SubmittedBy")
+  reviewedDeclarations Declaration[]           @relation("ReviewedBy")
+  statSheets           StatSheet[]
+  notifications        Notification[]
+  auditLogs            AuditLog[]
+  sessions             Session[]
+  sentMessages         AdminMessage[]          @relation("SentMessages")
+  receivedMessages     AdminMessageRecipient[] @relation("ReceivedMessages")
+  statDeadlines        StatDeadline[]          @relation("DeadlineCreatedBy")
+  pushSubscriptions    PushSubscription[]
+  planningEvents       PlanningEvent[]         @relation("PlanningCreatedBy")
+
+  @@map("users")
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  userId    String
+  token     String   @unique
+  expiresAt DateTime
+  ipAddress String?
+  userAgent String?
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+// ─── CONFIGURATION DES PÉRIODES ───────────────────────────────────────────────
+
+model DeclarationPeriodConfig {
+  id         String                @id @default(cuid())
+  periodType DeclarationPeriodType @default(DAILY)
+  isGlobal   Boolean               @default(false) // si true, s'applique à toute l'organisation
+  regionId   String?
+  facilityId String?
+  deadline   Int                   @default(5) // jours après la fin de période pour soumettre
+  createdAt  DateTime              @default(now())
+  updatedAt  DateTime              @updatedAt
+
+  region   Region?   @relation(fields: [regionId], references: [id])
+  facility Facility? @relation(fields: [facilityId], references: [id])
+
+  @@map("declaration_period_configs")
+}
+
+// ─── DÉCLARATIONS DE RECETTES ─────────────────────────────────────────────────
+
+model Declaration {
+  id              String                @id @default(cuid())
+  reference       String                @unique // ex: DEC-2024-001
+  declarationType DeclarationType       @default(REVENUE)
+  facilityId      String
+  submittedById   String
+  reviewedById    String?
+  periodType      DeclarationPeriodType
+  periodStart     DateTime
+  periodEnd       DateTime
+  totalAmount     Decimal               @db.Decimal(15, 2)
+  status          DeclarationStatus     @default(DRAFT)
+  comment         String? // commentaire en cas de rejet ou révision
+  submittedAt     DateTime?
+  reviewedAt      DateTime?
+  validatedAt     DateTime?
+  createdAt       DateTime              @default(now())
+  updatedAt       DateTime              @updatedAt
+
+  facility    Facility @relation(fields: [facilityId], references: [id])
+  submittedBy User     @relation("SubmittedBy", fields: [submittedById], references: [id])
+  reviewedBy  User?    @relation("ReviewedBy", fields: [reviewedById], references: [id])
+
+  items     DeclarationItem[]
+  documents DeclarationDocument[]
+  history   DeclarationHistory[]
+
+  @@index([facilityId, periodStart])
+  @@index([status])
+  @@map("declarations")
+}
+
+model DeclarationItem {
+  id            String   @id @default(cuid())
+  declarationId String
+  label         String
+  category      String // ex: "Consultations", "Hospitalisations", "Pharmacie"
+  amount        Decimal  @db.Decimal(15, 2)
+  quantity      Int?
+  unitPrice     Decimal? @db.Decimal(15, 2)
+  note          String?
+
+  declaration Declaration @relation(fields: [declarationId], references: [id], onDelete: Cascade)
+
+  @@map("declaration_items")
+}
+
+model DeclarationDocument {
+  id            String   @id @default(cuid())
+  declarationId String
+  filename      String
+  originalName  String
+  filePath      String
+  fileType      String // "image/jpeg", "application/pdf", etc.
+  fileSize      Int // en bytes
+  uploadedAt    DateTime @default(now())
+
+  declaration Declaration @relation(fields: [declarationId], references: [id], onDelete: Cascade)
+
+  @@map("declaration_documents")
+}
+
+model DeclarationHistory {
+  id            String            @id @default(cuid())
+  declarationId String
+  fromStatus    DeclarationStatus
+  toStatus      DeclarationStatus
+  changedById   String
+  comment       String?
+  changedAt     DateTime          @default(now())
+
+  declaration Declaration @relation(fields: [declarationId], references: [id], onDelete: Cascade)
+
+  @@map("declaration_history")
+}
+
+// ─── CATÉGORIES ──────────────────────────────────────────────────────────────
+
+model Category {
+  id              String          @id @default(cuid())
+  name            String
+  declarationType DeclarationType
+  isActive        Boolean         @default(true)
+  createdAt       DateTime        @default(now())
+
+  @@unique([name, declarationType])
+  @@map("categories")
+}
+
+// ─── BUDGET ───────────────────────────────────────────────────────────────────
+
+model Budget {
+  id              String          @id @default(cuid())
+  facilityId      String
+  declarationType DeclarationType @default(EXPENSE)
+  year            Int
+  month           Int?
+  category        String
+  planned         Decimal         @db.Decimal(15, 2)
+  notes           String?
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+
+  facility Facility @relation(fields: [facilityId], references: [id], onDelete: Cascade)
+
+  @@unique([facilityId, declarationType, year, month, category])
+  @@map("budgets")
+}
+
+// ─── STATISTIQUES ─────────────────────────────────────────────────────────────
+
+model StatSheet {
+  id            String          @id @default(cuid())
+  reference     String          @unique
+  facilityId    String
+  dataManagerId String
+  month         Int // 1-12
+  year          Int
+  status        StatSheetStatus @default(DRAFT)
+  comment       String?
+  submittedAt   DateTime?
+  validatedAt   DateTime?
+  completeness  Float? // 0-100 calculé automatiquement
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+
+  facility    Facility       @relation(fields: [facilityId], references: [id])
+  dataManager User           @relation(fields: [dataManagerId], references: [id])
+  values      StatValue[]
+  documents   StatDocument[]
+
+  @@unique([facilityId, month, year])
+  @@map("stat_sheets")
+}
+
+model StatIndicator {
+  id          String  @id @default(cuid())
+  code        String  @unique
+  label       String
+  category    String // ex: "Consultations", "Maternité", "Vaccination"
+  unit        String? // ex: "cas", "%", "nombre"
+  isRequired  Boolean @default(false)
+  description String?
+  sortOrder   Int     @default(0)
+  isActive    Boolean @default(true)
+
+  values StatValue[]
+
+  @@map("stat_indicators")
+}
+
+model StatValue {
+  id          String  @id @default(cuid())
+  statSheetId String
+  indicatorId String
+  value       Float?
+  note        String?
+
+  statSheet StatSheet     @relation(fields: [statSheetId], references: [id], onDelete: Cascade)
+  indicator StatIndicator @relation(fields: [indicatorId], references: [id])
+
+  @@unique([statSheetId, indicatorId])
+  @@map("stat_values")
+}
+
+model StatDocument {
+  id           String   @id @default(cuid())
+  statSheetId  String
+  filename     String
+  originalName String
+  filePath     String
+  fileType     String
+  fileSize     Int
+  uploadedAt   DateTime @default(now())
+
+  statSheet StatSheet @relation(fields: [statSheetId], references: [id], onDelete: Cascade)
+
+  @@map("stat_documents")
+}
+
+// Délais de promptitude pour la saisie mensuelle des fiches statistiques
+model StatDeadline {
+  id          String   @id @default(cuid())
+  month       Int? // null = s'applique à tous les mois
+  year        Int? // null = récurrent chaque année
+  dueDay      Int // jour du mois suivant la période (ex: 15 = le 15 du mois suivant)
+  alertDays   Int      @default(3) // nombre de jours avant l'échéance pour alerter
+  regionId    String? // null = national
+  facilityId  String? // null = toutes les structures
+  note        String?
+  createdById String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  region    Region?   @relation(fields: [regionId], references: [id])
+  facility  Facility? @relation(fields: [facilityId], references: [id])
+  createdBy User      @relation("DeadlineCreatedBy", fields: [createdById], references: [id])
+
+  @@map("stat_deadlines")
+}
+
+// ─── NOTIFICATIONS ────────────────────────────────────────────────────────────
+
+model Notification {
+  id                String           @id @default(cuid())
+  userId            String
+  type              NotificationType
+  title             String
+  message           String
+  isRead            Boolean          @default(false)
+  relatedEntityId   String?
+  relatedEntityType String? // "declaration", "stat_sheet", etc.
+  createdAt         DateTime         @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, isRead])
+  @@map("notifications")
+}
+
+model PushSubscription {
+  id        String   @id @default(cuid())
+  userId    String
+  endpoint  String   @unique
+  p256dh    String
+  auth      String
+  userAgent String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("push_subscriptions")
+}
+
+// ─── MESSAGERIE ADMINISTRATIVE ───────────────────────────────────────────────
+
+model AdminMessage {
+  id          String          @id @default(cuid())
+  title       String
+  content     String
+  category    MessageCategory @default(AUTRE)
+  priority    MessagePriority @default(NORMAL)
+  isSensitive Boolean         @default(false)
+  senderId    String
+  expiresAt   DateTime?
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+
+  sender     User                    @relation("SentMessages", fields: [senderId], references: [id])
+  recipients AdminMessageRecipient[]
+  documents  AdminMessageDocument[]
+
+  @@index([senderId])
+  @@map("admin_messages")
+}
+
+model AdminMessageRecipient {
+  id        String    @id @default(cuid())
+  messageId String
+  userId    String
+  isRead    Boolean   @default(false)
+  readAt    DateTime?
+  createdAt DateTime  @default(now())
+
+  message AdminMessage @relation(fields: [messageId], references: [id], onDelete: Cascade)
+  user    User         @relation("ReceivedMessages", fields: [userId], references: [id])
+
+  @@unique([messageId, userId])
+  @@map("admin_message_recipients")
+}
+
+model AdminMessageDocument {
+  id           String   @id @default(cuid())
+  messageId    String
+  filename     String
+  originalName String
+  filePath     String
+  fileType     String
+  fileSize     Int
+  uploadedAt   DateTime @default(now())
+
+  message AdminMessage @relation(fields: [messageId], references: [id], onDelete: Cascade)
+
+  @@map("admin_message_documents")
+}
+
+// ─── AUDIT ────────────────────────────────────────────────────────────────────
+
+model AuditLog {
+  id         String      @id @default(cuid())
+  userId     String
+  action     AuditAction
+  entityType String
+  entityId   String?
+  oldValues  Json?
+  newValues  Json?
+  ipAddress  String?
+  userAgent  String?
+  createdAt  DateTime    @default(now())
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@index([userId])
+  @@index([entityType, entityId])
+  @@map("audit_logs")
+}
+
+enum PlanningEventType {
+  VISIT
+  DEADLINE
+  MEETING
+  TRAINING
+  AUDIT_VISIT
+  OTHER
+}
+
+// ─── PLANNING ─────────────────────────────────────────────────────────────────
+
+model PlanningEvent {
+  id          String            @id @default(cuid())
+  title       String
+  description String?
+  type        PlanningEventType @default(OTHER)
+  startAt     DateTime
+  endAt       DateTime?
+  allDay      Boolean           @default(false)
+  location    String?
+  color       String?
+  createdById String
+  facilityId  String?
+  regionId    String?
+  isCompleted Boolean           @default(false)
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+
+  createdBy User      @relation("PlanningCreatedBy", fields: [createdById], references: [id])
+  facility  Facility? @relation(fields: [facilityId], references: [id])
+  region    Region?   @relation(fields: [regionId], references: [id])
+
+  @@index([createdById])
+  @@index([startAt])
+  @@map("planning_events")
+}
