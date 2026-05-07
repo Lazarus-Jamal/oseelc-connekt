@@ -5,6 +5,7 @@ node_modules/
 # Build outputs
 apps/web/.next/cache/
 dist/
+!packages/db/dist/
 out/
 
 # Environment files — NE JAMAIS commiter
