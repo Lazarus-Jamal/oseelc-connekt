@@ -1,6 +1,7 @@
 ---
 deployment:
   tasks:
+    - /bin/bash -l -c "npm install -g pnpm --silent"
     - /bin/bash -l -c "pnpm install --frozen-lockfile"
     - /bin/bash -l -c "pnpm db:generate"
     - /bin/bash -l -c "pnpm db:push"
