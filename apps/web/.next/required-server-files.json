@@ -289,11 +289,13 @@
     "bundlePagesRouterDependencies": false,
     "configFileName": "next.config.ts",
     "transpilePackages": [
-      "@care-connekt/shared",
-      "@care-connekt/db"
+      "@care-connekt/shared"
     ],
     "serverExternalPackages": [
       "@prisma/client",
+      "@prisma/adapter-pg",
+      "@care-connekt/db",
+      "pg",
       "bcryptjs"
     ],
     "turbopack": {
