@@ -1,11 +1,14 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { useSession } from 'next-auth/react'
 import { toast } from 'sonner'
 import { Plus, Search, Loader2, Building2, Pencil, Trash2, ToggleLeft, ToggleRight, X, Check, Wand2 } from 'lucide-react'
 import { PageHeader } from '@/components/ui/page-header'
 import { FACILITY_TYPE_LABELS } from '@care-connekt/shared'
+
+interface FacilitiesAdminPageProps {
+  role: string
+}
 
 interface Facility {
   id: string
@@ -23,9 +26,7 @@ interface Facility {
 
 const EMPTY_FORM = { name: '', code: '', type: 'HEALTH_CENTER', regionId: '', address: '', phone: '', email: '' }
 
-export function FacilitiesAdminPage() {
-  const { data: session } = useSession()
-  const role = session?.user?.role || ''
+export function FacilitiesAdminPage({ role }: FacilitiesAdminPageProps) {
   const canDelete = role === 'SUPER_ADMIN'
 
   const [facilities, setFacilities] = useState<Facility[]>([])

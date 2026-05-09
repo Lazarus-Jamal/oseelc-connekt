@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { useSession } from 'next-auth/react'
 import { toast } from 'sonner'
 import { Plus, Pencil, Trash2, Loader2, MapPin, X, Check } from 'lucide-react'
 import { PageHeader } from '@/components/ui/page-header'
@@ -15,9 +14,11 @@ interface Region {
 
 const EMPTY_FORM = { name: '', code: '' }
 
-export function RegionsAdminPage() {
-  const { data: session } = useSession()
-  const role = session?.user?.role || ''
+interface RegionsAdminPageProps {
+  role: string
+}
+
+export function RegionsAdminPage({ role }: RegionsAdminPageProps) {
   const canDelete = role === 'SUPER_ADMIN'
 
   const [regions, setRegions] = useState<Region[]>([])

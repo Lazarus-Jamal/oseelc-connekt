@@ -2,8 +2,9 @@
 
 import { useState } from 'react'
 import type { Session } from 'next-auth'
-import { Sidebar } from './sidebar'
 import { Header } from './header'
+
+import { Sidebar } from './sidebar'
 
 interface Props {
   session: Session

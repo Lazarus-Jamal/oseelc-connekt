@@ -1,11 +1,14 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { useSession } from 'next-auth/react'
 import { toast } from 'sonner'
 import { Plus, Trash2, Bell, Loader2, CalendarClock } from 'lucide-react'
 import { PageHeader } from '@/components/ui/page-header'
 import { MONTHS_FR } from '@care-connekt/shared'
+
+interface DeadlinesAdminPageProps {
+  role: string
+}
 
 interface Deadline {
   id: string
@@ -25,9 +28,7 @@ interface Facility { id: string; name: string; regionId: string }
 
 const EMPTY_FORM = { dueDay: 15, alertDays: 3, month: '', year: '', regionId: '', facilityId: '', note: '' }
 
-export function DeadlinesAdminPage() {
-  const { data: session } = useSession()
-  const role = session?.user?.role || ''
+export function DeadlinesAdminPage({ role }: DeadlinesAdminPageProps) {
   const isAdmin = role === 'SUPER_ADMIN' || role === 'DATA_ADMIN'
 
   const [deadlines, setDeadlines]   = useState<Deadline[]>([])
