@@ -108,6 +108,22 @@
       "namedRegex": "^/api/statistics/(?<nxtPid>[^/]+?)/documents(?:/)?$"
     },
     {
+      "page": "/api/users/[id]",
+      "regex": "^/api/users/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/api/users/(?<nxtPid>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/api/users/[id]/reset-password",
+      "regex": "^/api/users/([^/]+?)/reset\\-password(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/api/users/(?<nxtPid>[^/]+?)/reset\\-password(?:/)?$"
+    },
+    {
       "page": "/declarations/[id]",
       "regex": "^/declarations/([^/]+?)(?:/)?$",
       "routeKeys": {

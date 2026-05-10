@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState, useMemo } from 'react'
+import { useEffect, useState, useMemo, useCallback } from 'react'
 import { toast } from 'sonner'
 import { Plus, Search, Shield, Edit2, Power, Trash2, KeyRound, Loader2, X, AlertTriangle } from 'lucide-react'
 import { DataTable, type Column } from '@/components/ui/data-table'
@@ -56,7 +56,8 @@ export function UsersAdminPage({ role, currentUserId }: UsersAdminPageProps) {
     )
   }
 
-  const load = async () => {
+  const load = useCallback(async () => {
+    setLoading(true)
     try {
       const params = new URLSearchParams()
       if (search) params.set('search', search)
@@ -68,7 +69,7 @@ export function UsersAdminPage({ role, currentUserId }: UsersAdminPageProps) {
     } finally {
       setLoading(false)
     }
-  }
+  }, [search])
 
   useEffect(() => { load() }, [search])
   
@@ -120,8 +121,9 @@ export function UsersAdminPage({ role, currentUserId }: UsersAdminPageProps) {
       const res = await fetch(`/api/users/${user.id}/reset-password`, { method: 'POST' })
       const result = await res.json()
       if (res.ok) {
+        setEditingUser(user)
         setTempPassword(result.data.tempPassword)
-        setShowForm(true) // Reuse the temp password display logic
+        setShowForm(true)
         toast.success('Mot de passe réinitialisé')
       } else {
         toast.error(result.error || 'Erreur lors de la réinitialisation')
