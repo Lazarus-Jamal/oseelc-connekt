@@ -16,19 +16,37 @@ export async function GET(req: NextRequest) {
 }
 
 export async function POST(req: NextRequest) {
-  const session = await getServerSession(authOptions)
-  if (!session) return NextResponse.json({ success: false, error: 'Non autorisé' }, { status: 401 })
+  try {
+    const session = await getServerSession(authOptions)
+    if (!session) return NextResponse.json({ success: false, error: 'Non autorisé' }, { status: 401 })
 
-  if (!['SUPER_ADMIN', 'DIRECTION'].includes(session.user.role)) {
-    return NextResponse.json({ success: false, error: 'Non autorisé' }, { status: 403 })
+    if (!['SUPER_ADMIN', 'DIRECTION'].includes(session.user.role)) {
+      return NextResponse.json({ success: false, error: 'Non autorisé' }, { status: 403 })
+    }
+
+    const body = await req.json()
+    const { name, code } = body
+    if (!name?.trim() || !code?.trim()) {
+      return NextResponse.json({ success: false, error: 'Nom et code sont obligatoires' }, { status: 400 })
+    }
+
+    // Résoudre l'organizationId : depuis la session ou la première org en base
+    let organizationId = session.user.organizationId
+    if (!organizationId) {
+      const org = await prisma.organization.findFirst()
+      if (!org) return NextResponse.json({ success: false, error: 'Aucune organisation trouvée' }, { status: 400 })
+      organizationId = org.id
+    }
+
+    const region = await prisma.region.create({
+      data: { name: name.trim(), code: code.trim().toUpperCase(), organizationId },
+    })
+    return NextResponse.json({ success: true, data: region }, { status: 201 })
+  } catch (error: any) {
+    if (error?.code === 'P2002') {
+      return NextResponse.json({ success: false, error: 'Ce code de région existe déjà' }, { status: 409 })
+    }
+    console.error('POST /api/regions error:', error)
+    return NextResponse.json({ success: false, error: 'Erreur interne du serveur' }, { status: 500 })
   }
-
-  const body = await req.json()
-  const { name, code, organizationId } = body
-  if (!name || !code || !organizationId) {
-    return NextResponse.json({ success: false, error: 'Champs requis manquants' }, { status: 400 })
-  }
-
-  const region = await prisma.region.create({ data: { name, code: code.toUpperCase(), organizationId } })
-  return NextResponse.json({ success: true, data: region }, { status: 201 })
 }

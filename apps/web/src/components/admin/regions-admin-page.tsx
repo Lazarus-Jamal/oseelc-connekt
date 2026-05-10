@@ -23,12 +23,12 @@ export function RegionsAdminPage({ role }: RegionsAdminPageProps) {
 
   const [regions, setRegions] = useState<Region[]>([])
   const [loading, setLoading] = useState(true)
-  const [orgId, setOrgId] = useState<string>('')
 
   const [showForm, setShowForm] = useState(false)
   const [editTarget, setEditTarget] = useState<Region | null>(null)
   const [form, setForm] = useState(EMPTY_FORM)
   const [formLoading, setFormLoading] = useState(false)
+  const [formError, setFormError] = useState<string | null>(null)
 
   const [deleteTarget, setDeleteTarget] = useState<Region | null>(null)
   const [deleteLoading, setDeleteLoading] = useState(false)
@@ -40,43 +40,29 @@ export function RegionsAdminPage({ role }: RegionsAdminPageProps) {
       .catch(() => setLoading(false))
   }
 
-  // Récupérer l'orgId depuis la première région ou depuis la session
   useEffect(() => {
     fetch('/api/regions')
       .then((r) => r.json())
-      .then((d) => {
-        const data: any[] = d.data || []
-        setRegions(data)
-        setLoading(false)
-        // Chercher l'orgId dans les données existantes
-        if (data.length > 0 && data[0].organizationId) setOrgId(data[0].organizationId)
-      })
+      .then((d) => { setRegions(d.data || []); setLoading(false) })
       .catch(() => setLoading(false))
-
-    // Charger l'orgId depuis l'API organisations
-    fetch('/api/regions?withOrg=1')
-      .then((r) => r.json())
-      .then((d) => { if (d.orgId) setOrgId(d.orgId) })
-      .catch(() => {})
   }, [])
 
-  const openCreate = () => { setEditTarget(null); setForm(EMPTY_FORM); setShowForm(true) }
-  const openEdit = (r: Region) => { setEditTarget(r); setForm({ name: r.name, code: r.code }); setShowForm(true) }
-  const closeForm = () => { setShowForm(false); setEditTarget(null); setForm(EMPTY_FORM) }
+  const openCreate = () => { setEditTarget(null); setForm(EMPTY_FORM); setFormError(null); setShowForm(true) }
+  const openEdit = (r: Region) => { setEditTarget(r); setForm({ name: r.name, code: r.code }); setFormError(null); setShowForm(true) }
+  const closeForm = () => { setShowForm(false); setEditTarget(null); setForm(EMPTY_FORM); setFormError(null) }
 
   const submit = async () => {
     if (!form.name.trim() || !form.code.trim()) {
-      toast.error('Nom et code sont obligatoires')
+      setFormError('Nom et code sont obligatoires')
       return
     }
     setFormLoading(true)
+    setFormError(null)
     try {
       const isEdit = !!editTarget
       const url = isEdit ? `/api/regions/${editTarget.id}` : '/api/regions'
       const method = isEdit ? 'PATCH' : 'POST'
-      const body = isEdit
-        ? { name: form.name, code: form.code }
-        : { name: form.name, code: form.code, organizationId: orgId || 'org-oeuvre-sante' }
+      const body = { name: form.name, code: form.code }
 
       const res = await fetch(url, {
         method,
@@ -89,7 +75,7 @@ export function RegionsAdminPage({ role }: RegionsAdminPageProps) {
       closeForm()
       load()
     } catch (e: any) {
-      toast.error(e.message)
+      setFormError(e.message || 'Erreur lors de la sauvegarde')
     } finally {
       setFormLoading(false)
     }
@@ -205,6 +191,10 @@ export function RegionsAdminPage({ role }: RegionsAdminPageProps) {
               />
               <p className="text-xs text-gray-400 mt-1">Le code est automatiquement mis en majuscules</p>
             </div>
+
+            {formError && (
+              <p className="text-sm text-red-500 bg-red-50 dark:bg-red-900/20 px-3 py-2 rounded-lg">{formError}</p>
+            )}
 
             <div className="flex justify-end gap-3 pt-2">
               <button onClick={closeForm}
