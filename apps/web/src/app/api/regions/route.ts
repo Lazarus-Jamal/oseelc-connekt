@@ -30,11 +30,13 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ success: false, error: 'Nom et code sont obligatoires' }, { status: 400 })
     }
 
-    // Résoudre l'organizationId : depuis la session ou la première org en base
+    // Résoudre l'organizationId : depuis la session, la première org, ou créer si aucune
     let organizationId = session.user.organizationId
     if (!organizationId) {
-      const org = await prisma.organization.findFirst()
-      if (!org) return NextResponse.json({ success: false, error: 'Aucune organisation trouvée' }, { status: 400 })
+      let org = await prisma.organization.findFirst()
+      if (!org) {
+        org = await prisma.organization.create({ data: { name: 'OSEELC' } })
+      }
       organizationId = org.id
     }
 
