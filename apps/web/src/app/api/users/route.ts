@@ -9,7 +9,7 @@ import { Prisma } from '@care-connekt/db'
 const createSchema = z.object({
   email: z.string().email(),
   name: z.string().min(2),
-  role: z.enum(['SUPER_ADMIN', 'DATA_ADMIN', 'DIRECTION', 'REGIONAL_DIRECTOR', 'FACILITY_CHIEF', 'FINANCIER', 'DATA_MANAGER']),
+  role: z.enum(['SUPER_ADMIN', 'DATA_ADMIN', 'DIRECTION', 'REGIONAL_DIRECTOR', 'FACILITY_CHIEF', 'FINANCIER', 'DATA_MANAGER', 'CONTROLEUR', 'CAISSIER']),
   phone: z.string().optional(),
   facilityId: z.string().optional(),
   regionId: z.string().optional(),
