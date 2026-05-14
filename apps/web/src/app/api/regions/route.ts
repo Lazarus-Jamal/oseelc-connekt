@@ -33,7 +33,7 @@ export async function POST(req: NextRequest) {
     // Résoudre l'organizationId : depuis la session, la première org, ou créer si aucune
     let organizationId = session.user.organizationId
     if (!organizationId) {
-      let org = await prisma.organization.findFirst()
+      let org = await prisma.organization.findFirst({ orderBy: { createdAt: 'asc' } })
       if (!org) {
         org = await prisma.organization.create({ data: { name: 'OSEELC' } })
       }

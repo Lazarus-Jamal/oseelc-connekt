@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useCallback } from 'react'
 import Link from 'next/link'
-import { Building2, FileCheck, TrendingUp, TrendingDown, Scale, AlertCircle, RefreshCw, Calendar } from 'lucide-react'
+import { Building2, FileCheck, TrendingUp, TrendingDown, Scale, AlertCircle, RefreshCw, Calendar, MapPin, ChevronDown } from 'lucide-react'
 import { KpiCardComponent } from '@/components/ui/kpi-card'
 import { PageHeader } from '@/components/ui/page-header'
 import { formatCurrency } from '@care-connekt/shared'
@@ -39,6 +39,8 @@ function getPeriodLabel(period: Period, from: string, to: string): string {
   return fmt(now, { month: 'long', year: 'numeric' })
 }
 
+interface GeoItem { id: string; name: string }
+
 export function DirectionDashboardPage() {
   const [data,    setData]    = useState<any>(null)
   const [loading, setLoading] = useState(true)
@@ -46,32 +48,57 @@ export function DirectionDashboardPage() {
   const [period,     setPeriod]     = useState<Period>('monthly')
   const [customFrom, setCustomFrom] = useState('')
   const [customTo,   setCustomTo]   = useState('')
-  // The from/to actually sent to the API (applied on button click for custom)
   const [appliedFrom, setAppliedFrom] = useState('')
   const [appliedTo,   setAppliedTo]   = useState('')
 
-  const fetchData = useCallback((p: Period, from = '', to = '') => {
+  // Filtres géographiques
+  const [regions,    setRegions]    = useState<GeoItem[]>([])
+  const [facilities, setFacilities] = useState<GeoItem[]>([])
+  const [selectedRegion,   setSelectedRegion]   = useState('')
+  const [selectedFacility, setSelectedFacility] = useState('')
+
+  // Charger les régions au montage
+  useEffect(() => {
+    fetch('/api/regions')
+      .then((r) => r.json())
+      .then((d) => setRegions(d.data || []))
+      .catch(() => {})
+  }, [])
+
+  // Charger les FOSA quand la région change
+  useEffect(() => {
+    setSelectedFacility('')
+    if (!selectedRegion) { setFacilities([]); return }
+    fetch(`/api/facilities?regionId=${selectedRegion}`)
+      .then((r) => r.json())
+      .then((d) => setFacilities(d.data || []))
+      .catch(() => {})
+  }, [selectedRegion])
+
+  const fetchData = useCallback((p: Period, from = '', to = '', regionId = '', facilityId = '') => {
     setLoading(true)
     const params = new URLSearchParams({ period: p })
     if (p === 'custom') {
       if (from) params.set('from', from)
       if (to)   params.set('to',   to)
     }
+    if (facilityId) params.set('facilityId', facilityId)
+    else if (regionId) params.set('regionId', regionId)
     fetch(`/api/dashboard?${params}`)
       .then((r) => r.json())
       .then((d) => { setData(d.data ?? null); setLoading(false) })
       .catch(() => setLoading(false))
   }, [])
 
-  // Re-fetch when non-custom period changes
+  // Re-fetch quand la période ou les filtres géo changent
   useEffect(() => {
-    if (period !== 'custom') fetchData(period)
-  }, [period, fetchData])
+    if (period !== 'custom') fetchData(period, '', '', selectedRegion, selectedFacility)
+  }, [period, selectedRegion, selectedFacility, fetchData])
 
   const applyCustom = () => {
     setAppliedFrom(customFrom)
     setAppliedTo(customTo)
-    fetchData('custom', customFrom, customTo)
+    fetchData('custom', customFrom, customTo, selectedRegion, selectedFacility)
   }
 
   const periodLabel = getPeriodLabel(
@@ -147,12 +174,47 @@ export function DirectionDashboardPage() {
             </div>
           )}
 
+          {/* Séparateur */}
+          {regions.length > 0 && <div className="h-5 w-px bg-gray-200 dark:bg-gray-700 mx-1" />}
+
+          {/* Dropdown Région */}
+          {regions.length > 0 && (
+            <div className="relative flex items-center gap-1.5 text-sm text-gray-500">
+              <MapPin className="w-4 h-4 flex-shrink-0" />
+              <select
+                value={selectedRegion}
+                onChange={(e) => setSelectedRegion(e.target.value)}
+                className="pr-6 pl-1 py-1 text-sm bg-transparent border-0 focus:outline-none focus:ring-0 text-gray-700 dark:text-gray-300 cursor-pointer appearance-none"
+              >
+                <option value="">Toutes les régions</option>
+                {regions.map((r) => <option key={r.id} value={r.id}>{r.name}</option>)}
+              </select>
+              <ChevronDown className="w-3 h-3 pointer-events-none absolute right-0 text-gray-400" />
+            </div>
+          )}
+
+          {/* Dropdown FOSA */}
+          {selectedRegion && (
+            <div className="relative flex items-center gap-1.5 text-sm text-gray-500">
+              <Building2 className="w-4 h-4 flex-shrink-0" />
+              <select
+                value={selectedFacility}
+                onChange={(e) => setSelectedFacility(e.target.value)}
+                className="pr-6 pl-1 py-1 text-sm bg-transparent border-0 focus:outline-none focus:ring-0 text-gray-700 dark:text-gray-300 cursor-pointer appearance-none"
+              >
+                <option value="">Toutes les FOSA</option>
+                {facilities.map((f) => <option key={f.id} value={f.id}>{f.name}</option>)}
+              </select>
+              <ChevronDown className="w-3 h-3 pointer-events-none absolute right-0 text-gray-400" />
+            </div>
+          )}
+
           {/* Label période courante + bouton rafraîchir */}
           <div className="ml-auto flex items-center gap-2">
             <span className="text-xs text-gray-400 italic capitalize">{periodLabel}</span>
             {period !== 'custom' && (
               <button
-                onClick={() => fetchData(period)}
+                onClick={() => fetchData(period, '', '', selectedRegion, selectedFacility)}
                 className="p-1.5 rounded-lg text-gray-400 hover:text-brand-600 hover:bg-brand-50 dark:hover:bg-brand-900/20 transition"
                 title="Actualiser"
               >
