@@ -65,8 +65,8 @@ export async function GET(req: NextRequest) {
     }})
   }
 
-  // ── REGIONAL_DIRECTOR ────────────────────────────────────────────────────────
-  if (role === 'REGIONAL_DIRECTOR') {
+  // ── REGIONAL_DIRECTOR / CONTROLEUR_REGIONAL ──────────────────────────────────
+  if (role === 'REGIONAL_DIRECTOR' || role === 'CONTROLEUR_REGIONAL') {
     const facilityWhere = { regionId: regionId! }
     const [facilities, revenueAgg, expenseAgg, pendingReview, facilitiesStatus, monthlyTrend] = await Promise.all([
       prisma.facility.count({ where: facilityWhere }),
@@ -118,12 +118,14 @@ export async function GET(req: NextRequest) {
     }})
   }
 
-  // ── DIRECTION / SUPER_ADMIN ──────────────────────────────────────────────────
-  if (role === 'DIRECTION' || role === 'SUPER_ADMIN') {
+  // ── DIRECTION / SUPER_ADMIN / CONTROLEUR ────────────────────────────────────
+  if (role === 'DIRECTION' || role === 'SUPER_ADMIN' || role === 'CONTROLEUR') {
     const { searchParams } = req.nextUrl
     const period    = searchParams.get('period') || 'monthly'
     const customFrom = searchParams.get('from')
     const customTo   = searchParams.get('to')
+    const filterRegionId   = searchParams.get('regionId')   || null
+    const filterFacilityId = searchParams.get('facilityId') || null
 
     // Calcul de la plage de dates selon la période
     let startDate: Date
@@ -149,22 +151,38 @@ export async function GET(req: NextRequest) {
     // Inclure SUBMITTED + VALIDATED pour une vue complète
     const statusFilter = { in: ['SUBMITTED', 'VALIDATED'] as string[] } as any
 
+    // Scope géographique selon les filtres
+    const facilityScope: any = { isActive: true }
+    if (filterFacilityId) {
+      facilityScope.id = filterFacilityId
+    } else if (filterRegionId) {
+      facilityScope.regionId = filterRegionId
+    }
+    const declFacilityScope = filterFacilityId
+      ? { facilityId: filterFacilityId }
+      : filterRegionId
+        ? { facility: { regionId: filterRegionId } }
+        : {}
+    const regionScope = filterRegionId ? { id: filterRegionId } : {}
+
     const [totalFacilities, revenueAgg, expenseAgg, pendingValidations, regionsOverview] = await Promise.all([
-      prisma.facility.count({ where: { isActive: true } }),
+      prisma.facility.count({ where: facilityScope }),
       prisma.declaration.aggregate({
-        where: { periodStart: periodFilter, declarationType: 'REVENUE', status: statusFilter },
+        where: { ...declFacilityScope, periodStart: periodFilter, declarationType: 'REVENUE', status: statusFilter },
         _sum: { totalAmount: true },
       }),
       prisma.declaration.aggregate({
-        where: { periodStart: periodFilter, declarationType: 'EXPENSE', status: statusFilter },
+        where: { ...declFacilityScope, periodStart: periodFilter, declarationType: 'EXPENSE', status: statusFilter },
         _sum: { totalAmount: true },
       }),
-      prisma.declaration.count({ where: { status: { in: ['SUBMITTED', 'REVIEWED'] } } }),
+      prisma.declaration.count({ where: { ...declFacilityScope, status: { in: ['SUBMITTED', 'REVIEWED'] } } }),
       prisma.region.findMany({
+        where: regionScope,
         select: {
           id: true, name: true,
           _count: { select: { facilities: true } },
           facilities: {
+            where: filterFacilityId ? { id: filterFacilityId } : {},
             select: {
               id: true,
               declarations: {
@@ -197,7 +215,7 @@ export async function GET(req: NextRequest) {
     })
 
     const topFacilities: any[] = await prisma.facility.findMany({
-      where: { isActive: true },
+      where: facilityScope,
       select: {
         id: true, name: true, type: true,
         region: { select: { name: true } },

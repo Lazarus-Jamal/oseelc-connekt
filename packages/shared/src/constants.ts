@@ -22,8 +22,9 @@ export const ROLES_LABELS: Record<string, string> = {
   FACILITY_CHIEF:    'Chef de Centre',
   FINANCIER:         'Financier',
   DATA_MANAGER:      'Responsable Data',
-  CONTROLEUR:        'Contrôleur',
-  CAISSIER:          'Caissier',
+  CONTROLEUR:          'Contrôleur Général',
+  CONTROLEUR_REGIONAL: 'Contrôleur Régional',
+  CAISSIER:            'Caissier',
 }
 
 export const FACILITY_TYPE_LABELS: Record<string, string> = {

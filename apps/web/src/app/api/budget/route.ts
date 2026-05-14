@@ -25,6 +25,10 @@ export async function GET(req: NextRequest) {
   const declarationType = searchParams.get('declarationType') as 'REVENUE' | 'EXPENSE' | null
 
   const { role, facilityId: userFacilityId } = session.user
+  const viewRoles = ['SUPER_ADMIN', 'DIRECTION', 'REGIONAL_DIRECTOR', 'CONTROLEUR', 'CONTROLEUR_REGIONAL', 'FINANCIER', 'FACILITY_CHIEF']
+  if (!viewRoles.includes(role)) {
+    return NextResponse.json({ success: false, error: 'Accès non autorisé' }, { status: 403 })
+  }
 
   const where: any = { year }
   if (declarationType) where.declarationType = declarationType

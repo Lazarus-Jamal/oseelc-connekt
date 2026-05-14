@@ -19,6 +19,9 @@ enum Role {
   FACILITY_CHIEF    // Chef de centre / directeur d'hôpital
   FINANCIER         // Financier d'un centre ou hôpital
   DATA_MANAGER      // Responsable data régional (regionId) ou de centre (facilityId)
+  CONTROLEUR          // Contrôleur général — valide toutes déclarations, consulte stats et budget (national)
+  CONTROLEUR_REGIONAL // Contrôleur régional — idem mais scopé à sa région (regionId)
+  CAISSIER            // Caissier — soumet des déclarations uniquement
 }
 
 enum FacilityType {

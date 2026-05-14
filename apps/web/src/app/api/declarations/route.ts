@@ -44,12 +44,12 @@ export async function GET(req: NextRequest) {
   const where: Prisma.DeclarationWhereInput = {}
 
   // Filtrage selon le rôle
-  if (role === 'FINANCIER' || role === 'FACILITY_CHIEF') {
+  if (role === 'FINANCIER' || role === 'FACILITY_CHIEF' || role === 'CAISSIER') {
     where.facilityId = userFacilityId || undefined
-  } else if (role === 'REGIONAL_DIRECTOR') {
+  } else if (role === 'REGIONAL_DIRECTOR' || role === 'CONTROLEUR_REGIONAL') {
     where.facility = { regionId: userRegionId || undefined }
   }
-  // DIRECTION & SUPER_ADMIN voient tout
+  // DIRECTION, SUPER_ADMIN, CONTROLEUR voient tout
 
   // Les brouillons sont privés : seul le soumettant voit les siens
   where.OR = [

@@ -17,9 +17,9 @@ export async function GET(req: NextRequest) {
 
   // Scope géographique selon le rôle
   let facilityWhere: any = { isActive: true }
-  if (role === 'FINANCIER' || role === 'FACILITY_CHIEF') {
+  if (role === 'FINANCIER' || role === 'FACILITY_CHIEF' || role === 'CAISSIER') {
     facilityWhere.id = userFacilityId
-  } else if (role === 'REGIONAL_DIRECTOR') {
+  } else if (role === 'REGIONAL_DIRECTOR' || role === 'CONTROLEUR_REGIONAL') {
     facilityWhere.regionId = userRegionId
   } else if (facilityId) {
     facilityWhere.id = facilityId

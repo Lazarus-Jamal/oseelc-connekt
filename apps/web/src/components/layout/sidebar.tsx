@@ -46,15 +46,15 @@ interface NavItem {
 
 const NAV_ITEMS: NavItem[] = [
   { label: 'Tableau de bord', href: '/dashboard', icon: LayoutDashboard },
-  { label: 'Déclarations', href: '/declarations', icon: FileText, roles: ['SUPER_ADMIN', 'DIRECTION', 'REGIONAL_DIRECTOR', 'FACILITY_CHIEF', 'FINANCIER'] },
+  { label: 'Déclarations', href: '/declarations', icon: FileText, roles: ['SUPER_ADMIN', 'DIRECTION', 'REGIONAL_DIRECTOR', 'FACILITY_CHIEF', 'FINANCIER', 'CONTROLEUR', 'CONTROLEUR_REGIONAL', 'CAISSIER'] },
   { label: 'Dépenses', href: '/expenses', icon: TrendingDown, roles: ['SUPER_ADMIN', 'DIRECTION', 'REGIONAL_DIRECTOR', 'FACILITY_CHIEF', 'FINANCIER'] },
-  { label: 'Statistiques', href: '/statistics', icon: BarChart3, roles: ['SUPER_ADMIN', 'DATA_ADMIN', 'DIRECTION', 'REGIONAL_DIRECTOR', 'FACILITY_CHIEF', 'DATA_MANAGER'] },
+  { label: 'Statistiques', href: '/statistics', icon: BarChart3, roles: ['SUPER_ADMIN', 'DATA_ADMIN', 'DIRECTION', 'REGIONAL_DIRECTOR', 'FACILITY_CHIEF', 'DATA_MANAGER', 'CONTROLEUR', 'CONTROLEUR_REGIONAL'] },
   { label: 'Import statistiques', href: '/statistics/import', icon: FileUp, roles: ['SUPER_ADMIN', 'DATA_ADMIN', 'DATA_MANAGER'] },
-  { label: 'Rapports', href: '/reports', icon: FileBarChart, roles: ['SUPER_ADMIN', 'DATA_ADMIN', 'DIRECTION', 'REGIONAL_DIRECTOR', 'FACILITY_CHIEF', 'DATA_MANAGER'] },
-  { label: 'Analyse des données', href: '/analytics', icon: FlaskConical, roles: ['SUPER_ADMIN', 'DATA_ADMIN', 'DIRECTION', 'REGIONAL_DIRECTOR', 'DATA_MANAGER'] },
+  { label: 'Rapports', href: '/reports', icon: FileBarChart, roles: ['SUPER_ADMIN', 'DATA_ADMIN', 'DIRECTION', 'REGIONAL_DIRECTOR', 'FACILITY_CHIEF', 'DATA_MANAGER', 'CONTROLEUR', 'CONTROLEUR_REGIONAL'] },
+  { label: 'Analyse des données', href: '/analytics', icon: FlaskConical, roles: ['SUPER_ADMIN', 'DATA_ADMIN', 'DIRECTION', 'REGIONAL_DIRECTOR', 'DATA_MANAGER', 'CONTROLEUR', 'CONTROLEUR_REGIONAL'] },
   { label: 'Benchmarking', href: '/benchmarking', icon: Trophy, roles: ['SUPER_ADMIN', 'DATA_ADMIN', 'DIRECTION', 'REGIONAL_DIRECTOR'] },
   { label: 'Carte géographique', href: '/map', icon: MapPin, roles: ['SUPER_ADMIN', 'DATA_ADMIN', 'DIRECTION', 'REGIONAL_DIRECTOR'] },
-  { label: 'Suivi budgétaire', href: '/budget', icon: FileCheck, roles: ['SUPER_ADMIN', 'DIRECTION', 'REGIONAL_DIRECTOR'] },
+  { label: 'Suivi budgétaire', href: '/budget', icon: FileCheck, roles: ['SUPER_ADMIN', 'DIRECTION', 'REGIONAL_DIRECTOR', 'CONTROLEUR', 'CONTROLEUR_REGIONAL'] },
   { label: 'Catégories', href: '/categories', icon: Tag, roles: ['SUPER_ADMIN', 'DIRECTION', 'FINANCIER'] },
   { label: 'Planning & Agenda', href: '/planning', icon: CalendarClock },
   { label: 'Messagerie', href: '/messages', icon: MessageSquare },
@@ -80,6 +80,9 @@ const ROLE_BADGE: Record<string, string> = {
   FACILITY_CHIEF: 'Chef de centre',
   FINANCIER: 'Financier',
   DATA_MANAGER: 'Data Manager',
+  CONTROLEUR: 'Contrôleur Général',
+  CONTROLEUR_REGIONAL: 'Contrôleur Régional',
+  CAISSIER: 'Caissier',
 }
 
 export function Sidebar({ session, isOpen, onClose }: SidebarProps) {

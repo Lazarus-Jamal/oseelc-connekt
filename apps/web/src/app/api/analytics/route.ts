@@ -3,7 +3,7 @@ import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 import { prisma } from '@/lib/db'
 
-const ALLOWED = ['SUPER_ADMIN', 'DIRECTION', 'REGIONAL_DIRECTOR', 'DATA_MANAGER']
+const ALLOWED = ['SUPER_ADMIN', 'DIRECTION', 'REGIONAL_DIRECTOR', 'DATA_MANAGER', 'CONTROLEUR', 'CONTROLEUR_REGIONAL']
 
 export async function GET(req: NextRequest): Promise<NextResponse> {
   try {

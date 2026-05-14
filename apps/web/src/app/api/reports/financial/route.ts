@@ -17,8 +17,8 @@ export async function GET(req: NextRequest) {
   const { role, facilityId: userFacilityId, regionId: userRegionId } = session.user
 
   const baseWhere: any = { status: 'VALIDATED' }
-  if (role === 'FINANCIER' || role === 'FACILITY_CHIEF') baseWhere.facilityId = userFacilityId
-  else if (role === 'REGIONAL_DIRECTOR') baseWhere.facility = { regionId: userRegionId }
+  if (role === 'FINANCIER' || role === 'FACILITY_CHIEF' || role === 'CAISSIER') baseWhere.facilityId = userFacilityId
+  else if (role === 'REGIONAL_DIRECTOR' || role === 'CONTROLEUR_REGIONAL') baseWhere.facility = { regionId: userRegionId }
   if (facilityId) baseWhere.facilityId = facilityId
   if (regionId) baseWhere.facility = { regionId }
   if (from || to) {
