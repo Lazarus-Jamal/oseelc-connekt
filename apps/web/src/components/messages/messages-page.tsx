@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState, useCallback } from 'react'
+import { useEffect, useState, useCallback, useRef } from 'react'
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
@@ -8,6 +8,9 @@ import { PageHeader } from '@/components/ui/page-header'
 import { formatDate } from '@care-connekt/shared'
 import { Plus, Inbox, Send, Paperclip, Eye, EyeOff, AlertTriangle, Info, Bell } from 'lucide-react'
 import { ROLES_LABELS } from '@care-connekt/shared'
+import { toast } from 'sonner'
+
+const POLL_INTERVAL = 30_000
 
 const CATEGORY_LABELS: Record<string, string> = {
   CIRCULAIRE: 'Circulaire', BULLETIN_PAIE: 'Bulletin de paie',
@@ -37,22 +40,38 @@ export function MessagesPage() {
   const [items, setItems] = useState<any[]>([])
   const [unreadCount, setUnreadCount] = useState(0)
   const [loading, setLoading] = useState(true)
+  const prevUnreadRef = useRef<number | null>(null)
 
   const role = session?.user?.role || ''
   const canSend = CAN_SEND.includes(role)
 
-  const load = useCallback(() => {
-    setLoading(true)
+  const load = useCallback((silent = false) => {
+    if (!silent) setLoading(true)
     fetch(`/api/messages?box=${tab}`)
       .then((r) => r.json())
       .then((d) => {
         setItems(d.data || [])
-        if (d.unreadCount !== undefined) setUnreadCount(d.unreadCount)
+        if (d.unreadCount !== undefined) {
+          const prev = prevUnreadRef.current
+          if (prev !== null && d.unreadCount > prev) {
+            const diff = d.unreadCount - prev
+            toast.info(`${diff} nouveau${diff > 1 ? 'x' : ''} message${diff > 1 ? 's' : ''} reçu${diff > 1 ? 's' : ''}`, {
+              action: { label: 'Voir', onClick: () => setTab('inbox') },
+            })
+          }
+          prevUnreadRef.current = d.unreadCount
+          setUnreadCount(d.unreadCount)
+        }
       })
-      .finally(() => setLoading(false))
+      .finally(() => { if (!silent) setLoading(false) })
   }, [tab])
 
-  useEffect(() => { load() }, [load])
+  // Chargement initial + polling 30s
+  useEffect(() => {
+    load()
+    const interval = setInterval(() => load(true), POLL_INTERVAL)
+    return () => clearInterval(interval)
+  }, [load])
 
   return (
     <div className="space-y-5">

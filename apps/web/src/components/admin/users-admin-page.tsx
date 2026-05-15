@@ -189,9 +189,20 @@ export function UsersAdminPage({ role, currentUserId }: UsersAdminPageProps) {
         </span>
       ) 
     },
-    { 
-      key: 'status', 
-      header: 'Statut', 
+    {
+      key: 'lastLoginAt',
+      header: 'Dernière connexion',
+      cell: (row) => (
+        <span className="text-xs text-gray-500 dark:text-gray-400">
+          {row.lastLoginAt
+            ? new Intl.DateTimeFormat('fr-FR', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }).format(new Date(row.lastLoginAt))
+            : <span className="italic text-gray-400">Jamais connecté</span>}
+        </span>
+      )
+    },
+    {
+      key: 'status',
+      header: 'Statut',
       cell: (row) => (
         <div className="flex items-center gap-1.5">
           <div className={`w-1.5 h-1.5 rounded-full ${row.isActive ? 'bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]' : 'bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.5)]'}`} />

@@ -3,6 +3,7 @@ import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 import { prisma } from '@/lib/db'
 import { z } from 'zod'
+import { sendPushToMany } from '@/lib/push'
 
 const CAN_SEND = ['SUPER_ADMIN', 'DIRECTION', 'REGIONAL_DIRECTOR', 'FACILITY_CHIEF']
 
@@ -141,8 +142,19 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
           create: users.map((u) => ({ userId: u.id })),
         },
       },
-      include: { _count: { select: { recipients: true } } },
+      include: { _count: { select: { recipients: true } }, sender: { select: { name: true } } },
     })
+
+    // Envoyer les notifications push en arrière-plan (sans bloquer la réponse)
+    const priorityEmoji = priority === 'URGENT' ? '🔴 ' : priority === 'IMPORTANT' ? '🔵 ' : ''
+    sendPushToMany(
+      users.map((u) => u.id),
+      {
+        title: `${priorityEmoji}Nouveau message : ${title}`,
+        body: `De : ${message.sender.name}`,
+        url: `/messages/${message.id}`,
+      }
+    ).catch((e) => console.error('[push] sendPushToUsers failed:', e))
 
     return NextResponse.json({ success: true, data: message }, { status: 201 })
   } catch (e: any) {

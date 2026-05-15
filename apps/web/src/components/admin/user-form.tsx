@@ -11,13 +11,13 @@ const schema = z.object({
   name: z.string().min(2, 'Le nom doit contenir au moins 2 caractères'),
   email: z.string().email('Adresse email invalide'),
   phone: z.string().optional().nullable(),
-  role: z.enum(['SUPER_ADMIN', 'DATA_ADMIN', 'DIRECTION', 'REGIONAL_DIRECTOR', 'FACILITY_CHIEF', 'FINANCIER', 'DATA_MANAGER']),
+  role: z.enum(['SUPER_ADMIN', 'DATA_ADMIN', 'DIRECTION', 'REGIONAL_DIRECTOR', 'FACILITY_CHIEF', 'FINANCIER', 'DATA_MANAGER', 'CONTROLEUR', 'CONTROLEUR_REGIONAL', 'CAISSIER']),
   regionId: z.string().optional().nullable(),
   facilityId: z.string().optional().nullable(),
   organizationId: z.string().optional().nullable(),
 }).refine((data) => {
-  if (['REGIONAL_DIRECTOR'].includes(data.role) && !data.regionId) return false
-  if (['FACILITY_CHIEF', 'FINANCIER'].includes(data.role) && !data.facilityId) return false
+  if (['REGIONAL_DIRECTOR', 'CONTROLEUR_REGIONAL'].includes(data.role) && !data.regionId) return false
+  if (['FACILITY_CHIEF', 'FINANCIER', 'CAISSIER'].includes(data.role) && !data.facilityId) return false
   return true
 }, {
   message: "La région ou la formation sanitaire est requise pour ce rôle",
@@ -136,7 +136,7 @@ export function UserForm({ initialData, onSuccess, onCancel, facilities, regions
         </div>
 
         <div className="bg-brand-50/50 dark:bg-brand-900/10 p-4 rounded-2xl border border-brand-100/50 dark:border-brand-800/20 space-y-4">
-          {['REGIONAL_DIRECTOR', 'DATA_MANAGER'].includes(selectedRole) && (
+          {['REGIONAL_DIRECTOR', 'CONTROLEUR_REGIONAL', 'DATA_MANAGER'].includes(selectedRole) && (
             <div className="space-y-1.5">
               <label className="text-xs font-semibold text-gray-500 uppercase ml-1">Région Sanitaire</label>
               <div className="relative group">
@@ -148,7 +148,7 @@ export function UserForm({ initialData, onSuccess, onCancel, facilities, regions
               </div>
             </div>
           )}
-          {['FACILITY_CHIEF', 'FINANCIER', 'DATA_MANAGER'].includes(selectedRole) && (
+          {['FACILITY_CHIEF', 'FINANCIER', 'CAISSIER', 'DATA_MANAGER'].includes(selectedRole) && (
             <div className="space-y-1.5">
               <label className="text-xs font-semibold text-gray-500 uppercase ml-1">Formation Sanitaire (FOSA)</label>
               <div className="relative group">
