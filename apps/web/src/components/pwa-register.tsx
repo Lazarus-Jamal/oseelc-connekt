@@ -60,18 +60,29 @@ export function PWARegister() {
     const ios = /iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as any).MSStream
     if (ios) {
       setIsIOS(true)
-      setShowBanner(true)
-      return
+      const t = setTimeout(() => setShowBanner(true), 60_000)
+      return () => clearTimeout(t)
     }
 
-    // Chrome / Edge / Android — événement natif
+    // Chrome / Edge / Android — capturer l'événement immédiatement,
+    // mais n'afficher la bannière qu'après 60 secondes
+    let deferred: BeforeInstallPromptEvent | null = null
+    let timer: ReturnType<typeof setTimeout> | null = null
+
     const handler = (e: Event) => {
       e.preventDefault()
-      setInstallPrompt(e as BeforeInstallPromptEvent)
-      setShowBanner(true)
+      deferred = e as BeforeInstallPromptEvent
+      setInstallPrompt(deferred)
+      // Démarrer le timer au premier déclenchement de l'événement
+      if (!timer) {
+        timer = setTimeout(() => setShowBanner(true), 60_000)
+      }
     }
     window.addEventListener('beforeinstallprompt', handler)
-    return () => window.removeEventListener('beforeinstallprompt', handler)
+    return () => {
+      window.removeEventListener('beforeinstallprompt', handler)
+      if (timer) clearTimeout(timer)
+    }
   }, [])
 
   const handleInstall = async () => {

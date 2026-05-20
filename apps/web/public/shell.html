@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Saisie hors ligne — Oseelc-connekt</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f8fafc;color:#1e293b;min-height:100vh}
+:root{--brand:#0f766e;--brand-dark:#0d6460;--brand-light:#e0f2f1;--border:#e2e8f0;--muted:#64748b;--error:#ef4444;--success:#10b981}
+header{background:#0f766e;color:#fff;padding:12px 16px;display:flex;align-items:center;gap:12px;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+header img{width:36px;height:36px;object-fit:contain;border-radius:8px;background:#fff;padding:2px}
+header h1{font-size:16px;font-weight:700;letter-spacing:-.3px}
+header .badge{margin-left:auto;background:rgba(255,255,255,.2);border-radius:20px;padding:3px 10px;font-size:11px;font-weight:600}
+.offline-bar{background:#f59e0b;color:#fff;text-align:center;padding:6px;font-size:12px;font-weight:600}
+.container{max-width:680px;margin:0 auto;padding:16px}
+.tabs{display:flex;gap:4px;background:#fff;border:1px solid var(--border);border-radius:14px;padding:4px;margin-bottom:20px}
+.tab{flex:1;padding:9px;border:none;background:none;border-radius:10px;cursor:pointer;font-size:13px;font-weight:600;color:var(--muted);transition:.15s}
+.tab.active{background:var(--brand);color:#fff;box-shadow:0 2px 8px rgba(15,118,110,.3)}
+.card{background:#fff;border:1px solid var(--border);border-radius:16px;padding:20px;margin-bottom:16px}
+.card h2{font-size:14px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:16px}
+.field{margin-bottom:14px}
+.field label{display:block;font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:5px}
+.field input,.field select,.field textarea{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:10px;font-size:14px;color:#1e293b;background:#f8fafc;outline:none;transition:.15s;font-family:inherit}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--brand);background:#fff;box-shadow:0 0 0 3px rgba(15,118,110,.1)}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.item-row{background:#f8fafc;border:1px solid var(--border);border-radius:12px;padding:14px;margin-bottom:10px;position:relative}
+.item-row .remove-btn{position:absolute;top:10px;right:10px;background:none;border:none;cursor:pointer;color:#94a3b8;font-size:18px;line-height:1;padding:2px 6px;border-radius:6px}
+.item-row .remove-btn:hover{background:#fee2e2;color:var(--error)}
+.add-btn{width:100%;padding:10px;border:2px dashed var(--border);border-radius:10px;background:none;cursor:pointer;font-size:13px;font-weight:600;color:var(--muted);transition:.15s;margin-bottom:16px}
+.add-btn:hover{border-color:var(--brand);color:var(--brand);background:var(--brand-light)}
+.total-bar{background:var(--brand-light);border:1px solid rgba(15,118,110,.2);border-radius:10px;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.total-bar .label{font-size:13px;font-weight:600;color:var(--brand-dark)}
+.total-bar .amount{font-size:20px;font-weight:800;color:var(--brand)}
+.btn-primary{width:100%;padding:14px;background:var(--brand);color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;transition:.15s;box-shadow:0 4px 12px rgba(15,118,110,.3)}
+.btn-primary:hover{background:var(--brand-dark)}
+.btn-primary:disabled{opacity:.6;cursor:not-allowed}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#1e293b;color:#fff;padding:12px 20px;border-radius:12px;font-size:13px;font-weight:600;z-index:999;box-shadow:0 8px 24px rgba(0,0,0,.2);animation:slideUp .3s ease}
+.toast.success{background:var(--success)}
+.toast.error{background:var(--error)}
+@keyframes slideUp{from{transform:translateX(-50%) translateY(20px);opacity:0}to{transform:translateX(-50%) translateY(0);opacity:1}}
+.pending-box{background:#fff7ed;border:1px solid #fed7aa;border-radius:12px;padding:12px 16px;display:flex;align-items:center;gap:10px;margin-bottom:16px;font-size:13px}
+.pending-box strong{color:#ea580c}
+.empty-state{text-align:center;padding:40px 20px;color:var(--muted)}
+.empty-state .icon{font-size:48px;margin-bottom:12px}
+.sync-btn{margin-left:auto;padding:6px 14px;background:var(--brand);color:#fff;border:none;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer}
+</style>
+</head>
+<body>
+
+<div class="offline-bar">⚡ Mode hors ligne — vos saisies sont sauvegardées localement</div>
+
+<header>
+  <img src="/logo.png" alt="Oseelc" onerror="this.style.display='none'"/>
+  <h1>Oseelc-connekt</h1>
+  <span class="badge">Hors ligne</span>
+</header>
+
+<div class="container">
+  <div style="height:12px"></div>
+
+  <!-- Saisies en attente -->
+  <div id="pendingBox" class="pending-box" style="display:none">
+    <span>📤</span>
+    <div><strong id="pendingCount">0</strong> saisie(s) en attente de synchronisation</div>
+    <button class="sync-btn" onclick="trySyncNow()">Sync maintenant</button>
+  </div>
+
+  <!-- Onglets -->
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('revenue',this)">💰 Recettes</button>
+    <button class="tab" onclick="switchTab('expense',this)">📉 Dépenses</button>
+    <button class="tab" onclick="switchTab('pending',this)">📋 En attente</button>
+  </div>
+
+  <!-- Formulaire Recettes -->
+  <div id="tab-revenue">
+    <div class="card">
+      <h2>Informations de la période</h2>
+      <div class="field" id="facilityFieldRevenue" style="display:none">
+        <label>Formation sanitaire</label>
+        <select id="facilityIdRevenue"></select>
+      </div>
+      <div class="row">
+        <div class="field">
+          <label>Type de période</label>
+          <select id="periodTypeRevenue" onchange="onPeriodTypeChange('Revenue')">
+            <option value="DAILY">Journalier</option>
+            <option value="WEEKLY">Hebdomadaire</option>
+            <option value="MONTHLY">Mensuel</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Date début</label>
+          <input type="date" id="periodStartRevenue" onchange="onStartChange('Revenue')"/>
+        </div>
+      </div>
+      <div class="field" id="periodEndFieldRevenue" style="display:none">
+        <label>Date fin</label>
+        <input type="date" id="periodEndRevenue"/>
+      </div>
+      <div class="field">
+        <label>Notes (optionnel)</label>
+        <textarea id="notesRevenue" rows="2" placeholder="Observations..."></textarea>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Lignes de recettes</h2>
+      <div id="itemsRevenue"></div>
+      <button class="add-btn" onclick="addItem('Revenue')">+ Ajouter une ligne</button>
+      <div class="total-bar">
+        <span class="label">Total Recettes</span>
+        <span class="amount" id="totalRevenue">0 FC</span>
+      </div>
+      <button class="btn-primary" onclick="submitForm('REVENUE')" id="btnRevenue">
+        💾 Sauvegarder hors ligne
+      </button>
+    </div>
+  </div>
+
+  <!-- Formulaire Dépenses -->
+  <div id="tab-expense" style="display:none">
+    <div class="card">
+      <h2>Informations de la période</h2>
+      <div class="field" id="facilityFieldExpense" style="display:none">
+        <label>Formation sanitaire</label>
+        <select id="facilityIdExpense"></select>
+      </div>
+      <div class="row">
+        <div class="field">
+          <label>Type de période</label>
+          <select id="periodTypeExpense" onchange="onPeriodTypeChange('Expense')">
+            <option value="DAILY">Journalier</option>
+            <option value="WEEKLY">Hebdomadaire</option>
+            <option value="MONTHLY">Mensuel</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Date début</label>
+          <input type="date" id="periodStartExpense" onchange="onStartChange('Expense')"/>
+        </div>
+      </div>
+      <div class="field" id="periodEndFieldExpense" style="display:none">
+        <label>Date fin</label>
+        <input type="date" id="periodEndExpense"/>
+      </div>
+      <div class="field">
+        <label>Notes (optionnel)</label>
+        <textarea id="notesExpense" rows="2" placeholder="Observations..."></textarea>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Lignes de dépenses</h2>
+      <div id="itemsExpense"></div>
+      <button class="add-btn" onclick="addItem('Expense')">+ Ajouter une ligne</button>
+      <div class="total-bar">
+        <span class="label">Total Dépenses</span>
+        <span class="amount" id="totalExpense">0 FC</span>
+      </div>
+      <button class="btn-primary" onclick="submitForm('EXPENSE')" id="btnExpense">
+        💾 Sauvegarder hors ligne
+      </button>
+    </div>
+  </div>
+
+  <!-- Liste en attente -->
+  <div id="tab-pending" style="display:none">
+    <div class="card">
+      <h2>Saisies en attente de synchronisation</h2>
+      <div id="pendingList"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── Constantes ────────────────────────────────────────────────────────────────
+const REVENUE_CATS = [
+  'Consultations externes','Hospitalisations','Maternité','Chirurgie',
+  'Pharmacie','Examens de laboratoire','Imagerie médicale','Autres prestations'
+]
+const EXPENSE_CATS = [
+  'Personnel','Médicaments et consommables','Équipements et matériels',
+  'Entretien et maintenance','Eau, électricité, téléphone',
+  'Transport et carburant','Frais administratifs',
+  'Formations et séminaires','Autres dépenses'
+]
+
+const DB_NAME    = 'oseelc-offline'
+const DB_VERSION = 1
+const STORE      = 'pending-submissions'
+
+let db = null
+
+// ── IndexedDB ─────────────────────────────────────────────────────────────────
+function openDB() {
+  return new Promise((res, rej) => {
+    if (db) return res(db)
+    const req = indexedDB.open(DB_NAME, DB_VERSION)
+    req.onupgradeneeded = () => req.result.createObjectStore(STORE, { keyPath: 'id' })
+    req.onsuccess = () => { db = req.result; res(db) }
+    req.onerror   = () => rej(req.error)
+  })
+}
+
+async function savePending(item) {
+  const d = await openDB()
+  const record = { ...item, id: crypto.randomUUID(), createdAt: Date.now(), status: 'pending' }
+  return new Promise((res, rej) => {
+    const tx = d.transaction(STORE, 'readwrite')
+    tx.objectStore(STORE).put(record)
+    tx.oncomplete = () => res(record.id)
+    tx.onerror    = () => rej(tx.error)
+  })
+}
+
+async function getPending() {
+  const d = await openDB()
+  return new Promise((res, rej) => {
+    const tx  = d.transaction(STORE, 'readonly')
+    const req = tx.objectStore(STORE).getAll()
+    req.onsuccess = () => res(req.result)
+    req.onerror   = () => rej(req.error)
+  })
+}
+
+async function removePending(id) {
+  const d = await openDB()
+  return new Promise((res, rej) => {
+    const tx = d.transaction(STORE, 'readwrite')
+    tx.objectStore(STORE).delete(id)
+    tx.oncomplete = () => res()
+    tx.onerror    = () => rej(tx.error)
+  })
+}
+
+// ── Données de référence ──────────────────────────────────────────────────────
+function getFacilities() {
+  try { return JSON.parse(localStorage.getItem('oseelc:offline:facilities') || '[]') } catch { return [] }
+}
+function getUser() {
+  try { return JSON.parse(localStorage.getItem('oseelc:offline:user') || '{}') } catch { return {} }
+}
+
+// ── Init ──────────────────────────────────────────────────────────────────────
+const today = new Date().toISOString().split('T')[0]
+
+function init() {
+  const user        = getUser()
+  const facilities  = getFacilities()
+
+  // Pré-remplir les dates
+  ;['Revenue','Expense'].forEach(t => {
+    document.getElementById('periodStart' + t).value = today
+    document.getElementById('periodEnd'   + t).value = today
+  })
+
+  // FOSA : si l'user est rattaché à une FOSA, on la pré-sélectionne
+  ;['Revenue','Expense'].forEach(t => {
+    const sel   = document.getElementById('facilityId' + t)
+    const field = document.getElementById('facilityField' + t)
+    if (user.facilityId) {
+      sel.innerHTML = `<option value="${user.facilityId}">Ma formation sanitaire</option>`
+    } else if (facilities.length > 0) {
+      field.style.display = 'block'
+      sel.innerHTML = facilities.map(f =>
+        `<option value="${f.id}">${f.name}</option>`
+      ).join('')
+    }
+  })
+
+  // Ajouter une ligne par défaut
+  addItem('Revenue')
+  addItem('Expense')
+
+  refreshPendingCount()
+}
+
+// ── Onglets ───────────────────────────────────────────────────────────────────
+function switchTab(name, btn) {
+  document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'))
+  btn.classList.add('active')
+  ;['revenue','expense','pending'].forEach(t => {
+    document.getElementById('tab-' + t).style.display = t === name ? '' : 'none'
+  })
+  if (name === 'pending') renderPendingList()
+}
+
+// ── Gestion des lignes ────────────────────────────────────────────────────────
+let counters = { Revenue: 0, Expense: 0 }
+
+function addItem(type) {
+  const cats = type === 'Revenue' ? REVENUE_CATS : EXPENSE_CATS
+  const id   = ++counters[type]
+  const html = `
+    <div class="item-row" id="item-${type}-${id}">
+      <button class="remove-btn" onclick="removeItem('${type}',${id})" title="Supprimer">×</button>
+      <div class="field">
+        <label>Libellé</label>
+        <input type="text" id="label-${type}-${id}" placeholder="Ex: Consultations du matin"/>
+      </div>
+      <div class="row">
+        <div class="field">
+          <label>Catégorie</label>
+          <select id="cat-${type}-${id}">
+            ${cats.map(c => `<option value="${c}">${c}</option>`).join('')}
+          </select>
+        </div>
+        <div class="field">
+          <label>Montant (FC)</label>
+          <input type="number" id="amount-${type}-${id}" min="0" value="0"
+            oninput="updateTotal('${type}')" placeholder="0"/>
+        </div>
+      </div>
+    </div>`
+  document.getElementById('items' + type).insertAdjacentHTML('beforeend', html)
+  updateTotal(type)
+}
+
+function removeItem(type, id) {
+  const el = document.getElementById(`item-${type}-${id}`)
+  if (el) el.remove()
+  updateTotal(type)
+}
+
+function updateTotal(type) {
+  let total = 0
+  document.querySelectorAll(`[id^="amount-${type}-"]`).forEach(el => {
+    total += Number(el.value) || 0
+  })
+  document.getElementById('total' + type).textContent = total.toLocaleString('fr-FR') + ' FC'
+}
+
+// ── Changement période ────────────────────────────────────────────────────────
+function onPeriodTypeChange(type) {
+  const pt    = document.getElementById('periodType' + type).value
+  const field = document.getElementById('periodEndField' + type)
+  if (pt === 'DAILY') {
+    field.style.display = 'none'
+    onStartChange(type)
+  } else {
+    field.style.display = 'block'
+  }
+}
+
+function onStartChange(type) {
+  const pt  = document.getElementById('periodType' + type).value
+  if (pt === 'DAILY') {
+    const start = document.getElementById('periodStart' + type).value
+    document.getElementById('periodEnd' + type).value = start
+  }
+}
+
+// ── Soumission ────────────────────────────────────────────────────────────────
+async function submitForm(declarationType) {
+  const T     = declarationType === 'REVENUE' ? 'Revenue' : 'Expense'
+  const user  = getUser()
+  const facs  = getFacilities()
+
+  const facilityIdEl = document.getElementById('facilityId' + T)
+  const facilityId   = facilityIdEl.value || user.facilityId
+  if (!facilityId) { showToast('Veuillez sélectionner une formation sanitaire', 'error'); return }
+
+  const periodType  = document.getElementById('periodType' + T).value
+  const periodStart = document.getElementById('periodStart' + T).value
+  const periodEnd   = document.getElementById('periodEnd' + T).value || periodStart
+  const notes       = document.getElementById('notes' + T).value
+
+  if (!periodStart) { showToast('La date de début est requise', 'error'); return }
+
+  const items = []
+  document.querySelectorAll(`[id^="item-${T}-"]`).forEach(row => {
+    const idNum = row.id.split('-')[2]
+    const label  = document.getElementById(`label-${T}-${idNum}`)?.value?.trim()
+    const cat    = document.getElementById(`cat-${T}-${idNum}`)?.value
+    const amount = Number(document.getElementById(`amount-${T}-${idNum}`)?.value || 0)
+    if (label) items.push({ label, category: cat, amount })
+  })
+
+  if (items.length === 0) { showToast('Ajoutez au moins une ligne', 'error'); return }
+
+  const payload = {
+    facilityId,
+    declarationType,
+    periodType,
+    periodStart: new Date(periodStart).toISOString(),
+    periodEnd:   new Date(periodEnd + 'T23:59:59').toISOString(),
+    notes,
+    items,
+  }
+
+  const label = `${declarationType === 'REVENUE' ? 'Recettes' : 'Dépenses'} du ${periodStart} — ${items.length} ligne(s)`
+
+  const btn = document.getElementById('btn' + T)
+  btn.disabled = true
+  btn.textContent = 'Sauvegarde...'
+
+  try {
+    if (navigator.onLine) {
+      // Tentative d'envoi direct
+      const res    = await fetch('/api/declarations', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+      const result = await res.json()
+      if (!result.success) throw new Error(result.error)
+      showToast('✅ Déclaration envoyée avec succès !', 'success')
+    } else {
+      await savePending({ type: declarationType === 'REVENUE' ? 'declaration' : 'expense', label, endpoint: '/api/declarations', method: 'POST', body: payload })
+      showToast('💾 Sauvegardé localement — sync au retour du réseau', 'success')
+    }
+    resetForm(T)
+    refreshPendingCount()
+  } catch (e) {
+    // Si l'envoi direct échoue, sauvegarder en local
+    await savePending({ type: declarationType === 'REVENUE' ? 'declaration' : 'expense', label, endpoint: '/api/declarations', method: 'POST', body: payload })
+    showToast('💾 Sauvegardé localement (erreur réseau)', 'success')
+    resetForm(T)
+    refreshPendingCount()
+  } finally {
+    btn.disabled = false
+    btn.textContent = '💾 Sauvegarder hors ligne'
+  }
+}
+
+function resetForm(T) {
+  document.getElementById('items' + T).innerHTML = ''
+  counters[T] = 0
+  document.getElementById('periodStart' + T).value = today
+  document.getElementById('periodEnd'   + T).value = today
+  document.getElementById('notes' + T).value = ''
+  addItem(T)
+  updateTotal(T)
+}
+
+// ── Saisies en attente ────────────────────────────────────────────────────────
+async function refreshPendingCount() {
+  const items = await getPending()
+  const box   = document.getElementById('pendingBox')
+  const count = document.getElementById('pendingCount')
+  count.textContent = items.length
+  box.style.display = items.length > 0 ? 'flex' : 'none'
+}
+
+async function renderPendingList() {
+  const items = await getPending()
+  const list  = document.getElementById('pendingList')
+  if (items.length === 0) {
+    list.innerHTML = '<div class="empty-state"><div class="icon">✅</div><p>Aucune saisie en attente</p></div>'
+    return
+  }
+  list.innerHTML = items.map(item => `
+    <div style="padding:12px;border:1px solid #e2e8f0;border-radius:10px;margin-bottom:8px;display:flex;align-items:center;gap:10px">
+      <span style="font-size:20px">${item.type === 'declaration' ? '💰' : '📉'}</span>
+      <div style="flex:1">
+        <div style="font-size:13px;font-weight:600">${item.label}</div>
+        <div style="font-size:11px;color:#94a3b8">${new Date(item.createdAt).toLocaleString('fr-FR')}</div>
+      </div>
+      <span style="font-size:11px;padding:3px 8px;border-radius:6px;background:${item.status==='error'?'#fee2e2':'#f0fdf4'};color:${item.status==='error'?'#ef4444':'#16a34a'};font-weight:600">
+        ${item.status === 'error' ? '⚠️ Erreur' : item.status === 'syncing' ? '🔄 Sync...' : '⏳ En attente'}
+      </span>
+    </div>
+  `).join('')
+}
+
+async function trySyncNow() {
+  if (!navigator.onLine) { showToast('Toujours hors ligne', 'error'); return }
+  const items = await getPending()
+  let ok = 0, failed = 0
+  for (const item of items) {
+    try {
+      const res = await fetch(item.endpoint, {
+        method: item.method,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(item.body),
+      })
+      const data = await res.json()
+      if (!data.success) throw new Error(data.error)
+      await removePending(item.id)
+      ok++
+    } catch { failed++ }
+  }
+  if (ok > 0) showToast(`✅ ${ok} saisie(s) synchronisée(s)`, 'success')
+  if (failed > 0) showToast(`⚠️ ${failed} saisie(s) en échec`, 'error')
+  refreshPendingCount()
+  renderPendingList()
+}
+
+// Sync automatique au retour du réseau
+window.addEventListener('online', () => trySyncNow())
+
+// ── Toast ─────────────────────────────────────────────────────────────────────
+function showToast(msg, type = 'success') {
+  const t = document.createElement('div')
+  t.className = `toast ${type}`
+  t.textContent = msg
+  document.body.appendChild(t)
+  setTimeout(() => t.remove(), 4000)
+}
+
+// ── Démarrage ─────────────────────────────────────────────────────────────────
+init()
+</script>
+</body>
+</html>

@@ -5,6 +5,7 @@ import { Download, TrendingUp, TrendingDown, Scale, Filter } from 'lucide-react'
 import { PageHeader } from '@/components/ui/page-header'
 import { formatCurrency } from '@care-connekt/shared'
 import { BudgetMensuelReport } from './budget-mensuel-report'
+import { StatisticsReport } from './statistics-report'
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
   LineChart, Line, PieChart, Pie, Cell, Legend,
@@ -19,7 +20,7 @@ export function ReportsPage() {
   const [loading, setLoading] = useState(true)
   const [from, setFrom] = useState('')
   const [to, setTo] = useState('')
-  const [activeTab, setActiveTab] = useState<'overview' | 'revenue' | 'expense' | 'budget-mensuel'>('overview')
+  const [activeTab, setActiveTab] = useState<'overview' | 'revenue' | 'expense' | 'budget-mensuel' | 'statistics'>('overview')
 
   const load = () => {
     setLoading(true)
@@ -159,6 +160,7 @@ export function ReportsPage() {
     { key: 'revenue',        label: 'Recettes' },
     { key: 'expense',        label: 'Dépenses' },
     { key: 'budget-mensuel', label: 'Budget Mensuel' },
+    { key: 'statistics',     label: 'Statistiques' },
   ] as const
 
   return (
@@ -400,6 +402,9 @@ export function ReportsPage() {
 
           {/* Tab: Budget Mensuel */}
           {activeTab === 'budget-mensuel' && <BudgetMensuelReport />}
+
+          {/* Tab: Statistiques */}
+          {activeTab === 'statistics' && <StatisticsReport />}
 
           {/* Tab: Dépenses */}
           {activeTab === 'expense' && (

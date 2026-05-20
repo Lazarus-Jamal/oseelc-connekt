@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import { Geist } from 'next/font/google'
 import { Providers } from '@/components/providers'
 import { PWARegister } from '@/components/pwa-register'
+import { OfflineSyncBanner } from '@/components/offline-sync-banner'
 import './globals.css'
 
 const geist = Geist({ subsets: ['latin'], variable: '--font-geist-sans' })
@@ -43,6 +44,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={`${geist.variable} font-sans antialiased`}>
         <Providers>{children}</Providers>
         <PWARegister />
+        <OfflineSyncBanner />
       </body>
     </html>
   )

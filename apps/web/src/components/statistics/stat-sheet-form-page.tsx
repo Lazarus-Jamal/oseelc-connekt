@@ -4,10 +4,11 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { useSession } from 'next-auth/react'
 import { toast } from 'sonner'
-import { ArrowLeft, ArrowRight, Loader2, Save, Send, Building2, MapPin, CheckCircle2, Circle, AlertCircle } from 'lucide-react'
+import { ArrowLeft, ArrowRight, Loader2, Save, Send, Building2, MapPin, CheckCircle2, Circle, AlertCircle, WifiOff } from 'lucide-react'
 import Link from 'next/link'
 import { PageHeader } from '@/components/ui/page-header'
 import { MONTHS_FR } from '@care-connekt/shared'
+import { savePending } from '@/lib/offline-store'
 import { Indicator, GridSection, CATEGORY_ICONS } from './stat-grid'
 
 interface Facility {
@@ -109,6 +110,21 @@ export function StatSheetFormPage() {
           note: values[ind.id]?.note || undefined,
         })),
       }
+
+      // Mode hors ligne : sauvegarder localement
+      if (!navigator.onLine) {
+        await savePending({
+          type: 'declaration',
+          label: `Statistiques ${MONTHS_FR[month - 1]} ${year} — ${filledCount} indicateur(s) renseigné(s)`,
+          endpoint: '/api/statistics',
+          method: 'POST',
+          body: payload,
+        })
+        toast.success('Fiche sauvegardée localement — elle sera envoyée dès le retour du réseau', { icon: <WifiOff className="w-4 h-4" /> })
+        router.push('/statistics')
+        return
+      }
+
       const res = await fetch('/api/statistics', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

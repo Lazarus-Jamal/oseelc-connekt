@@ -7,10 +7,11 @@ import { useForm, useFieldArray } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { toast } from 'sonner'
-import { Plus, Trash2, Loader2, ArrowLeft, Upload, X, FileText, ImageIcon, User, Building2 } from 'lucide-react'
+import { Plus, Trash2, Loader2, ArrowLeft, Upload, X, FileText, ImageIcon, User, Building2, WifiOff } from 'lucide-react'
 import Link from 'next/link'
 import { PageHeader } from '@/components/ui/page-header'
 import { EXPENSE_CATEGORIES, formatCurrency, formatFileSize } from '@care-connekt/shared'
+import { savePending } from '@/lib/offline-store'
 
 const DEFAULT_EXPENSE_CATS = EXPENSE_CATEGORIES as readonly string[]
 
@@ -115,18 +116,34 @@ export function ExpenseFormPage() {
     }
     setSubmitting(true)
     try {
+      const payload = {
+        facilityId: finalFacilityId,
+        declarationType: 'EXPENSE',
+        periodType: data.periodType,
+        periodStart: new Date(data.periodStart).toISOString(),
+        periodEnd: new Date(data.periodEnd + 'T23:59:59').toISOString(),
+        notes: data.notes,
+        items: data.items,
+      }
+
+      // Mode hors ligne : sauvegarder localement
+      if (!navigator.onLine) {
+        await savePending({
+          type: 'expense',
+          label: `Dépense du ${data.periodStart} — ${data.items.length} ligne(s)`,
+          endpoint: '/api/declarations',
+          method: 'POST',
+          body: payload,
+        })
+        toast.success('Saisie sauvegardée localement — elle sera envoyée dès le retour du réseau', { icon: <WifiOff className="w-4 h-4" /> })
+        router.push('/expenses')
+        return
+      }
+
       const res = await fetch('/api/declarations', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          facilityId: finalFacilityId,
-          declarationType: 'EXPENSE',
-          periodType: data.periodType,
-          periodStart: new Date(data.periodStart).toISOString(),
-          periodEnd: new Date(data.periodEnd + 'T23:59:59').toISOString(),
-          notes: data.notes,
-          items: data.items,
-        }),
+        body: JSON.stringify(payload),
       })
       const result = await res.json()
       if (!result.success) throw new Error(result.error)

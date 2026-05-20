@@ -1,7 +1,18 @@
-const CACHE_NAME = 'oseelc-v1'
+const CACHE_NAME = 'oseelc-v2'
 
-// Assets statiques à mettre en cache immédiatement
-const PRECACHE = ['/offline.html', '/logo.png']
+const PRECACHE = ['/offline.html', '/shell.html', '/logo.png']
+
+// Pages à mettre en cache dès que l'utilisateur est connecté
+const APP_PAGES = [
+  '/dashboard',
+  '/declarations',
+  '/declarations/new',
+  '/expenses',
+  '/expenses/new',
+  '/statistics',
+  '/statistics/new',
+  '/messages',
+]
 
 // ── Installation ──────────────────────────────────────────────────────────────
 self.addEventListener('install', (event) => {
@@ -14,13 +25,27 @@ self.addEventListener('install', (event) => {
 // ── Activation : nettoyage des anciens caches ─────────────────────────────────
 self.addEventListener('activate', (event) => {
   event.waitUntil(
-    caches
-      .keys()
-      .then((keys) =>
-        Promise.all(keys.filter((k) => k !== CACHE_NAME).map((k) => caches.delete(k)))
-      )
+    caches.keys()
+      .then((keys) => Promise.all(keys.filter((k) => k !== CACHE_NAME).map((k) => caches.delete(k))))
       .then(() => self.clients.claim())
   )
+})
+
+// ── Message depuis l'app : pré-cacher les pages après login ───────────────────
+self.addEventListener('message', (event) => {
+  if (event.data?.type === 'PRECACHE_APP_PAGES') {
+    event.waitUntil(
+      caches.open(CACHE_NAME).then((cache) =>
+        Promise.all(
+          APP_PAGES.map((url) =>
+            fetch(url, { credentials: 'include' })
+              .then((res) => { if (res.ok && res.status === 200) cache.put(url, res) })
+              .catch(() => {})
+          )
+        )
+      )
+    )
+  }
 })
 
 // ── Fetch : stratégie hybride ─────────────────────────────────────────────────
@@ -28,16 +53,18 @@ self.addEventListener('fetch', (event) => {
   const { request } = event
   const url = new URL(request.url)
 
-  // Ne pas intercepter les requêtes non-GET
+  // Ignorer les méthodes non-GET
   if (request.method !== 'GET') return
 
-  // Ne pas cacher les appels API (données toujours fraîches)
+  // Ignorer les appels API (toujours frais) et auth
   if (url.pathname.startsWith('/api/')) return
 
-  // Ne pas cacher les routes d'auth NextAuth
-  if (url.pathname.startsWith('/api/auth')) return
+  // Ignorer les requêtes RSC de Next.js (navigation client-side interne)
+  if (url.searchParams.has('_rsc')) return
+  if (request.headers.get('RSC') === '1') return
+  if (request.headers.get('Next-Router-Prefetch') === '1') return
 
-  // Cache-first pour les assets statiques Next.js (_next/static, icons, images publiques)
+  // Assets statiques : cache-first
   const isStaticAsset =
     url.pathname.startsWith('/_next/static/') ||
     url.pathname.startsWith('/icons/') ||
@@ -51,8 +78,7 @@ self.addEventListener('fetch', (event) => {
         if (cached) return cached
         return fetch(request).then((response) => {
           if (response.ok) {
-            const clone = response.clone()
-            caches.open(CACHE_NAME).then((cache) => cache.put(request, clone))
+            caches.open(CACHE_NAME).then((cache) => cache.put(request, response.clone()))
           }
           return response
         })
@@ -61,19 +87,44 @@ self.addEventListener('fetch', (event) => {
     return
   }
 
-  // Network-first pour les pages (avec fallback offline si réseau indisponible)
+  // Pages de navigation : network-first avec fallback intelligent
   event.respondWith(
     fetch(request)
       .then((response) => {
-        if (response.ok) {
+        if (response.ok && response.status === 200) {
           const clone = response.clone()
           caches.open(CACHE_NAME).then((cache) => cache.put(request, clone))
         }
         return response
       })
-      .catch(() =>
-        caches.match(request).then((cached) => cached || caches.match('/offline.html'))
-      )
+      .catch(async () => {
+        // 1. Page exacte demandée
+        const exact = await caches.match(request)
+        if (exact) return exact
+
+        // 2. Sans les query params
+        const cleanUrl = url.origin + url.pathname
+        const clean = await caches.match(cleanUrl)
+        if (clean) return clean
+
+        // 3. Pour les pages de saisie : servir le shell offline autonome
+        const isFormPage =
+          url.pathname.startsWith('/declarations') ||
+          url.pathname.startsWith('/expenses') ||
+          url.pathname.startsWith('/statistics') ||
+          url.pathname.startsWith('/dashboard') ||
+          url.pathname.startsWith('/messages') ||
+          url.pathname.startsWith('/reports') ||
+          url.pathname.startsWith('/budget') ||
+          url.pathname.startsWith('/admin')
+        if (isFormPage) {
+          const shell = await caches.match('/shell.html')
+          if (shell) return shell
+        }
+
+        // 4. Dernier recours
+        return caches.match('/offline.html') || new Response('Hors ligne', { status: 503 })
+      })
   )
 })
 
@@ -87,9 +138,7 @@ self.addEventListener('push', (event) => {
 
   event.waitUntil(
     self.registration.showNotification(title, {
-      body,
-      icon,
-      badge,
+      body, icon, badge,
       data: { url },
       vibrate: [100, 50, 100],
       requireInteraction: false,
