@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 import { toast } from 'sonner'
-import { ArrowLeft, Send, Upload, X, FileText, Loader2, Users, AlertTriangle, EyeOff, ChevronDown } from 'lucide-react'
+import { ArrowLeft, Send, Upload, X, FileText, Loader2, Users, AlertTriangle, EyeOff, ChevronDown, CornerDownRight } from 'lucide-react'
 import { PageHeader } from '@/components/ui/page-header'
 import { formatFileSize } from '@care-connekt/shared'
 
@@ -30,34 +30,54 @@ const ROLES = [
   { value: 'DATA_MANAGER',      label: 'Responsables Data' },
 ]
 
-export function MessageComposePage() {
+export function MessageComposePage({
+  replyToId = null,
+  initialTitle = '',
+  initialRecipientId = null,
+}: {
+  replyToId?: string | null
+  initialTitle?: string
+  initialRecipientId?: string | null
+}) {
   const router = useRouter()
   const { data: session } = useSession()
   const fileInputRef = useRef<HTMLInputElement>(null)
+  const isReply = !!replyToId
 
-  const [title, setTitle] = useState('')
+  const [title, setTitle] = useState(initialTitle)
   const [content, setContent] = useState('')
-  const [category, setCategory] = useState('CIRCULAIRE')
+  const [category, setCategory] = useState('AUTRE')
   const [priority, setPriority] = useState('NORMAL')
   const [isSensitive, setIsSensitive] = useState(false)
   const [expiresAt, setExpiresAt] = useState('')
   const [targetAll, setTargetAll] = useState(false)
   const [targetRoles, setTargetRoles] = useState<string[]>([])
   const [targetFacilityIds, setTargetFacilityIds] = useState<string[]>([])
-  const [targetUserIds, setTargetUserIds] = useState<string[]>([])
+  const [targetUserIds, setTargetUserIds] = useState<string[]>(initialRecipientId ? [initialRecipientId] : [])
 
   const [facilities, setFacilities] = useState<{ id: string; name: string }[]>([])
   const [users, setUsers] = useState<{ id: string; name: string; role: string }[]>([])
   const [userSearch, setUserSearch] = useState('')
   const [showUserDropdown, setShowUserDropdown] = useState(false)
+  const [replyToSenderName, setReplyToSenderName] = useState('')
 
   const [files, setFiles] = useState<File[]>([])
   const [submitting, setSubmitting] = useState(false)
 
   useEffect(() => {
-    fetch('/api/facilities?limit=100').then((r) => r.json()).then((d) => { if (d.success) setFacilities(d.data) })
+    if (!isReply) {
+      fetch('/api/facilities?limit=100').then((r) => r.json()).then((d) => { if (d.success) setFacilities(d.data) })
+    }
     fetch('/api/users?limit=100').then((r) => r.json()).then((d) => { if (d.success) setUsers(d.data || []) })
-  }, [])
+  }, [isReply])
+
+  useEffect(() => {
+    if (replyToId) {
+      fetch(`/api/messages/${replyToId}`).then((r) => r.json()).then((d) => {
+        if (d.success) setReplyToSenderName(d.data?.sender?.name ?? '')
+      })
+    }
+  }, [replyToId])
 
   const toggleRole = (role: string) =>
     setTargetRoles((prev) => prev.includes(role) ? prev.filter((r) => r !== role) : [...prev, role])
@@ -86,7 +106,7 @@ export function MessageComposePage() {
   const onSubmit = async () => {
     if (!title.trim()) { toast.error('Titre requis'); return }
     if (!content.trim()) { toast.error('Contenu requis'); return }
-    if (!targetAll && targetRoles.length === 0 && targetFacilityIds.length === 0 && targetUserIds.length === 0) {
+    if (!isReply && !targetAll && targetRoles.length === 0 && targetFacilityIds.length === 0 && targetUserIds.length === 0) {
       toast.error('Sélectionnez au moins un destinataire')
       return
     }
@@ -97,7 +117,8 @@ export function MessageComposePage() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ title, content, category, priority, isSensitive,
-          expiresAt: expiresAt || null, targetAll, targetRoles, targetFacilityIds,
+          expiresAt: expiresAt || null, replyToId: replyToId ?? null,
+          targetAll, targetRoles, targetFacilityIds,
           targetRegionIds: [], targetUserIds }),
       })
       const data = await res.json()
@@ -134,6 +155,14 @@ export function MessageComposePage() {
       </div>
 
       <div className="space-y-5">
+        {/* Reply context banner */}
+        {isReply && (
+          <div className="flex items-center gap-2 px-4 py-3 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-2xl text-sm text-green-700 dark:text-green-400">
+            <CornerDownRight className="w-4 h-4 flex-shrink-0" />
+            Réponse directe à {replyToSenderName || '…'} — le destinataire sera l'expéditeur du message original.
+          </div>
+        )}
+
         {/* Titre + catégorie + priorité */}
         <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 p-5 space-y-4">
           <div className="space-y-1.5">
@@ -194,8 +223,8 @@ export function MessageComposePage() {
             className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-brand-400 resize-none transition" />
         </div>
 
-        {/* Destinataires */}
-        <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 p-5 space-y-4">
+        {/* Destinataires — masqué en mode réponse directe */}
+        {!isReply && <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 p-5 space-y-4">
           <div className="flex items-center gap-2">
             <Users className="w-4 h-4 text-brand-500" />
             <h3 className="font-semibold text-gray-900 dark:text-white text-sm">Destinataires</h3>
@@ -283,7 +312,7 @@ export function MessageComposePage() {
               </div>
             </>
           )}
-        </div>
+        </div>}
 
         {/* Pièces jointes */}
         <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 p-5">

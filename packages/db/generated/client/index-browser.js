@@ -366,7 +366,8 @@ exports.Prisma.AdminMessageScalarFieldEnum = {
   senderId: 'senderId',
   expiresAt: 'expiresAt',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  replyToId: 'replyToId'
 };
 
 exports.Prisma.AdminMessageRecipientScalarFieldEnum = {

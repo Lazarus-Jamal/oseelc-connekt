@@ -8,7 +8,7 @@ import { toast } from 'sonner'
 import {
   ArrowLeft, Paperclip, Download, Trash2, AlertTriangle, Info, Bell,
   EyeOff, Users, CheckCircle2, Clock, FileText, FileSpreadsheet, Image as ImageIcon,
-  Pencil, X, Save, Loader2, Eye,
+  Pencil, X, Save, Loader2, Eye, Reply, CornerDownRight,
 } from 'lucide-react'
 import { formatDate } from '@care-connekt/shared'
 import { ROLES_LABELS } from '@care-connekt/shared'
@@ -53,12 +53,19 @@ function fileIcon(type: string) {
 
 interface Recipient { userId: string; name: string; role: string; isRead: boolean; readAt: string | null }
 interface Document { id: string; originalName: string; filePath: string; fileType: string; fileSize: number }
+interface Reply {
+  id: string; title: string; content: string; createdAt: string
+  sender: { id: string; name: string; role: string }
+  _count: { replies: number }
+}
 interface Message {
   id: string; title: string; content: string; category: string; priority: string
   isSensitive: boolean; expiresAt: string | null; createdAt: string; updatedAt: string
   sender: { id: string; name: string; role: string }
   documents: Document[]
   recipients: Recipient[]
+  replyTo?: { id: string; title: string; content: string; createdAt: string; sender: { id: string; name: string; role: string } } | null
+  replies?: Reply[]
   isSender: boolean; isRecipient: boolean
 }
 
@@ -195,6 +202,13 @@ export function MessageDetailPage({ id }: { id: string }) {
                 Délai de modification dépassé
               </span>
             )
+          )}
+          {!editing && (
+            <Link href={`/messages/new?replyTo=${message.id}&title=${encodeURIComponent('Re: ' + message.title)}&recipientId=${message.sender.id}`}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-sm text-green-600 dark:text-green-400 border border-green-200 dark:border-green-800 hover:bg-green-50 dark:hover:bg-green-900/20 transition">
+              <Reply className="w-3.5 h-3.5" />
+              Répondre
+            </Link>
           )}
           {canDelete && !editing && (
             <button onClick={handleDelete} disabled={deleting}
@@ -399,6 +413,54 @@ export function MessageDetailPage({ id }: { id: string }) {
               ))}
             </div>
           )}
+        </div>
+      )}
+
+      {/* Original message context (if this is a reply) */}
+      {message.replyTo && (
+        <div className="bg-gray-50 dark:bg-gray-800/50 rounded-2xl border border-gray-100 dark:border-gray-800 p-4">
+          <div className="flex items-center gap-2 mb-2 text-xs text-gray-500 dark:text-gray-400">
+            <CornerDownRight className="w-3.5 h-3.5" />
+            En réponse à
+          </div>
+          <Link href={`/messages/${message.replyTo.id}`} className="group block">
+            <p className="text-sm font-semibold text-gray-700 dark:text-gray-300 group-hover:text-brand-600 dark:group-hover:text-brand-400 truncate">
+              {message.replyTo.title}
+            </p>
+            <p className="text-xs text-gray-400 mt-0.5 line-clamp-2">{message.replyTo.content}</p>
+            <p className="text-xs text-gray-400 mt-1">De : {message.replyTo.sender.name} · {formatDate(message.replyTo.createdAt)}</p>
+          </Link>
+        </div>
+      )}
+
+      {/* Replies thread */}
+      {message.replies && message.replies.length > 0 && (
+        <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 p-5 space-y-3">
+          <h2 className="text-sm font-semibold text-gray-900 dark:text-white flex items-center gap-2">
+            <Reply className="w-4 h-4 text-brand-500" />
+            Réponses ({message.replies.length})
+          </h2>
+          {message.replies.map((reply) => (
+            <Link key={reply.id} href={`/messages/${reply.id}`}
+              className="block rounded-xl border border-gray-100 dark:border-gray-800 p-4 hover:border-brand-300 hover:bg-brand-50/30 dark:hover:bg-brand-900/10 transition">
+              <div className="flex items-start justify-between gap-3">
+                <div className="flex items-center gap-2 min-w-0">
+                  <div className="w-7 h-7 rounded-full bg-gradient-to-br from-brand-400 to-brand-600 flex items-center justify-center text-white text-xs font-bold flex-shrink-0">
+                    {reply.sender.name.charAt(0).toUpperCase()}
+                  </div>
+                  <div className="min-w-0">
+                    <p className="text-sm font-medium text-gray-800 dark:text-gray-200 truncate">{reply.sender.name}</p>
+                    <p className="text-xs text-gray-400">{formatDate(reply.createdAt)}</p>
+                  </div>
+                </div>
+                {reply._count.replies > 0 && (
+                  <span className="text-xs text-brand-500 flex-shrink-0">{reply._count.replies} réponse{reply._count.replies > 1 ? 's' : ''}</span>
+                )}
+              </div>
+              <p className="text-sm font-semibold text-gray-800 dark:text-gray-200 mt-2 truncate">{reply.title}</p>
+              <p className="text-sm text-gray-500 dark:text-gray-400 mt-0.5 line-clamp-2">{reply.content}</p>
+            </Link>
+          ))}
         </div>
       )}
     </div>

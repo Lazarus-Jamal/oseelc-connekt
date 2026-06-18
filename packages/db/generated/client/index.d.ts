@@ -4031,11 +4031,13 @@ export namespace Prisma {
    */
 
   export type AdminMessageCountOutputType = {
+    replies: number
     recipients: number
     documents: number
   }
 
   export type AdminMessageCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    replies?: boolean | AdminMessageCountOutputTypeCountRepliesArgs
     recipients?: boolean | AdminMessageCountOutputTypeCountRecipientsArgs
     documents?: boolean | AdminMessageCountOutputTypeCountDocumentsArgs
   }
@@ -4049,6 +4051,13 @@ export namespace Prisma {
      * Select specific fields to fetch from the AdminMessageCountOutputType
      */
     select?: AdminMessageCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * AdminMessageCountOutputType without action
+   */
+  export type AdminMessageCountOutputTypeCountRepliesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AdminMessageWhereInput
   }
 
   /**
@@ -26843,6 +26852,7 @@ export namespace Prisma {
     expiresAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
+    replyToId: string | null
   }
 
   export type AdminMessageMaxAggregateOutputType = {
@@ -26856,6 +26866,7 @@ export namespace Prisma {
     expiresAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
+    replyToId: string | null
   }
 
   export type AdminMessageCountAggregateOutputType = {
@@ -26869,6 +26880,7 @@ export namespace Prisma {
     expiresAt: number
     createdAt: number
     updatedAt: number
+    replyToId: number
     _all: number
   }
 
@@ -26884,6 +26896,7 @@ export namespace Prisma {
     expiresAt?: true
     createdAt?: true
     updatedAt?: true
+    replyToId?: true
   }
 
   export type AdminMessageMaxAggregateInputType = {
@@ -26897,6 +26910,7 @@ export namespace Prisma {
     expiresAt?: true
     createdAt?: true
     updatedAt?: true
+    replyToId?: true
   }
 
   export type AdminMessageCountAggregateInputType = {
@@ -26910,6 +26924,7 @@ export namespace Prisma {
     expiresAt?: true
     createdAt?: true
     updatedAt?: true
+    replyToId?: true
     _all?: true
   }
 
@@ -26996,6 +27011,7 @@ export namespace Prisma {
     expiresAt: Date | null
     createdAt: Date
     updatedAt: Date
+    replyToId: string | null
     _count: AdminMessageCountAggregateOutputType | null
     _min: AdminMessageMinAggregateOutputType | null
     _max: AdminMessageMaxAggregateOutputType | null
@@ -27026,6 +27042,9 @@ export namespace Prisma {
     expiresAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    replyToId?: boolean
+    replyTo?: boolean | AdminMessage$replyToArgs<ExtArgs>
+    replies?: boolean | AdminMessage$repliesArgs<ExtArgs>
     sender?: boolean | UserDefaultArgs<ExtArgs>
     recipients?: boolean | AdminMessage$recipientsArgs<ExtArgs>
     documents?: boolean | AdminMessage$documentsArgs<ExtArgs>
@@ -27043,6 +27062,8 @@ export namespace Prisma {
     expiresAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    replyToId?: boolean
+    replyTo?: boolean | AdminMessage$replyToArgs<ExtArgs>
     sender?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["adminMessage"]>
 
@@ -27057,6 +27078,8 @@ export namespace Prisma {
     expiresAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    replyToId?: boolean
+    replyTo?: boolean | AdminMessage$replyToArgs<ExtArgs>
     sender?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["adminMessage"]>
 
@@ -27071,25 +27094,32 @@ export namespace Prisma {
     expiresAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    replyToId?: boolean
   }
 
-  export type AdminMessageOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "content" | "category" | "priority" | "isSensitive" | "senderId" | "expiresAt" | "createdAt" | "updatedAt", ExtArgs["result"]["adminMessage"]>
+  export type AdminMessageOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "content" | "category" | "priority" | "isSensitive" | "senderId" | "expiresAt" | "createdAt" | "updatedAt" | "replyToId", ExtArgs["result"]["adminMessage"]>
   export type AdminMessageInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    replyTo?: boolean | AdminMessage$replyToArgs<ExtArgs>
+    replies?: boolean | AdminMessage$repliesArgs<ExtArgs>
     sender?: boolean | UserDefaultArgs<ExtArgs>
     recipients?: boolean | AdminMessage$recipientsArgs<ExtArgs>
     documents?: boolean | AdminMessage$documentsArgs<ExtArgs>
     _count?: boolean | AdminMessageCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type AdminMessageIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    replyTo?: boolean | AdminMessage$replyToArgs<ExtArgs>
     sender?: boolean | UserDefaultArgs<ExtArgs>
   }
   export type AdminMessageIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    replyTo?: boolean | AdminMessage$replyToArgs<ExtArgs>
     sender?: boolean | UserDefaultArgs<ExtArgs>
   }
 
   export type $AdminMessagePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "AdminMessage"
     objects: {
+      replyTo: Prisma.$AdminMessagePayload<ExtArgs> | null
+      replies: Prisma.$AdminMessagePayload<ExtArgs>[]
       sender: Prisma.$UserPayload<ExtArgs>
       recipients: Prisma.$AdminMessageRecipientPayload<ExtArgs>[]
       documents: Prisma.$AdminMessageDocumentPayload<ExtArgs>[]
@@ -27105,6 +27135,7 @@ export namespace Prisma {
       expiresAt: Date | null
       createdAt: Date
       updatedAt: Date
+      replyToId: string | null
     }, ExtArgs["result"]["adminMessage"]>
     composites: {}
   }
@@ -27499,6 +27530,8 @@ export namespace Prisma {
    */
   export interface Prisma__AdminMessageClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    replyTo<T extends AdminMessage$replyToArgs<ExtArgs> = {}>(args?: Subset<T, AdminMessage$replyToArgs<ExtArgs>>): Prisma__AdminMessageClient<$Result.GetResult<Prisma.$AdminMessagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    replies<T extends AdminMessage$repliesArgs<ExtArgs> = {}>(args?: Subset<T, AdminMessage$repliesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdminMessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     sender<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     recipients<T extends AdminMessage$recipientsArgs<ExtArgs> = {}>(args?: Subset<T, AdminMessage$recipientsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdminMessageRecipientPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     documents<T extends AdminMessage$documentsArgs<ExtArgs> = {}>(args?: Subset<T, AdminMessage$documentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdminMessageDocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -27541,6 +27574,7 @@ export namespace Prisma {
     readonly expiresAt: FieldRef<"AdminMessage", 'DateTime'>
     readonly createdAt: FieldRef<"AdminMessage", 'DateTime'>
     readonly updatedAt: FieldRef<"AdminMessage", 'DateTime'>
+    readonly replyToId: FieldRef<"AdminMessage", 'String'>
   }
     
 
@@ -27934,6 +27968,49 @@ export namespace Prisma {
      * Limit how many AdminMessages to delete.
      */
     limit?: number
+  }
+
+  /**
+   * AdminMessage.replyTo
+   */
+  export type AdminMessage$replyToArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminMessage
+     */
+    select?: AdminMessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdminMessage
+     */
+    omit?: AdminMessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdminMessageInclude<ExtArgs> | null
+    where?: AdminMessageWhereInput
+  }
+
+  /**
+   * AdminMessage.replies
+   */
+  export type AdminMessage$repliesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminMessage
+     */
+    select?: AdminMessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdminMessage
+     */
+    omit?: AdminMessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdminMessageInclude<ExtArgs> | null
+    where?: AdminMessageWhereInput
+    orderBy?: AdminMessageOrderByWithRelationInput | AdminMessageOrderByWithRelationInput[]
+    cursor?: AdminMessageWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AdminMessageScalarFieldEnum | AdminMessageScalarFieldEnum[]
   }
 
   /**
@@ -38552,7 +38629,8 @@ export namespace Prisma {
     senderId: 'senderId',
     expiresAt: 'expiresAt',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    replyToId: 'replyToId'
   };
 
   export type AdminMessageScalarFieldEnum = (typeof AdminMessageScalarFieldEnum)[keyof typeof AdminMessageScalarFieldEnum]
@@ -40612,6 +40690,9 @@ export namespace Prisma {
     expiresAt?: DateTimeNullableFilter<"AdminMessage"> | Date | string | null
     createdAt?: DateTimeFilter<"AdminMessage"> | Date | string
     updatedAt?: DateTimeFilter<"AdminMessage"> | Date | string
+    replyToId?: StringNullableFilter<"AdminMessage"> | string | null
+    replyTo?: XOR<AdminMessageNullableScalarRelationFilter, AdminMessageWhereInput> | null
+    replies?: AdminMessageListRelationFilter
     sender?: XOR<UserScalarRelationFilter, UserWhereInput>
     recipients?: AdminMessageRecipientListRelationFilter
     documents?: AdminMessageDocumentListRelationFilter
@@ -40628,6 +40709,9 @@ export namespace Prisma {
     expiresAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    replyToId?: SortOrderInput | SortOrder
+    replyTo?: AdminMessageOrderByWithRelationInput
+    replies?: AdminMessageOrderByRelationAggregateInput
     sender?: UserOrderByWithRelationInput
     recipients?: AdminMessageRecipientOrderByRelationAggregateInput
     documents?: AdminMessageDocumentOrderByRelationAggregateInput
@@ -40647,6 +40731,9 @@ export namespace Prisma {
     expiresAt?: DateTimeNullableFilter<"AdminMessage"> | Date | string | null
     createdAt?: DateTimeFilter<"AdminMessage"> | Date | string
     updatedAt?: DateTimeFilter<"AdminMessage"> | Date | string
+    replyToId?: StringNullableFilter<"AdminMessage"> | string | null
+    replyTo?: XOR<AdminMessageNullableScalarRelationFilter, AdminMessageWhereInput> | null
+    replies?: AdminMessageListRelationFilter
     sender?: XOR<UserScalarRelationFilter, UserWhereInput>
     recipients?: AdminMessageRecipientListRelationFilter
     documents?: AdminMessageDocumentListRelationFilter
@@ -40663,6 +40750,7 @@ export namespace Prisma {
     expiresAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    replyToId?: SortOrderInput | SortOrder
     _count?: AdminMessageCountOrderByAggregateInput
     _max?: AdminMessageMaxOrderByAggregateInput
     _min?: AdminMessageMinOrderByAggregateInput
@@ -40682,6 +40770,7 @@ export namespace Prisma {
     expiresAt?: DateTimeNullableWithAggregatesFilter<"AdminMessage"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"AdminMessage"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"AdminMessage"> | Date | string
+    replyToId?: StringNullableWithAggregatesFilter<"AdminMessage"> | string | null
   }
 
   export type AdminMessageRecipientWhereInput = {
@@ -43147,6 +43236,8 @@ export namespace Prisma {
     expiresAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    replyTo?: AdminMessageCreateNestedOneWithoutRepliesInput
+    replies?: AdminMessageCreateNestedManyWithoutReplyToInput
     sender: UserCreateNestedOneWithoutSentMessagesInput
     recipients?: AdminMessageRecipientCreateNestedManyWithoutMessageInput
     documents?: AdminMessageDocumentCreateNestedManyWithoutMessageInput
@@ -43163,6 +43254,8 @@ export namespace Prisma {
     expiresAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    replyToId?: string | null
+    replies?: AdminMessageUncheckedCreateNestedManyWithoutReplyToInput
     recipients?: AdminMessageRecipientUncheckedCreateNestedManyWithoutMessageInput
     documents?: AdminMessageDocumentUncheckedCreateNestedManyWithoutMessageInput
   }
@@ -43177,6 +43270,8 @@ export namespace Prisma {
     expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    replyTo?: AdminMessageUpdateOneWithoutRepliesNestedInput
+    replies?: AdminMessageUpdateManyWithoutReplyToNestedInput
     sender?: UserUpdateOneRequiredWithoutSentMessagesNestedInput
     recipients?: AdminMessageRecipientUpdateManyWithoutMessageNestedInput
     documents?: AdminMessageDocumentUpdateManyWithoutMessageNestedInput
@@ -43193,6 +43288,8 @@ export namespace Prisma {
     expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    replyToId?: NullableStringFieldUpdateOperationsInput | string | null
+    replies?: AdminMessageUncheckedUpdateManyWithoutReplyToNestedInput
     recipients?: AdminMessageRecipientUncheckedUpdateManyWithoutMessageNestedInput
     documents?: AdminMessageDocumentUncheckedUpdateManyWithoutMessageNestedInput
   }
@@ -43208,6 +43305,7 @@ export namespace Prisma {
     expiresAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    replyToId?: string | null
   }
 
   export type AdminMessageUpdateManyMutationInput = {
@@ -43233,6 +43331,7 @@ export namespace Prisma {
     expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    replyToId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type AdminMessageRecipientCreateInput = {
@@ -45495,6 +45594,11 @@ export namespace Prisma {
     not?: NestedEnumMessagePriorityFilter<$PrismaModel> | $Enums.MessagePriority
   }
 
+  export type AdminMessageNullableScalarRelationFilter = {
+    is?: AdminMessageWhereInput | null
+    isNot?: AdminMessageWhereInput | null
+  }
+
   export type AdminMessageDocumentListRelationFilter = {
     every?: AdminMessageDocumentWhereInput
     some?: AdminMessageDocumentWhereInput
@@ -45516,6 +45620,7 @@ export namespace Prisma {
     expiresAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    replyToId?: SortOrder
   }
 
   export type AdminMessageMaxOrderByAggregateInput = {
@@ -45529,6 +45634,7 @@ export namespace Prisma {
     expiresAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    replyToId?: SortOrder
   }
 
   export type AdminMessageMinOrderByAggregateInput = {
@@ -45542,6 +45648,7 @@ export namespace Prisma {
     expiresAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    replyToId?: SortOrder
   }
 
   export type EnumMessageCategoryWithAggregatesFilter<$PrismaModel = never> = {
@@ -47954,6 +48061,19 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutPushSubscriptionsInput, UserUpdateWithoutPushSubscriptionsInput>, UserUncheckedUpdateWithoutPushSubscriptionsInput>
   }
 
+  export type AdminMessageCreateNestedOneWithoutRepliesInput = {
+    create?: XOR<AdminMessageCreateWithoutRepliesInput, AdminMessageUncheckedCreateWithoutRepliesInput>
+    connectOrCreate?: AdminMessageCreateOrConnectWithoutRepliesInput
+    connect?: AdminMessageWhereUniqueInput
+  }
+
+  export type AdminMessageCreateNestedManyWithoutReplyToInput = {
+    create?: XOR<AdminMessageCreateWithoutReplyToInput, AdminMessageUncheckedCreateWithoutReplyToInput> | AdminMessageCreateWithoutReplyToInput[] | AdminMessageUncheckedCreateWithoutReplyToInput[]
+    connectOrCreate?: AdminMessageCreateOrConnectWithoutReplyToInput | AdminMessageCreateOrConnectWithoutReplyToInput[]
+    createMany?: AdminMessageCreateManyReplyToInputEnvelope
+    connect?: AdminMessageWhereUniqueInput | AdminMessageWhereUniqueInput[]
+  }
+
   export type UserCreateNestedOneWithoutSentMessagesInput = {
     create?: XOR<UserCreateWithoutSentMessagesInput, UserUncheckedCreateWithoutSentMessagesInput>
     connectOrCreate?: UserCreateOrConnectWithoutSentMessagesInput
@@ -47972,6 +48092,13 @@ export namespace Prisma {
     connectOrCreate?: AdminMessageDocumentCreateOrConnectWithoutMessageInput | AdminMessageDocumentCreateOrConnectWithoutMessageInput[]
     createMany?: AdminMessageDocumentCreateManyMessageInputEnvelope
     connect?: AdminMessageDocumentWhereUniqueInput | AdminMessageDocumentWhereUniqueInput[]
+  }
+
+  export type AdminMessageUncheckedCreateNestedManyWithoutReplyToInput = {
+    create?: XOR<AdminMessageCreateWithoutReplyToInput, AdminMessageUncheckedCreateWithoutReplyToInput> | AdminMessageCreateWithoutReplyToInput[] | AdminMessageUncheckedCreateWithoutReplyToInput[]
+    connectOrCreate?: AdminMessageCreateOrConnectWithoutReplyToInput | AdminMessageCreateOrConnectWithoutReplyToInput[]
+    createMany?: AdminMessageCreateManyReplyToInputEnvelope
+    connect?: AdminMessageWhereUniqueInput | AdminMessageWhereUniqueInput[]
   }
 
   export type AdminMessageRecipientUncheckedCreateNestedManyWithoutMessageInput = {
@@ -47994,6 +48121,30 @@ export namespace Prisma {
 
   export type EnumMessagePriorityFieldUpdateOperationsInput = {
     set?: $Enums.MessagePriority
+  }
+
+  export type AdminMessageUpdateOneWithoutRepliesNestedInput = {
+    create?: XOR<AdminMessageCreateWithoutRepliesInput, AdminMessageUncheckedCreateWithoutRepliesInput>
+    connectOrCreate?: AdminMessageCreateOrConnectWithoutRepliesInput
+    upsert?: AdminMessageUpsertWithoutRepliesInput
+    disconnect?: AdminMessageWhereInput | boolean
+    delete?: AdminMessageWhereInput | boolean
+    connect?: AdminMessageWhereUniqueInput
+    update?: XOR<XOR<AdminMessageUpdateToOneWithWhereWithoutRepliesInput, AdminMessageUpdateWithoutRepliesInput>, AdminMessageUncheckedUpdateWithoutRepliesInput>
+  }
+
+  export type AdminMessageUpdateManyWithoutReplyToNestedInput = {
+    create?: XOR<AdminMessageCreateWithoutReplyToInput, AdminMessageUncheckedCreateWithoutReplyToInput> | AdminMessageCreateWithoutReplyToInput[] | AdminMessageUncheckedCreateWithoutReplyToInput[]
+    connectOrCreate?: AdminMessageCreateOrConnectWithoutReplyToInput | AdminMessageCreateOrConnectWithoutReplyToInput[]
+    upsert?: AdminMessageUpsertWithWhereUniqueWithoutReplyToInput | AdminMessageUpsertWithWhereUniqueWithoutReplyToInput[]
+    createMany?: AdminMessageCreateManyReplyToInputEnvelope
+    set?: AdminMessageWhereUniqueInput | AdminMessageWhereUniqueInput[]
+    disconnect?: AdminMessageWhereUniqueInput | AdminMessageWhereUniqueInput[]
+    delete?: AdminMessageWhereUniqueInput | AdminMessageWhereUniqueInput[]
+    connect?: AdminMessageWhereUniqueInput | AdminMessageWhereUniqueInput[]
+    update?: AdminMessageUpdateWithWhereUniqueWithoutReplyToInput | AdminMessageUpdateWithWhereUniqueWithoutReplyToInput[]
+    updateMany?: AdminMessageUpdateManyWithWhereWithoutReplyToInput | AdminMessageUpdateManyWithWhereWithoutReplyToInput[]
+    deleteMany?: AdminMessageScalarWhereInput | AdminMessageScalarWhereInput[]
   }
 
   export type UserUpdateOneRequiredWithoutSentMessagesNestedInput = {
@@ -48030,6 +48181,20 @@ export namespace Prisma {
     update?: AdminMessageDocumentUpdateWithWhereUniqueWithoutMessageInput | AdminMessageDocumentUpdateWithWhereUniqueWithoutMessageInput[]
     updateMany?: AdminMessageDocumentUpdateManyWithWhereWithoutMessageInput | AdminMessageDocumentUpdateManyWithWhereWithoutMessageInput[]
     deleteMany?: AdminMessageDocumentScalarWhereInput | AdminMessageDocumentScalarWhereInput[]
+  }
+
+  export type AdminMessageUncheckedUpdateManyWithoutReplyToNestedInput = {
+    create?: XOR<AdminMessageCreateWithoutReplyToInput, AdminMessageUncheckedCreateWithoutReplyToInput> | AdminMessageCreateWithoutReplyToInput[] | AdminMessageUncheckedCreateWithoutReplyToInput[]
+    connectOrCreate?: AdminMessageCreateOrConnectWithoutReplyToInput | AdminMessageCreateOrConnectWithoutReplyToInput[]
+    upsert?: AdminMessageUpsertWithWhereUniqueWithoutReplyToInput | AdminMessageUpsertWithWhereUniqueWithoutReplyToInput[]
+    createMany?: AdminMessageCreateManyReplyToInputEnvelope
+    set?: AdminMessageWhereUniqueInput | AdminMessageWhereUniqueInput[]
+    disconnect?: AdminMessageWhereUniqueInput | AdminMessageWhereUniqueInput[]
+    delete?: AdminMessageWhereUniqueInput | AdminMessageWhereUniqueInput[]
+    connect?: AdminMessageWhereUniqueInput | AdminMessageWhereUniqueInput[]
+    update?: AdminMessageUpdateWithWhereUniqueWithoutReplyToInput | AdminMessageUpdateWithWhereUniqueWithoutReplyToInput[]
+    updateMany?: AdminMessageUpdateManyWithWhereWithoutReplyToInput | AdminMessageUpdateManyWithWhereWithoutReplyToInput[]
+    deleteMany?: AdminMessageScalarWhereInput | AdminMessageScalarWhereInput[]
   }
 
   export type AdminMessageRecipientUncheckedUpdateManyWithoutMessageNestedInput = {
@@ -50628,6 +50793,8 @@ export namespace Prisma {
     expiresAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    replyTo?: AdminMessageCreateNestedOneWithoutRepliesInput
+    replies?: AdminMessageCreateNestedManyWithoutReplyToInput
     recipients?: AdminMessageRecipientCreateNestedManyWithoutMessageInput
     documents?: AdminMessageDocumentCreateNestedManyWithoutMessageInput
   }
@@ -50642,6 +50809,8 @@ export namespace Prisma {
     expiresAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    replyToId?: string | null
+    replies?: AdminMessageUncheckedCreateNestedManyWithoutReplyToInput
     recipients?: AdminMessageRecipientUncheckedCreateNestedManyWithoutMessageInput
     documents?: AdminMessageDocumentUncheckedCreateNestedManyWithoutMessageInput
   }
@@ -51097,6 +51266,7 @@ export namespace Prisma {
     expiresAt?: DateTimeNullableFilter<"AdminMessage"> | Date | string | null
     createdAt?: DateTimeFilter<"AdminMessage"> | Date | string
     updatedAt?: DateTimeFilter<"AdminMessage"> | Date | string
+    replyToId?: StringNullableFilter<"AdminMessage"> | string | null
   }
 
   export type AdminMessageRecipientUpsertWithWhereUniqueWithoutUserInput = {
@@ -53729,6 +53899,85 @@ export namespace Prisma {
     planningEvents?: PlanningEventUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
+  export type AdminMessageCreateWithoutRepliesInput = {
+    id?: string
+    title: string
+    content: string
+    category?: $Enums.MessageCategory
+    priority?: $Enums.MessagePriority
+    isSensitive?: boolean
+    expiresAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    replyTo?: AdminMessageCreateNestedOneWithoutRepliesInput
+    sender: UserCreateNestedOneWithoutSentMessagesInput
+    recipients?: AdminMessageRecipientCreateNestedManyWithoutMessageInput
+    documents?: AdminMessageDocumentCreateNestedManyWithoutMessageInput
+  }
+
+  export type AdminMessageUncheckedCreateWithoutRepliesInput = {
+    id?: string
+    title: string
+    content: string
+    category?: $Enums.MessageCategory
+    priority?: $Enums.MessagePriority
+    isSensitive?: boolean
+    senderId: string
+    expiresAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    replyToId?: string | null
+    recipients?: AdminMessageRecipientUncheckedCreateNestedManyWithoutMessageInput
+    documents?: AdminMessageDocumentUncheckedCreateNestedManyWithoutMessageInput
+  }
+
+  export type AdminMessageCreateOrConnectWithoutRepliesInput = {
+    where: AdminMessageWhereUniqueInput
+    create: XOR<AdminMessageCreateWithoutRepliesInput, AdminMessageUncheckedCreateWithoutRepliesInput>
+  }
+
+  export type AdminMessageCreateWithoutReplyToInput = {
+    id?: string
+    title: string
+    content: string
+    category?: $Enums.MessageCategory
+    priority?: $Enums.MessagePriority
+    isSensitive?: boolean
+    expiresAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    replies?: AdminMessageCreateNestedManyWithoutReplyToInput
+    sender: UserCreateNestedOneWithoutSentMessagesInput
+    recipients?: AdminMessageRecipientCreateNestedManyWithoutMessageInput
+    documents?: AdminMessageDocumentCreateNestedManyWithoutMessageInput
+  }
+
+  export type AdminMessageUncheckedCreateWithoutReplyToInput = {
+    id?: string
+    title: string
+    content: string
+    category?: $Enums.MessageCategory
+    priority?: $Enums.MessagePriority
+    isSensitive?: boolean
+    senderId: string
+    expiresAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    replies?: AdminMessageUncheckedCreateNestedManyWithoutReplyToInput
+    recipients?: AdminMessageRecipientUncheckedCreateNestedManyWithoutMessageInput
+    documents?: AdminMessageDocumentUncheckedCreateNestedManyWithoutMessageInput
+  }
+
+  export type AdminMessageCreateOrConnectWithoutReplyToInput = {
+    where: AdminMessageWhereUniqueInput
+    create: XOR<AdminMessageCreateWithoutReplyToInput, AdminMessageUncheckedCreateWithoutReplyToInput>
+  }
+
+  export type AdminMessageCreateManyReplyToInputEnvelope = {
+    data: AdminMessageCreateManyReplyToInput | AdminMessageCreateManyReplyToInput[]
+    skipDuplicates?: boolean
+  }
+
   export type UserCreateWithoutSentMessagesInput = {
     id?: string
     email: string
@@ -53848,6 +54097,65 @@ export namespace Prisma {
   export type AdminMessageDocumentCreateManyMessageInputEnvelope = {
     data: AdminMessageDocumentCreateManyMessageInput | AdminMessageDocumentCreateManyMessageInput[]
     skipDuplicates?: boolean
+  }
+
+  export type AdminMessageUpsertWithoutRepliesInput = {
+    update: XOR<AdminMessageUpdateWithoutRepliesInput, AdminMessageUncheckedUpdateWithoutRepliesInput>
+    create: XOR<AdminMessageCreateWithoutRepliesInput, AdminMessageUncheckedCreateWithoutRepliesInput>
+    where?: AdminMessageWhereInput
+  }
+
+  export type AdminMessageUpdateToOneWithWhereWithoutRepliesInput = {
+    where?: AdminMessageWhereInput
+    data: XOR<AdminMessageUpdateWithoutRepliesInput, AdminMessageUncheckedUpdateWithoutRepliesInput>
+  }
+
+  export type AdminMessageUpdateWithoutRepliesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    category?: EnumMessageCategoryFieldUpdateOperationsInput | $Enums.MessageCategory
+    priority?: EnumMessagePriorityFieldUpdateOperationsInput | $Enums.MessagePriority
+    isSensitive?: BoolFieldUpdateOperationsInput | boolean
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    replyTo?: AdminMessageUpdateOneWithoutRepliesNestedInput
+    sender?: UserUpdateOneRequiredWithoutSentMessagesNestedInput
+    recipients?: AdminMessageRecipientUpdateManyWithoutMessageNestedInput
+    documents?: AdminMessageDocumentUpdateManyWithoutMessageNestedInput
+  }
+
+  export type AdminMessageUncheckedUpdateWithoutRepliesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    category?: EnumMessageCategoryFieldUpdateOperationsInput | $Enums.MessageCategory
+    priority?: EnumMessagePriorityFieldUpdateOperationsInput | $Enums.MessagePriority
+    isSensitive?: BoolFieldUpdateOperationsInput | boolean
+    senderId?: StringFieldUpdateOperationsInput | string
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    replyToId?: NullableStringFieldUpdateOperationsInput | string | null
+    recipients?: AdminMessageRecipientUncheckedUpdateManyWithoutMessageNestedInput
+    documents?: AdminMessageDocumentUncheckedUpdateManyWithoutMessageNestedInput
+  }
+
+  export type AdminMessageUpsertWithWhereUniqueWithoutReplyToInput = {
+    where: AdminMessageWhereUniqueInput
+    update: XOR<AdminMessageUpdateWithoutReplyToInput, AdminMessageUncheckedUpdateWithoutReplyToInput>
+    create: XOR<AdminMessageCreateWithoutReplyToInput, AdminMessageUncheckedCreateWithoutReplyToInput>
+  }
+
+  export type AdminMessageUpdateWithWhereUniqueWithoutReplyToInput = {
+    where: AdminMessageWhereUniqueInput
+    data: XOR<AdminMessageUpdateWithoutReplyToInput, AdminMessageUncheckedUpdateWithoutReplyToInput>
+  }
+
+  export type AdminMessageUpdateManyWithWhereWithoutReplyToInput = {
+    where: AdminMessageScalarWhereInput
+    data: XOR<AdminMessageUpdateManyMutationInput, AdminMessageUncheckedUpdateManyWithoutReplyToInput>
   }
 
   export type UserUpsertWithoutSentMessagesInput = {
@@ -53977,6 +54285,8 @@ export namespace Prisma {
     expiresAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    replyTo?: AdminMessageCreateNestedOneWithoutRepliesInput
+    replies?: AdminMessageCreateNestedManyWithoutReplyToInput
     sender: UserCreateNestedOneWithoutSentMessagesInput
     documents?: AdminMessageDocumentCreateNestedManyWithoutMessageInput
   }
@@ -53992,6 +54302,8 @@ export namespace Prisma {
     expiresAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    replyToId?: string | null
+    replies?: AdminMessageUncheckedCreateNestedManyWithoutReplyToInput
     documents?: AdminMessageDocumentUncheckedCreateNestedManyWithoutMessageInput
   }
 
@@ -54086,6 +54398,8 @@ export namespace Prisma {
     expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    replyTo?: AdminMessageUpdateOneWithoutRepliesNestedInput
+    replies?: AdminMessageUpdateManyWithoutReplyToNestedInput
     sender?: UserUpdateOneRequiredWithoutSentMessagesNestedInput
     documents?: AdminMessageDocumentUpdateManyWithoutMessageNestedInput
   }
@@ -54101,6 +54415,8 @@ export namespace Prisma {
     expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    replyToId?: NullableStringFieldUpdateOperationsInput | string | null
+    replies?: AdminMessageUncheckedUpdateManyWithoutReplyToNestedInput
     documents?: AdminMessageDocumentUncheckedUpdateManyWithoutMessageNestedInput
   }
 
@@ -54185,6 +54501,8 @@ export namespace Prisma {
     expiresAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    replyTo?: AdminMessageCreateNestedOneWithoutRepliesInput
+    replies?: AdminMessageCreateNestedManyWithoutReplyToInput
     sender: UserCreateNestedOneWithoutSentMessagesInput
     recipients?: AdminMessageRecipientCreateNestedManyWithoutMessageInput
   }
@@ -54200,6 +54518,8 @@ export namespace Prisma {
     expiresAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    replyToId?: string | null
+    replies?: AdminMessageUncheckedCreateNestedManyWithoutReplyToInput
     recipients?: AdminMessageRecipientUncheckedCreateNestedManyWithoutMessageInput
   }
 
@@ -54229,6 +54549,8 @@ export namespace Prisma {
     expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    replyTo?: AdminMessageUpdateOneWithoutRepliesNestedInput
+    replies?: AdminMessageUpdateManyWithoutReplyToNestedInput
     sender?: UserUpdateOneRequiredWithoutSentMessagesNestedInput
     recipients?: AdminMessageRecipientUpdateManyWithoutMessageNestedInput
   }
@@ -54244,6 +54566,8 @@ export namespace Prisma {
     expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    replyToId?: NullableStringFieldUpdateOperationsInput | string | null
+    replies?: AdminMessageUncheckedUpdateManyWithoutReplyToNestedInput
     recipients?: AdminMessageRecipientUncheckedUpdateManyWithoutMessageNestedInput
   }
 
@@ -56504,6 +56828,7 @@ export namespace Prisma {
     expiresAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    replyToId?: string | null
   }
 
   export type AdminMessageRecipientCreateManyUserInput = {
@@ -56835,6 +57160,8 @@ export namespace Prisma {
     expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    replyTo?: AdminMessageUpdateOneWithoutRepliesNestedInput
+    replies?: AdminMessageUpdateManyWithoutReplyToNestedInput
     recipients?: AdminMessageRecipientUpdateManyWithoutMessageNestedInput
     documents?: AdminMessageDocumentUpdateManyWithoutMessageNestedInput
   }
@@ -56849,6 +57176,8 @@ export namespace Prisma {
     expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    replyToId?: NullableStringFieldUpdateOperationsInput | string | null
+    replies?: AdminMessageUncheckedUpdateManyWithoutReplyToNestedInput
     recipients?: AdminMessageRecipientUncheckedUpdateManyWithoutMessageNestedInput
     documents?: AdminMessageDocumentUncheckedUpdateManyWithoutMessageNestedInput
   }
@@ -56863,6 +57192,7 @@ export namespace Prisma {
     expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    replyToId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type AdminMessageRecipientUpdateWithoutUserInput = {
@@ -57221,6 +57551,19 @@ export namespace Prisma {
     note?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
+  export type AdminMessageCreateManyReplyToInput = {
+    id?: string
+    title: string
+    content: string
+    category?: $Enums.MessageCategory
+    priority?: $Enums.MessagePriority
+    isSensitive?: boolean
+    senderId: string
+    expiresAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type AdminMessageRecipientCreateManyMessageInput = {
     id?: string
     userId: string
@@ -57237,6 +57580,51 @@ export namespace Prisma {
     fileType: string
     fileSize: number
     uploadedAt?: Date | string
+  }
+
+  export type AdminMessageUpdateWithoutReplyToInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    category?: EnumMessageCategoryFieldUpdateOperationsInput | $Enums.MessageCategory
+    priority?: EnumMessagePriorityFieldUpdateOperationsInput | $Enums.MessagePriority
+    isSensitive?: BoolFieldUpdateOperationsInput | boolean
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    replies?: AdminMessageUpdateManyWithoutReplyToNestedInput
+    sender?: UserUpdateOneRequiredWithoutSentMessagesNestedInput
+    recipients?: AdminMessageRecipientUpdateManyWithoutMessageNestedInput
+    documents?: AdminMessageDocumentUpdateManyWithoutMessageNestedInput
+  }
+
+  export type AdminMessageUncheckedUpdateWithoutReplyToInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    category?: EnumMessageCategoryFieldUpdateOperationsInput | $Enums.MessageCategory
+    priority?: EnumMessagePriorityFieldUpdateOperationsInput | $Enums.MessagePriority
+    isSensitive?: BoolFieldUpdateOperationsInput | boolean
+    senderId?: StringFieldUpdateOperationsInput | string
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    replies?: AdminMessageUncheckedUpdateManyWithoutReplyToNestedInput
+    recipients?: AdminMessageRecipientUncheckedUpdateManyWithoutMessageNestedInput
+    documents?: AdminMessageDocumentUncheckedUpdateManyWithoutMessageNestedInput
+  }
+
+  export type AdminMessageUncheckedUpdateManyWithoutReplyToInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    category?: EnumMessageCategoryFieldUpdateOperationsInput | $Enums.MessageCategory
+    priority?: EnumMessagePriorityFieldUpdateOperationsInput | $Enums.MessagePriority
+    isSensitive?: BoolFieldUpdateOperationsInput | boolean
+    senderId?: StringFieldUpdateOperationsInput | string
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type AdminMessageRecipientUpdateWithoutMessageInput = {

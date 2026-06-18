@@ -5,7 +5,8 @@ import { prisma } from '@/lib/db'
 import { z } from 'zod'
 import { sendPushToMany } from '@/lib/push'
 
-const CAN_SEND = ['SUPER_ADMIN', 'DIRECTION', 'REGIONAL_DIRECTOR', 'FACILITY_CHIEF']
+// Tous les rôles peuvent répondre à un message direct; seuls ces rôles peuvent initier
+const CAN_SEND = ['SUPER_ADMIN', 'DIRECTION', 'REGIONAL_DIRECTOR', 'FACILITY_CHIEF', 'DATA_MANAGER', 'DATA_ADMIN', 'FINANCIER', 'CAISSIER', 'CONTROLEUR', 'CONTROLEUR_REGIONAL']
 
 const createSchema = z.object({
   title: z.string().min(2).max(150),
@@ -14,6 +15,7 @@ const createSchema = z.object({
   priority: z.enum(['NORMAL', 'IMPORTANT', 'URGENT']).default('NORMAL'),
   isSensitive: z.boolean().default(false),
   expiresAt: z.string().datetime().optional().nullable(),
+  replyToId: z.string().optional().nullable(),
   targetRoles: z.array(z.string()).default([]),
   targetFacilityIds: z.array(z.string()).default([]),
   targetRegionIds: z.array(z.string()).default([]),
@@ -111,26 +113,33 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
       return NextResponse.json({ success: false, error: parsed.error.errors[0]?.message || 'Données invalides' }, { status: 400 })
     }
 
-    const { title, content, category, priority, isSensitive, expiresAt,
+    const { title, content, category, priority, isSensitive, expiresAt, replyToId,
       targetRoles, targetFacilityIds, targetRegionIds, targetUserIds, targetAll } = parsed.data
 
-    const where: any = { isActive: true, id: { not: session.user.id } }
-
-    if (!targetAll) {
-      const orConditions: any[] = []
-      if (targetRoles.length > 0) orConditions.push({ role: { in: targetRoles } })
-      if (targetFacilityIds.length > 0) orConditions.push({ facilityId: { in: targetFacilityIds } })
-      if (targetRegionIds.length > 0) orConditions.push({ regionId: { in: targetRegionIds } })
-      if (targetUserIds.length > 0) orConditions.push({ id: { in: targetUserIds } })
-      if (orConditions.length === 0) {
-        return NextResponse.json({ success: false, error: 'Aucun destinataire sélectionné' }, { status: 400 })
+    // For a reply, auto-target the original sender (no need for the full targeting form)
+    let recipientUserIds: string[] = []
+    if (replyToId) {
+      const original = await prisma.adminMessage.findUnique({ where: { id: replyToId }, select: { senderId: true } })
+      if (!original) return NextResponse.json({ success: false, error: 'Message original introuvable' }, { status: 404 })
+      recipientUserIds = [original.senderId]
+    } else {
+      const where: any = { isActive: true, id: { not: session.user.id } }
+      if (!targetAll) {
+        const orConditions: any[] = []
+        if (targetRoles.length > 0) orConditions.push({ role: { in: targetRoles } })
+        if (targetFacilityIds.length > 0) orConditions.push({ facilityId: { in: targetFacilityIds } })
+        if (targetRegionIds.length > 0) orConditions.push({ regionId: { in: targetRegionIds } })
+        if (targetUserIds.length > 0) orConditions.push({ id: { in: targetUserIds } })
+        if (orConditions.length === 0) {
+          return NextResponse.json({ success: false, error: 'Aucun destinataire sélectionné' }, { status: 400 })
+        }
+        where.OR = orConditions
       }
-      where.OR = orConditions
-    }
-
-    const users = await prisma.user.findMany({ where, select: { id: true } })
-    if (users.length === 0) {
-      return NextResponse.json({ success: false, error: 'Aucun destinataire trouvé' }, { status: 400 })
+      const users = await prisma.user.findMany({ where, select: { id: true } })
+      if (users.length === 0) {
+        return NextResponse.json({ success: false, error: 'Aucun destinataire trouvé' }, { status: 400 })
+      }
+      recipientUserIds = users.map((u) => u.id)
     }
 
     const message = await prisma.adminMessage.create({
@@ -138,8 +147,9 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
         title, content, category, priority, isSensitive,
         senderId: session.user.id,
         expiresAt: expiresAt ? new Date(expiresAt) : null,
+        replyToId: replyToId ?? null,
         recipients: {
-          create: users.map((u) => ({ userId: u.id })),
+          create: recipientUserIds.map((id) => ({ userId: id })),
         },
       },
       include: { _count: { select: { recipients: true } }, sender: { select: { name: true } } },
@@ -148,7 +158,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     // Envoyer les notifications push en arrière-plan (sans bloquer la réponse)
     const priorityEmoji = priority === 'URGENT' ? '🔴 ' : priority === 'IMPORTANT' ? '🔵 ' : ''
     sendPushToMany(
-      users.map((u) => u.id),
+      recipientUserIds,
       {
         title: `${priorityEmoji}Nouveau message : ${title}`,
         body: `De : ${message.sender.name}`,

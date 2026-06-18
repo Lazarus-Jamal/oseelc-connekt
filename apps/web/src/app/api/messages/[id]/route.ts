@@ -30,6 +30,19 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ id:
           include: { user: { select: { id: true, name: true, role: true } } },
           orderBy: { createdAt: 'asc' },
         },
+        replyTo: {
+          select: {
+            id: true, title: true, content: true, createdAt: true,
+            sender: { select: { id: true, name: true, role: true } },
+          },
+        },
+        replies: {
+          orderBy: { createdAt: 'asc' },
+          include: {
+            sender: { select: { id: true, name: true, role: true } },
+            _count: { select: { replies: true } },
+          },
+        },
       },
     })
 

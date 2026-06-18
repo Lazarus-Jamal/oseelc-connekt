@@ -484,11 +484,17 @@ model AdminMessage {
   createdAt   DateTime        @default(now())
   updatedAt   DateTime        @updatedAt
 
+  // Direct reply thread
+  replyToId   String?
+  replyTo     AdminMessage?   @relation("MessageReplies", fields: [replyToId], references: [id])
+  replies     AdminMessage[]  @relation("MessageReplies")
+
   sender     User                    @relation("SentMessages", fields: [senderId], references: [id])
   recipients AdminMessageRecipient[]
   documents  AdminMessageDocument[]
 
   @@index([senderId])
+  @@index([replyToId])
   @@map("admin_messages")
 }
 
