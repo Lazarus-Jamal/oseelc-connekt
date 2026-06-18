@@ -43,3 +43,13 @@ apps/web/public/uploads/
 .vscode/
 .idea/
 *.swp
+
+# Projets externes / standalone
+CleanSanté/
+
+# Binaires trop lourds
+*.exe
+*.dll.node.tmp*
+
+# Fichiers temporaires / scratch
+packages/db/scratch_*.ts
