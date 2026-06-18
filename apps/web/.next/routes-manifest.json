@@ -20,12 +20,28 @@
   },
   "dynamicRoutes": [
     {
+      "page": "/api/admin/care2x/versions/[id]",
+      "regex": "^/api/admin/care2x/versions/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/api/admin/care2x/versions/(?<nxtPid>[^/]+?)(?:/)?$"
+    },
+    {
       "page": "/api/admin/deadlines/[id]",
       "regex": "^/api/admin/deadlines/([^/]+?)(?:/)?$",
       "routeKeys": {
         "nxtPid": "nxtPid"
       },
       "namedRegex": "^/api/admin/deadlines/(?<nxtPid>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/api/admin/facilities/[id]/api-key",
+      "regex": "^/api/admin/facilities/([^/]+?)/api\\-key(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/api/admin/facilities/(?<nxtPid>[^/]+?)/api\\-key(?:/)?$"
     },
     {
       "page": "/api/auth/[...nextauth]",
@@ -198,6 +214,12 @@
       "regex": "^/admin/audit(?:/)?$",
       "routeKeys": {},
       "namedRegex": "^/admin/audit(?:/)?$"
+    },
+    {
+      "page": "/admin/care2x-keys",
+      "regex": "^/admin/care2x\\-keys(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/care2x\\-keys(?:/)?$"
     },
     {
       "page": "/admin/config",
