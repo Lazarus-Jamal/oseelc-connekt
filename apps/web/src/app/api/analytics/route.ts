@@ -3,7 +3,7 @@ import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 import { prisma } from '@/lib/db'
 
-const ALLOWED = ['SUPER_ADMIN', 'DIRECTION', 'REGIONAL_DIRECTOR', 'DATA_MANAGER', 'CONTROLEUR', 'CONTROLEUR_REGIONAL']
+const ALLOWED = ['SUPER_ADMIN', 'DIRECTION', 'DATA_ADMIN', 'REGIONAL_DIRECTOR', 'DATA_MANAGER', 'CONTROLEUR', 'CONTROLEUR_REGIONAL']
 
 export async function GET(req: NextRequest): Promise<NextResponse> {
   try {
@@ -20,21 +20,37 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
     const regionId  = searchParams.get('regionId')  || null
     const facilityId = searchParams.get('facilityId') || null
 
-    // ── Scope restriction for REGIONAL_DIRECTOR ───────────────────────────
-    const scopeRegionId = session.user.role === 'REGIONAL_DIRECTOR'
-      ? (session.user as any).regionId
-      : regionId
+    const { role: userRole, regionId: userRegionId, facilityId: userFacilityId } = session.user
+
+    // Roles with forced geographic restriction (cannot override via URL params)
+    const isRegionalForced =
+      userRole === 'REGIONAL_DIRECTOR' ||
+      userRole === 'CONTROLEUR_REGIONAL' ||
+      (userRole === 'DATA_MANAGER' && !!userRegionId && !userFacilityId)
+    const isFacilityForced = userRole === 'DATA_MANAGER' && !!userFacilityId
+
+    const scopeRegionId   = isRegionalForced ? userRegionId : regionId
+    const scopeFacilityId = isFacilityForced ? userFacilityId : facilityId
+
+    // Prisma where clause for facilities respecting the user's scope
+    const facilityScope: any = { isActive: true }
+    if (scopeFacilityId) facilityScope.id = scopeFacilityId
+    else if (scopeRegionId) facilityScope.regionId = scopeRegionId
 
     // ── OVERVIEW ─────────────────────────────────────────────────────────
     if (view === 'overview') {
       const [regions, facilities, allSheets] = await Promise.all([
-        prisma.region.findMany({ include: { facilities: { where: { isActive: true } } } }),
-        prisma.facility.findMany({ where: { isActive: true } }),
+        prisma.region.findMany({
+          where: scopeRegionId ? { id: scopeRegionId } : {},
+          include: { facilities: { where: facilityScope } },
+        }),
+        prisma.facility.findMany({ where: facilityScope }),
         prisma.statSheet.findMany({
           where: {
             year,
             ...(month ? { month } : {}),
             status: { in: ['SUBMITTED', 'VALIDATED'] },
+            facility: facilityScope,
           },
           include: {
             facility: { select: { id: true, name: true, regionId: true } },
@@ -168,18 +184,29 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
 
     // ── FACILITY ─────────────────────────────────────────────────────────
     if (view === 'facility') {
-      if (!facilityId) return NextResponse.json({ success: false, error: 'facilityId requis' }, { status: 400 })
+      const reqFacilityId = scopeFacilityId || facilityId
+      if (!reqFacilityId) return NextResponse.json({ success: false, error: 'facilityId requis' }, { status: 400 })
+
+      // Validate that the requested facility is within the user's scope
+      if (isFacilityForced && reqFacilityId !== userFacilityId) {
+        return NextResponse.json({ success: false, error: 'Accès non autorisé' }, { status: 403 })
+      }
 
       const facility = await prisma.facility.findUnique({
-        where: { id: facilityId },
+        where: { id: reqFacilityId },
         include: { region: { select: { id: true, name: true } } },
       })
       if (!facility) return NextResponse.json({ success: false, error: 'Centre introuvable' }, { status: 404 })
 
+      // For regional scope, verify facility belongs to user's region
+      if (isRegionalForced && facility.region?.id !== scopeRegionId) {
+        return NextResponse.json({ success: false, error: 'Accès non autorisé' }, { status: 403 })
+      }
+
       // All sheets for this facility (last 2 years)
       const sheets = await prisma.statSheet.findMany({
         where: {
-          facilityId,
+          facilityId: reqFacilityId,
           year: { gte: year - 1 },
           status: { in: ['SUBMITTED', 'VALIDATED'] },
         },
@@ -217,11 +244,11 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
         year,
         ...(month ? { month } : {}),
         status: { in: ['SUBMITTED', 'VALIDATED'] },
+        facility: facilityScope,
       }
-      if (scopeRegionId) sheetWhere.facility = { regionId: scopeRegionId }
 
       const [facilities, sheets] = await Promise.all([
-        prisma.facility.findMany({ where: { isActive: true, ...(scopeRegionId ? { regionId: scopeRegionId } : {}) } }),
+        prisma.facility.findMany({ where: facilityScope }),
         prisma.statSheet.findMany({
           where: sheetWhere,
           include: {
@@ -338,8 +365,7 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
 
     // ── PYRAMID ───────────────────────────────────────────────────────────
     if (view === 'pyramid') {
-      const sheetWhere: any = { year, ...(month ? { month } : {}), status: { in: ['SUBMITTED', 'VALIDATED'] } }
-      if (scopeRegionId) sheetWhere.facility = { regionId: scopeRegionId }
+      const sheetWhere: any = { year, ...(month ? { month } : {}), status: { in: ['SUBMITTED', 'VALIDATED'] }, facility: facilityScope }
 
       const values = await prisma.statValue.findMany({
         where: {

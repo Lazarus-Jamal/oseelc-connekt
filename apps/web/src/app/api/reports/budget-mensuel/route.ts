@@ -21,6 +21,10 @@ export async function GET(req: NextRequest) {
     facilityWhere.id = userFacilityId
   } else if (role === 'REGIONAL_DIRECTOR' || role === 'CONTROLEUR_REGIONAL') {
     facilityWhere.regionId = userRegionId
+  } else if (role === 'DATA_MANAGER' && userFacilityId) {
+    facilityWhere.id = userFacilityId
+  } else if (role === 'DATA_MANAGER' && userRegionId) {
+    facilityWhere.regionId = userRegionId
   } else if (facilityId) {
     facilityWhere.id = facilityId
   } else if (regionId) {

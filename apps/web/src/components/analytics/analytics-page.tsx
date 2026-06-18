@@ -336,17 +336,21 @@ function OverviewTab({ year, month }: { year: number; month: number | null }) {
 }
 
 // ── Regions Tab ───────────────────────────────────────────────────────────────
-function RegionsTab({ year, month }: { year: number; month: number | null }) {
+function RegionsTab({ year, month, forcedRegionId }: { year: number; month: number | null; forcedRegionId: string | null }) {
   const [regions, setRegions] = useState<any[]>([])
   const [selectedRegion, setSelectedRegion] = useState('')
   const [data, setData] = useState<any>(null)
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
+    if (forcedRegionId) {
+      setSelectedRegion(forcedRegionId)
+      return
+    }
     fetch('/api/regions').then((r) => r.json()).then((d) => {
       if (d.success) { setRegions(d.data || []); if (d.data?.[0]) setSelectedRegion(d.data[0].id) }
     }).catch(() => {})
-  }, [])
+  }, [forcedRegionId])
 
   useEffect(() => {
     if (!selectedRegion) return
@@ -371,14 +375,22 @@ function RegionsTab({ year, month }: { year: number; month: number | null }) {
     return acc
   }, {} as Record<string, any[]>) : {}
 
+  const regionLabel = data?.region?.name ?? ''
+
   return (
     <div className="space-y-5">
       <div className="flex items-center gap-3">
         <MapPin className="w-4 h-4 text-brand-500" />
-        <select value={selectedRegion} onChange={(e) => setSelectedRegion(e.target.value)}
-          className="px-3 py-2 text-sm border border-gray-200 dark:border-gray-700 rounded-xl bg-white dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-brand-400">
-          {regions.map((r) => <option key={r.id} value={r.id}>{r.name}</option>)}
-        </select>
+        {forcedRegionId ? (
+          <span className="px-3 py-2 text-sm border border-gray-200 dark:border-gray-700 rounded-xl bg-gray-50 dark:bg-gray-800 text-gray-700 dark:text-gray-300">
+            {regionLabel || '…'}
+          </span>
+        ) : (
+          <select value={selectedRegion} onChange={(e) => setSelectedRegion(e.target.value)}
+            className="px-3 py-2 text-sm border border-gray-200 dark:border-gray-700 rounded-xl bg-white dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-brand-400">
+            {regions.map((r) => <option key={r.id} value={r.id}>{r.name}</option>)}
+          </select>
+        )}
       </div>
 
       {loading ? (
@@ -442,7 +454,9 @@ function RegionsTab({ year, month }: { year: number; month: number | null }) {
 }
 
 // ── Facilities Tab ────────────────────────────────────────────────────────────
-function FacilitiesTab({ year, month }: { year: number; month: number | null }) {
+function FacilitiesTab({ year, month, forcedRegionId, forcedFacilityId }: {
+  year: number; month: number | null; forcedRegionId: string | null; forcedFacilityId: string | null
+}) {
   const [regions, setRegions] = useState<any[]>([])
   const [facilities, setFacilities] = useState<any[]>([])
   const [selectedRegion, setSelectedRegion] = useState('')
@@ -452,17 +466,20 @@ function FacilitiesTab({ year, month }: { year: number; month: number | null }) 
   const [selectedIndicator, setSelectedIndicator] = useState('')
 
   useEffect(() => {
+    if (forcedRegionId) { setSelectedRegion(forcedRegionId); return }
+    if (forcedFacilityId) return
     fetch('/api/regions').then((r) => r.json()).then((d) => {
       if (d.success) setRegions(d.data || [])
     })
-  }, [])
+  }, [forcedRegionId, forcedFacilityId])
 
   useEffect(() => {
+    if (forcedFacilityId) { setSelectedFacility(forcedFacilityId); return }
     if (!selectedRegion) return
     fetch(`/api/facilities?regionId=${selectedRegion}&limit=100`).then((r) => r.json()).then((d) => {
       if (d.success) { setFacilities(d.data || []); setSelectedFacility(d.data?.[0]?.id || '') }
     })
-  }, [selectedRegion])
+  }, [selectedRegion, forcedFacilityId])
 
   useEffect(() => {
     if (!selectedFacility) return
@@ -494,16 +511,23 @@ function FacilitiesTab({ year, month }: { year: number; month: number | null }) 
   return (
     <div className="space-y-5">
       <div className="flex items-center gap-3 flex-wrap">
-        <select value={selectedRegion} onChange={(e) => setSelectedRegion(e.target.value)}
-          className="px-3 py-2 text-sm border border-gray-200 dark:border-gray-700 rounded-xl bg-white dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-brand-400">
-          <option value="">-- Choisir une région --</option>
-          {regions.map((r) => <option key={r.id} value={r.id}>{r.name}</option>)}
-        </select>
-        {facilities.length > 0 && (
+        {!forcedRegionId && !forcedFacilityId && (
+          <select value={selectedRegion} onChange={(e) => setSelectedRegion(e.target.value)}
+            className="px-3 py-2 text-sm border border-gray-200 dark:border-gray-700 rounded-xl bg-white dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-brand-400">
+            <option value="">-- Choisir une région --</option>
+            {regions.map((r) => <option key={r.id} value={r.id}>{r.name}</option>)}
+          </select>
+        )}
+        {!forcedFacilityId && facilities.length > 0 && (
           <select value={selectedFacility} onChange={(e) => setSelectedFacility(e.target.value)}
             className="px-3 py-2 text-sm border border-gray-200 dark:border-gray-700 rounded-xl bg-white dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-brand-400">
             {facilities.map((f) => <option key={f.id} value={f.id}>{f.name}</option>)}
           </select>
+        )}
+        {forcedFacilityId && data && (
+          <span className="px-3 py-2 text-sm border border-gray-200 dark:border-gray-700 rounded-xl bg-gray-50 dark:bg-gray-800 text-gray-700 dark:text-gray-300">
+            {data.facility?.name ?? '…'}
+          </span>
         )}
       </div>
 
@@ -577,17 +601,18 @@ function FacilitiesTab({ year, month }: { year: number; month: number | null }) 
 }
 
 // ── Inferences Tab ────────────────────────────────────────────────────────────
-function InferencesTab({ year, month }: { year: number; month: number | null }) {
+function InferencesTab({ year, month, forcedRegionId }: { year: number; month: number | null; forcedRegionId: string | null }) {
   const [regions, setRegions] = useState<any[]>([])
-  const [selectedRegion, setSelectedRegion] = useState('')
+  const [selectedRegion, setSelectedRegion] = useState(forcedRegionId ?? '')
   const [data, setData] = useState<any>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    if (forcedRegionId) return
     fetch('/api/regions').then((r) => r.json()).then((d) => {
       if (d.success) setRegions(d.data || [])
     })
-  }, [])
+  }, [forcedRegionId])
 
   const load = useCallback(() => {
     setLoading(true)
@@ -619,13 +644,15 @@ function InferencesTab({ year, month }: { year: number; month: number | null }) 
 
   return (
     <div className="space-y-5">
-      <div className="flex items-center gap-3">
-        <select value={selectedRegion} onChange={(e) => setSelectedRegion(e.target.value)}
-          className="px-3 py-2 text-sm border border-gray-200 dark:border-gray-700 rounded-xl bg-white dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-brand-400">
-          <option value="">🌍 Niveau national</option>
-          {regions.map((r) => <option key={r.id} value={r.id}>{r.name}</option>)}
-        </select>
-      </div>
+      {!forcedRegionId && (
+        <div className="flex items-center gap-3">
+          <select value={selectedRegion} onChange={(e) => setSelectedRegion(e.target.value)}
+            className="px-3 py-2 text-sm border border-gray-200 dark:border-gray-700 rounded-xl bg-white dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-brand-400">
+            <option value="">🌍 Niveau national</option>
+            {regions.map((r) => <option key={r.id} value={r.id}>{r.name}</option>)}
+          </select>
+        </div>
+      )}
 
       {loading ? (
         <div className="flex justify-center items-center h-48"><div className="w-8 h-8 border-2 border-brand-500 border-t-transparent rounded-full animate-spin" /></div>
@@ -1023,6 +1050,8 @@ function ReportTab({ year, month }: { year: number; month: number | null }) {
 }
 
 // ── Main Component ────────────────────────────────────────────────────────────
+const SCOPED_ROLES = ['REGIONAL_DIRECTOR', 'CONTROLEUR_REGIONAL', 'DATA_MANAGER']
+
 const TABS = [
   { key: 'overview',    label: 'Aperçu national',  icon: Globe2 },
   { key: 'regions',     label: 'Par région',        icon: MapPin },
@@ -1037,6 +1066,11 @@ export function AnalyticsPage() {
   const [tab, setTab] = useState('overview')
   const [year, setYear] = useState(new Date().getFullYear())
   const [month, setMonth] = useState<number | null>(null)
+
+  const userRole = session?.user?.role ?? ''
+  const isScoped = SCOPED_ROLES.includes(userRole)
+  const forcedRegionId   = isScoped ? (session?.user?.regionId   ?? null) : null
+  const forcedFacilityId = (userRole === 'DATA_MANAGER') ? (session?.user?.facilityId ?? null) : null
 
   return (
     <div className="space-y-5 print:space-y-4">
@@ -1065,10 +1099,10 @@ export function AnalyticsPage() {
       {/* Content */}
       <div>
         {tab === 'overview'   && <OverviewTab    year={year} month={month} />}
-        {tab === 'regions'    && <RegionsTab     year={year} month={month} />}
-        {tab === 'facilities' && <FacilitiesTab  year={year} month={month} />}
+        {tab === 'regions'    && <RegionsTab     year={year} month={month} forcedRegionId={forcedRegionId} />}
+        {tab === 'facilities' && <FacilitiesTab  year={year} month={month} forcedRegionId={forcedRegionId} forcedFacilityId={forcedFacilityId} />}
         {tab === 'explorer'   && <ExplorerTab    year={year} month={month} />}
-        {tab === 'inferences' && <InferencesTab  year={year} month={month} />}
+        {tab === 'inferences' && <InferencesTab  year={year} month={month} forcedRegionId={forcedRegionId} />}
         {tab === 'report'     && <ReportTab      year={year} month={month} />}
       </div>
     </div>

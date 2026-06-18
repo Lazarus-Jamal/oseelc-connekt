@@ -242,12 +242,25 @@ export async function GET(req: NextRequest) {
 
   // ── DATA_MANAGER / DATA_ADMIN ─────────────────────────────────────────────────
   if (role === 'DATA_MANAGER' || role === 'DATA_ADMIN') {
-    const [totalFacilities, pendingValidations, pendingStats] = await Promise.all([
-      prisma.facility.count({ where: { isActive: true } }),
-      prisma.declaration.count({ where: { status: { in: ['SUBMITTED', 'REVIEWED'] } } }),
-      prisma.statSheet.count({ where: { status: 'SUBMITTED' } }),
+    // DATA_MANAGER is scoped to their facility or region; DATA_ADMIN sees all
+    const facWhere: any = { isActive: true }
+    if (role === 'DATA_MANAGER' && facilityId) facWhere.id = facilityId
+    else if (role === 'DATA_MANAGER' && regionId) facWhere.regionId = regionId
+
+    const [totalFacilities, pendingStats, recentSheets] = await Promise.all([
+      prisma.facility.count({ where: facWhere }),
+      prisma.statSheet.count({ where: { status: 'SUBMITTED', facility: facWhere } }),
+      prisma.statSheet.findMany({
+        where: { status: { in: ['SUBMITTED', 'VALIDATED'] }, facility: facWhere },
+        orderBy: { updatedAt: 'desc' },
+        take: 5,
+        select: {
+          id: true, year: true, month: true, status: true, completeness: true,
+          facility: { select: { id: true, name: true } },
+        },
+      }),
     ])
-    return NextResponse.json({ success: true, data: { totalFacilities, pendingValidations, pendingStats } })
+    return NextResponse.json({ success: true, data: { totalFacilities, pendingStats, recentSheets } })
   }
 
   return NextResponse.json({ success: true, data: {} })
