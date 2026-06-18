@@ -151,6 +151,9 @@ model Facility {
   budgets        Budget[]
   statDeadlines  StatDeadline[]
   planningEvents PlanningEvent[]
+  apiKey              FacilityApiKey?
+  care2xSyncs         Care2xSync[]
+  recouvrementSyncs   Care2xRecouvrementSync[]
 
   @@map("facilities")
 }
@@ -548,6 +551,90 @@ enum PlanningEventType {
   TRAINING
   AUDIT_VISIT
   OTHER
+}
+
+// ─── CARE2X SYNC ─────────────────────────────────────────────────────────────
+
+model FacilityApiKey {
+  id         String    @id @default(cuid())
+  facilityId String    @unique
+  keyHash    String    @unique
+  keyPreview String
+  isActive   Boolean   @default(true)
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  lastUsedAt DateTime?
+
+  facility             Facility                  @relation(fields: [facilityId], references: [id], onDelete: Cascade)
+  care2xSyncs          Care2xSync[]
+  recouvrementSyncs    Care2xRecouvrementSync[]
+
+  @@map("facility_api_keys")
+}
+
+model Care2xSync {
+  id           String   @id @default(cuid())
+  facilityId   String
+  apiKeyId     String
+  batchRef     String   @unique
+  entriesCount Int
+  totalAmount  Decimal  @db.Decimal(15, 2)
+  periodStart  DateTime
+  periodEnd    DateTime
+  receivedAt   DateTime @default(now())
+
+  facility Facility       @relation(fields: [facilityId], references: [id])
+  apiKey   FacilityApiKey @relation(fields: [apiKeyId], references: [id])
+  entries  Care2xSyncEntry[]
+
+  @@index([facilityId])
+  @@index([receivedAt])
+  @@map("care2x_syncs")
+}
+
+model Care2xSyncEntry {
+  id           String  @id @default(cuid())
+  syncId       String
+  localId      String
+  montant      Decimal @db.Decimal(15, 2)
+  date         DateTime
+  typePaiement String
+
+  sync Care2xSync @relation(fields: [syncId], references: [id], onDelete: Cascade)
+
+  @@index([syncId])
+  @@map("care2x_sync_entries")
+}
+
+model Care2xRecouvrementSync {
+  id            String   @id @default(cuid())
+  facilityId    String
+  apiKeyId      String
+  batchRef      String   @unique
+  totalFacture  Decimal  @db.Decimal(15, 2)
+  totalRecouvre Decimal  @db.Decimal(15, 2)
+  rapport       Json
+  receivedAt    DateTime @default(now())
+
+  facility Facility       @relation(fields: [facilityId], references: [id])
+  apiKey   FacilityApiKey @relation(fields: [apiKeyId], references: [id])
+
+  @@index([facilityId])
+  @@map("care2x_recouvrement_syncs")
+}
+
+model Care2xVersion {
+  id           String   @id @default(cuid())
+  version      String   @unique
+  releaseNotes String?
+  filename     String
+  filePath     String
+  fileSize     Int
+  downloadUrl  String
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+
+  @@map("care2x_versions")
 }
 
 // ─── PLANNING ─────────────────────────────────────────────────────────────────

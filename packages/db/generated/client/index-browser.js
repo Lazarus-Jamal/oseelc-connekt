@@ -402,6 +402,61 @@ exports.Prisma.AuditLogScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.FacilityApiKeyScalarFieldEnum = {
+  id: 'id',
+  facilityId: 'facilityId',
+  keyHash: 'keyHash',
+  keyPreview: 'keyPreview',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  lastUsedAt: 'lastUsedAt'
+};
+
+exports.Prisma.Care2xSyncScalarFieldEnum = {
+  id: 'id',
+  facilityId: 'facilityId',
+  apiKeyId: 'apiKeyId',
+  batchRef: 'batchRef',
+  entriesCount: 'entriesCount',
+  totalAmount: 'totalAmount',
+  periodStart: 'periodStart',
+  periodEnd: 'periodEnd',
+  receivedAt: 'receivedAt'
+};
+
+exports.Prisma.Care2xSyncEntryScalarFieldEnum = {
+  id: 'id',
+  syncId: 'syncId',
+  localId: 'localId',
+  montant: 'montant',
+  date: 'date',
+  typePaiement: 'typePaiement'
+};
+
+exports.Prisma.Care2xRecouvrementSyncScalarFieldEnum = {
+  id: 'id',
+  facilityId: 'facilityId',
+  apiKeyId: 'apiKeyId',
+  batchRef: 'batchRef',
+  totalFacture: 'totalFacture',
+  totalRecouvre: 'totalRecouvre',
+  rapport: 'rapport',
+  receivedAt: 'receivedAt'
+};
+
+exports.Prisma.Care2xVersionScalarFieldEnum = {
+  id: 'id',
+  version: 'version',
+  releaseNotes: 'releaseNotes',
+  filename: 'filename',
+  filePath: 'filePath',
+  fileSize: 'fileSize',
+  downloadUrl: 'downloadUrl',
+  isActive: 'isActive',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.PlanningEventScalarFieldEnum = {
   id: 'id',
   title: 'title',
@@ -427,6 +482,10 @@ exports.Prisma.SortOrder = {
 
 exports.Prisma.NullableJsonNullValueInput = {
   DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull
+};
+
+exports.Prisma.JsonNullValueInput = {
   JsonNull: Prisma.JsonNull
 };
 
@@ -558,6 +617,11 @@ exports.Prisma.ModelName = {
   AdminMessageRecipient: 'AdminMessageRecipient',
   AdminMessageDocument: 'AdminMessageDocument',
   AuditLog: 'AuditLog',
+  FacilityApiKey: 'FacilityApiKey',
+  Care2xSync: 'Care2xSync',
+  Care2xSyncEntry: 'Care2xSyncEntry',
+  Care2xRecouvrementSync: 'Care2xRecouvrementSync',
+  Care2xVersion: 'Care2xVersion',
   PlanningEvent: 'PlanningEvent'
 };
 

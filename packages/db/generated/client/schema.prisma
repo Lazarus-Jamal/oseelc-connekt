@@ -19,6 +19,9 @@ enum Role {
   FACILITY_CHIEF // Chef de centre / directeur d'hôpital
   FINANCIER // Financier d'un centre ou hôpital
   DATA_MANAGER // Responsable data régional (regionId) ou de centre (facilityId)
+  CONTROLEUR // Contrôleur général — valide toutes déclarations, consulte stats et budget (national)
+  CONTROLEUR_REGIONAL // Contrôleur régional — idem mais scopé à sa région (regionId)
+  CAISSIER // Caissier — soumet des déclarations uniquement
 }
 
 enum FacilityType {
@@ -148,6 +151,8 @@ model Facility {
   budgets        Budget[]
   statDeadlines  StatDeadline[]
   planningEvents PlanningEvent[]
+  apiKey         FacilityApiKey?
+  care2xSyncs    Care2xSync[]
 
   @@map("facilities")
 }
@@ -544,6 +549,58 @@ enum PlanningEventType {
   TRAINING
   AUDIT_VISIT
   OTHER
+}
+
+// ─── CARE2X SYNC ─────────────────────────────────────────────────────────────
+
+model FacilityApiKey {
+  id         String    @id @default(cuid())
+  facilityId String    @unique
+  keyHash    String    @unique
+  keyPreview String
+  isActive   Boolean   @default(true)
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  lastUsedAt DateTime?
+
+  facility    Facility     @relation(fields: [facilityId], references: [id], onDelete: Cascade)
+  care2xSyncs Care2xSync[]
+
+  @@map("facility_api_keys")
+}
+
+model Care2xSync {
+  id           String   @id @default(cuid())
+  facilityId   String
+  apiKeyId     String
+  batchRef     String   @unique
+  entriesCount Int
+  totalAmount  Decimal  @db.Decimal(15, 2)
+  periodStart  DateTime
+  periodEnd    DateTime
+  receivedAt   DateTime @default(now())
+
+  facility Facility          @relation(fields: [facilityId], references: [id])
+  apiKey   FacilityApiKey    @relation(fields: [apiKeyId], references: [id])
+  entries  Care2xSyncEntry[]
+
+  @@index([facilityId])
+  @@index([receivedAt])
+  @@map("care2x_syncs")
+}
+
+model Care2xSyncEntry {
+  id           String   @id @default(cuid())
+  syncId       String
+  localId      String
+  montant      Decimal  @db.Decimal(15, 2)
+  date         DateTime
+  typePaiement String
+
+  sync Care2xSync @relation(fields: [syncId], references: [id], onDelete: Cascade)
+
+  @@index([syncId])
+  @@map("care2x_sync_entries")
 }
 
 // ─── PLANNING ─────────────────────────────────────────────────────────────────

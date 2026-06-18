@@ -29,6 +29,7 @@ import {
   FileUp,
   Trophy,
   Globe,
+  Wifi,
 } from 'lucide-react'
 
 interface SidebarProps {
@@ -70,6 +71,7 @@ const ADMIN_ITEMS: NavItem[] = [
   { label: 'Journal d\'audit', href: '/admin/audit', icon: Shield, roles: ['SUPER_ADMIN', 'DIRECTION'] },
   { label: 'Intégration DHIS2', href: '/admin/dhis2', icon: Globe, roles: ['SUPER_ADMIN', 'DATA_ADMIN', 'DIRECTION'] },
   { label: 'Configuration', href: '/admin/config', icon: Settings, roles: ['SUPER_ADMIN'] },
+  { label: 'Clés API Care2x', href: '/admin/care2x-keys', icon: Wifi, roles: ['SUPER_ADMIN'] },
 ]
 
 const ROLE_BADGE: Record<string, string> = {

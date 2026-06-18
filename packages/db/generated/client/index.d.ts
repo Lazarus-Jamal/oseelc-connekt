@@ -129,6 +129,31 @@ export type AdminMessageDocument = $Result.DefaultSelection<Prisma.$AdminMessage
  */
 export type AuditLog = $Result.DefaultSelection<Prisma.$AuditLogPayload>
 /**
+ * Model FacilityApiKey
+ * 
+ */
+export type FacilityApiKey = $Result.DefaultSelection<Prisma.$FacilityApiKeyPayload>
+/**
+ * Model Care2xSync
+ * 
+ */
+export type Care2xSync = $Result.DefaultSelection<Prisma.$Care2xSyncPayload>
+/**
+ * Model Care2xSyncEntry
+ * 
+ */
+export type Care2xSyncEntry = $Result.DefaultSelection<Prisma.$Care2xSyncEntryPayload>
+/**
+ * Model Care2xRecouvrementSync
+ * 
+ */
+export type Care2xRecouvrementSync = $Result.DefaultSelection<Prisma.$Care2xRecouvrementSyncPayload>
+/**
+ * Model Care2xVersion
+ * 
+ */
+export type Care2xVersion = $Result.DefaultSelection<Prisma.$Care2xVersionPayload>
+/**
  * Model PlanningEvent
  * 
  */
@@ -654,6 +679,56 @@ export class PrismaClient<
   get auditLog(): Prisma.AuditLogDelegate<ExtArgs, ClientOptions>;
 
   /**
+   * `prisma.facilityApiKey`: Exposes CRUD operations for the **FacilityApiKey** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more FacilityApiKeys
+    * const facilityApiKeys = await prisma.facilityApiKey.findMany()
+    * ```
+    */
+  get facilityApiKey(): Prisma.FacilityApiKeyDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.care2xSync`: Exposes CRUD operations for the **Care2xSync** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Care2xSyncs
+    * const care2xSyncs = await prisma.care2xSync.findMany()
+    * ```
+    */
+  get care2xSync(): Prisma.Care2xSyncDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.care2xSyncEntry`: Exposes CRUD operations for the **Care2xSyncEntry** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Care2xSyncEntries
+    * const care2xSyncEntries = await prisma.care2xSyncEntry.findMany()
+    * ```
+    */
+  get care2xSyncEntry(): Prisma.Care2xSyncEntryDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.care2xRecouvrementSync`: Exposes CRUD operations for the **Care2xRecouvrementSync** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Care2xRecouvrementSyncs
+    * const care2xRecouvrementSyncs = await prisma.care2xRecouvrementSync.findMany()
+    * ```
+    */
+  get care2xRecouvrementSync(): Prisma.Care2xRecouvrementSyncDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.care2xVersion`: Exposes CRUD operations for the **Care2xVersion** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Care2xVersions
+    * const care2xVersions = await prisma.care2xVersion.findMany()
+    * ```
+    */
+  get care2xVersion(): Prisma.Care2xVersionDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.planningEvent`: Exposes CRUD operations for the **PlanningEvent** model.
     * Example usage:
     * ```ts
@@ -1126,6 +1201,11 @@ export namespace Prisma {
     AdminMessageRecipient: 'AdminMessageRecipient',
     AdminMessageDocument: 'AdminMessageDocument',
     AuditLog: 'AuditLog',
+    FacilityApiKey: 'FacilityApiKey',
+    Care2xSync: 'Care2xSync',
+    Care2xSyncEntry: 'Care2xSyncEntry',
+    Care2xRecouvrementSync: 'Care2xRecouvrementSync',
+    Care2xVersion: 'Care2xVersion',
     PlanningEvent: 'PlanningEvent'
   };
 
@@ -1145,7 +1225,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "organization" | "region" | "facility" | "user" | "session" | "declarationPeriodConfig" | "declaration" | "declarationItem" | "declarationDocument" | "declarationHistory" | "category" | "budget" | "statSheet" | "statIndicator" | "statValue" | "statDocument" | "statDeadline" | "notification" | "pushSubscription" | "adminMessage" | "adminMessageRecipient" | "adminMessageDocument" | "auditLog" | "planningEvent"
+      modelProps: "organization" | "region" | "facility" | "user" | "session" | "declarationPeriodConfig" | "declaration" | "declarationItem" | "declarationDocument" | "declarationHistory" | "category" | "budget" | "statSheet" | "statIndicator" | "statValue" | "statDocument" | "statDeadline" | "notification" | "pushSubscription" | "adminMessage" | "adminMessageRecipient" | "adminMessageDocument" | "auditLog" | "facilityApiKey" | "care2xSync" | "care2xSyncEntry" | "care2xRecouvrementSync" | "care2xVersion" | "planningEvent"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2851,6 +2931,376 @@ export namespace Prisma {
           }
         }
       }
+      FacilityApiKey: {
+        payload: Prisma.$FacilityApiKeyPayload<ExtArgs>
+        fields: Prisma.FacilityApiKeyFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.FacilityApiKeyFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FacilityApiKeyPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.FacilityApiKeyFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FacilityApiKeyPayload>
+          }
+          findFirst: {
+            args: Prisma.FacilityApiKeyFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FacilityApiKeyPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.FacilityApiKeyFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FacilityApiKeyPayload>
+          }
+          findMany: {
+            args: Prisma.FacilityApiKeyFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FacilityApiKeyPayload>[]
+          }
+          create: {
+            args: Prisma.FacilityApiKeyCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FacilityApiKeyPayload>
+          }
+          createMany: {
+            args: Prisma.FacilityApiKeyCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.FacilityApiKeyCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FacilityApiKeyPayload>[]
+          }
+          delete: {
+            args: Prisma.FacilityApiKeyDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FacilityApiKeyPayload>
+          }
+          update: {
+            args: Prisma.FacilityApiKeyUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FacilityApiKeyPayload>
+          }
+          deleteMany: {
+            args: Prisma.FacilityApiKeyDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.FacilityApiKeyUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.FacilityApiKeyUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FacilityApiKeyPayload>[]
+          }
+          upsert: {
+            args: Prisma.FacilityApiKeyUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FacilityApiKeyPayload>
+          }
+          aggregate: {
+            args: Prisma.FacilityApiKeyAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateFacilityApiKey>
+          }
+          groupBy: {
+            args: Prisma.FacilityApiKeyGroupByArgs<ExtArgs>
+            result: $Utils.Optional<FacilityApiKeyGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.FacilityApiKeyCountArgs<ExtArgs>
+            result: $Utils.Optional<FacilityApiKeyCountAggregateOutputType> | number
+          }
+        }
+      }
+      Care2xSync: {
+        payload: Prisma.$Care2xSyncPayload<ExtArgs>
+        fields: Prisma.Care2xSyncFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.Care2xSyncFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Care2xSyncPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.Care2xSyncFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Care2xSyncPayload>
+          }
+          findFirst: {
+            args: Prisma.Care2xSyncFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Care2xSyncPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.Care2xSyncFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Care2xSyncPayload>
+          }
+          findMany: {
+            args: Prisma.Care2xSyncFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Care2xSyncPayload>[]
+          }
+          create: {
+            args: Prisma.Care2xSyncCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Care2xSyncPayload>
+          }
+          createMany: {
+            args: Prisma.Care2xSyncCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.Care2xSyncCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Care2xSyncPayload>[]
+          }
+          delete: {
+            args: Prisma.Care2xSyncDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Care2xSyncPayload>
+          }
+          update: {
+            args: Prisma.Care2xSyncUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Care2xSyncPayload>
+          }
+          deleteMany: {
+            args: Prisma.Care2xSyncDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.Care2xSyncUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.Care2xSyncUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Care2xSyncPayload>[]
+          }
+          upsert: {
+            args: Prisma.Care2xSyncUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Care2xSyncPayload>
+          }
+          aggregate: {
+            args: Prisma.Care2xSyncAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateCare2xSync>
+          }
+          groupBy: {
+            args: Prisma.Care2xSyncGroupByArgs<ExtArgs>
+            result: $Utils.Optional<Care2xSyncGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.Care2xSyncCountArgs<ExtArgs>
+            result: $Utils.Optional<Care2xSyncCountAggregateOutputType> | number
+          }
+        }
+      }
+      Care2xSyncEntry: {
+        payload: Prisma.$Care2xSyncEntryPayload<ExtArgs>
+        fields: Prisma.Care2xSyncEntryFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.Care2xSyncEntryFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Care2xSyncEntryPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.Care2xSyncEntryFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Care2xSyncEntryPayload>
+          }
+          findFirst: {
+            args: Prisma.Care2xSyncEntryFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Care2xSyncEntryPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.Care2xSyncEntryFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Care2xSyncEntryPayload>
+          }
+          findMany: {
+            args: Prisma.Care2xSyncEntryFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Care2xSyncEntryPayload>[]
+          }
+          create: {
+            args: Prisma.Care2xSyncEntryCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Care2xSyncEntryPayload>
+          }
+          createMany: {
+            args: Prisma.Care2xSyncEntryCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.Care2xSyncEntryCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Care2xSyncEntryPayload>[]
+          }
+          delete: {
+            args: Prisma.Care2xSyncEntryDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Care2xSyncEntryPayload>
+          }
+          update: {
+            args: Prisma.Care2xSyncEntryUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Care2xSyncEntryPayload>
+          }
+          deleteMany: {
+            args: Prisma.Care2xSyncEntryDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.Care2xSyncEntryUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.Care2xSyncEntryUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Care2xSyncEntryPayload>[]
+          }
+          upsert: {
+            args: Prisma.Care2xSyncEntryUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Care2xSyncEntryPayload>
+          }
+          aggregate: {
+            args: Prisma.Care2xSyncEntryAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateCare2xSyncEntry>
+          }
+          groupBy: {
+            args: Prisma.Care2xSyncEntryGroupByArgs<ExtArgs>
+            result: $Utils.Optional<Care2xSyncEntryGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.Care2xSyncEntryCountArgs<ExtArgs>
+            result: $Utils.Optional<Care2xSyncEntryCountAggregateOutputType> | number
+          }
+        }
+      }
+      Care2xRecouvrementSync: {
+        payload: Prisma.$Care2xRecouvrementSyncPayload<ExtArgs>
+        fields: Prisma.Care2xRecouvrementSyncFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.Care2xRecouvrementSyncFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Care2xRecouvrementSyncPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.Care2xRecouvrementSyncFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Care2xRecouvrementSyncPayload>
+          }
+          findFirst: {
+            args: Prisma.Care2xRecouvrementSyncFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Care2xRecouvrementSyncPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.Care2xRecouvrementSyncFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Care2xRecouvrementSyncPayload>
+          }
+          findMany: {
+            args: Prisma.Care2xRecouvrementSyncFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Care2xRecouvrementSyncPayload>[]
+          }
+          create: {
+            args: Prisma.Care2xRecouvrementSyncCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Care2xRecouvrementSyncPayload>
+          }
+          createMany: {
+            args: Prisma.Care2xRecouvrementSyncCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.Care2xRecouvrementSyncCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Care2xRecouvrementSyncPayload>[]
+          }
+          delete: {
+            args: Prisma.Care2xRecouvrementSyncDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Care2xRecouvrementSyncPayload>
+          }
+          update: {
+            args: Prisma.Care2xRecouvrementSyncUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Care2xRecouvrementSyncPayload>
+          }
+          deleteMany: {
+            args: Prisma.Care2xRecouvrementSyncDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.Care2xRecouvrementSyncUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.Care2xRecouvrementSyncUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Care2xRecouvrementSyncPayload>[]
+          }
+          upsert: {
+            args: Prisma.Care2xRecouvrementSyncUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Care2xRecouvrementSyncPayload>
+          }
+          aggregate: {
+            args: Prisma.Care2xRecouvrementSyncAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateCare2xRecouvrementSync>
+          }
+          groupBy: {
+            args: Prisma.Care2xRecouvrementSyncGroupByArgs<ExtArgs>
+            result: $Utils.Optional<Care2xRecouvrementSyncGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.Care2xRecouvrementSyncCountArgs<ExtArgs>
+            result: $Utils.Optional<Care2xRecouvrementSyncCountAggregateOutputType> | number
+          }
+        }
+      }
+      Care2xVersion: {
+        payload: Prisma.$Care2xVersionPayload<ExtArgs>
+        fields: Prisma.Care2xVersionFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.Care2xVersionFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Care2xVersionPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.Care2xVersionFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Care2xVersionPayload>
+          }
+          findFirst: {
+            args: Prisma.Care2xVersionFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Care2xVersionPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.Care2xVersionFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Care2xVersionPayload>
+          }
+          findMany: {
+            args: Prisma.Care2xVersionFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Care2xVersionPayload>[]
+          }
+          create: {
+            args: Prisma.Care2xVersionCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Care2xVersionPayload>
+          }
+          createMany: {
+            args: Prisma.Care2xVersionCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.Care2xVersionCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Care2xVersionPayload>[]
+          }
+          delete: {
+            args: Prisma.Care2xVersionDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Care2xVersionPayload>
+          }
+          update: {
+            args: Prisma.Care2xVersionUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Care2xVersionPayload>
+          }
+          deleteMany: {
+            args: Prisma.Care2xVersionDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.Care2xVersionUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.Care2xVersionUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Care2xVersionPayload>[]
+          }
+          upsert: {
+            args: Prisma.Care2xVersionUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Care2xVersionPayload>
+          }
+          aggregate: {
+            args: Prisma.Care2xVersionAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateCare2xVersion>
+          }
+          groupBy: {
+            args: Prisma.Care2xVersionGroupByArgs<ExtArgs>
+            result: $Utils.Optional<Care2xVersionGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.Care2xVersionCountArgs<ExtArgs>
+            result: $Utils.Optional<Care2xVersionCountAggregateOutputType> | number
+          }
+        }
+      }
       PlanningEvent: {
         payload: Prisma.$PlanningEventPayload<ExtArgs>
         fields: Prisma.PlanningEventFieldRefs
@@ -3044,6 +3494,11 @@ export namespace Prisma {
     adminMessageRecipient?: AdminMessageRecipientOmit
     adminMessageDocument?: AdminMessageDocumentOmit
     auditLog?: AuditLogOmit
+    facilityApiKey?: FacilityApiKeyOmit
+    care2xSync?: Care2xSyncOmit
+    care2xSyncEntry?: Care2xSyncEntryOmit
+    care2xRecouvrementSync?: Care2xRecouvrementSyncOmit
+    care2xVersion?: Care2xVersionOmit
     planningEvent?: PlanningEventOmit
   }
 
@@ -3239,6 +3694,8 @@ export namespace Prisma {
     budgets: number
     statDeadlines: number
     planningEvents: number
+    care2xSyncs: number
+    recouvrementSyncs: number
   }
 
   export type FacilityCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3249,6 +3706,8 @@ export namespace Prisma {
     budgets?: boolean | FacilityCountOutputTypeCountBudgetsArgs
     statDeadlines?: boolean | FacilityCountOutputTypeCountStatDeadlinesArgs
     planningEvents?: boolean | FacilityCountOutputTypeCountPlanningEventsArgs
+    care2xSyncs?: boolean | FacilityCountOutputTypeCountCare2xSyncsArgs
+    recouvrementSyncs?: boolean | FacilityCountOutputTypeCountRecouvrementSyncsArgs
   }
 
   // Custom InputTypes
@@ -3309,6 +3768,20 @@ export namespace Prisma {
    */
   export type FacilityCountOutputTypeCountPlanningEventsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: PlanningEventWhereInput
+  }
+
+  /**
+   * FacilityCountOutputType without action
+   */
+  export type FacilityCountOutputTypeCountCare2xSyncsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: Care2xSyncWhereInput
+  }
+
+  /**
+   * FacilityCountOutputType without action
+   */
+  export type FacilityCountOutputTypeCountRecouvrementSyncsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: Care2xRecouvrementSyncWhereInput
   }
 
 
@@ -3590,6 +4063,77 @@ export namespace Prisma {
    */
   export type AdminMessageCountOutputTypeCountDocumentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: AdminMessageDocumentWhereInput
+  }
+
+
+  /**
+   * Count Type FacilityApiKeyCountOutputType
+   */
+
+  export type FacilityApiKeyCountOutputType = {
+    care2xSyncs: number
+    recouvrementSyncs: number
+  }
+
+  export type FacilityApiKeyCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    care2xSyncs?: boolean | FacilityApiKeyCountOutputTypeCountCare2xSyncsArgs
+    recouvrementSyncs?: boolean | FacilityApiKeyCountOutputTypeCountRecouvrementSyncsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * FacilityApiKeyCountOutputType without action
+   */
+  export type FacilityApiKeyCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FacilityApiKeyCountOutputType
+     */
+    select?: FacilityApiKeyCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * FacilityApiKeyCountOutputType without action
+   */
+  export type FacilityApiKeyCountOutputTypeCountCare2xSyncsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: Care2xSyncWhereInput
+  }
+
+  /**
+   * FacilityApiKeyCountOutputType without action
+   */
+  export type FacilityApiKeyCountOutputTypeCountRecouvrementSyncsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: Care2xRecouvrementSyncWhereInput
+  }
+
+
+  /**
+   * Count Type Care2xSyncCountOutputType
+   */
+
+  export type Care2xSyncCountOutputType = {
+    entries: number
+  }
+
+  export type Care2xSyncCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    entries?: boolean | Care2xSyncCountOutputTypeCountEntriesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * Care2xSyncCountOutputType without action
+   */
+  export type Care2xSyncCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Care2xSyncCountOutputType
+     */
+    select?: Care2xSyncCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * Care2xSyncCountOutputType without action
+   */
+  export type Care2xSyncCountOutputTypeCountEntriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: Care2xSyncEntryWhereInput
   }
 
 
@@ -6234,6 +6778,9 @@ export namespace Prisma {
     budgets?: boolean | Facility$budgetsArgs<ExtArgs>
     statDeadlines?: boolean | Facility$statDeadlinesArgs<ExtArgs>
     planningEvents?: boolean | Facility$planningEventsArgs<ExtArgs>
+    apiKey?: boolean | Facility$apiKeyArgs<ExtArgs>
+    care2xSyncs?: boolean | Facility$care2xSyncsArgs<ExtArgs>
+    recouvrementSyncs?: boolean | Facility$recouvrementSyncsArgs<ExtArgs>
     _count?: boolean | FacilityCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["facility"]>
 
@@ -6297,6 +6844,9 @@ export namespace Prisma {
     budgets?: boolean | Facility$budgetsArgs<ExtArgs>
     statDeadlines?: boolean | Facility$statDeadlinesArgs<ExtArgs>
     planningEvents?: boolean | Facility$planningEventsArgs<ExtArgs>
+    apiKey?: boolean | Facility$apiKeyArgs<ExtArgs>
+    care2xSyncs?: boolean | Facility$care2xSyncsArgs<ExtArgs>
+    recouvrementSyncs?: boolean | Facility$recouvrementSyncsArgs<ExtArgs>
     _count?: boolean | FacilityCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type FacilityIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -6317,6 +6867,9 @@ export namespace Prisma {
       budgets: Prisma.$BudgetPayload<ExtArgs>[]
       statDeadlines: Prisma.$StatDeadlinePayload<ExtArgs>[]
       planningEvents: Prisma.$PlanningEventPayload<ExtArgs>[]
+      apiKey: Prisma.$FacilityApiKeyPayload<ExtArgs> | null
+      care2xSyncs: Prisma.$Care2xSyncPayload<ExtArgs>[]
+      recouvrementSyncs: Prisma.$Care2xRecouvrementSyncPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -6734,6 +7287,9 @@ export namespace Prisma {
     budgets<T extends Facility$budgetsArgs<ExtArgs> = {}>(args?: Subset<T, Facility$budgetsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BudgetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     statDeadlines<T extends Facility$statDeadlinesArgs<ExtArgs> = {}>(args?: Subset<T, Facility$statDeadlinesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StatDeadlinePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     planningEvents<T extends Facility$planningEventsArgs<ExtArgs> = {}>(args?: Subset<T, Facility$planningEventsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PlanningEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    apiKey<T extends Facility$apiKeyArgs<ExtArgs> = {}>(args?: Subset<T, Facility$apiKeyArgs<ExtArgs>>): Prisma__FacilityApiKeyClient<$Result.GetResult<Prisma.$FacilityApiKeyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    care2xSyncs<T extends Facility$care2xSyncsArgs<ExtArgs> = {}>(args?: Subset<T, Facility$care2xSyncsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Care2xSyncPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    recouvrementSyncs<T extends Facility$recouvrementSyncsArgs<ExtArgs> = {}>(args?: Subset<T, Facility$recouvrementSyncsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Care2xRecouvrementSyncPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -7337,6 +7893,73 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: PlanningEventScalarFieldEnum | PlanningEventScalarFieldEnum[]
+  }
+
+  /**
+   * Facility.apiKey
+   */
+  export type Facility$apiKeyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FacilityApiKey
+     */
+    select?: FacilityApiKeySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FacilityApiKey
+     */
+    omit?: FacilityApiKeyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FacilityApiKeyInclude<ExtArgs> | null
+    where?: FacilityApiKeyWhereInput
+  }
+
+  /**
+   * Facility.care2xSyncs
+   */
+  export type Facility$care2xSyncsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Care2xSync
+     */
+    select?: Care2xSyncSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Care2xSync
+     */
+    omit?: Care2xSyncOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Care2xSyncInclude<ExtArgs> | null
+    where?: Care2xSyncWhereInput
+    orderBy?: Care2xSyncOrderByWithRelationInput | Care2xSyncOrderByWithRelationInput[]
+    cursor?: Care2xSyncWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Care2xSyncScalarFieldEnum | Care2xSyncScalarFieldEnum[]
+  }
+
+  /**
+   * Facility.recouvrementSyncs
+   */
+  export type Facility$recouvrementSyncsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Care2xRecouvrementSync
+     */
+    select?: Care2xRecouvrementSyncSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Care2xRecouvrementSync
+     */
+    omit?: Care2xRecouvrementSyncOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Care2xRecouvrementSyncInclude<ExtArgs> | null
+    where?: Care2xRecouvrementSyncWhereInput
+    orderBy?: Care2xRecouvrementSyncOrderByWithRelationInput | Care2xRecouvrementSyncOrderByWithRelationInput[]
+    cursor?: Care2xRecouvrementSyncWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Care2xRecouvrementSyncScalarFieldEnum | Care2xRecouvrementSyncScalarFieldEnum[]
   }
 
   /**
@@ -30706,6 +31329,5672 @@ export namespace Prisma {
 
 
   /**
+   * Model FacilityApiKey
+   */
+
+  export type AggregateFacilityApiKey = {
+    _count: FacilityApiKeyCountAggregateOutputType | null
+    _min: FacilityApiKeyMinAggregateOutputType | null
+    _max: FacilityApiKeyMaxAggregateOutputType | null
+  }
+
+  export type FacilityApiKeyMinAggregateOutputType = {
+    id: string | null
+    facilityId: string | null
+    keyHash: string | null
+    keyPreview: string | null
+    isActive: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    lastUsedAt: Date | null
+  }
+
+  export type FacilityApiKeyMaxAggregateOutputType = {
+    id: string | null
+    facilityId: string | null
+    keyHash: string | null
+    keyPreview: string | null
+    isActive: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    lastUsedAt: Date | null
+  }
+
+  export type FacilityApiKeyCountAggregateOutputType = {
+    id: number
+    facilityId: number
+    keyHash: number
+    keyPreview: number
+    isActive: number
+    createdAt: number
+    updatedAt: number
+    lastUsedAt: number
+    _all: number
+  }
+
+
+  export type FacilityApiKeyMinAggregateInputType = {
+    id?: true
+    facilityId?: true
+    keyHash?: true
+    keyPreview?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+    lastUsedAt?: true
+  }
+
+  export type FacilityApiKeyMaxAggregateInputType = {
+    id?: true
+    facilityId?: true
+    keyHash?: true
+    keyPreview?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+    lastUsedAt?: true
+  }
+
+  export type FacilityApiKeyCountAggregateInputType = {
+    id?: true
+    facilityId?: true
+    keyHash?: true
+    keyPreview?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+    lastUsedAt?: true
+    _all?: true
+  }
+
+  export type FacilityApiKeyAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which FacilityApiKey to aggregate.
+     */
+    where?: FacilityApiKeyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FacilityApiKeys to fetch.
+     */
+    orderBy?: FacilityApiKeyOrderByWithRelationInput | FacilityApiKeyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: FacilityApiKeyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FacilityApiKeys from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FacilityApiKeys.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned FacilityApiKeys
+    **/
+    _count?: true | FacilityApiKeyCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: FacilityApiKeyMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: FacilityApiKeyMaxAggregateInputType
+  }
+
+  export type GetFacilityApiKeyAggregateType<T extends FacilityApiKeyAggregateArgs> = {
+        [P in keyof T & keyof AggregateFacilityApiKey]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateFacilityApiKey[P]>
+      : GetScalarType<T[P], AggregateFacilityApiKey[P]>
+  }
+
+
+
+
+  export type FacilityApiKeyGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FacilityApiKeyWhereInput
+    orderBy?: FacilityApiKeyOrderByWithAggregationInput | FacilityApiKeyOrderByWithAggregationInput[]
+    by: FacilityApiKeyScalarFieldEnum[] | FacilityApiKeyScalarFieldEnum
+    having?: FacilityApiKeyScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: FacilityApiKeyCountAggregateInputType | true
+    _min?: FacilityApiKeyMinAggregateInputType
+    _max?: FacilityApiKeyMaxAggregateInputType
+  }
+
+  export type FacilityApiKeyGroupByOutputType = {
+    id: string
+    facilityId: string
+    keyHash: string
+    keyPreview: string
+    isActive: boolean
+    createdAt: Date
+    updatedAt: Date
+    lastUsedAt: Date | null
+    _count: FacilityApiKeyCountAggregateOutputType | null
+    _min: FacilityApiKeyMinAggregateOutputType | null
+    _max: FacilityApiKeyMaxAggregateOutputType | null
+  }
+
+  type GetFacilityApiKeyGroupByPayload<T extends FacilityApiKeyGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<FacilityApiKeyGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof FacilityApiKeyGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], FacilityApiKeyGroupByOutputType[P]>
+            : GetScalarType<T[P], FacilityApiKeyGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type FacilityApiKeySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    facilityId?: boolean
+    keyHash?: boolean
+    keyPreview?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    lastUsedAt?: boolean
+    facility?: boolean | FacilityDefaultArgs<ExtArgs>
+    care2xSyncs?: boolean | FacilityApiKey$care2xSyncsArgs<ExtArgs>
+    recouvrementSyncs?: boolean | FacilityApiKey$recouvrementSyncsArgs<ExtArgs>
+    _count?: boolean | FacilityApiKeyCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["facilityApiKey"]>
+
+  export type FacilityApiKeySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    facilityId?: boolean
+    keyHash?: boolean
+    keyPreview?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    lastUsedAt?: boolean
+    facility?: boolean | FacilityDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["facilityApiKey"]>
+
+  export type FacilityApiKeySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    facilityId?: boolean
+    keyHash?: boolean
+    keyPreview?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    lastUsedAt?: boolean
+    facility?: boolean | FacilityDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["facilityApiKey"]>
+
+  export type FacilityApiKeySelectScalar = {
+    id?: boolean
+    facilityId?: boolean
+    keyHash?: boolean
+    keyPreview?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    lastUsedAt?: boolean
+  }
+
+  export type FacilityApiKeyOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "facilityId" | "keyHash" | "keyPreview" | "isActive" | "createdAt" | "updatedAt" | "lastUsedAt", ExtArgs["result"]["facilityApiKey"]>
+  export type FacilityApiKeyInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    facility?: boolean | FacilityDefaultArgs<ExtArgs>
+    care2xSyncs?: boolean | FacilityApiKey$care2xSyncsArgs<ExtArgs>
+    recouvrementSyncs?: boolean | FacilityApiKey$recouvrementSyncsArgs<ExtArgs>
+    _count?: boolean | FacilityApiKeyCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type FacilityApiKeyIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    facility?: boolean | FacilityDefaultArgs<ExtArgs>
+  }
+  export type FacilityApiKeyIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    facility?: boolean | FacilityDefaultArgs<ExtArgs>
+  }
+
+  export type $FacilityApiKeyPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "FacilityApiKey"
+    objects: {
+      facility: Prisma.$FacilityPayload<ExtArgs>
+      care2xSyncs: Prisma.$Care2xSyncPayload<ExtArgs>[]
+      recouvrementSyncs: Prisma.$Care2xRecouvrementSyncPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      facilityId: string
+      keyHash: string
+      keyPreview: string
+      isActive: boolean
+      createdAt: Date
+      updatedAt: Date
+      lastUsedAt: Date | null
+    }, ExtArgs["result"]["facilityApiKey"]>
+    composites: {}
+  }
+
+  type FacilityApiKeyGetPayload<S extends boolean | null | undefined | FacilityApiKeyDefaultArgs> = $Result.GetResult<Prisma.$FacilityApiKeyPayload, S>
+
+  type FacilityApiKeyCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<FacilityApiKeyFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: FacilityApiKeyCountAggregateInputType | true
+    }
+
+  export interface FacilityApiKeyDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['FacilityApiKey'], meta: { name: 'FacilityApiKey' } }
+    /**
+     * Find zero or one FacilityApiKey that matches the filter.
+     * @param {FacilityApiKeyFindUniqueArgs} args - Arguments to find a FacilityApiKey
+     * @example
+     * // Get one FacilityApiKey
+     * const facilityApiKey = await prisma.facilityApiKey.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends FacilityApiKeyFindUniqueArgs>(args: SelectSubset<T, FacilityApiKeyFindUniqueArgs<ExtArgs>>): Prisma__FacilityApiKeyClient<$Result.GetResult<Prisma.$FacilityApiKeyPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one FacilityApiKey that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {FacilityApiKeyFindUniqueOrThrowArgs} args - Arguments to find a FacilityApiKey
+     * @example
+     * // Get one FacilityApiKey
+     * const facilityApiKey = await prisma.facilityApiKey.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends FacilityApiKeyFindUniqueOrThrowArgs>(args: SelectSubset<T, FacilityApiKeyFindUniqueOrThrowArgs<ExtArgs>>): Prisma__FacilityApiKeyClient<$Result.GetResult<Prisma.$FacilityApiKeyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first FacilityApiKey that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FacilityApiKeyFindFirstArgs} args - Arguments to find a FacilityApiKey
+     * @example
+     * // Get one FacilityApiKey
+     * const facilityApiKey = await prisma.facilityApiKey.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends FacilityApiKeyFindFirstArgs>(args?: SelectSubset<T, FacilityApiKeyFindFirstArgs<ExtArgs>>): Prisma__FacilityApiKeyClient<$Result.GetResult<Prisma.$FacilityApiKeyPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first FacilityApiKey that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FacilityApiKeyFindFirstOrThrowArgs} args - Arguments to find a FacilityApiKey
+     * @example
+     * // Get one FacilityApiKey
+     * const facilityApiKey = await prisma.facilityApiKey.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends FacilityApiKeyFindFirstOrThrowArgs>(args?: SelectSubset<T, FacilityApiKeyFindFirstOrThrowArgs<ExtArgs>>): Prisma__FacilityApiKeyClient<$Result.GetResult<Prisma.$FacilityApiKeyPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more FacilityApiKeys that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FacilityApiKeyFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all FacilityApiKeys
+     * const facilityApiKeys = await prisma.facilityApiKey.findMany()
+     * 
+     * // Get first 10 FacilityApiKeys
+     * const facilityApiKeys = await prisma.facilityApiKey.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const facilityApiKeyWithIdOnly = await prisma.facilityApiKey.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends FacilityApiKeyFindManyArgs>(args?: SelectSubset<T, FacilityApiKeyFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FacilityApiKeyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a FacilityApiKey.
+     * @param {FacilityApiKeyCreateArgs} args - Arguments to create a FacilityApiKey.
+     * @example
+     * // Create one FacilityApiKey
+     * const FacilityApiKey = await prisma.facilityApiKey.create({
+     *   data: {
+     *     // ... data to create a FacilityApiKey
+     *   }
+     * })
+     * 
+     */
+    create<T extends FacilityApiKeyCreateArgs>(args: SelectSubset<T, FacilityApiKeyCreateArgs<ExtArgs>>): Prisma__FacilityApiKeyClient<$Result.GetResult<Prisma.$FacilityApiKeyPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many FacilityApiKeys.
+     * @param {FacilityApiKeyCreateManyArgs} args - Arguments to create many FacilityApiKeys.
+     * @example
+     * // Create many FacilityApiKeys
+     * const facilityApiKey = await prisma.facilityApiKey.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends FacilityApiKeyCreateManyArgs>(args?: SelectSubset<T, FacilityApiKeyCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many FacilityApiKeys and returns the data saved in the database.
+     * @param {FacilityApiKeyCreateManyAndReturnArgs} args - Arguments to create many FacilityApiKeys.
+     * @example
+     * // Create many FacilityApiKeys
+     * const facilityApiKey = await prisma.facilityApiKey.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many FacilityApiKeys and only return the `id`
+     * const facilityApiKeyWithIdOnly = await prisma.facilityApiKey.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends FacilityApiKeyCreateManyAndReturnArgs>(args?: SelectSubset<T, FacilityApiKeyCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FacilityApiKeyPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a FacilityApiKey.
+     * @param {FacilityApiKeyDeleteArgs} args - Arguments to delete one FacilityApiKey.
+     * @example
+     * // Delete one FacilityApiKey
+     * const FacilityApiKey = await prisma.facilityApiKey.delete({
+     *   where: {
+     *     // ... filter to delete one FacilityApiKey
+     *   }
+     * })
+     * 
+     */
+    delete<T extends FacilityApiKeyDeleteArgs>(args: SelectSubset<T, FacilityApiKeyDeleteArgs<ExtArgs>>): Prisma__FacilityApiKeyClient<$Result.GetResult<Prisma.$FacilityApiKeyPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one FacilityApiKey.
+     * @param {FacilityApiKeyUpdateArgs} args - Arguments to update one FacilityApiKey.
+     * @example
+     * // Update one FacilityApiKey
+     * const facilityApiKey = await prisma.facilityApiKey.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends FacilityApiKeyUpdateArgs>(args: SelectSubset<T, FacilityApiKeyUpdateArgs<ExtArgs>>): Prisma__FacilityApiKeyClient<$Result.GetResult<Prisma.$FacilityApiKeyPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more FacilityApiKeys.
+     * @param {FacilityApiKeyDeleteManyArgs} args - Arguments to filter FacilityApiKeys to delete.
+     * @example
+     * // Delete a few FacilityApiKeys
+     * const { count } = await prisma.facilityApiKey.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends FacilityApiKeyDeleteManyArgs>(args?: SelectSubset<T, FacilityApiKeyDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more FacilityApiKeys.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FacilityApiKeyUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many FacilityApiKeys
+     * const facilityApiKey = await prisma.facilityApiKey.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends FacilityApiKeyUpdateManyArgs>(args: SelectSubset<T, FacilityApiKeyUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more FacilityApiKeys and returns the data updated in the database.
+     * @param {FacilityApiKeyUpdateManyAndReturnArgs} args - Arguments to update many FacilityApiKeys.
+     * @example
+     * // Update many FacilityApiKeys
+     * const facilityApiKey = await prisma.facilityApiKey.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more FacilityApiKeys and only return the `id`
+     * const facilityApiKeyWithIdOnly = await prisma.facilityApiKey.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends FacilityApiKeyUpdateManyAndReturnArgs>(args: SelectSubset<T, FacilityApiKeyUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FacilityApiKeyPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one FacilityApiKey.
+     * @param {FacilityApiKeyUpsertArgs} args - Arguments to update or create a FacilityApiKey.
+     * @example
+     * // Update or create a FacilityApiKey
+     * const facilityApiKey = await prisma.facilityApiKey.upsert({
+     *   create: {
+     *     // ... data to create a FacilityApiKey
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the FacilityApiKey we want to update
+     *   }
+     * })
+     */
+    upsert<T extends FacilityApiKeyUpsertArgs>(args: SelectSubset<T, FacilityApiKeyUpsertArgs<ExtArgs>>): Prisma__FacilityApiKeyClient<$Result.GetResult<Prisma.$FacilityApiKeyPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of FacilityApiKeys.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FacilityApiKeyCountArgs} args - Arguments to filter FacilityApiKeys to count.
+     * @example
+     * // Count the number of FacilityApiKeys
+     * const count = await prisma.facilityApiKey.count({
+     *   where: {
+     *     // ... the filter for the FacilityApiKeys we want to count
+     *   }
+     * })
+    **/
+    count<T extends FacilityApiKeyCountArgs>(
+      args?: Subset<T, FacilityApiKeyCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], FacilityApiKeyCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a FacilityApiKey.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FacilityApiKeyAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends FacilityApiKeyAggregateArgs>(args: Subset<T, FacilityApiKeyAggregateArgs>): Prisma.PrismaPromise<GetFacilityApiKeyAggregateType<T>>
+
+    /**
+     * Group by FacilityApiKey.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FacilityApiKeyGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends FacilityApiKeyGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: FacilityApiKeyGroupByArgs['orderBy'] }
+        : { orderBy?: FacilityApiKeyGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, FacilityApiKeyGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetFacilityApiKeyGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the FacilityApiKey model
+   */
+  readonly fields: FacilityApiKeyFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for FacilityApiKey.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__FacilityApiKeyClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    facility<T extends FacilityDefaultArgs<ExtArgs> = {}>(args?: Subset<T, FacilityDefaultArgs<ExtArgs>>): Prisma__FacilityClient<$Result.GetResult<Prisma.$FacilityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    care2xSyncs<T extends FacilityApiKey$care2xSyncsArgs<ExtArgs> = {}>(args?: Subset<T, FacilityApiKey$care2xSyncsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Care2xSyncPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    recouvrementSyncs<T extends FacilityApiKey$recouvrementSyncsArgs<ExtArgs> = {}>(args?: Subset<T, FacilityApiKey$recouvrementSyncsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Care2xRecouvrementSyncPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the FacilityApiKey model
+   */
+  interface FacilityApiKeyFieldRefs {
+    readonly id: FieldRef<"FacilityApiKey", 'String'>
+    readonly facilityId: FieldRef<"FacilityApiKey", 'String'>
+    readonly keyHash: FieldRef<"FacilityApiKey", 'String'>
+    readonly keyPreview: FieldRef<"FacilityApiKey", 'String'>
+    readonly isActive: FieldRef<"FacilityApiKey", 'Boolean'>
+    readonly createdAt: FieldRef<"FacilityApiKey", 'DateTime'>
+    readonly updatedAt: FieldRef<"FacilityApiKey", 'DateTime'>
+    readonly lastUsedAt: FieldRef<"FacilityApiKey", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * FacilityApiKey findUnique
+   */
+  export type FacilityApiKeyFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FacilityApiKey
+     */
+    select?: FacilityApiKeySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FacilityApiKey
+     */
+    omit?: FacilityApiKeyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FacilityApiKeyInclude<ExtArgs> | null
+    /**
+     * Filter, which FacilityApiKey to fetch.
+     */
+    where: FacilityApiKeyWhereUniqueInput
+  }
+
+  /**
+   * FacilityApiKey findUniqueOrThrow
+   */
+  export type FacilityApiKeyFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FacilityApiKey
+     */
+    select?: FacilityApiKeySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FacilityApiKey
+     */
+    omit?: FacilityApiKeyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FacilityApiKeyInclude<ExtArgs> | null
+    /**
+     * Filter, which FacilityApiKey to fetch.
+     */
+    where: FacilityApiKeyWhereUniqueInput
+  }
+
+  /**
+   * FacilityApiKey findFirst
+   */
+  export type FacilityApiKeyFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FacilityApiKey
+     */
+    select?: FacilityApiKeySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FacilityApiKey
+     */
+    omit?: FacilityApiKeyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FacilityApiKeyInclude<ExtArgs> | null
+    /**
+     * Filter, which FacilityApiKey to fetch.
+     */
+    where?: FacilityApiKeyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FacilityApiKeys to fetch.
+     */
+    orderBy?: FacilityApiKeyOrderByWithRelationInput | FacilityApiKeyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for FacilityApiKeys.
+     */
+    cursor?: FacilityApiKeyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FacilityApiKeys from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FacilityApiKeys.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FacilityApiKeys.
+     */
+    distinct?: FacilityApiKeyScalarFieldEnum | FacilityApiKeyScalarFieldEnum[]
+  }
+
+  /**
+   * FacilityApiKey findFirstOrThrow
+   */
+  export type FacilityApiKeyFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FacilityApiKey
+     */
+    select?: FacilityApiKeySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FacilityApiKey
+     */
+    omit?: FacilityApiKeyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FacilityApiKeyInclude<ExtArgs> | null
+    /**
+     * Filter, which FacilityApiKey to fetch.
+     */
+    where?: FacilityApiKeyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FacilityApiKeys to fetch.
+     */
+    orderBy?: FacilityApiKeyOrderByWithRelationInput | FacilityApiKeyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for FacilityApiKeys.
+     */
+    cursor?: FacilityApiKeyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FacilityApiKeys from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FacilityApiKeys.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FacilityApiKeys.
+     */
+    distinct?: FacilityApiKeyScalarFieldEnum | FacilityApiKeyScalarFieldEnum[]
+  }
+
+  /**
+   * FacilityApiKey findMany
+   */
+  export type FacilityApiKeyFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FacilityApiKey
+     */
+    select?: FacilityApiKeySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FacilityApiKey
+     */
+    omit?: FacilityApiKeyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FacilityApiKeyInclude<ExtArgs> | null
+    /**
+     * Filter, which FacilityApiKeys to fetch.
+     */
+    where?: FacilityApiKeyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FacilityApiKeys to fetch.
+     */
+    orderBy?: FacilityApiKeyOrderByWithRelationInput | FacilityApiKeyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing FacilityApiKeys.
+     */
+    cursor?: FacilityApiKeyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FacilityApiKeys from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FacilityApiKeys.
+     */
+    skip?: number
+    distinct?: FacilityApiKeyScalarFieldEnum | FacilityApiKeyScalarFieldEnum[]
+  }
+
+  /**
+   * FacilityApiKey create
+   */
+  export type FacilityApiKeyCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FacilityApiKey
+     */
+    select?: FacilityApiKeySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FacilityApiKey
+     */
+    omit?: FacilityApiKeyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FacilityApiKeyInclude<ExtArgs> | null
+    /**
+     * The data needed to create a FacilityApiKey.
+     */
+    data: XOR<FacilityApiKeyCreateInput, FacilityApiKeyUncheckedCreateInput>
+  }
+
+  /**
+   * FacilityApiKey createMany
+   */
+  export type FacilityApiKeyCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many FacilityApiKeys.
+     */
+    data: FacilityApiKeyCreateManyInput | FacilityApiKeyCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * FacilityApiKey createManyAndReturn
+   */
+  export type FacilityApiKeyCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FacilityApiKey
+     */
+    select?: FacilityApiKeySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the FacilityApiKey
+     */
+    omit?: FacilityApiKeyOmit<ExtArgs> | null
+    /**
+     * The data used to create many FacilityApiKeys.
+     */
+    data: FacilityApiKeyCreateManyInput | FacilityApiKeyCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FacilityApiKeyIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * FacilityApiKey update
+   */
+  export type FacilityApiKeyUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FacilityApiKey
+     */
+    select?: FacilityApiKeySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FacilityApiKey
+     */
+    omit?: FacilityApiKeyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FacilityApiKeyInclude<ExtArgs> | null
+    /**
+     * The data needed to update a FacilityApiKey.
+     */
+    data: XOR<FacilityApiKeyUpdateInput, FacilityApiKeyUncheckedUpdateInput>
+    /**
+     * Choose, which FacilityApiKey to update.
+     */
+    where: FacilityApiKeyWhereUniqueInput
+  }
+
+  /**
+   * FacilityApiKey updateMany
+   */
+  export type FacilityApiKeyUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update FacilityApiKeys.
+     */
+    data: XOR<FacilityApiKeyUpdateManyMutationInput, FacilityApiKeyUncheckedUpdateManyInput>
+    /**
+     * Filter which FacilityApiKeys to update
+     */
+    where?: FacilityApiKeyWhereInput
+    /**
+     * Limit how many FacilityApiKeys to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * FacilityApiKey updateManyAndReturn
+   */
+  export type FacilityApiKeyUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FacilityApiKey
+     */
+    select?: FacilityApiKeySelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the FacilityApiKey
+     */
+    omit?: FacilityApiKeyOmit<ExtArgs> | null
+    /**
+     * The data used to update FacilityApiKeys.
+     */
+    data: XOR<FacilityApiKeyUpdateManyMutationInput, FacilityApiKeyUncheckedUpdateManyInput>
+    /**
+     * Filter which FacilityApiKeys to update
+     */
+    where?: FacilityApiKeyWhereInput
+    /**
+     * Limit how many FacilityApiKeys to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FacilityApiKeyIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * FacilityApiKey upsert
+   */
+  export type FacilityApiKeyUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FacilityApiKey
+     */
+    select?: FacilityApiKeySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FacilityApiKey
+     */
+    omit?: FacilityApiKeyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FacilityApiKeyInclude<ExtArgs> | null
+    /**
+     * The filter to search for the FacilityApiKey to update in case it exists.
+     */
+    where: FacilityApiKeyWhereUniqueInput
+    /**
+     * In case the FacilityApiKey found by the `where` argument doesn't exist, create a new FacilityApiKey with this data.
+     */
+    create: XOR<FacilityApiKeyCreateInput, FacilityApiKeyUncheckedCreateInput>
+    /**
+     * In case the FacilityApiKey was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<FacilityApiKeyUpdateInput, FacilityApiKeyUncheckedUpdateInput>
+  }
+
+  /**
+   * FacilityApiKey delete
+   */
+  export type FacilityApiKeyDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FacilityApiKey
+     */
+    select?: FacilityApiKeySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FacilityApiKey
+     */
+    omit?: FacilityApiKeyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FacilityApiKeyInclude<ExtArgs> | null
+    /**
+     * Filter which FacilityApiKey to delete.
+     */
+    where: FacilityApiKeyWhereUniqueInput
+  }
+
+  /**
+   * FacilityApiKey deleteMany
+   */
+  export type FacilityApiKeyDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which FacilityApiKeys to delete
+     */
+    where?: FacilityApiKeyWhereInput
+    /**
+     * Limit how many FacilityApiKeys to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * FacilityApiKey.care2xSyncs
+   */
+  export type FacilityApiKey$care2xSyncsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Care2xSync
+     */
+    select?: Care2xSyncSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Care2xSync
+     */
+    omit?: Care2xSyncOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Care2xSyncInclude<ExtArgs> | null
+    where?: Care2xSyncWhereInput
+    orderBy?: Care2xSyncOrderByWithRelationInput | Care2xSyncOrderByWithRelationInput[]
+    cursor?: Care2xSyncWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Care2xSyncScalarFieldEnum | Care2xSyncScalarFieldEnum[]
+  }
+
+  /**
+   * FacilityApiKey.recouvrementSyncs
+   */
+  export type FacilityApiKey$recouvrementSyncsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Care2xRecouvrementSync
+     */
+    select?: Care2xRecouvrementSyncSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Care2xRecouvrementSync
+     */
+    omit?: Care2xRecouvrementSyncOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Care2xRecouvrementSyncInclude<ExtArgs> | null
+    where?: Care2xRecouvrementSyncWhereInput
+    orderBy?: Care2xRecouvrementSyncOrderByWithRelationInput | Care2xRecouvrementSyncOrderByWithRelationInput[]
+    cursor?: Care2xRecouvrementSyncWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Care2xRecouvrementSyncScalarFieldEnum | Care2xRecouvrementSyncScalarFieldEnum[]
+  }
+
+  /**
+   * FacilityApiKey without action
+   */
+  export type FacilityApiKeyDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FacilityApiKey
+     */
+    select?: FacilityApiKeySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FacilityApiKey
+     */
+    omit?: FacilityApiKeyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FacilityApiKeyInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Care2xSync
+   */
+
+  export type AggregateCare2xSync = {
+    _count: Care2xSyncCountAggregateOutputType | null
+    _avg: Care2xSyncAvgAggregateOutputType | null
+    _sum: Care2xSyncSumAggregateOutputType | null
+    _min: Care2xSyncMinAggregateOutputType | null
+    _max: Care2xSyncMaxAggregateOutputType | null
+  }
+
+  export type Care2xSyncAvgAggregateOutputType = {
+    entriesCount: number | null
+    totalAmount: Decimal | null
+  }
+
+  export type Care2xSyncSumAggregateOutputType = {
+    entriesCount: number | null
+    totalAmount: Decimal | null
+  }
+
+  export type Care2xSyncMinAggregateOutputType = {
+    id: string | null
+    facilityId: string | null
+    apiKeyId: string | null
+    batchRef: string | null
+    entriesCount: number | null
+    totalAmount: Decimal | null
+    periodStart: Date | null
+    periodEnd: Date | null
+    receivedAt: Date | null
+  }
+
+  export type Care2xSyncMaxAggregateOutputType = {
+    id: string | null
+    facilityId: string | null
+    apiKeyId: string | null
+    batchRef: string | null
+    entriesCount: number | null
+    totalAmount: Decimal | null
+    periodStart: Date | null
+    periodEnd: Date | null
+    receivedAt: Date | null
+  }
+
+  export type Care2xSyncCountAggregateOutputType = {
+    id: number
+    facilityId: number
+    apiKeyId: number
+    batchRef: number
+    entriesCount: number
+    totalAmount: number
+    periodStart: number
+    periodEnd: number
+    receivedAt: number
+    _all: number
+  }
+
+
+  export type Care2xSyncAvgAggregateInputType = {
+    entriesCount?: true
+    totalAmount?: true
+  }
+
+  export type Care2xSyncSumAggregateInputType = {
+    entriesCount?: true
+    totalAmount?: true
+  }
+
+  export type Care2xSyncMinAggregateInputType = {
+    id?: true
+    facilityId?: true
+    apiKeyId?: true
+    batchRef?: true
+    entriesCount?: true
+    totalAmount?: true
+    periodStart?: true
+    periodEnd?: true
+    receivedAt?: true
+  }
+
+  export type Care2xSyncMaxAggregateInputType = {
+    id?: true
+    facilityId?: true
+    apiKeyId?: true
+    batchRef?: true
+    entriesCount?: true
+    totalAmount?: true
+    periodStart?: true
+    periodEnd?: true
+    receivedAt?: true
+  }
+
+  export type Care2xSyncCountAggregateInputType = {
+    id?: true
+    facilityId?: true
+    apiKeyId?: true
+    batchRef?: true
+    entriesCount?: true
+    totalAmount?: true
+    periodStart?: true
+    periodEnd?: true
+    receivedAt?: true
+    _all?: true
+  }
+
+  export type Care2xSyncAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Care2xSync to aggregate.
+     */
+    where?: Care2xSyncWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Care2xSyncs to fetch.
+     */
+    orderBy?: Care2xSyncOrderByWithRelationInput | Care2xSyncOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: Care2xSyncWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Care2xSyncs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Care2xSyncs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Care2xSyncs
+    **/
+    _count?: true | Care2xSyncCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: Care2xSyncAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: Care2xSyncSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Care2xSyncMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Care2xSyncMaxAggregateInputType
+  }
+
+  export type GetCare2xSyncAggregateType<T extends Care2xSyncAggregateArgs> = {
+        [P in keyof T & keyof AggregateCare2xSync]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateCare2xSync[P]>
+      : GetScalarType<T[P], AggregateCare2xSync[P]>
+  }
+
+
+
+
+  export type Care2xSyncGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: Care2xSyncWhereInput
+    orderBy?: Care2xSyncOrderByWithAggregationInput | Care2xSyncOrderByWithAggregationInput[]
+    by: Care2xSyncScalarFieldEnum[] | Care2xSyncScalarFieldEnum
+    having?: Care2xSyncScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Care2xSyncCountAggregateInputType | true
+    _avg?: Care2xSyncAvgAggregateInputType
+    _sum?: Care2xSyncSumAggregateInputType
+    _min?: Care2xSyncMinAggregateInputType
+    _max?: Care2xSyncMaxAggregateInputType
+  }
+
+  export type Care2xSyncGroupByOutputType = {
+    id: string
+    facilityId: string
+    apiKeyId: string
+    batchRef: string
+    entriesCount: number
+    totalAmount: Decimal
+    periodStart: Date
+    periodEnd: Date
+    receivedAt: Date
+    _count: Care2xSyncCountAggregateOutputType | null
+    _avg: Care2xSyncAvgAggregateOutputType | null
+    _sum: Care2xSyncSumAggregateOutputType | null
+    _min: Care2xSyncMinAggregateOutputType | null
+    _max: Care2xSyncMaxAggregateOutputType | null
+  }
+
+  type GetCare2xSyncGroupByPayload<T extends Care2xSyncGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<Care2xSyncGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Care2xSyncGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Care2xSyncGroupByOutputType[P]>
+            : GetScalarType<T[P], Care2xSyncGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type Care2xSyncSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    facilityId?: boolean
+    apiKeyId?: boolean
+    batchRef?: boolean
+    entriesCount?: boolean
+    totalAmount?: boolean
+    periodStart?: boolean
+    periodEnd?: boolean
+    receivedAt?: boolean
+    facility?: boolean | FacilityDefaultArgs<ExtArgs>
+    apiKey?: boolean | FacilityApiKeyDefaultArgs<ExtArgs>
+    entries?: boolean | Care2xSync$entriesArgs<ExtArgs>
+    _count?: boolean | Care2xSyncCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["care2xSync"]>
+
+  export type Care2xSyncSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    facilityId?: boolean
+    apiKeyId?: boolean
+    batchRef?: boolean
+    entriesCount?: boolean
+    totalAmount?: boolean
+    periodStart?: boolean
+    periodEnd?: boolean
+    receivedAt?: boolean
+    facility?: boolean | FacilityDefaultArgs<ExtArgs>
+    apiKey?: boolean | FacilityApiKeyDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["care2xSync"]>
+
+  export type Care2xSyncSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    facilityId?: boolean
+    apiKeyId?: boolean
+    batchRef?: boolean
+    entriesCount?: boolean
+    totalAmount?: boolean
+    periodStart?: boolean
+    periodEnd?: boolean
+    receivedAt?: boolean
+    facility?: boolean | FacilityDefaultArgs<ExtArgs>
+    apiKey?: boolean | FacilityApiKeyDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["care2xSync"]>
+
+  export type Care2xSyncSelectScalar = {
+    id?: boolean
+    facilityId?: boolean
+    apiKeyId?: boolean
+    batchRef?: boolean
+    entriesCount?: boolean
+    totalAmount?: boolean
+    periodStart?: boolean
+    periodEnd?: boolean
+    receivedAt?: boolean
+  }
+
+  export type Care2xSyncOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "facilityId" | "apiKeyId" | "batchRef" | "entriesCount" | "totalAmount" | "periodStart" | "periodEnd" | "receivedAt", ExtArgs["result"]["care2xSync"]>
+  export type Care2xSyncInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    facility?: boolean | FacilityDefaultArgs<ExtArgs>
+    apiKey?: boolean | FacilityApiKeyDefaultArgs<ExtArgs>
+    entries?: boolean | Care2xSync$entriesArgs<ExtArgs>
+    _count?: boolean | Care2xSyncCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type Care2xSyncIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    facility?: boolean | FacilityDefaultArgs<ExtArgs>
+    apiKey?: boolean | FacilityApiKeyDefaultArgs<ExtArgs>
+  }
+  export type Care2xSyncIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    facility?: boolean | FacilityDefaultArgs<ExtArgs>
+    apiKey?: boolean | FacilityApiKeyDefaultArgs<ExtArgs>
+  }
+
+  export type $Care2xSyncPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Care2xSync"
+    objects: {
+      facility: Prisma.$FacilityPayload<ExtArgs>
+      apiKey: Prisma.$FacilityApiKeyPayload<ExtArgs>
+      entries: Prisma.$Care2xSyncEntryPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      facilityId: string
+      apiKeyId: string
+      batchRef: string
+      entriesCount: number
+      totalAmount: Prisma.Decimal
+      periodStart: Date
+      periodEnd: Date
+      receivedAt: Date
+    }, ExtArgs["result"]["care2xSync"]>
+    composites: {}
+  }
+
+  type Care2xSyncGetPayload<S extends boolean | null | undefined | Care2xSyncDefaultArgs> = $Result.GetResult<Prisma.$Care2xSyncPayload, S>
+
+  type Care2xSyncCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<Care2xSyncFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: Care2xSyncCountAggregateInputType | true
+    }
+
+  export interface Care2xSyncDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Care2xSync'], meta: { name: 'Care2xSync' } }
+    /**
+     * Find zero or one Care2xSync that matches the filter.
+     * @param {Care2xSyncFindUniqueArgs} args - Arguments to find a Care2xSync
+     * @example
+     * // Get one Care2xSync
+     * const care2xSync = await prisma.care2xSync.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends Care2xSyncFindUniqueArgs>(args: SelectSubset<T, Care2xSyncFindUniqueArgs<ExtArgs>>): Prisma__Care2xSyncClient<$Result.GetResult<Prisma.$Care2xSyncPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Care2xSync that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {Care2xSyncFindUniqueOrThrowArgs} args - Arguments to find a Care2xSync
+     * @example
+     * // Get one Care2xSync
+     * const care2xSync = await prisma.care2xSync.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends Care2xSyncFindUniqueOrThrowArgs>(args: SelectSubset<T, Care2xSyncFindUniqueOrThrowArgs<ExtArgs>>): Prisma__Care2xSyncClient<$Result.GetResult<Prisma.$Care2xSyncPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Care2xSync that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Care2xSyncFindFirstArgs} args - Arguments to find a Care2xSync
+     * @example
+     * // Get one Care2xSync
+     * const care2xSync = await prisma.care2xSync.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends Care2xSyncFindFirstArgs>(args?: SelectSubset<T, Care2xSyncFindFirstArgs<ExtArgs>>): Prisma__Care2xSyncClient<$Result.GetResult<Prisma.$Care2xSyncPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Care2xSync that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Care2xSyncFindFirstOrThrowArgs} args - Arguments to find a Care2xSync
+     * @example
+     * // Get one Care2xSync
+     * const care2xSync = await prisma.care2xSync.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends Care2xSyncFindFirstOrThrowArgs>(args?: SelectSubset<T, Care2xSyncFindFirstOrThrowArgs<ExtArgs>>): Prisma__Care2xSyncClient<$Result.GetResult<Prisma.$Care2xSyncPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Care2xSyncs that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Care2xSyncFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Care2xSyncs
+     * const care2xSyncs = await prisma.care2xSync.findMany()
+     * 
+     * // Get first 10 Care2xSyncs
+     * const care2xSyncs = await prisma.care2xSync.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const care2xSyncWithIdOnly = await prisma.care2xSync.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends Care2xSyncFindManyArgs>(args?: SelectSubset<T, Care2xSyncFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Care2xSyncPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Care2xSync.
+     * @param {Care2xSyncCreateArgs} args - Arguments to create a Care2xSync.
+     * @example
+     * // Create one Care2xSync
+     * const Care2xSync = await prisma.care2xSync.create({
+     *   data: {
+     *     // ... data to create a Care2xSync
+     *   }
+     * })
+     * 
+     */
+    create<T extends Care2xSyncCreateArgs>(args: SelectSubset<T, Care2xSyncCreateArgs<ExtArgs>>): Prisma__Care2xSyncClient<$Result.GetResult<Prisma.$Care2xSyncPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Care2xSyncs.
+     * @param {Care2xSyncCreateManyArgs} args - Arguments to create many Care2xSyncs.
+     * @example
+     * // Create many Care2xSyncs
+     * const care2xSync = await prisma.care2xSync.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends Care2xSyncCreateManyArgs>(args?: SelectSubset<T, Care2xSyncCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Care2xSyncs and returns the data saved in the database.
+     * @param {Care2xSyncCreateManyAndReturnArgs} args - Arguments to create many Care2xSyncs.
+     * @example
+     * // Create many Care2xSyncs
+     * const care2xSync = await prisma.care2xSync.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Care2xSyncs and only return the `id`
+     * const care2xSyncWithIdOnly = await prisma.care2xSync.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends Care2xSyncCreateManyAndReturnArgs>(args?: SelectSubset<T, Care2xSyncCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Care2xSyncPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Care2xSync.
+     * @param {Care2xSyncDeleteArgs} args - Arguments to delete one Care2xSync.
+     * @example
+     * // Delete one Care2xSync
+     * const Care2xSync = await prisma.care2xSync.delete({
+     *   where: {
+     *     // ... filter to delete one Care2xSync
+     *   }
+     * })
+     * 
+     */
+    delete<T extends Care2xSyncDeleteArgs>(args: SelectSubset<T, Care2xSyncDeleteArgs<ExtArgs>>): Prisma__Care2xSyncClient<$Result.GetResult<Prisma.$Care2xSyncPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Care2xSync.
+     * @param {Care2xSyncUpdateArgs} args - Arguments to update one Care2xSync.
+     * @example
+     * // Update one Care2xSync
+     * const care2xSync = await prisma.care2xSync.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends Care2xSyncUpdateArgs>(args: SelectSubset<T, Care2xSyncUpdateArgs<ExtArgs>>): Prisma__Care2xSyncClient<$Result.GetResult<Prisma.$Care2xSyncPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Care2xSyncs.
+     * @param {Care2xSyncDeleteManyArgs} args - Arguments to filter Care2xSyncs to delete.
+     * @example
+     * // Delete a few Care2xSyncs
+     * const { count } = await prisma.care2xSync.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends Care2xSyncDeleteManyArgs>(args?: SelectSubset<T, Care2xSyncDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Care2xSyncs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Care2xSyncUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Care2xSyncs
+     * const care2xSync = await prisma.care2xSync.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends Care2xSyncUpdateManyArgs>(args: SelectSubset<T, Care2xSyncUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Care2xSyncs and returns the data updated in the database.
+     * @param {Care2xSyncUpdateManyAndReturnArgs} args - Arguments to update many Care2xSyncs.
+     * @example
+     * // Update many Care2xSyncs
+     * const care2xSync = await prisma.care2xSync.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Care2xSyncs and only return the `id`
+     * const care2xSyncWithIdOnly = await prisma.care2xSync.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends Care2xSyncUpdateManyAndReturnArgs>(args: SelectSubset<T, Care2xSyncUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Care2xSyncPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Care2xSync.
+     * @param {Care2xSyncUpsertArgs} args - Arguments to update or create a Care2xSync.
+     * @example
+     * // Update or create a Care2xSync
+     * const care2xSync = await prisma.care2xSync.upsert({
+     *   create: {
+     *     // ... data to create a Care2xSync
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Care2xSync we want to update
+     *   }
+     * })
+     */
+    upsert<T extends Care2xSyncUpsertArgs>(args: SelectSubset<T, Care2xSyncUpsertArgs<ExtArgs>>): Prisma__Care2xSyncClient<$Result.GetResult<Prisma.$Care2xSyncPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Care2xSyncs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Care2xSyncCountArgs} args - Arguments to filter Care2xSyncs to count.
+     * @example
+     * // Count the number of Care2xSyncs
+     * const count = await prisma.care2xSync.count({
+     *   where: {
+     *     // ... the filter for the Care2xSyncs we want to count
+     *   }
+     * })
+    **/
+    count<T extends Care2xSyncCountArgs>(
+      args?: Subset<T, Care2xSyncCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Care2xSyncCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Care2xSync.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Care2xSyncAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Care2xSyncAggregateArgs>(args: Subset<T, Care2xSyncAggregateArgs>): Prisma.PrismaPromise<GetCare2xSyncAggregateType<T>>
+
+    /**
+     * Group by Care2xSync.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Care2xSyncGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends Care2xSyncGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: Care2xSyncGroupByArgs['orderBy'] }
+        : { orderBy?: Care2xSyncGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, Care2xSyncGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCare2xSyncGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Care2xSync model
+   */
+  readonly fields: Care2xSyncFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Care2xSync.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__Care2xSyncClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    facility<T extends FacilityDefaultArgs<ExtArgs> = {}>(args?: Subset<T, FacilityDefaultArgs<ExtArgs>>): Prisma__FacilityClient<$Result.GetResult<Prisma.$FacilityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    apiKey<T extends FacilityApiKeyDefaultArgs<ExtArgs> = {}>(args?: Subset<T, FacilityApiKeyDefaultArgs<ExtArgs>>): Prisma__FacilityApiKeyClient<$Result.GetResult<Prisma.$FacilityApiKeyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    entries<T extends Care2xSync$entriesArgs<ExtArgs> = {}>(args?: Subset<T, Care2xSync$entriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Care2xSyncEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Care2xSync model
+   */
+  interface Care2xSyncFieldRefs {
+    readonly id: FieldRef<"Care2xSync", 'String'>
+    readonly facilityId: FieldRef<"Care2xSync", 'String'>
+    readonly apiKeyId: FieldRef<"Care2xSync", 'String'>
+    readonly batchRef: FieldRef<"Care2xSync", 'String'>
+    readonly entriesCount: FieldRef<"Care2xSync", 'Int'>
+    readonly totalAmount: FieldRef<"Care2xSync", 'Decimal'>
+    readonly periodStart: FieldRef<"Care2xSync", 'DateTime'>
+    readonly periodEnd: FieldRef<"Care2xSync", 'DateTime'>
+    readonly receivedAt: FieldRef<"Care2xSync", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Care2xSync findUnique
+   */
+  export type Care2xSyncFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Care2xSync
+     */
+    select?: Care2xSyncSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Care2xSync
+     */
+    omit?: Care2xSyncOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Care2xSyncInclude<ExtArgs> | null
+    /**
+     * Filter, which Care2xSync to fetch.
+     */
+    where: Care2xSyncWhereUniqueInput
+  }
+
+  /**
+   * Care2xSync findUniqueOrThrow
+   */
+  export type Care2xSyncFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Care2xSync
+     */
+    select?: Care2xSyncSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Care2xSync
+     */
+    omit?: Care2xSyncOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Care2xSyncInclude<ExtArgs> | null
+    /**
+     * Filter, which Care2xSync to fetch.
+     */
+    where: Care2xSyncWhereUniqueInput
+  }
+
+  /**
+   * Care2xSync findFirst
+   */
+  export type Care2xSyncFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Care2xSync
+     */
+    select?: Care2xSyncSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Care2xSync
+     */
+    omit?: Care2xSyncOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Care2xSyncInclude<ExtArgs> | null
+    /**
+     * Filter, which Care2xSync to fetch.
+     */
+    where?: Care2xSyncWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Care2xSyncs to fetch.
+     */
+    orderBy?: Care2xSyncOrderByWithRelationInput | Care2xSyncOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Care2xSyncs.
+     */
+    cursor?: Care2xSyncWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Care2xSyncs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Care2xSyncs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Care2xSyncs.
+     */
+    distinct?: Care2xSyncScalarFieldEnum | Care2xSyncScalarFieldEnum[]
+  }
+
+  /**
+   * Care2xSync findFirstOrThrow
+   */
+  export type Care2xSyncFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Care2xSync
+     */
+    select?: Care2xSyncSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Care2xSync
+     */
+    omit?: Care2xSyncOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Care2xSyncInclude<ExtArgs> | null
+    /**
+     * Filter, which Care2xSync to fetch.
+     */
+    where?: Care2xSyncWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Care2xSyncs to fetch.
+     */
+    orderBy?: Care2xSyncOrderByWithRelationInput | Care2xSyncOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Care2xSyncs.
+     */
+    cursor?: Care2xSyncWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Care2xSyncs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Care2xSyncs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Care2xSyncs.
+     */
+    distinct?: Care2xSyncScalarFieldEnum | Care2xSyncScalarFieldEnum[]
+  }
+
+  /**
+   * Care2xSync findMany
+   */
+  export type Care2xSyncFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Care2xSync
+     */
+    select?: Care2xSyncSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Care2xSync
+     */
+    omit?: Care2xSyncOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Care2xSyncInclude<ExtArgs> | null
+    /**
+     * Filter, which Care2xSyncs to fetch.
+     */
+    where?: Care2xSyncWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Care2xSyncs to fetch.
+     */
+    orderBy?: Care2xSyncOrderByWithRelationInput | Care2xSyncOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Care2xSyncs.
+     */
+    cursor?: Care2xSyncWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Care2xSyncs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Care2xSyncs.
+     */
+    skip?: number
+    distinct?: Care2xSyncScalarFieldEnum | Care2xSyncScalarFieldEnum[]
+  }
+
+  /**
+   * Care2xSync create
+   */
+  export type Care2xSyncCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Care2xSync
+     */
+    select?: Care2xSyncSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Care2xSync
+     */
+    omit?: Care2xSyncOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Care2xSyncInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Care2xSync.
+     */
+    data: XOR<Care2xSyncCreateInput, Care2xSyncUncheckedCreateInput>
+  }
+
+  /**
+   * Care2xSync createMany
+   */
+  export type Care2xSyncCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Care2xSyncs.
+     */
+    data: Care2xSyncCreateManyInput | Care2xSyncCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Care2xSync createManyAndReturn
+   */
+  export type Care2xSyncCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Care2xSync
+     */
+    select?: Care2xSyncSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Care2xSync
+     */
+    omit?: Care2xSyncOmit<ExtArgs> | null
+    /**
+     * The data used to create many Care2xSyncs.
+     */
+    data: Care2xSyncCreateManyInput | Care2xSyncCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Care2xSyncIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Care2xSync update
+   */
+  export type Care2xSyncUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Care2xSync
+     */
+    select?: Care2xSyncSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Care2xSync
+     */
+    omit?: Care2xSyncOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Care2xSyncInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Care2xSync.
+     */
+    data: XOR<Care2xSyncUpdateInput, Care2xSyncUncheckedUpdateInput>
+    /**
+     * Choose, which Care2xSync to update.
+     */
+    where: Care2xSyncWhereUniqueInput
+  }
+
+  /**
+   * Care2xSync updateMany
+   */
+  export type Care2xSyncUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Care2xSyncs.
+     */
+    data: XOR<Care2xSyncUpdateManyMutationInput, Care2xSyncUncheckedUpdateManyInput>
+    /**
+     * Filter which Care2xSyncs to update
+     */
+    where?: Care2xSyncWhereInput
+    /**
+     * Limit how many Care2xSyncs to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Care2xSync updateManyAndReturn
+   */
+  export type Care2xSyncUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Care2xSync
+     */
+    select?: Care2xSyncSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Care2xSync
+     */
+    omit?: Care2xSyncOmit<ExtArgs> | null
+    /**
+     * The data used to update Care2xSyncs.
+     */
+    data: XOR<Care2xSyncUpdateManyMutationInput, Care2xSyncUncheckedUpdateManyInput>
+    /**
+     * Filter which Care2xSyncs to update
+     */
+    where?: Care2xSyncWhereInput
+    /**
+     * Limit how many Care2xSyncs to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Care2xSyncIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Care2xSync upsert
+   */
+  export type Care2xSyncUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Care2xSync
+     */
+    select?: Care2xSyncSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Care2xSync
+     */
+    omit?: Care2xSyncOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Care2xSyncInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Care2xSync to update in case it exists.
+     */
+    where: Care2xSyncWhereUniqueInput
+    /**
+     * In case the Care2xSync found by the `where` argument doesn't exist, create a new Care2xSync with this data.
+     */
+    create: XOR<Care2xSyncCreateInput, Care2xSyncUncheckedCreateInput>
+    /**
+     * In case the Care2xSync was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<Care2xSyncUpdateInput, Care2xSyncUncheckedUpdateInput>
+  }
+
+  /**
+   * Care2xSync delete
+   */
+  export type Care2xSyncDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Care2xSync
+     */
+    select?: Care2xSyncSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Care2xSync
+     */
+    omit?: Care2xSyncOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Care2xSyncInclude<ExtArgs> | null
+    /**
+     * Filter which Care2xSync to delete.
+     */
+    where: Care2xSyncWhereUniqueInput
+  }
+
+  /**
+   * Care2xSync deleteMany
+   */
+  export type Care2xSyncDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Care2xSyncs to delete
+     */
+    where?: Care2xSyncWhereInput
+    /**
+     * Limit how many Care2xSyncs to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Care2xSync.entries
+   */
+  export type Care2xSync$entriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Care2xSyncEntry
+     */
+    select?: Care2xSyncEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Care2xSyncEntry
+     */
+    omit?: Care2xSyncEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Care2xSyncEntryInclude<ExtArgs> | null
+    where?: Care2xSyncEntryWhereInput
+    orderBy?: Care2xSyncEntryOrderByWithRelationInput | Care2xSyncEntryOrderByWithRelationInput[]
+    cursor?: Care2xSyncEntryWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Care2xSyncEntryScalarFieldEnum | Care2xSyncEntryScalarFieldEnum[]
+  }
+
+  /**
+   * Care2xSync without action
+   */
+  export type Care2xSyncDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Care2xSync
+     */
+    select?: Care2xSyncSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Care2xSync
+     */
+    omit?: Care2xSyncOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Care2xSyncInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Care2xSyncEntry
+   */
+
+  export type AggregateCare2xSyncEntry = {
+    _count: Care2xSyncEntryCountAggregateOutputType | null
+    _avg: Care2xSyncEntryAvgAggregateOutputType | null
+    _sum: Care2xSyncEntrySumAggregateOutputType | null
+    _min: Care2xSyncEntryMinAggregateOutputType | null
+    _max: Care2xSyncEntryMaxAggregateOutputType | null
+  }
+
+  export type Care2xSyncEntryAvgAggregateOutputType = {
+    montant: Decimal | null
+  }
+
+  export type Care2xSyncEntrySumAggregateOutputType = {
+    montant: Decimal | null
+  }
+
+  export type Care2xSyncEntryMinAggregateOutputType = {
+    id: string | null
+    syncId: string | null
+    localId: string | null
+    montant: Decimal | null
+    date: Date | null
+    typePaiement: string | null
+  }
+
+  export type Care2xSyncEntryMaxAggregateOutputType = {
+    id: string | null
+    syncId: string | null
+    localId: string | null
+    montant: Decimal | null
+    date: Date | null
+    typePaiement: string | null
+  }
+
+  export type Care2xSyncEntryCountAggregateOutputType = {
+    id: number
+    syncId: number
+    localId: number
+    montant: number
+    date: number
+    typePaiement: number
+    _all: number
+  }
+
+
+  export type Care2xSyncEntryAvgAggregateInputType = {
+    montant?: true
+  }
+
+  export type Care2xSyncEntrySumAggregateInputType = {
+    montant?: true
+  }
+
+  export type Care2xSyncEntryMinAggregateInputType = {
+    id?: true
+    syncId?: true
+    localId?: true
+    montant?: true
+    date?: true
+    typePaiement?: true
+  }
+
+  export type Care2xSyncEntryMaxAggregateInputType = {
+    id?: true
+    syncId?: true
+    localId?: true
+    montant?: true
+    date?: true
+    typePaiement?: true
+  }
+
+  export type Care2xSyncEntryCountAggregateInputType = {
+    id?: true
+    syncId?: true
+    localId?: true
+    montant?: true
+    date?: true
+    typePaiement?: true
+    _all?: true
+  }
+
+  export type Care2xSyncEntryAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Care2xSyncEntry to aggregate.
+     */
+    where?: Care2xSyncEntryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Care2xSyncEntries to fetch.
+     */
+    orderBy?: Care2xSyncEntryOrderByWithRelationInput | Care2xSyncEntryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: Care2xSyncEntryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Care2xSyncEntries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Care2xSyncEntries.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Care2xSyncEntries
+    **/
+    _count?: true | Care2xSyncEntryCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: Care2xSyncEntryAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: Care2xSyncEntrySumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Care2xSyncEntryMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Care2xSyncEntryMaxAggregateInputType
+  }
+
+  export type GetCare2xSyncEntryAggregateType<T extends Care2xSyncEntryAggregateArgs> = {
+        [P in keyof T & keyof AggregateCare2xSyncEntry]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateCare2xSyncEntry[P]>
+      : GetScalarType<T[P], AggregateCare2xSyncEntry[P]>
+  }
+
+
+
+
+  export type Care2xSyncEntryGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: Care2xSyncEntryWhereInput
+    orderBy?: Care2xSyncEntryOrderByWithAggregationInput | Care2xSyncEntryOrderByWithAggregationInput[]
+    by: Care2xSyncEntryScalarFieldEnum[] | Care2xSyncEntryScalarFieldEnum
+    having?: Care2xSyncEntryScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Care2xSyncEntryCountAggregateInputType | true
+    _avg?: Care2xSyncEntryAvgAggregateInputType
+    _sum?: Care2xSyncEntrySumAggregateInputType
+    _min?: Care2xSyncEntryMinAggregateInputType
+    _max?: Care2xSyncEntryMaxAggregateInputType
+  }
+
+  export type Care2xSyncEntryGroupByOutputType = {
+    id: string
+    syncId: string
+    localId: string
+    montant: Decimal
+    date: Date
+    typePaiement: string
+    _count: Care2xSyncEntryCountAggregateOutputType | null
+    _avg: Care2xSyncEntryAvgAggregateOutputType | null
+    _sum: Care2xSyncEntrySumAggregateOutputType | null
+    _min: Care2xSyncEntryMinAggregateOutputType | null
+    _max: Care2xSyncEntryMaxAggregateOutputType | null
+  }
+
+  type GetCare2xSyncEntryGroupByPayload<T extends Care2xSyncEntryGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<Care2xSyncEntryGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Care2xSyncEntryGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Care2xSyncEntryGroupByOutputType[P]>
+            : GetScalarType<T[P], Care2xSyncEntryGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type Care2xSyncEntrySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    syncId?: boolean
+    localId?: boolean
+    montant?: boolean
+    date?: boolean
+    typePaiement?: boolean
+    sync?: boolean | Care2xSyncDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["care2xSyncEntry"]>
+
+  export type Care2xSyncEntrySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    syncId?: boolean
+    localId?: boolean
+    montant?: boolean
+    date?: boolean
+    typePaiement?: boolean
+    sync?: boolean | Care2xSyncDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["care2xSyncEntry"]>
+
+  export type Care2xSyncEntrySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    syncId?: boolean
+    localId?: boolean
+    montant?: boolean
+    date?: boolean
+    typePaiement?: boolean
+    sync?: boolean | Care2xSyncDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["care2xSyncEntry"]>
+
+  export type Care2xSyncEntrySelectScalar = {
+    id?: boolean
+    syncId?: boolean
+    localId?: boolean
+    montant?: boolean
+    date?: boolean
+    typePaiement?: boolean
+  }
+
+  export type Care2xSyncEntryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "syncId" | "localId" | "montant" | "date" | "typePaiement", ExtArgs["result"]["care2xSyncEntry"]>
+  export type Care2xSyncEntryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    sync?: boolean | Care2xSyncDefaultArgs<ExtArgs>
+  }
+  export type Care2xSyncEntryIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    sync?: boolean | Care2xSyncDefaultArgs<ExtArgs>
+  }
+  export type Care2xSyncEntryIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    sync?: boolean | Care2xSyncDefaultArgs<ExtArgs>
+  }
+
+  export type $Care2xSyncEntryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Care2xSyncEntry"
+    objects: {
+      sync: Prisma.$Care2xSyncPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      syncId: string
+      localId: string
+      montant: Prisma.Decimal
+      date: Date
+      typePaiement: string
+    }, ExtArgs["result"]["care2xSyncEntry"]>
+    composites: {}
+  }
+
+  type Care2xSyncEntryGetPayload<S extends boolean | null | undefined | Care2xSyncEntryDefaultArgs> = $Result.GetResult<Prisma.$Care2xSyncEntryPayload, S>
+
+  type Care2xSyncEntryCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<Care2xSyncEntryFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: Care2xSyncEntryCountAggregateInputType | true
+    }
+
+  export interface Care2xSyncEntryDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Care2xSyncEntry'], meta: { name: 'Care2xSyncEntry' } }
+    /**
+     * Find zero or one Care2xSyncEntry that matches the filter.
+     * @param {Care2xSyncEntryFindUniqueArgs} args - Arguments to find a Care2xSyncEntry
+     * @example
+     * // Get one Care2xSyncEntry
+     * const care2xSyncEntry = await prisma.care2xSyncEntry.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends Care2xSyncEntryFindUniqueArgs>(args: SelectSubset<T, Care2xSyncEntryFindUniqueArgs<ExtArgs>>): Prisma__Care2xSyncEntryClient<$Result.GetResult<Prisma.$Care2xSyncEntryPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Care2xSyncEntry that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {Care2xSyncEntryFindUniqueOrThrowArgs} args - Arguments to find a Care2xSyncEntry
+     * @example
+     * // Get one Care2xSyncEntry
+     * const care2xSyncEntry = await prisma.care2xSyncEntry.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends Care2xSyncEntryFindUniqueOrThrowArgs>(args: SelectSubset<T, Care2xSyncEntryFindUniqueOrThrowArgs<ExtArgs>>): Prisma__Care2xSyncEntryClient<$Result.GetResult<Prisma.$Care2xSyncEntryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Care2xSyncEntry that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Care2xSyncEntryFindFirstArgs} args - Arguments to find a Care2xSyncEntry
+     * @example
+     * // Get one Care2xSyncEntry
+     * const care2xSyncEntry = await prisma.care2xSyncEntry.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends Care2xSyncEntryFindFirstArgs>(args?: SelectSubset<T, Care2xSyncEntryFindFirstArgs<ExtArgs>>): Prisma__Care2xSyncEntryClient<$Result.GetResult<Prisma.$Care2xSyncEntryPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Care2xSyncEntry that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Care2xSyncEntryFindFirstOrThrowArgs} args - Arguments to find a Care2xSyncEntry
+     * @example
+     * // Get one Care2xSyncEntry
+     * const care2xSyncEntry = await prisma.care2xSyncEntry.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends Care2xSyncEntryFindFirstOrThrowArgs>(args?: SelectSubset<T, Care2xSyncEntryFindFirstOrThrowArgs<ExtArgs>>): Prisma__Care2xSyncEntryClient<$Result.GetResult<Prisma.$Care2xSyncEntryPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Care2xSyncEntries that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Care2xSyncEntryFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Care2xSyncEntries
+     * const care2xSyncEntries = await prisma.care2xSyncEntry.findMany()
+     * 
+     * // Get first 10 Care2xSyncEntries
+     * const care2xSyncEntries = await prisma.care2xSyncEntry.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const care2xSyncEntryWithIdOnly = await prisma.care2xSyncEntry.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends Care2xSyncEntryFindManyArgs>(args?: SelectSubset<T, Care2xSyncEntryFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Care2xSyncEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Care2xSyncEntry.
+     * @param {Care2xSyncEntryCreateArgs} args - Arguments to create a Care2xSyncEntry.
+     * @example
+     * // Create one Care2xSyncEntry
+     * const Care2xSyncEntry = await prisma.care2xSyncEntry.create({
+     *   data: {
+     *     // ... data to create a Care2xSyncEntry
+     *   }
+     * })
+     * 
+     */
+    create<T extends Care2xSyncEntryCreateArgs>(args: SelectSubset<T, Care2xSyncEntryCreateArgs<ExtArgs>>): Prisma__Care2xSyncEntryClient<$Result.GetResult<Prisma.$Care2xSyncEntryPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Care2xSyncEntries.
+     * @param {Care2xSyncEntryCreateManyArgs} args - Arguments to create many Care2xSyncEntries.
+     * @example
+     * // Create many Care2xSyncEntries
+     * const care2xSyncEntry = await prisma.care2xSyncEntry.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends Care2xSyncEntryCreateManyArgs>(args?: SelectSubset<T, Care2xSyncEntryCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Care2xSyncEntries and returns the data saved in the database.
+     * @param {Care2xSyncEntryCreateManyAndReturnArgs} args - Arguments to create many Care2xSyncEntries.
+     * @example
+     * // Create many Care2xSyncEntries
+     * const care2xSyncEntry = await prisma.care2xSyncEntry.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Care2xSyncEntries and only return the `id`
+     * const care2xSyncEntryWithIdOnly = await prisma.care2xSyncEntry.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends Care2xSyncEntryCreateManyAndReturnArgs>(args?: SelectSubset<T, Care2xSyncEntryCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Care2xSyncEntryPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Care2xSyncEntry.
+     * @param {Care2xSyncEntryDeleteArgs} args - Arguments to delete one Care2xSyncEntry.
+     * @example
+     * // Delete one Care2xSyncEntry
+     * const Care2xSyncEntry = await prisma.care2xSyncEntry.delete({
+     *   where: {
+     *     // ... filter to delete one Care2xSyncEntry
+     *   }
+     * })
+     * 
+     */
+    delete<T extends Care2xSyncEntryDeleteArgs>(args: SelectSubset<T, Care2xSyncEntryDeleteArgs<ExtArgs>>): Prisma__Care2xSyncEntryClient<$Result.GetResult<Prisma.$Care2xSyncEntryPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Care2xSyncEntry.
+     * @param {Care2xSyncEntryUpdateArgs} args - Arguments to update one Care2xSyncEntry.
+     * @example
+     * // Update one Care2xSyncEntry
+     * const care2xSyncEntry = await prisma.care2xSyncEntry.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends Care2xSyncEntryUpdateArgs>(args: SelectSubset<T, Care2xSyncEntryUpdateArgs<ExtArgs>>): Prisma__Care2xSyncEntryClient<$Result.GetResult<Prisma.$Care2xSyncEntryPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Care2xSyncEntries.
+     * @param {Care2xSyncEntryDeleteManyArgs} args - Arguments to filter Care2xSyncEntries to delete.
+     * @example
+     * // Delete a few Care2xSyncEntries
+     * const { count } = await prisma.care2xSyncEntry.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends Care2xSyncEntryDeleteManyArgs>(args?: SelectSubset<T, Care2xSyncEntryDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Care2xSyncEntries.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Care2xSyncEntryUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Care2xSyncEntries
+     * const care2xSyncEntry = await prisma.care2xSyncEntry.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends Care2xSyncEntryUpdateManyArgs>(args: SelectSubset<T, Care2xSyncEntryUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Care2xSyncEntries and returns the data updated in the database.
+     * @param {Care2xSyncEntryUpdateManyAndReturnArgs} args - Arguments to update many Care2xSyncEntries.
+     * @example
+     * // Update many Care2xSyncEntries
+     * const care2xSyncEntry = await prisma.care2xSyncEntry.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Care2xSyncEntries and only return the `id`
+     * const care2xSyncEntryWithIdOnly = await prisma.care2xSyncEntry.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends Care2xSyncEntryUpdateManyAndReturnArgs>(args: SelectSubset<T, Care2xSyncEntryUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Care2xSyncEntryPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Care2xSyncEntry.
+     * @param {Care2xSyncEntryUpsertArgs} args - Arguments to update or create a Care2xSyncEntry.
+     * @example
+     * // Update or create a Care2xSyncEntry
+     * const care2xSyncEntry = await prisma.care2xSyncEntry.upsert({
+     *   create: {
+     *     // ... data to create a Care2xSyncEntry
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Care2xSyncEntry we want to update
+     *   }
+     * })
+     */
+    upsert<T extends Care2xSyncEntryUpsertArgs>(args: SelectSubset<T, Care2xSyncEntryUpsertArgs<ExtArgs>>): Prisma__Care2xSyncEntryClient<$Result.GetResult<Prisma.$Care2xSyncEntryPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Care2xSyncEntries.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Care2xSyncEntryCountArgs} args - Arguments to filter Care2xSyncEntries to count.
+     * @example
+     * // Count the number of Care2xSyncEntries
+     * const count = await prisma.care2xSyncEntry.count({
+     *   where: {
+     *     // ... the filter for the Care2xSyncEntries we want to count
+     *   }
+     * })
+    **/
+    count<T extends Care2xSyncEntryCountArgs>(
+      args?: Subset<T, Care2xSyncEntryCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Care2xSyncEntryCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Care2xSyncEntry.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Care2xSyncEntryAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Care2xSyncEntryAggregateArgs>(args: Subset<T, Care2xSyncEntryAggregateArgs>): Prisma.PrismaPromise<GetCare2xSyncEntryAggregateType<T>>
+
+    /**
+     * Group by Care2xSyncEntry.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Care2xSyncEntryGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends Care2xSyncEntryGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: Care2xSyncEntryGroupByArgs['orderBy'] }
+        : { orderBy?: Care2xSyncEntryGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, Care2xSyncEntryGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCare2xSyncEntryGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Care2xSyncEntry model
+   */
+  readonly fields: Care2xSyncEntryFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Care2xSyncEntry.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__Care2xSyncEntryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    sync<T extends Care2xSyncDefaultArgs<ExtArgs> = {}>(args?: Subset<T, Care2xSyncDefaultArgs<ExtArgs>>): Prisma__Care2xSyncClient<$Result.GetResult<Prisma.$Care2xSyncPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Care2xSyncEntry model
+   */
+  interface Care2xSyncEntryFieldRefs {
+    readonly id: FieldRef<"Care2xSyncEntry", 'String'>
+    readonly syncId: FieldRef<"Care2xSyncEntry", 'String'>
+    readonly localId: FieldRef<"Care2xSyncEntry", 'String'>
+    readonly montant: FieldRef<"Care2xSyncEntry", 'Decimal'>
+    readonly date: FieldRef<"Care2xSyncEntry", 'DateTime'>
+    readonly typePaiement: FieldRef<"Care2xSyncEntry", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Care2xSyncEntry findUnique
+   */
+  export type Care2xSyncEntryFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Care2xSyncEntry
+     */
+    select?: Care2xSyncEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Care2xSyncEntry
+     */
+    omit?: Care2xSyncEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Care2xSyncEntryInclude<ExtArgs> | null
+    /**
+     * Filter, which Care2xSyncEntry to fetch.
+     */
+    where: Care2xSyncEntryWhereUniqueInput
+  }
+
+  /**
+   * Care2xSyncEntry findUniqueOrThrow
+   */
+  export type Care2xSyncEntryFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Care2xSyncEntry
+     */
+    select?: Care2xSyncEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Care2xSyncEntry
+     */
+    omit?: Care2xSyncEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Care2xSyncEntryInclude<ExtArgs> | null
+    /**
+     * Filter, which Care2xSyncEntry to fetch.
+     */
+    where: Care2xSyncEntryWhereUniqueInput
+  }
+
+  /**
+   * Care2xSyncEntry findFirst
+   */
+  export type Care2xSyncEntryFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Care2xSyncEntry
+     */
+    select?: Care2xSyncEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Care2xSyncEntry
+     */
+    omit?: Care2xSyncEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Care2xSyncEntryInclude<ExtArgs> | null
+    /**
+     * Filter, which Care2xSyncEntry to fetch.
+     */
+    where?: Care2xSyncEntryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Care2xSyncEntries to fetch.
+     */
+    orderBy?: Care2xSyncEntryOrderByWithRelationInput | Care2xSyncEntryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Care2xSyncEntries.
+     */
+    cursor?: Care2xSyncEntryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Care2xSyncEntries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Care2xSyncEntries.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Care2xSyncEntries.
+     */
+    distinct?: Care2xSyncEntryScalarFieldEnum | Care2xSyncEntryScalarFieldEnum[]
+  }
+
+  /**
+   * Care2xSyncEntry findFirstOrThrow
+   */
+  export type Care2xSyncEntryFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Care2xSyncEntry
+     */
+    select?: Care2xSyncEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Care2xSyncEntry
+     */
+    omit?: Care2xSyncEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Care2xSyncEntryInclude<ExtArgs> | null
+    /**
+     * Filter, which Care2xSyncEntry to fetch.
+     */
+    where?: Care2xSyncEntryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Care2xSyncEntries to fetch.
+     */
+    orderBy?: Care2xSyncEntryOrderByWithRelationInput | Care2xSyncEntryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Care2xSyncEntries.
+     */
+    cursor?: Care2xSyncEntryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Care2xSyncEntries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Care2xSyncEntries.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Care2xSyncEntries.
+     */
+    distinct?: Care2xSyncEntryScalarFieldEnum | Care2xSyncEntryScalarFieldEnum[]
+  }
+
+  /**
+   * Care2xSyncEntry findMany
+   */
+  export type Care2xSyncEntryFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Care2xSyncEntry
+     */
+    select?: Care2xSyncEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Care2xSyncEntry
+     */
+    omit?: Care2xSyncEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Care2xSyncEntryInclude<ExtArgs> | null
+    /**
+     * Filter, which Care2xSyncEntries to fetch.
+     */
+    where?: Care2xSyncEntryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Care2xSyncEntries to fetch.
+     */
+    orderBy?: Care2xSyncEntryOrderByWithRelationInput | Care2xSyncEntryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Care2xSyncEntries.
+     */
+    cursor?: Care2xSyncEntryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Care2xSyncEntries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Care2xSyncEntries.
+     */
+    skip?: number
+    distinct?: Care2xSyncEntryScalarFieldEnum | Care2xSyncEntryScalarFieldEnum[]
+  }
+
+  /**
+   * Care2xSyncEntry create
+   */
+  export type Care2xSyncEntryCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Care2xSyncEntry
+     */
+    select?: Care2xSyncEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Care2xSyncEntry
+     */
+    omit?: Care2xSyncEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Care2xSyncEntryInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Care2xSyncEntry.
+     */
+    data: XOR<Care2xSyncEntryCreateInput, Care2xSyncEntryUncheckedCreateInput>
+  }
+
+  /**
+   * Care2xSyncEntry createMany
+   */
+  export type Care2xSyncEntryCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Care2xSyncEntries.
+     */
+    data: Care2xSyncEntryCreateManyInput | Care2xSyncEntryCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Care2xSyncEntry createManyAndReturn
+   */
+  export type Care2xSyncEntryCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Care2xSyncEntry
+     */
+    select?: Care2xSyncEntrySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Care2xSyncEntry
+     */
+    omit?: Care2xSyncEntryOmit<ExtArgs> | null
+    /**
+     * The data used to create many Care2xSyncEntries.
+     */
+    data: Care2xSyncEntryCreateManyInput | Care2xSyncEntryCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Care2xSyncEntryIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Care2xSyncEntry update
+   */
+  export type Care2xSyncEntryUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Care2xSyncEntry
+     */
+    select?: Care2xSyncEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Care2xSyncEntry
+     */
+    omit?: Care2xSyncEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Care2xSyncEntryInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Care2xSyncEntry.
+     */
+    data: XOR<Care2xSyncEntryUpdateInput, Care2xSyncEntryUncheckedUpdateInput>
+    /**
+     * Choose, which Care2xSyncEntry to update.
+     */
+    where: Care2xSyncEntryWhereUniqueInput
+  }
+
+  /**
+   * Care2xSyncEntry updateMany
+   */
+  export type Care2xSyncEntryUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Care2xSyncEntries.
+     */
+    data: XOR<Care2xSyncEntryUpdateManyMutationInput, Care2xSyncEntryUncheckedUpdateManyInput>
+    /**
+     * Filter which Care2xSyncEntries to update
+     */
+    where?: Care2xSyncEntryWhereInput
+    /**
+     * Limit how many Care2xSyncEntries to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Care2xSyncEntry updateManyAndReturn
+   */
+  export type Care2xSyncEntryUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Care2xSyncEntry
+     */
+    select?: Care2xSyncEntrySelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Care2xSyncEntry
+     */
+    omit?: Care2xSyncEntryOmit<ExtArgs> | null
+    /**
+     * The data used to update Care2xSyncEntries.
+     */
+    data: XOR<Care2xSyncEntryUpdateManyMutationInput, Care2xSyncEntryUncheckedUpdateManyInput>
+    /**
+     * Filter which Care2xSyncEntries to update
+     */
+    where?: Care2xSyncEntryWhereInput
+    /**
+     * Limit how many Care2xSyncEntries to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Care2xSyncEntryIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Care2xSyncEntry upsert
+   */
+  export type Care2xSyncEntryUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Care2xSyncEntry
+     */
+    select?: Care2xSyncEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Care2xSyncEntry
+     */
+    omit?: Care2xSyncEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Care2xSyncEntryInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Care2xSyncEntry to update in case it exists.
+     */
+    where: Care2xSyncEntryWhereUniqueInput
+    /**
+     * In case the Care2xSyncEntry found by the `where` argument doesn't exist, create a new Care2xSyncEntry with this data.
+     */
+    create: XOR<Care2xSyncEntryCreateInput, Care2xSyncEntryUncheckedCreateInput>
+    /**
+     * In case the Care2xSyncEntry was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<Care2xSyncEntryUpdateInput, Care2xSyncEntryUncheckedUpdateInput>
+  }
+
+  /**
+   * Care2xSyncEntry delete
+   */
+  export type Care2xSyncEntryDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Care2xSyncEntry
+     */
+    select?: Care2xSyncEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Care2xSyncEntry
+     */
+    omit?: Care2xSyncEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Care2xSyncEntryInclude<ExtArgs> | null
+    /**
+     * Filter which Care2xSyncEntry to delete.
+     */
+    where: Care2xSyncEntryWhereUniqueInput
+  }
+
+  /**
+   * Care2xSyncEntry deleteMany
+   */
+  export type Care2xSyncEntryDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Care2xSyncEntries to delete
+     */
+    where?: Care2xSyncEntryWhereInput
+    /**
+     * Limit how many Care2xSyncEntries to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Care2xSyncEntry without action
+   */
+  export type Care2xSyncEntryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Care2xSyncEntry
+     */
+    select?: Care2xSyncEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Care2xSyncEntry
+     */
+    omit?: Care2xSyncEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Care2xSyncEntryInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Care2xRecouvrementSync
+   */
+
+  export type AggregateCare2xRecouvrementSync = {
+    _count: Care2xRecouvrementSyncCountAggregateOutputType | null
+    _avg: Care2xRecouvrementSyncAvgAggregateOutputType | null
+    _sum: Care2xRecouvrementSyncSumAggregateOutputType | null
+    _min: Care2xRecouvrementSyncMinAggregateOutputType | null
+    _max: Care2xRecouvrementSyncMaxAggregateOutputType | null
+  }
+
+  export type Care2xRecouvrementSyncAvgAggregateOutputType = {
+    totalFacture: Decimal | null
+    totalRecouvre: Decimal | null
+  }
+
+  export type Care2xRecouvrementSyncSumAggregateOutputType = {
+    totalFacture: Decimal | null
+    totalRecouvre: Decimal | null
+  }
+
+  export type Care2xRecouvrementSyncMinAggregateOutputType = {
+    id: string | null
+    facilityId: string | null
+    apiKeyId: string | null
+    batchRef: string | null
+    totalFacture: Decimal | null
+    totalRecouvre: Decimal | null
+    receivedAt: Date | null
+  }
+
+  export type Care2xRecouvrementSyncMaxAggregateOutputType = {
+    id: string | null
+    facilityId: string | null
+    apiKeyId: string | null
+    batchRef: string | null
+    totalFacture: Decimal | null
+    totalRecouvre: Decimal | null
+    receivedAt: Date | null
+  }
+
+  export type Care2xRecouvrementSyncCountAggregateOutputType = {
+    id: number
+    facilityId: number
+    apiKeyId: number
+    batchRef: number
+    totalFacture: number
+    totalRecouvre: number
+    rapport: number
+    receivedAt: number
+    _all: number
+  }
+
+
+  export type Care2xRecouvrementSyncAvgAggregateInputType = {
+    totalFacture?: true
+    totalRecouvre?: true
+  }
+
+  export type Care2xRecouvrementSyncSumAggregateInputType = {
+    totalFacture?: true
+    totalRecouvre?: true
+  }
+
+  export type Care2xRecouvrementSyncMinAggregateInputType = {
+    id?: true
+    facilityId?: true
+    apiKeyId?: true
+    batchRef?: true
+    totalFacture?: true
+    totalRecouvre?: true
+    receivedAt?: true
+  }
+
+  export type Care2xRecouvrementSyncMaxAggregateInputType = {
+    id?: true
+    facilityId?: true
+    apiKeyId?: true
+    batchRef?: true
+    totalFacture?: true
+    totalRecouvre?: true
+    receivedAt?: true
+  }
+
+  export type Care2xRecouvrementSyncCountAggregateInputType = {
+    id?: true
+    facilityId?: true
+    apiKeyId?: true
+    batchRef?: true
+    totalFacture?: true
+    totalRecouvre?: true
+    rapport?: true
+    receivedAt?: true
+    _all?: true
+  }
+
+  export type Care2xRecouvrementSyncAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Care2xRecouvrementSync to aggregate.
+     */
+    where?: Care2xRecouvrementSyncWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Care2xRecouvrementSyncs to fetch.
+     */
+    orderBy?: Care2xRecouvrementSyncOrderByWithRelationInput | Care2xRecouvrementSyncOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: Care2xRecouvrementSyncWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Care2xRecouvrementSyncs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Care2xRecouvrementSyncs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Care2xRecouvrementSyncs
+    **/
+    _count?: true | Care2xRecouvrementSyncCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: Care2xRecouvrementSyncAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: Care2xRecouvrementSyncSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Care2xRecouvrementSyncMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Care2xRecouvrementSyncMaxAggregateInputType
+  }
+
+  export type GetCare2xRecouvrementSyncAggregateType<T extends Care2xRecouvrementSyncAggregateArgs> = {
+        [P in keyof T & keyof AggregateCare2xRecouvrementSync]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateCare2xRecouvrementSync[P]>
+      : GetScalarType<T[P], AggregateCare2xRecouvrementSync[P]>
+  }
+
+
+
+
+  export type Care2xRecouvrementSyncGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: Care2xRecouvrementSyncWhereInput
+    orderBy?: Care2xRecouvrementSyncOrderByWithAggregationInput | Care2xRecouvrementSyncOrderByWithAggregationInput[]
+    by: Care2xRecouvrementSyncScalarFieldEnum[] | Care2xRecouvrementSyncScalarFieldEnum
+    having?: Care2xRecouvrementSyncScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Care2xRecouvrementSyncCountAggregateInputType | true
+    _avg?: Care2xRecouvrementSyncAvgAggregateInputType
+    _sum?: Care2xRecouvrementSyncSumAggregateInputType
+    _min?: Care2xRecouvrementSyncMinAggregateInputType
+    _max?: Care2xRecouvrementSyncMaxAggregateInputType
+  }
+
+  export type Care2xRecouvrementSyncGroupByOutputType = {
+    id: string
+    facilityId: string
+    apiKeyId: string
+    batchRef: string
+    totalFacture: Decimal
+    totalRecouvre: Decimal
+    rapport: JsonValue
+    receivedAt: Date
+    _count: Care2xRecouvrementSyncCountAggregateOutputType | null
+    _avg: Care2xRecouvrementSyncAvgAggregateOutputType | null
+    _sum: Care2xRecouvrementSyncSumAggregateOutputType | null
+    _min: Care2xRecouvrementSyncMinAggregateOutputType | null
+    _max: Care2xRecouvrementSyncMaxAggregateOutputType | null
+  }
+
+  type GetCare2xRecouvrementSyncGroupByPayload<T extends Care2xRecouvrementSyncGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<Care2xRecouvrementSyncGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Care2xRecouvrementSyncGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Care2xRecouvrementSyncGroupByOutputType[P]>
+            : GetScalarType<T[P], Care2xRecouvrementSyncGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type Care2xRecouvrementSyncSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    facilityId?: boolean
+    apiKeyId?: boolean
+    batchRef?: boolean
+    totalFacture?: boolean
+    totalRecouvre?: boolean
+    rapport?: boolean
+    receivedAt?: boolean
+    facility?: boolean | FacilityDefaultArgs<ExtArgs>
+    apiKey?: boolean | FacilityApiKeyDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["care2xRecouvrementSync"]>
+
+  export type Care2xRecouvrementSyncSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    facilityId?: boolean
+    apiKeyId?: boolean
+    batchRef?: boolean
+    totalFacture?: boolean
+    totalRecouvre?: boolean
+    rapport?: boolean
+    receivedAt?: boolean
+    facility?: boolean | FacilityDefaultArgs<ExtArgs>
+    apiKey?: boolean | FacilityApiKeyDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["care2xRecouvrementSync"]>
+
+  export type Care2xRecouvrementSyncSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    facilityId?: boolean
+    apiKeyId?: boolean
+    batchRef?: boolean
+    totalFacture?: boolean
+    totalRecouvre?: boolean
+    rapport?: boolean
+    receivedAt?: boolean
+    facility?: boolean | FacilityDefaultArgs<ExtArgs>
+    apiKey?: boolean | FacilityApiKeyDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["care2xRecouvrementSync"]>
+
+  export type Care2xRecouvrementSyncSelectScalar = {
+    id?: boolean
+    facilityId?: boolean
+    apiKeyId?: boolean
+    batchRef?: boolean
+    totalFacture?: boolean
+    totalRecouvre?: boolean
+    rapport?: boolean
+    receivedAt?: boolean
+  }
+
+  export type Care2xRecouvrementSyncOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "facilityId" | "apiKeyId" | "batchRef" | "totalFacture" | "totalRecouvre" | "rapport" | "receivedAt", ExtArgs["result"]["care2xRecouvrementSync"]>
+  export type Care2xRecouvrementSyncInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    facility?: boolean | FacilityDefaultArgs<ExtArgs>
+    apiKey?: boolean | FacilityApiKeyDefaultArgs<ExtArgs>
+  }
+  export type Care2xRecouvrementSyncIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    facility?: boolean | FacilityDefaultArgs<ExtArgs>
+    apiKey?: boolean | FacilityApiKeyDefaultArgs<ExtArgs>
+  }
+  export type Care2xRecouvrementSyncIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    facility?: boolean | FacilityDefaultArgs<ExtArgs>
+    apiKey?: boolean | FacilityApiKeyDefaultArgs<ExtArgs>
+  }
+
+  export type $Care2xRecouvrementSyncPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Care2xRecouvrementSync"
+    objects: {
+      facility: Prisma.$FacilityPayload<ExtArgs>
+      apiKey: Prisma.$FacilityApiKeyPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      facilityId: string
+      apiKeyId: string
+      batchRef: string
+      totalFacture: Prisma.Decimal
+      totalRecouvre: Prisma.Decimal
+      rapport: Prisma.JsonValue
+      receivedAt: Date
+    }, ExtArgs["result"]["care2xRecouvrementSync"]>
+    composites: {}
+  }
+
+  type Care2xRecouvrementSyncGetPayload<S extends boolean | null | undefined | Care2xRecouvrementSyncDefaultArgs> = $Result.GetResult<Prisma.$Care2xRecouvrementSyncPayload, S>
+
+  type Care2xRecouvrementSyncCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<Care2xRecouvrementSyncFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: Care2xRecouvrementSyncCountAggregateInputType | true
+    }
+
+  export interface Care2xRecouvrementSyncDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Care2xRecouvrementSync'], meta: { name: 'Care2xRecouvrementSync' } }
+    /**
+     * Find zero or one Care2xRecouvrementSync that matches the filter.
+     * @param {Care2xRecouvrementSyncFindUniqueArgs} args - Arguments to find a Care2xRecouvrementSync
+     * @example
+     * // Get one Care2xRecouvrementSync
+     * const care2xRecouvrementSync = await prisma.care2xRecouvrementSync.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends Care2xRecouvrementSyncFindUniqueArgs>(args: SelectSubset<T, Care2xRecouvrementSyncFindUniqueArgs<ExtArgs>>): Prisma__Care2xRecouvrementSyncClient<$Result.GetResult<Prisma.$Care2xRecouvrementSyncPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Care2xRecouvrementSync that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {Care2xRecouvrementSyncFindUniqueOrThrowArgs} args - Arguments to find a Care2xRecouvrementSync
+     * @example
+     * // Get one Care2xRecouvrementSync
+     * const care2xRecouvrementSync = await prisma.care2xRecouvrementSync.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends Care2xRecouvrementSyncFindUniqueOrThrowArgs>(args: SelectSubset<T, Care2xRecouvrementSyncFindUniqueOrThrowArgs<ExtArgs>>): Prisma__Care2xRecouvrementSyncClient<$Result.GetResult<Prisma.$Care2xRecouvrementSyncPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Care2xRecouvrementSync that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Care2xRecouvrementSyncFindFirstArgs} args - Arguments to find a Care2xRecouvrementSync
+     * @example
+     * // Get one Care2xRecouvrementSync
+     * const care2xRecouvrementSync = await prisma.care2xRecouvrementSync.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends Care2xRecouvrementSyncFindFirstArgs>(args?: SelectSubset<T, Care2xRecouvrementSyncFindFirstArgs<ExtArgs>>): Prisma__Care2xRecouvrementSyncClient<$Result.GetResult<Prisma.$Care2xRecouvrementSyncPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Care2xRecouvrementSync that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Care2xRecouvrementSyncFindFirstOrThrowArgs} args - Arguments to find a Care2xRecouvrementSync
+     * @example
+     * // Get one Care2xRecouvrementSync
+     * const care2xRecouvrementSync = await prisma.care2xRecouvrementSync.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends Care2xRecouvrementSyncFindFirstOrThrowArgs>(args?: SelectSubset<T, Care2xRecouvrementSyncFindFirstOrThrowArgs<ExtArgs>>): Prisma__Care2xRecouvrementSyncClient<$Result.GetResult<Prisma.$Care2xRecouvrementSyncPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Care2xRecouvrementSyncs that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Care2xRecouvrementSyncFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Care2xRecouvrementSyncs
+     * const care2xRecouvrementSyncs = await prisma.care2xRecouvrementSync.findMany()
+     * 
+     * // Get first 10 Care2xRecouvrementSyncs
+     * const care2xRecouvrementSyncs = await prisma.care2xRecouvrementSync.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const care2xRecouvrementSyncWithIdOnly = await prisma.care2xRecouvrementSync.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends Care2xRecouvrementSyncFindManyArgs>(args?: SelectSubset<T, Care2xRecouvrementSyncFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Care2xRecouvrementSyncPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Care2xRecouvrementSync.
+     * @param {Care2xRecouvrementSyncCreateArgs} args - Arguments to create a Care2xRecouvrementSync.
+     * @example
+     * // Create one Care2xRecouvrementSync
+     * const Care2xRecouvrementSync = await prisma.care2xRecouvrementSync.create({
+     *   data: {
+     *     // ... data to create a Care2xRecouvrementSync
+     *   }
+     * })
+     * 
+     */
+    create<T extends Care2xRecouvrementSyncCreateArgs>(args: SelectSubset<T, Care2xRecouvrementSyncCreateArgs<ExtArgs>>): Prisma__Care2xRecouvrementSyncClient<$Result.GetResult<Prisma.$Care2xRecouvrementSyncPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Care2xRecouvrementSyncs.
+     * @param {Care2xRecouvrementSyncCreateManyArgs} args - Arguments to create many Care2xRecouvrementSyncs.
+     * @example
+     * // Create many Care2xRecouvrementSyncs
+     * const care2xRecouvrementSync = await prisma.care2xRecouvrementSync.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends Care2xRecouvrementSyncCreateManyArgs>(args?: SelectSubset<T, Care2xRecouvrementSyncCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Care2xRecouvrementSyncs and returns the data saved in the database.
+     * @param {Care2xRecouvrementSyncCreateManyAndReturnArgs} args - Arguments to create many Care2xRecouvrementSyncs.
+     * @example
+     * // Create many Care2xRecouvrementSyncs
+     * const care2xRecouvrementSync = await prisma.care2xRecouvrementSync.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Care2xRecouvrementSyncs and only return the `id`
+     * const care2xRecouvrementSyncWithIdOnly = await prisma.care2xRecouvrementSync.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends Care2xRecouvrementSyncCreateManyAndReturnArgs>(args?: SelectSubset<T, Care2xRecouvrementSyncCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Care2xRecouvrementSyncPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Care2xRecouvrementSync.
+     * @param {Care2xRecouvrementSyncDeleteArgs} args - Arguments to delete one Care2xRecouvrementSync.
+     * @example
+     * // Delete one Care2xRecouvrementSync
+     * const Care2xRecouvrementSync = await prisma.care2xRecouvrementSync.delete({
+     *   where: {
+     *     // ... filter to delete one Care2xRecouvrementSync
+     *   }
+     * })
+     * 
+     */
+    delete<T extends Care2xRecouvrementSyncDeleteArgs>(args: SelectSubset<T, Care2xRecouvrementSyncDeleteArgs<ExtArgs>>): Prisma__Care2xRecouvrementSyncClient<$Result.GetResult<Prisma.$Care2xRecouvrementSyncPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Care2xRecouvrementSync.
+     * @param {Care2xRecouvrementSyncUpdateArgs} args - Arguments to update one Care2xRecouvrementSync.
+     * @example
+     * // Update one Care2xRecouvrementSync
+     * const care2xRecouvrementSync = await prisma.care2xRecouvrementSync.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends Care2xRecouvrementSyncUpdateArgs>(args: SelectSubset<T, Care2xRecouvrementSyncUpdateArgs<ExtArgs>>): Prisma__Care2xRecouvrementSyncClient<$Result.GetResult<Prisma.$Care2xRecouvrementSyncPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Care2xRecouvrementSyncs.
+     * @param {Care2xRecouvrementSyncDeleteManyArgs} args - Arguments to filter Care2xRecouvrementSyncs to delete.
+     * @example
+     * // Delete a few Care2xRecouvrementSyncs
+     * const { count } = await prisma.care2xRecouvrementSync.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends Care2xRecouvrementSyncDeleteManyArgs>(args?: SelectSubset<T, Care2xRecouvrementSyncDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Care2xRecouvrementSyncs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Care2xRecouvrementSyncUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Care2xRecouvrementSyncs
+     * const care2xRecouvrementSync = await prisma.care2xRecouvrementSync.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends Care2xRecouvrementSyncUpdateManyArgs>(args: SelectSubset<T, Care2xRecouvrementSyncUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Care2xRecouvrementSyncs and returns the data updated in the database.
+     * @param {Care2xRecouvrementSyncUpdateManyAndReturnArgs} args - Arguments to update many Care2xRecouvrementSyncs.
+     * @example
+     * // Update many Care2xRecouvrementSyncs
+     * const care2xRecouvrementSync = await prisma.care2xRecouvrementSync.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Care2xRecouvrementSyncs and only return the `id`
+     * const care2xRecouvrementSyncWithIdOnly = await prisma.care2xRecouvrementSync.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends Care2xRecouvrementSyncUpdateManyAndReturnArgs>(args: SelectSubset<T, Care2xRecouvrementSyncUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Care2xRecouvrementSyncPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Care2xRecouvrementSync.
+     * @param {Care2xRecouvrementSyncUpsertArgs} args - Arguments to update or create a Care2xRecouvrementSync.
+     * @example
+     * // Update or create a Care2xRecouvrementSync
+     * const care2xRecouvrementSync = await prisma.care2xRecouvrementSync.upsert({
+     *   create: {
+     *     // ... data to create a Care2xRecouvrementSync
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Care2xRecouvrementSync we want to update
+     *   }
+     * })
+     */
+    upsert<T extends Care2xRecouvrementSyncUpsertArgs>(args: SelectSubset<T, Care2xRecouvrementSyncUpsertArgs<ExtArgs>>): Prisma__Care2xRecouvrementSyncClient<$Result.GetResult<Prisma.$Care2xRecouvrementSyncPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Care2xRecouvrementSyncs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Care2xRecouvrementSyncCountArgs} args - Arguments to filter Care2xRecouvrementSyncs to count.
+     * @example
+     * // Count the number of Care2xRecouvrementSyncs
+     * const count = await prisma.care2xRecouvrementSync.count({
+     *   where: {
+     *     // ... the filter for the Care2xRecouvrementSyncs we want to count
+     *   }
+     * })
+    **/
+    count<T extends Care2xRecouvrementSyncCountArgs>(
+      args?: Subset<T, Care2xRecouvrementSyncCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Care2xRecouvrementSyncCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Care2xRecouvrementSync.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Care2xRecouvrementSyncAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Care2xRecouvrementSyncAggregateArgs>(args: Subset<T, Care2xRecouvrementSyncAggregateArgs>): Prisma.PrismaPromise<GetCare2xRecouvrementSyncAggregateType<T>>
+
+    /**
+     * Group by Care2xRecouvrementSync.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Care2xRecouvrementSyncGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends Care2xRecouvrementSyncGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: Care2xRecouvrementSyncGroupByArgs['orderBy'] }
+        : { orderBy?: Care2xRecouvrementSyncGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, Care2xRecouvrementSyncGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCare2xRecouvrementSyncGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Care2xRecouvrementSync model
+   */
+  readonly fields: Care2xRecouvrementSyncFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Care2xRecouvrementSync.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__Care2xRecouvrementSyncClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    facility<T extends FacilityDefaultArgs<ExtArgs> = {}>(args?: Subset<T, FacilityDefaultArgs<ExtArgs>>): Prisma__FacilityClient<$Result.GetResult<Prisma.$FacilityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    apiKey<T extends FacilityApiKeyDefaultArgs<ExtArgs> = {}>(args?: Subset<T, FacilityApiKeyDefaultArgs<ExtArgs>>): Prisma__FacilityApiKeyClient<$Result.GetResult<Prisma.$FacilityApiKeyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Care2xRecouvrementSync model
+   */
+  interface Care2xRecouvrementSyncFieldRefs {
+    readonly id: FieldRef<"Care2xRecouvrementSync", 'String'>
+    readonly facilityId: FieldRef<"Care2xRecouvrementSync", 'String'>
+    readonly apiKeyId: FieldRef<"Care2xRecouvrementSync", 'String'>
+    readonly batchRef: FieldRef<"Care2xRecouvrementSync", 'String'>
+    readonly totalFacture: FieldRef<"Care2xRecouvrementSync", 'Decimal'>
+    readonly totalRecouvre: FieldRef<"Care2xRecouvrementSync", 'Decimal'>
+    readonly rapport: FieldRef<"Care2xRecouvrementSync", 'Json'>
+    readonly receivedAt: FieldRef<"Care2xRecouvrementSync", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Care2xRecouvrementSync findUnique
+   */
+  export type Care2xRecouvrementSyncFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Care2xRecouvrementSync
+     */
+    select?: Care2xRecouvrementSyncSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Care2xRecouvrementSync
+     */
+    omit?: Care2xRecouvrementSyncOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Care2xRecouvrementSyncInclude<ExtArgs> | null
+    /**
+     * Filter, which Care2xRecouvrementSync to fetch.
+     */
+    where: Care2xRecouvrementSyncWhereUniqueInput
+  }
+
+  /**
+   * Care2xRecouvrementSync findUniqueOrThrow
+   */
+  export type Care2xRecouvrementSyncFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Care2xRecouvrementSync
+     */
+    select?: Care2xRecouvrementSyncSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Care2xRecouvrementSync
+     */
+    omit?: Care2xRecouvrementSyncOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Care2xRecouvrementSyncInclude<ExtArgs> | null
+    /**
+     * Filter, which Care2xRecouvrementSync to fetch.
+     */
+    where: Care2xRecouvrementSyncWhereUniqueInput
+  }
+
+  /**
+   * Care2xRecouvrementSync findFirst
+   */
+  export type Care2xRecouvrementSyncFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Care2xRecouvrementSync
+     */
+    select?: Care2xRecouvrementSyncSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Care2xRecouvrementSync
+     */
+    omit?: Care2xRecouvrementSyncOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Care2xRecouvrementSyncInclude<ExtArgs> | null
+    /**
+     * Filter, which Care2xRecouvrementSync to fetch.
+     */
+    where?: Care2xRecouvrementSyncWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Care2xRecouvrementSyncs to fetch.
+     */
+    orderBy?: Care2xRecouvrementSyncOrderByWithRelationInput | Care2xRecouvrementSyncOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Care2xRecouvrementSyncs.
+     */
+    cursor?: Care2xRecouvrementSyncWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Care2xRecouvrementSyncs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Care2xRecouvrementSyncs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Care2xRecouvrementSyncs.
+     */
+    distinct?: Care2xRecouvrementSyncScalarFieldEnum | Care2xRecouvrementSyncScalarFieldEnum[]
+  }
+
+  /**
+   * Care2xRecouvrementSync findFirstOrThrow
+   */
+  export type Care2xRecouvrementSyncFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Care2xRecouvrementSync
+     */
+    select?: Care2xRecouvrementSyncSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Care2xRecouvrementSync
+     */
+    omit?: Care2xRecouvrementSyncOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Care2xRecouvrementSyncInclude<ExtArgs> | null
+    /**
+     * Filter, which Care2xRecouvrementSync to fetch.
+     */
+    where?: Care2xRecouvrementSyncWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Care2xRecouvrementSyncs to fetch.
+     */
+    orderBy?: Care2xRecouvrementSyncOrderByWithRelationInput | Care2xRecouvrementSyncOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Care2xRecouvrementSyncs.
+     */
+    cursor?: Care2xRecouvrementSyncWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Care2xRecouvrementSyncs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Care2xRecouvrementSyncs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Care2xRecouvrementSyncs.
+     */
+    distinct?: Care2xRecouvrementSyncScalarFieldEnum | Care2xRecouvrementSyncScalarFieldEnum[]
+  }
+
+  /**
+   * Care2xRecouvrementSync findMany
+   */
+  export type Care2xRecouvrementSyncFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Care2xRecouvrementSync
+     */
+    select?: Care2xRecouvrementSyncSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Care2xRecouvrementSync
+     */
+    omit?: Care2xRecouvrementSyncOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Care2xRecouvrementSyncInclude<ExtArgs> | null
+    /**
+     * Filter, which Care2xRecouvrementSyncs to fetch.
+     */
+    where?: Care2xRecouvrementSyncWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Care2xRecouvrementSyncs to fetch.
+     */
+    orderBy?: Care2xRecouvrementSyncOrderByWithRelationInput | Care2xRecouvrementSyncOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Care2xRecouvrementSyncs.
+     */
+    cursor?: Care2xRecouvrementSyncWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Care2xRecouvrementSyncs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Care2xRecouvrementSyncs.
+     */
+    skip?: number
+    distinct?: Care2xRecouvrementSyncScalarFieldEnum | Care2xRecouvrementSyncScalarFieldEnum[]
+  }
+
+  /**
+   * Care2xRecouvrementSync create
+   */
+  export type Care2xRecouvrementSyncCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Care2xRecouvrementSync
+     */
+    select?: Care2xRecouvrementSyncSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Care2xRecouvrementSync
+     */
+    omit?: Care2xRecouvrementSyncOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Care2xRecouvrementSyncInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Care2xRecouvrementSync.
+     */
+    data: XOR<Care2xRecouvrementSyncCreateInput, Care2xRecouvrementSyncUncheckedCreateInput>
+  }
+
+  /**
+   * Care2xRecouvrementSync createMany
+   */
+  export type Care2xRecouvrementSyncCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Care2xRecouvrementSyncs.
+     */
+    data: Care2xRecouvrementSyncCreateManyInput | Care2xRecouvrementSyncCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Care2xRecouvrementSync createManyAndReturn
+   */
+  export type Care2xRecouvrementSyncCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Care2xRecouvrementSync
+     */
+    select?: Care2xRecouvrementSyncSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Care2xRecouvrementSync
+     */
+    omit?: Care2xRecouvrementSyncOmit<ExtArgs> | null
+    /**
+     * The data used to create many Care2xRecouvrementSyncs.
+     */
+    data: Care2xRecouvrementSyncCreateManyInput | Care2xRecouvrementSyncCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Care2xRecouvrementSyncIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Care2xRecouvrementSync update
+   */
+  export type Care2xRecouvrementSyncUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Care2xRecouvrementSync
+     */
+    select?: Care2xRecouvrementSyncSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Care2xRecouvrementSync
+     */
+    omit?: Care2xRecouvrementSyncOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Care2xRecouvrementSyncInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Care2xRecouvrementSync.
+     */
+    data: XOR<Care2xRecouvrementSyncUpdateInput, Care2xRecouvrementSyncUncheckedUpdateInput>
+    /**
+     * Choose, which Care2xRecouvrementSync to update.
+     */
+    where: Care2xRecouvrementSyncWhereUniqueInput
+  }
+
+  /**
+   * Care2xRecouvrementSync updateMany
+   */
+  export type Care2xRecouvrementSyncUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Care2xRecouvrementSyncs.
+     */
+    data: XOR<Care2xRecouvrementSyncUpdateManyMutationInput, Care2xRecouvrementSyncUncheckedUpdateManyInput>
+    /**
+     * Filter which Care2xRecouvrementSyncs to update
+     */
+    where?: Care2xRecouvrementSyncWhereInput
+    /**
+     * Limit how many Care2xRecouvrementSyncs to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Care2xRecouvrementSync updateManyAndReturn
+   */
+  export type Care2xRecouvrementSyncUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Care2xRecouvrementSync
+     */
+    select?: Care2xRecouvrementSyncSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Care2xRecouvrementSync
+     */
+    omit?: Care2xRecouvrementSyncOmit<ExtArgs> | null
+    /**
+     * The data used to update Care2xRecouvrementSyncs.
+     */
+    data: XOR<Care2xRecouvrementSyncUpdateManyMutationInput, Care2xRecouvrementSyncUncheckedUpdateManyInput>
+    /**
+     * Filter which Care2xRecouvrementSyncs to update
+     */
+    where?: Care2xRecouvrementSyncWhereInput
+    /**
+     * Limit how many Care2xRecouvrementSyncs to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Care2xRecouvrementSyncIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Care2xRecouvrementSync upsert
+   */
+  export type Care2xRecouvrementSyncUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Care2xRecouvrementSync
+     */
+    select?: Care2xRecouvrementSyncSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Care2xRecouvrementSync
+     */
+    omit?: Care2xRecouvrementSyncOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Care2xRecouvrementSyncInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Care2xRecouvrementSync to update in case it exists.
+     */
+    where: Care2xRecouvrementSyncWhereUniqueInput
+    /**
+     * In case the Care2xRecouvrementSync found by the `where` argument doesn't exist, create a new Care2xRecouvrementSync with this data.
+     */
+    create: XOR<Care2xRecouvrementSyncCreateInput, Care2xRecouvrementSyncUncheckedCreateInput>
+    /**
+     * In case the Care2xRecouvrementSync was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<Care2xRecouvrementSyncUpdateInput, Care2xRecouvrementSyncUncheckedUpdateInput>
+  }
+
+  /**
+   * Care2xRecouvrementSync delete
+   */
+  export type Care2xRecouvrementSyncDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Care2xRecouvrementSync
+     */
+    select?: Care2xRecouvrementSyncSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Care2xRecouvrementSync
+     */
+    omit?: Care2xRecouvrementSyncOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Care2xRecouvrementSyncInclude<ExtArgs> | null
+    /**
+     * Filter which Care2xRecouvrementSync to delete.
+     */
+    where: Care2xRecouvrementSyncWhereUniqueInput
+  }
+
+  /**
+   * Care2xRecouvrementSync deleteMany
+   */
+  export type Care2xRecouvrementSyncDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Care2xRecouvrementSyncs to delete
+     */
+    where?: Care2xRecouvrementSyncWhereInput
+    /**
+     * Limit how many Care2xRecouvrementSyncs to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Care2xRecouvrementSync without action
+   */
+  export type Care2xRecouvrementSyncDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Care2xRecouvrementSync
+     */
+    select?: Care2xRecouvrementSyncSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Care2xRecouvrementSync
+     */
+    omit?: Care2xRecouvrementSyncOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Care2xRecouvrementSyncInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Care2xVersion
+   */
+
+  export type AggregateCare2xVersion = {
+    _count: Care2xVersionCountAggregateOutputType | null
+    _avg: Care2xVersionAvgAggregateOutputType | null
+    _sum: Care2xVersionSumAggregateOutputType | null
+    _min: Care2xVersionMinAggregateOutputType | null
+    _max: Care2xVersionMaxAggregateOutputType | null
+  }
+
+  export type Care2xVersionAvgAggregateOutputType = {
+    fileSize: number | null
+  }
+
+  export type Care2xVersionSumAggregateOutputType = {
+    fileSize: number | null
+  }
+
+  export type Care2xVersionMinAggregateOutputType = {
+    id: string | null
+    version: string | null
+    releaseNotes: string | null
+    filename: string | null
+    filePath: string | null
+    fileSize: number | null
+    downloadUrl: string | null
+    isActive: boolean | null
+    createdAt: Date | null
+  }
+
+  export type Care2xVersionMaxAggregateOutputType = {
+    id: string | null
+    version: string | null
+    releaseNotes: string | null
+    filename: string | null
+    filePath: string | null
+    fileSize: number | null
+    downloadUrl: string | null
+    isActive: boolean | null
+    createdAt: Date | null
+  }
+
+  export type Care2xVersionCountAggregateOutputType = {
+    id: number
+    version: number
+    releaseNotes: number
+    filename: number
+    filePath: number
+    fileSize: number
+    downloadUrl: number
+    isActive: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type Care2xVersionAvgAggregateInputType = {
+    fileSize?: true
+  }
+
+  export type Care2xVersionSumAggregateInputType = {
+    fileSize?: true
+  }
+
+  export type Care2xVersionMinAggregateInputType = {
+    id?: true
+    version?: true
+    releaseNotes?: true
+    filename?: true
+    filePath?: true
+    fileSize?: true
+    downloadUrl?: true
+    isActive?: true
+    createdAt?: true
+  }
+
+  export type Care2xVersionMaxAggregateInputType = {
+    id?: true
+    version?: true
+    releaseNotes?: true
+    filename?: true
+    filePath?: true
+    fileSize?: true
+    downloadUrl?: true
+    isActive?: true
+    createdAt?: true
+  }
+
+  export type Care2xVersionCountAggregateInputType = {
+    id?: true
+    version?: true
+    releaseNotes?: true
+    filename?: true
+    filePath?: true
+    fileSize?: true
+    downloadUrl?: true
+    isActive?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type Care2xVersionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Care2xVersion to aggregate.
+     */
+    where?: Care2xVersionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Care2xVersions to fetch.
+     */
+    orderBy?: Care2xVersionOrderByWithRelationInput | Care2xVersionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: Care2xVersionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Care2xVersions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Care2xVersions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Care2xVersions
+    **/
+    _count?: true | Care2xVersionCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: Care2xVersionAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: Care2xVersionSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Care2xVersionMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Care2xVersionMaxAggregateInputType
+  }
+
+  export type GetCare2xVersionAggregateType<T extends Care2xVersionAggregateArgs> = {
+        [P in keyof T & keyof AggregateCare2xVersion]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateCare2xVersion[P]>
+      : GetScalarType<T[P], AggregateCare2xVersion[P]>
+  }
+
+
+
+
+  export type Care2xVersionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: Care2xVersionWhereInput
+    orderBy?: Care2xVersionOrderByWithAggregationInput | Care2xVersionOrderByWithAggregationInput[]
+    by: Care2xVersionScalarFieldEnum[] | Care2xVersionScalarFieldEnum
+    having?: Care2xVersionScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Care2xVersionCountAggregateInputType | true
+    _avg?: Care2xVersionAvgAggregateInputType
+    _sum?: Care2xVersionSumAggregateInputType
+    _min?: Care2xVersionMinAggregateInputType
+    _max?: Care2xVersionMaxAggregateInputType
+  }
+
+  export type Care2xVersionGroupByOutputType = {
+    id: string
+    version: string
+    releaseNotes: string | null
+    filename: string
+    filePath: string
+    fileSize: number
+    downloadUrl: string
+    isActive: boolean
+    createdAt: Date
+    _count: Care2xVersionCountAggregateOutputType | null
+    _avg: Care2xVersionAvgAggregateOutputType | null
+    _sum: Care2xVersionSumAggregateOutputType | null
+    _min: Care2xVersionMinAggregateOutputType | null
+    _max: Care2xVersionMaxAggregateOutputType | null
+  }
+
+  type GetCare2xVersionGroupByPayload<T extends Care2xVersionGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<Care2xVersionGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Care2xVersionGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Care2xVersionGroupByOutputType[P]>
+            : GetScalarType<T[P], Care2xVersionGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type Care2xVersionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    version?: boolean
+    releaseNotes?: boolean
+    filename?: boolean
+    filePath?: boolean
+    fileSize?: boolean
+    downloadUrl?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+  }, ExtArgs["result"]["care2xVersion"]>
+
+  export type Care2xVersionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    version?: boolean
+    releaseNotes?: boolean
+    filename?: boolean
+    filePath?: boolean
+    fileSize?: boolean
+    downloadUrl?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+  }, ExtArgs["result"]["care2xVersion"]>
+
+  export type Care2xVersionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    version?: boolean
+    releaseNotes?: boolean
+    filename?: boolean
+    filePath?: boolean
+    fileSize?: boolean
+    downloadUrl?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+  }, ExtArgs["result"]["care2xVersion"]>
+
+  export type Care2xVersionSelectScalar = {
+    id?: boolean
+    version?: boolean
+    releaseNotes?: boolean
+    filename?: boolean
+    filePath?: boolean
+    fileSize?: boolean
+    downloadUrl?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+  }
+
+  export type Care2xVersionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "version" | "releaseNotes" | "filename" | "filePath" | "fileSize" | "downloadUrl" | "isActive" | "createdAt", ExtArgs["result"]["care2xVersion"]>
+
+  export type $Care2xVersionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Care2xVersion"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      version: string
+      releaseNotes: string | null
+      filename: string
+      filePath: string
+      fileSize: number
+      downloadUrl: string
+      isActive: boolean
+      createdAt: Date
+    }, ExtArgs["result"]["care2xVersion"]>
+    composites: {}
+  }
+
+  type Care2xVersionGetPayload<S extends boolean | null | undefined | Care2xVersionDefaultArgs> = $Result.GetResult<Prisma.$Care2xVersionPayload, S>
+
+  type Care2xVersionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<Care2xVersionFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: Care2xVersionCountAggregateInputType | true
+    }
+
+  export interface Care2xVersionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Care2xVersion'], meta: { name: 'Care2xVersion' } }
+    /**
+     * Find zero or one Care2xVersion that matches the filter.
+     * @param {Care2xVersionFindUniqueArgs} args - Arguments to find a Care2xVersion
+     * @example
+     * // Get one Care2xVersion
+     * const care2xVersion = await prisma.care2xVersion.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends Care2xVersionFindUniqueArgs>(args: SelectSubset<T, Care2xVersionFindUniqueArgs<ExtArgs>>): Prisma__Care2xVersionClient<$Result.GetResult<Prisma.$Care2xVersionPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Care2xVersion that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {Care2xVersionFindUniqueOrThrowArgs} args - Arguments to find a Care2xVersion
+     * @example
+     * // Get one Care2xVersion
+     * const care2xVersion = await prisma.care2xVersion.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends Care2xVersionFindUniqueOrThrowArgs>(args: SelectSubset<T, Care2xVersionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__Care2xVersionClient<$Result.GetResult<Prisma.$Care2xVersionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Care2xVersion that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Care2xVersionFindFirstArgs} args - Arguments to find a Care2xVersion
+     * @example
+     * // Get one Care2xVersion
+     * const care2xVersion = await prisma.care2xVersion.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends Care2xVersionFindFirstArgs>(args?: SelectSubset<T, Care2xVersionFindFirstArgs<ExtArgs>>): Prisma__Care2xVersionClient<$Result.GetResult<Prisma.$Care2xVersionPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Care2xVersion that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Care2xVersionFindFirstOrThrowArgs} args - Arguments to find a Care2xVersion
+     * @example
+     * // Get one Care2xVersion
+     * const care2xVersion = await prisma.care2xVersion.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends Care2xVersionFindFirstOrThrowArgs>(args?: SelectSubset<T, Care2xVersionFindFirstOrThrowArgs<ExtArgs>>): Prisma__Care2xVersionClient<$Result.GetResult<Prisma.$Care2xVersionPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Care2xVersions that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Care2xVersionFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Care2xVersions
+     * const care2xVersions = await prisma.care2xVersion.findMany()
+     * 
+     * // Get first 10 Care2xVersions
+     * const care2xVersions = await prisma.care2xVersion.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const care2xVersionWithIdOnly = await prisma.care2xVersion.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends Care2xVersionFindManyArgs>(args?: SelectSubset<T, Care2xVersionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Care2xVersionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Care2xVersion.
+     * @param {Care2xVersionCreateArgs} args - Arguments to create a Care2xVersion.
+     * @example
+     * // Create one Care2xVersion
+     * const Care2xVersion = await prisma.care2xVersion.create({
+     *   data: {
+     *     // ... data to create a Care2xVersion
+     *   }
+     * })
+     * 
+     */
+    create<T extends Care2xVersionCreateArgs>(args: SelectSubset<T, Care2xVersionCreateArgs<ExtArgs>>): Prisma__Care2xVersionClient<$Result.GetResult<Prisma.$Care2xVersionPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Care2xVersions.
+     * @param {Care2xVersionCreateManyArgs} args - Arguments to create many Care2xVersions.
+     * @example
+     * // Create many Care2xVersions
+     * const care2xVersion = await prisma.care2xVersion.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends Care2xVersionCreateManyArgs>(args?: SelectSubset<T, Care2xVersionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Care2xVersions and returns the data saved in the database.
+     * @param {Care2xVersionCreateManyAndReturnArgs} args - Arguments to create many Care2xVersions.
+     * @example
+     * // Create many Care2xVersions
+     * const care2xVersion = await prisma.care2xVersion.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Care2xVersions and only return the `id`
+     * const care2xVersionWithIdOnly = await prisma.care2xVersion.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends Care2xVersionCreateManyAndReturnArgs>(args?: SelectSubset<T, Care2xVersionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Care2xVersionPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Care2xVersion.
+     * @param {Care2xVersionDeleteArgs} args - Arguments to delete one Care2xVersion.
+     * @example
+     * // Delete one Care2xVersion
+     * const Care2xVersion = await prisma.care2xVersion.delete({
+     *   where: {
+     *     // ... filter to delete one Care2xVersion
+     *   }
+     * })
+     * 
+     */
+    delete<T extends Care2xVersionDeleteArgs>(args: SelectSubset<T, Care2xVersionDeleteArgs<ExtArgs>>): Prisma__Care2xVersionClient<$Result.GetResult<Prisma.$Care2xVersionPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Care2xVersion.
+     * @param {Care2xVersionUpdateArgs} args - Arguments to update one Care2xVersion.
+     * @example
+     * // Update one Care2xVersion
+     * const care2xVersion = await prisma.care2xVersion.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends Care2xVersionUpdateArgs>(args: SelectSubset<T, Care2xVersionUpdateArgs<ExtArgs>>): Prisma__Care2xVersionClient<$Result.GetResult<Prisma.$Care2xVersionPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Care2xVersions.
+     * @param {Care2xVersionDeleteManyArgs} args - Arguments to filter Care2xVersions to delete.
+     * @example
+     * // Delete a few Care2xVersions
+     * const { count } = await prisma.care2xVersion.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends Care2xVersionDeleteManyArgs>(args?: SelectSubset<T, Care2xVersionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Care2xVersions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Care2xVersionUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Care2xVersions
+     * const care2xVersion = await prisma.care2xVersion.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends Care2xVersionUpdateManyArgs>(args: SelectSubset<T, Care2xVersionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Care2xVersions and returns the data updated in the database.
+     * @param {Care2xVersionUpdateManyAndReturnArgs} args - Arguments to update many Care2xVersions.
+     * @example
+     * // Update many Care2xVersions
+     * const care2xVersion = await prisma.care2xVersion.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Care2xVersions and only return the `id`
+     * const care2xVersionWithIdOnly = await prisma.care2xVersion.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends Care2xVersionUpdateManyAndReturnArgs>(args: SelectSubset<T, Care2xVersionUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Care2xVersionPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Care2xVersion.
+     * @param {Care2xVersionUpsertArgs} args - Arguments to update or create a Care2xVersion.
+     * @example
+     * // Update or create a Care2xVersion
+     * const care2xVersion = await prisma.care2xVersion.upsert({
+     *   create: {
+     *     // ... data to create a Care2xVersion
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Care2xVersion we want to update
+     *   }
+     * })
+     */
+    upsert<T extends Care2xVersionUpsertArgs>(args: SelectSubset<T, Care2xVersionUpsertArgs<ExtArgs>>): Prisma__Care2xVersionClient<$Result.GetResult<Prisma.$Care2xVersionPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Care2xVersions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Care2xVersionCountArgs} args - Arguments to filter Care2xVersions to count.
+     * @example
+     * // Count the number of Care2xVersions
+     * const count = await prisma.care2xVersion.count({
+     *   where: {
+     *     // ... the filter for the Care2xVersions we want to count
+     *   }
+     * })
+    **/
+    count<T extends Care2xVersionCountArgs>(
+      args?: Subset<T, Care2xVersionCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Care2xVersionCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Care2xVersion.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Care2xVersionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Care2xVersionAggregateArgs>(args: Subset<T, Care2xVersionAggregateArgs>): Prisma.PrismaPromise<GetCare2xVersionAggregateType<T>>
+
+    /**
+     * Group by Care2xVersion.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Care2xVersionGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends Care2xVersionGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: Care2xVersionGroupByArgs['orderBy'] }
+        : { orderBy?: Care2xVersionGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, Care2xVersionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCare2xVersionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Care2xVersion model
+   */
+  readonly fields: Care2xVersionFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Care2xVersion.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__Care2xVersionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Care2xVersion model
+   */
+  interface Care2xVersionFieldRefs {
+    readonly id: FieldRef<"Care2xVersion", 'String'>
+    readonly version: FieldRef<"Care2xVersion", 'String'>
+    readonly releaseNotes: FieldRef<"Care2xVersion", 'String'>
+    readonly filename: FieldRef<"Care2xVersion", 'String'>
+    readonly filePath: FieldRef<"Care2xVersion", 'String'>
+    readonly fileSize: FieldRef<"Care2xVersion", 'Int'>
+    readonly downloadUrl: FieldRef<"Care2xVersion", 'String'>
+    readonly isActive: FieldRef<"Care2xVersion", 'Boolean'>
+    readonly createdAt: FieldRef<"Care2xVersion", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Care2xVersion findUnique
+   */
+  export type Care2xVersionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Care2xVersion
+     */
+    select?: Care2xVersionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Care2xVersion
+     */
+    omit?: Care2xVersionOmit<ExtArgs> | null
+    /**
+     * Filter, which Care2xVersion to fetch.
+     */
+    where: Care2xVersionWhereUniqueInput
+  }
+
+  /**
+   * Care2xVersion findUniqueOrThrow
+   */
+  export type Care2xVersionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Care2xVersion
+     */
+    select?: Care2xVersionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Care2xVersion
+     */
+    omit?: Care2xVersionOmit<ExtArgs> | null
+    /**
+     * Filter, which Care2xVersion to fetch.
+     */
+    where: Care2xVersionWhereUniqueInput
+  }
+
+  /**
+   * Care2xVersion findFirst
+   */
+  export type Care2xVersionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Care2xVersion
+     */
+    select?: Care2xVersionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Care2xVersion
+     */
+    omit?: Care2xVersionOmit<ExtArgs> | null
+    /**
+     * Filter, which Care2xVersion to fetch.
+     */
+    where?: Care2xVersionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Care2xVersions to fetch.
+     */
+    orderBy?: Care2xVersionOrderByWithRelationInput | Care2xVersionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Care2xVersions.
+     */
+    cursor?: Care2xVersionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Care2xVersions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Care2xVersions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Care2xVersions.
+     */
+    distinct?: Care2xVersionScalarFieldEnum | Care2xVersionScalarFieldEnum[]
+  }
+
+  /**
+   * Care2xVersion findFirstOrThrow
+   */
+  export type Care2xVersionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Care2xVersion
+     */
+    select?: Care2xVersionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Care2xVersion
+     */
+    omit?: Care2xVersionOmit<ExtArgs> | null
+    /**
+     * Filter, which Care2xVersion to fetch.
+     */
+    where?: Care2xVersionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Care2xVersions to fetch.
+     */
+    orderBy?: Care2xVersionOrderByWithRelationInput | Care2xVersionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Care2xVersions.
+     */
+    cursor?: Care2xVersionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Care2xVersions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Care2xVersions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Care2xVersions.
+     */
+    distinct?: Care2xVersionScalarFieldEnum | Care2xVersionScalarFieldEnum[]
+  }
+
+  /**
+   * Care2xVersion findMany
+   */
+  export type Care2xVersionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Care2xVersion
+     */
+    select?: Care2xVersionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Care2xVersion
+     */
+    omit?: Care2xVersionOmit<ExtArgs> | null
+    /**
+     * Filter, which Care2xVersions to fetch.
+     */
+    where?: Care2xVersionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Care2xVersions to fetch.
+     */
+    orderBy?: Care2xVersionOrderByWithRelationInput | Care2xVersionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Care2xVersions.
+     */
+    cursor?: Care2xVersionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Care2xVersions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Care2xVersions.
+     */
+    skip?: number
+    distinct?: Care2xVersionScalarFieldEnum | Care2xVersionScalarFieldEnum[]
+  }
+
+  /**
+   * Care2xVersion create
+   */
+  export type Care2xVersionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Care2xVersion
+     */
+    select?: Care2xVersionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Care2xVersion
+     */
+    omit?: Care2xVersionOmit<ExtArgs> | null
+    /**
+     * The data needed to create a Care2xVersion.
+     */
+    data: XOR<Care2xVersionCreateInput, Care2xVersionUncheckedCreateInput>
+  }
+
+  /**
+   * Care2xVersion createMany
+   */
+  export type Care2xVersionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Care2xVersions.
+     */
+    data: Care2xVersionCreateManyInput | Care2xVersionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Care2xVersion createManyAndReturn
+   */
+  export type Care2xVersionCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Care2xVersion
+     */
+    select?: Care2xVersionSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Care2xVersion
+     */
+    omit?: Care2xVersionOmit<ExtArgs> | null
+    /**
+     * The data used to create many Care2xVersions.
+     */
+    data: Care2xVersionCreateManyInput | Care2xVersionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Care2xVersion update
+   */
+  export type Care2xVersionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Care2xVersion
+     */
+    select?: Care2xVersionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Care2xVersion
+     */
+    omit?: Care2xVersionOmit<ExtArgs> | null
+    /**
+     * The data needed to update a Care2xVersion.
+     */
+    data: XOR<Care2xVersionUpdateInput, Care2xVersionUncheckedUpdateInput>
+    /**
+     * Choose, which Care2xVersion to update.
+     */
+    where: Care2xVersionWhereUniqueInput
+  }
+
+  /**
+   * Care2xVersion updateMany
+   */
+  export type Care2xVersionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Care2xVersions.
+     */
+    data: XOR<Care2xVersionUpdateManyMutationInput, Care2xVersionUncheckedUpdateManyInput>
+    /**
+     * Filter which Care2xVersions to update
+     */
+    where?: Care2xVersionWhereInput
+    /**
+     * Limit how many Care2xVersions to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Care2xVersion updateManyAndReturn
+   */
+  export type Care2xVersionUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Care2xVersion
+     */
+    select?: Care2xVersionSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Care2xVersion
+     */
+    omit?: Care2xVersionOmit<ExtArgs> | null
+    /**
+     * The data used to update Care2xVersions.
+     */
+    data: XOR<Care2xVersionUpdateManyMutationInput, Care2xVersionUncheckedUpdateManyInput>
+    /**
+     * Filter which Care2xVersions to update
+     */
+    where?: Care2xVersionWhereInput
+    /**
+     * Limit how many Care2xVersions to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Care2xVersion upsert
+   */
+  export type Care2xVersionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Care2xVersion
+     */
+    select?: Care2xVersionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Care2xVersion
+     */
+    omit?: Care2xVersionOmit<ExtArgs> | null
+    /**
+     * The filter to search for the Care2xVersion to update in case it exists.
+     */
+    where: Care2xVersionWhereUniqueInput
+    /**
+     * In case the Care2xVersion found by the `where` argument doesn't exist, create a new Care2xVersion with this data.
+     */
+    create: XOR<Care2xVersionCreateInput, Care2xVersionUncheckedCreateInput>
+    /**
+     * In case the Care2xVersion was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<Care2xVersionUpdateInput, Care2xVersionUncheckedUpdateInput>
+  }
+
+  /**
+   * Care2xVersion delete
+   */
+  export type Care2xVersionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Care2xVersion
+     */
+    select?: Care2xVersionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Care2xVersion
+     */
+    omit?: Care2xVersionOmit<ExtArgs> | null
+    /**
+     * Filter which Care2xVersion to delete.
+     */
+    where: Care2xVersionWhereUniqueInput
+  }
+
+  /**
+   * Care2xVersion deleteMany
+   */
+  export type Care2xVersionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Care2xVersions to delete
+     */
+    where?: Care2xVersionWhereInput
+    /**
+     * Limit how many Care2xVersions to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Care2xVersion without action
+   */
+  export type Care2xVersionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Care2xVersion
+     */
+    select?: Care2xVersionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Care2xVersion
+     */
+    omit?: Care2xVersionOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Model PlanningEvent
    */
 
@@ -32311,6 +38600,76 @@ export namespace Prisma {
   export type AuditLogScalarFieldEnum = (typeof AuditLogScalarFieldEnum)[keyof typeof AuditLogScalarFieldEnum]
 
 
+  export const FacilityApiKeyScalarFieldEnum: {
+    id: 'id',
+    facilityId: 'facilityId',
+    keyHash: 'keyHash',
+    keyPreview: 'keyPreview',
+    isActive: 'isActive',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    lastUsedAt: 'lastUsedAt'
+  };
+
+  export type FacilityApiKeyScalarFieldEnum = (typeof FacilityApiKeyScalarFieldEnum)[keyof typeof FacilityApiKeyScalarFieldEnum]
+
+
+  export const Care2xSyncScalarFieldEnum: {
+    id: 'id',
+    facilityId: 'facilityId',
+    apiKeyId: 'apiKeyId',
+    batchRef: 'batchRef',
+    entriesCount: 'entriesCount',
+    totalAmount: 'totalAmount',
+    periodStart: 'periodStart',
+    periodEnd: 'periodEnd',
+    receivedAt: 'receivedAt'
+  };
+
+  export type Care2xSyncScalarFieldEnum = (typeof Care2xSyncScalarFieldEnum)[keyof typeof Care2xSyncScalarFieldEnum]
+
+
+  export const Care2xSyncEntryScalarFieldEnum: {
+    id: 'id',
+    syncId: 'syncId',
+    localId: 'localId',
+    montant: 'montant',
+    date: 'date',
+    typePaiement: 'typePaiement'
+  };
+
+  export type Care2xSyncEntryScalarFieldEnum = (typeof Care2xSyncEntryScalarFieldEnum)[keyof typeof Care2xSyncEntryScalarFieldEnum]
+
+
+  export const Care2xRecouvrementSyncScalarFieldEnum: {
+    id: 'id',
+    facilityId: 'facilityId',
+    apiKeyId: 'apiKeyId',
+    batchRef: 'batchRef',
+    totalFacture: 'totalFacture',
+    totalRecouvre: 'totalRecouvre',
+    rapport: 'rapport',
+    receivedAt: 'receivedAt'
+  };
+
+  export type Care2xRecouvrementSyncScalarFieldEnum = (typeof Care2xRecouvrementSyncScalarFieldEnum)[keyof typeof Care2xRecouvrementSyncScalarFieldEnum]
+
+
+  export const Care2xVersionScalarFieldEnum: {
+    id: 'id',
+    version: 'version',
+    releaseNotes: 'releaseNotes',
+    filename: 'filename',
+    filePath: 'filePath',
+    fileSize: 'fileSize',
+    downloadUrl: 'downloadUrl',
+    isActive: 'isActive',
+    createdAt: 'createdAt'
+  };
+
+  export type Care2xVersionScalarFieldEnum = (typeof Care2xVersionScalarFieldEnum)[keyof typeof Care2xVersionScalarFieldEnum]
+
+
   export const PlanningEventScalarFieldEnum: {
     id: 'id',
     title: 'title',
@@ -32346,6 +38705,13 @@ export namespace Prisma {
   };
 
   export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
+
+
+  export const JsonNullValueInput: {
+    JsonNull: typeof JsonNull
+  };
+
+  export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
 
 
   export const QueryMode: {
@@ -32804,6 +39170,9 @@ export namespace Prisma {
     budgets?: BudgetListRelationFilter
     statDeadlines?: StatDeadlineListRelationFilter
     planningEvents?: PlanningEventListRelationFilter
+    apiKey?: XOR<FacilityApiKeyNullableScalarRelationFilter, FacilityApiKeyWhereInput> | null
+    care2xSyncs?: Care2xSyncListRelationFilter
+    recouvrementSyncs?: Care2xRecouvrementSyncListRelationFilter
   }
 
   export type FacilityOrderByWithRelationInput = {
@@ -32828,6 +39197,9 @@ export namespace Prisma {
     budgets?: BudgetOrderByRelationAggregateInput
     statDeadlines?: StatDeadlineOrderByRelationAggregateInput
     planningEvents?: PlanningEventOrderByRelationAggregateInput
+    apiKey?: FacilityApiKeyOrderByWithRelationInput
+    care2xSyncs?: Care2xSyncOrderByRelationAggregateInput
+    recouvrementSyncs?: Care2xRecouvrementSyncOrderByRelationAggregateInput
   }
 
   export type FacilityWhereUniqueInput = Prisma.AtLeast<{
@@ -32855,6 +39227,9 @@ export namespace Prisma {
     budgets?: BudgetListRelationFilter
     statDeadlines?: StatDeadlineListRelationFilter
     planningEvents?: PlanningEventListRelationFilter
+    apiKey?: XOR<FacilityApiKeyNullableScalarRelationFilter, FacilityApiKeyWhereInput> | null
+    care2xSyncs?: Care2xSyncListRelationFilter
+    recouvrementSyncs?: Care2xRecouvrementSyncListRelationFilter
   }, "id" | "code">
 
   export type FacilityOrderByWithAggregationInput = {
@@ -34525,6 +40900,376 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"AuditLog"> | Date | string
   }
 
+  export type FacilityApiKeyWhereInput = {
+    AND?: FacilityApiKeyWhereInput | FacilityApiKeyWhereInput[]
+    OR?: FacilityApiKeyWhereInput[]
+    NOT?: FacilityApiKeyWhereInput | FacilityApiKeyWhereInput[]
+    id?: StringFilter<"FacilityApiKey"> | string
+    facilityId?: StringFilter<"FacilityApiKey"> | string
+    keyHash?: StringFilter<"FacilityApiKey"> | string
+    keyPreview?: StringFilter<"FacilityApiKey"> | string
+    isActive?: BoolFilter<"FacilityApiKey"> | boolean
+    createdAt?: DateTimeFilter<"FacilityApiKey"> | Date | string
+    updatedAt?: DateTimeFilter<"FacilityApiKey"> | Date | string
+    lastUsedAt?: DateTimeNullableFilter<"FacilityApiKey"> | Date | string | null
+    facility?: XOR<FacilityScalarRelationFilter, FacilityWhereInput>
+    care2xSyncs?: Care2xSyncListRelationFilter
+    recouvrementSyncs?: Care2xRecouvrementSyncListRelationFilter
+  }
+
+  export type FacilityApiKeyOrderByWithRelationInput = {
+    id?: SortOrder
+    facilityId?: SortOrder
+    keyHash?: SortOrder
+    keyPreview?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    lastUsedAt?: SortOrderInput | SortOrder
+    facility?: FacilityOrderByWithRelationInput
+    care2xSyncs?: Care2xSyncOrderByRelationAggregateInput
+    recouvrementSyncs?: Care2xRecouvrementSyncOrderByRelationAggregateInput
+  }
+
+  export type FacilityApiKeyWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    facilityId?: string
+    keyHash?: string
+    AND?: FacilityApiKeyWhereInput | FacilityApiKeyWhereInput[]
+    OR?: FacilityApiKeyWhereInput[]
+    NOT?: FacilityApiKeyWhereInput | FacilityApiKeyWhereInput[]
+    keyPreview?: StringFilter<"FacilityApiKey"> | string
+    isActive?: BoolFilter<"FacilityApiKey"> | boolean
+    createdAt?: DateTimeFilter<"FacilityApiKey"> | Date | string
+    updatedAt?: DateTimeFilter<"FacilityApiKey"> | Date | string
+    lastUsedAt?: DateTimeNullableFilter<"FacilityApiKey"> | Date | string | null
+    facility?: XOR<FacilityScalarRelationFilter, FacilityWhereInput>
+    care2xSyncs?: Care2xSyncListRelationFilter
+    recouvrementSyncs?: Care2xRecouvrementSyncListRelationFilter
+  }, "id" | "facilityId" | "keyHash">
+
+  export type FacilityApiKeyOrderByWithAggregationInput = {
+    id?: SortOrder
+    facilityId?: SortOrder
+    keyHash?: SortOrder
+    keyPreview?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    lastUsedAt?: SortOrderInput | SortOrder
+    _count?: FacilityApiKeyCountOrderByAggregateInput
+    _max?: FacilityApiKeyMaxOrderByAggregateInput
+    _min?: FacilityApiKeyMinOrderByAggregateInput
+  }
+
+  export type FacilityApiKeyScalarWhereWithAggregatesInput = {
+    AND?: FacilityApiKeyScalarWhereWithAggregatesInput | FacilityApiKeyScalarWhereWithAggregatesInput[]
+    OR?: FacilityApiKeyScalarWhereWithAggregatesInput[]
+    NOT?: FacilityApiKeyScalarWhereWithAggregatesInput | FacilityApiKeyScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"FacilityApiKey"> | string
+    facilityId?: StringWithAggregatesFilter<"FacilityApiKey"> | string
+    keyHash?: StringWithAggregatesFilter<"FacilityApiKey"> | string
+    keyPreview?: StringWithAggregatesFilter<"FacilityApiKey"> | string
+    isActive?: BoolWithAggregatesFilter<"FacilityApiKey"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"FacilityApiKey"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"FacilityApiKey"> | Date | string
+    lastUsedAt?: DateTimeNullableWithAggregatesFilter<"FacilityApiKey"> | Date | string | null
+  }
+
+  export type Care2xSyncWhereInput = {
+    AND?: Care2xSyncWhereInput | Care2xSyncWhereInput[]
+    OR?: Care2xSyncWhereInput[]
+    NOT?: Care2xSyncWhereInput | Care2xSyncWhereInput[]
+    id?: StringFilter<"Care2xSync"> | string
+    facilityId?: StringFilter<"Care2xSync"> | string
+    apiKeyId?: StringFilter<"Care2xSync"> | string
+    batchRef?: StringFilter<"Care2xSync"> | string
+    entriesCount?: IntFilter<"Care2xSync"> | number
+    totalAmount?: DecimalFilter<"Care2xSync"> | Decimal | DecimalJsLike | number | string
+    periodStart?: DateTimeFilter<"Care2xSync"> | Date | string
+    periodEnd?: DateTimeFilter<"Care2xSync"> | Date | string
+    receivedAt?: DateTimeFilter<"Care2xSync"> | Date | string
+    facility?: XOR<FacilityScalarRelationFilter, FacilityWhereInput>
+    apiKey?: XOR<FacilityApiKeyScalarRelationFilter, FacilityApiKeyWhereInput>
+    entries?: Care2xSyncEntryListRelationFilter
+  }
+
+  export type Care2xSyncOrderByWithRelationInput = {
+    id?: SortOrder
+    facilityId?: SortOrder
+    apiKeyId?: SortOrder
+    batchRef?: SortOrder
+    entriesCount?: SortOrder
+    totalAmount?: SortOrder
+    periodStart?: SortOrder
+    periodEnd?: SortOrder
+    receivedAt?: SortOrder
+    facility?: FacilityOrderByWithRelationInput
+    apiKey?: FacilityApiKeyOrderByWithRelationInput
+    entries?: Care2xSyncEntryOrderByRelationAggregateInput
+  }
+
+  export type Care2xSyncWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    batchRef?: string
+    AND?: Care2xSyncWhereInput | Care2xSyncWhereInput[]
+    OR?: Care2xSyncWhereInput[]
+    NOT?: Care2xSyncWhereInput | Care2xSyncWhereInput[]
+    facilityId?: StringFilter<"Care2xSync"> | string
+    apiKeyId?: StringFilter<"Care2xSync"> | string
+    entriesCount?: IntFilter<"Care2xSync"> | number
+    totalAmount?: DecimalFilter<"Care2xSync"> | Decimal | DecimalJsLike | number | string
+    periodStart?: DateTimeFilter<"Care2xSync"> | Date | string
+    periodEnd?: DateTimeFilter<"Care2xSync"> | Date | string
+    receivedAt?: DateTimeFilter<"Care2xSync"> | Date | string
+    facility?: XOR<FacilityScalarRelationFilter, FacilityWhereInput>
+    apiKey?: XOR<FacilityApiKeyScalarRelationFilter, FacilityApiKeyWhereInput>
+    entries?: Care2xSyncEntryListRelationFilter
+  }, "id" | "batchRef">
+
+  export type Care2xSyncOrderByWithAggregationInput = {
+    id?: SortOrder
+    facilityId?: SortOrder
+    apiKeyId?: SortOrder
+    batchRef?: SortOrder
+    entriesCount?: SortOrder
+    totalAmount?: SortOrder
+    periodStart?: SortOrder
+    periodEnd?: SortOrder
+    receivedAt?: SortOrder
+    _count?: Care2xSyncCountOrderByAggregateInput
+    _avg?: Care2xSyncAvgOrderByAggregateInput
+    _max?: Care2xSyncMaxOrderByAggregateInput
+    _min?: Care2xSyncMinOrderByAggregateInput
+    _sum?: Care2xSyncSumOrderByAggregateInput
+  }
+
+  export type Care2xSyncScalarWhereWithAggregatesInput = {
+    AND?: Care2xSyncScalarWhereWithAggregatesInput | Care2xSyncScalarWhereWithAggregatesInput[]
+    OR?: Care2xSyncScalarWhereWithAggregatesInput[]
+    NOT?: Care2xSyncScalarWhereWithAggregatesInput | Care2xSyncScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Care2xSync"> | string
+    facilityId?: StringWithAggregatesFilter<"Care2xSync"> | string
+    apiKeyId?: StringWithAggregatesFilter<"Care2xSync"> | string
+    batchRef?: StringWithAggregatesFilter<"Care2xSync"> | string
+    entriesCount?: IntWithAggregatesFilter<"Care2xSync"> | number
+    totalAmount?: DecimalWithAggregatesFilter<"Care2xSync"> | Decimal | DecimalJsLike | number | string
+    periodStart?: DateTimeWithAggregatesFilter<"Care2xSync"> | Date | string
+    periodEnd?: DateTimeWithAggregatesFilter<"Care2xSync"> | Date | string
+    receivedAt?: DateTimeWithAggregatesFilter<"Care2xSync"> | Date | string
+  }
+
+  export type Care2xSyncEntryWhereInput = {
+    AND?: Care2xSyncEntryWhereInput | Care2xSyncEntryWhereInput[]
+    OR?: Care2xSyncEntryWhereInput[]
+    NOT?: Care2xSyncEntryWhereInput | Care2xSyncEntryWhereInput[]
+    id?: StringFilter<"Care2xSyncEntry"> | string
+    syncId?: StringFilter<"Care2xSyncEntry"> | string
+    localId?: StringFilter<"Care2xSyncEntry"> | string
+    montant?: DecimalFilter<"Care2xSyncEntry"> | Decimal | DecimalJsLike | number | string
+    date?: DateTimeFilter<"Care2xSyncEntry"> | Date | string
+    typePaiement?: StringFilter<"Care2xSyncEntry"> | string
+    sync?: XOR<Care2xSyncScalarRelationFilter, Care2xSyncWhereInput>
+  }
+
+  export type Care2xSyncEntryOrderByWithRelationInput = {
+    id?: SortOrder
+    syncId?: SortOrder
+    localId?: SortOrder
+    montant?: SortOrder
+    date?: SortOrder
+    typePaiement?: SortOrder
+    sync?: Care2xSyncOrderByWithRelationInput
+  }
+
+  export type Care2xSyncEntryWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: Care2xSyncEntryWhereInput | Care2xSyncEntryWhereInput[]
+    OR?: Care2xSyncEntryWhereInput[]
+    NOT?: Care2xSyncEntryWhereInput | Care2xSyncEntryWhereInput[]
+    syncId?: StringFilter<"Care2xSyncEntry"> | string
+    localId?: StringFilter<"Care2xSyncEntry"> | string
+    montant?: DecimalFilter<"Care2xSyncEntry"> | Decimal | DecimalJsLike | number | string
+    date?: DateTimeFilter<"Care2xSyncEntry"> | Date | string
+    typePaiement?: StringFilter<"Care2xSyncEntry"> | string
+    sync?: XOR<Care2xSyncScalarRelationFilter, Care2xSyncWhereInput>
+  }, "id">
+
+  export type Care2xSyncEntryOrderByWithAggregationInput = {
+    id?: SortOrder
+    syncId?: SortOrder
+    localId?: SortOrder
+    montant?: SortOrder
+    date?: SortOrder
+    typePaiement?: SortOrder
+    _count?: Care2xSyncEntryCountOrderByAggregateInput
+    _avg?: Care2xSyncEntryAvgOrderByAggregateInput
+    _max?: Care2xSyncEntryMaxOrderByAggregateInput
+    _min?: Care2xSyncEntryMinOrderByAggregateInput
+    _sum?: Care2xSyncEntrySumOrderByAggregateInput
+  }
+
+  export type Care2xSyncEntryScalarWhereWithAggregatesInput = {
+    AND?: Care2xSyncEntryScalarWhereWithAggregatesInput | Care2xSyncEntryScalarWhereWithAggregatesInput[]
+    OR?: Care2xSyncEntryScalarWhereWithAggregatesInput[]
+    NOT?: Care2xSyncEntryScalarWhereWithAggregatesInput | Care2xSyncEntryScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Care2xSyncEntry"> | string
+    syncId?: StringWithAggregatesFilter<"Care2xSyncEntry"> | string
+    localId?: StringWithAggregatesFilter<"Care2xSyncEntry"> | string
+    montant?: DecimalWithAggregatesFilter<"Care2xSyncEntry"> | Decimal | DecimalJsLike | number | string
+    date?: DateTimeWithAggregatesFilter<"Care2xSyncEntry"> | Date | string
+    typePaiement?: StringWithAggregatesFilter<"Care2xSyncEntry"> | string
+  }
+
+  export type Care2xRecouvrementSyncWhereInput = {
+    AND?: Care2xRecouvrementSyncWhereInput | Care2xRecouvrementSyncWhereInput[]
+    OR?: Care2xRecouvrementSyncWhereInput[]
+    NOT?: Care2xRecouvrementSyncWhereInput | Care2xRecouvrementSyncWhereInput[]
+    id?: StringFilter<"Care2xRecouvrementSync"> | string
+    facilityId?: StringFilter<"Care2xRecouvrementSync"> | string
+    apiKeyId?: StringFilter<"Care2xRecouvrementSync"> | string
+    batchRef?: StringFilter<"Care2xRecouvrementSync"> | string
+    totalFacture?: DecimalFilter<"Care2xRecouvrementSync"> | Decimal | DecimalJsLike | number | string
+    totalRecouvre?: DecimalFilter<"Care2xRecouvrementSync"> | Decimal | DecimalJsLike | number | string
+    rapport?: JsonFilter<"Care2xRecouvrementSync">
+    receivedAt?: DateTimeFilter<"Care2xRecouvrementSync"> | Date | string
+    facility?: XOR<FacilityScalarRelationFilter, FacilityWhereInput>
+    apiKey?: XOR<FacilityApiKeyScalarRelationFilter, FacilityApiKeyWhereInput>
+  }
+
+  export type Care2xRecouvrementSyncOrderByWithRelationInput = {
+    id?: SortOrder
+    facilityId?: SortOrder
+    apiKeyId?: SortOrder
+    batchRef?: SortOrder
+    totalFacture?: SortOrder
+    totalRecouvre?: SortOrder
+    rapport?: SortOrder
+    receivedAt?: SortOrder
+    facility?: FacilityOrderByWithRelationInput
+    apiKey?: FacilityApiKeyOrderByWithRelationInput
+  }
+
+  export type Care2xRecouvrementSyncWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    batchRef?: string
+    AND?: Care2xRecouvrementSyncWhereInput | Care2xRecouvrementSyncWhereInput[]
+    OR?: Care2xRecouvrementSyncWhereInput[]
+    NOT?: Care2xRecouvrementSyncWhereInput | Care2xRecouvrementSyncWhereInput[]
+    facilityId?: StringFilter<"Care2xRecouvrementSync"> | string
+    apiKeyId?: StringFilter<"Care2xRecouvrementSync"> | string
+    totalFacture?: DecimalFilter<"Care2xRecouvrementSync"> | Decimal | DecimalJsLike | number | string
+    totalRecouvre?: DecimalFilter<"Care2xRecouvrementSync"> | Decimal | DecimalJsLike | number | string
+    rapport?: JsonFilter<"Care2xRecouvrementSync">
+    receivedAt?: DateTimeFilter<"Care2xRecouvrementSync"> | Date | string
+    facility?: XOR<FacilityScalarRelationFilter, FacilityWhereInput>
+    apiKey?: XOR<FacilityApiKeyScalarRelationFilter, FacilityApiKeyWhereInput>
+  }, "id" | "batchRef">
+
+  export type Care2xRecouvrementSyncOrderByWithAggregationInput = {
+    id?: SortOrder
+    facilityId?: SortOrder
+    apiKeyId?: SortOrder
+    batchRef?: SortOrder
+    totalFacture?: SortOrder
+    totalRecouvre?: SortOrder
+    rapport?: SortOrder
+    receivedAt?: SortOrder
+    _count?: Care2xRecouvrementSyncCountOrderByAggregateInput
+    _avg?: Care2xRecouvrementSyncAvgOrderByAggregateInput
+    _max?: Care2xRecouvrementSyncMaxOrderByAggregateInput
+    _min?: Care2xRecouvrementSyncMinOrderByAggregateInput
+    _sum?: Care2xRecouvrementSyncSumOrderByAggregateInput
+  }
+
+  export type Care2xRecouvrementSyncScalarWhereWithAggregatesInput = {
+    AND?: Care2xRecouvrementSyncScalarWhereWithAggregatesInput | Care2xRecouvrementSyncScalarWhereWithAggregatesInput[]
+    OR?: Care2xRecouvrementSyncScalarWhereWithAggregatesInput[]
+    NOT?: Care2xRecouvrementSyncScalarWhereWithAggregatesInput | Care2xRecouvrementSyncScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Care2xRecouvrementSync"> | string
+    facilityId?: StringWithAggregatesFilter<"Care2xRecouvrementSync"> | string
+    apiKeyId?: StringWithAggregatesFilter<"Care2xRecouvrementSync"> | string
+    batchRef?: StringWithAggregatesFilter<"Care2xRecouvrementSync"> | string
+    totalFacture?: DecimalWithAggregatesFilter<"Care2xRecouvrementSync"> | Decimal | DecimalJsLike | number | string
+    totalRecouvre?: DecimalWithAggregatesFilter<"Care2xRecouvrementSync"> | Decimal | DecimalJsLike | number | string
+    rapport?: JsonWithAggregatesFilter<"Care2xRecouvrementSync">
+    receivedAt?: DateTimeWithAggregatesFilter<"Care2xRecouvrementSync"> | Date | string
+  }
+
+  export type Care2xVersionWhereInput = {
+    AND?: Care2xVersionWhereInput | Care2xVersionWhereInput[]
+    OR?: Care2xVersionWhereInput[]
+    NOT?: Care2xVersionWhereInput | Care2xVersionWhereInput[]
+    id?: StringFilter<"Care2xVersion"> | string
+    version?: StringFilter<"Care2xVersion"> | string
+    releaseNotes?: StringNullableFilter<"Care2xVersion"> | string | null
+    filename?: StringFilter<"Care2xVersion"> | string
+    filePath?: StringFilter<"Care2xVersion"> | string
+    fileSize?: IntFilter<"Care2xVersion"> | number
+    downloadUrl?: StringFilter<"Care2xVersion"> | string
+    isActive?: BoolFilter<"Care2xVersion"> | boolean
+    createdAt?: DateTimeFilter<"Care2xVersion"> | Date | string
+  }
+
+  export type Care2xVersionOrderByWithRelationInput = {
+    id?: SortOrder
+    version?: SortOrder
+    releaseNotes?: SortOrderInput | SortOrder
+    filename?: SortOrder
+    filePath?: SortOrder
+    fileSize?: SortOrder
+    downloadUrl?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type Care2xVersionWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    version?: string
+    AND?: Care2xVersionWhereInput | Care2xVersionWhereInput[]
+    OR?: Care2xVersionWhereInput[]
+    NOT?: Care2xVersionWhereInput | Care2xVersionWhereInput[]
+    releaseNotes?: StringNullableFilter<"Care2xVersion"> | string | null
+    filename?: StringFilter<"Care2xVersion"> | string
+    filePath?: StringFilter<"Care2xVersion"> | string
+    fileSize?: IntFilter<"Care2xVersion"> | number
+    downloadUrl?: StringFilter<"Care2xVersion"> | string
+    isActive?: BoolFilter<"Care2xVersion"> | boolean
+    createdAt?: DateTimeFilter<"Care2xVersion"> | Date | string
+  }, "id" | "version">
+
+  export type Care2xVersionOrderByWithAggregationInput = {
+    id?: SortOrder
+    version?: SortOrder
+    releaseNotes?: SortOrderInput | SortOrder
+    filename?: SortOrder
+    filePath?: SortOrder
+    fileSize?: SortOrder
+    downloadUrl?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    _count?: Care2xVersionCountOrderByAggregateInput
+    _avg?: Care2xVersionAvgOrderByAggregateInput
+    _max?: Care2xVersionMaxOrderByAggregateInput
+    _min?: Care2xVersionMinOrderByAggregateInput
+    _sum?: Care2xVersionSumOrderByAggregateInput
+  }
+
+  export type Care2xVersionScalarWhereWithAggregatesInput = {
+    AND?: Care2xVersionScalarWhereWithAggregatesInput | Care2xVersionScalarWhereWithAggregatesInput[]
+    OR?: Care2xVersionScalarWhereWithAggregatesInput[]
+    NOT?: Care2xVersionScalarWhereWithAggregatesInput | Care2xVersionScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Care2xVersion"> | string
+    version?: StringWithAggregatesFilter<"Care2xVersion"> | string
+    releaseNotes?: StringNullableWithAggregatesFilter<"Care2xVersion"> | string | null
+    filename?: StringWithAggregatesFilter<"Care2xVersion"> | string
+    filePath?: StringWithAggregatesFilter<"Care2xVersion"> | string
+    fileSize?: IntWithAggregatesFilter<"Care2xVersion"> | number
+    downloadUrl?: StringWithAggregatesFilter<"Care2xVersion"> | string
+    isActive?: BoolWithAggregatesFilter<"Care2xVersion"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"Care2xVersion"> | Date | string
+  }
+
   export type PlanningEventWhereInput = {
     AND?: PlanningEventWhereInput | PlanningEventWhereInput[]
     OR?: PlanningEventWhereInput[]
@@ -34831,6 +41576,9 @@ export namespace Prisma {
     budgets?: BudgetCreateNestedManyWithoutFacilityInput
     statDeadlines?: StatDeadlineCreateNestedManyWithoutFacilityInput
     planningEvents?: PlanningEventCreateNestedManyWithoutFacilityInput
+    apiKey?: FacilityApiKeyCreateNestedOneWithoutFacilityInput
+    care2xSyncs?: Care2xSyncCreateNestedManyWithoutFacilityInput
+    recouvrementSyncs?: Care2xRecouvrementSyncCreateNestedManyWithoutFacilityInput
   }
 
   export type FacilityUncheckedCreateInput = {
@@ -34854,6 +41602,9 @@ export namespace Prisma {
     budgets?: BudgetUncheckedCreateNestedManyWithoutFacilityInput
     statDeadlines?: StatDeadlineUncheckedCreateNestedManyWithoutFacilityInput
     planningEvents?: PlanningEventUncheckedCreateNestedManyWithoutFacilityInput
+    apiKey?: FacilityApiKeyUncheckedCreateNestedOneWithoutFacilityInput
+    care2xSyncs?: Care2xSyncUncheckedCreateNestedManyWithoutFacilityInput
+    recouvrementSyncs?: Care2xRecouvrementSyncUncheckedCreateNestedManyWithoutFacilityInput
   }
 
   export type FacilityUpdateInput = {
@@ -34877,6 +41628,9 @@ export namespace Prisma {
     budgets?: BudgetUpdateManyWithoutFacilityNestedInput
     statDeadlines?: StatDeadlineUpdateManyWithoutFacilityNestedInput
     planningEvents?: PlanningEventUpdateManyWithoutFacilityNestedInput
+    apiKey?: FacilityApiKeyUpdateOneWithoutFacilityNestedInput
+    care2xSyncs?: Care2xSyncUpdateManyWithoutFacilityNestedInput
+    recouvrementSyncs?: Care2xRecouvrementSyncUpdateManyWithoutFacilityNestedInput
   }
 
   export type FacilityUncheckedUpdateInput = {
@@ -34900,6 +41654,9 @@ export namespace Prisma {
     budgets?: BudgetUncheckedUpdateManyWithoutFacilityNestedInput
     statDeadlines?: StatDeadlineUncheckedUpdateManyWithoutFacilityNestedInput
     planningEvents?: PlanningEventUncheckedUpdateManyWithoutFacilityNestedInput
+    apiKey?: FacilityApiKeyUncheckedUpdateOneWithoutFacilityNestedInput
+    care2xSyncs?: Care2xSyncUncheckedUpdateManyWithoutFacilityNestedInput
+    recouvrementSyncs?: Care2xRecouvrementSyncUncheckedUpdateManyWithoutFacilityNestedInput
   }
 
   export type FacilityCreateManyInput = {
@@ -36705,6 +43462,397 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type FacilityApiKeyCreateInput = {
+    id?: string
+    keyHash: string
+    keyPreview: string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    lastUsedAt?: Date | string | null
+    facility: FacilityCreateNestedOneWithoutApiKeyInput
+    care2xSyncs?: Care2xSyncCreateNestedManyWithoutApiKeyInput
+    recouvrementSyncs?: Care2xRecouvrementSyncCreateNestedManyWithoutApiKeyInput
+  }
+
+  export type FacilityApiKeyUncheckedCreateInput = {
+    id?: string
+    facilityId: string
+    keyHash: string
+    keyPreview: string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    lastUsedAt?: Date | string | null
+    care2xSyncs?: Care2xSyncUncheckedCreateNestedManyWithoutApiKeyInput
+    recouvrementSyncs?: Care2xRecouvrementSyncUncheckedCreateNestedManyWithoutApiKeyInput
+  }
+
+  export type FacilityApiKeyUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    keyHash?: StringFieldUpdateOperationsInput | string
+    keyPreview?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastUsedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    facility?: FacilityUpdateOneRequiredWithoutApiKeyNestedInput
+    care2xSyncs?: Care2xSyncUpdateManyWithoutApiKeyNestedInput
+    recouvrementSyncs?: Care2xRecouvrementSyncUpdateManyWithoutApiKeyNestedInput
+  }
+
+  export type FacilityApiKeyUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    facilityId?: StringFieldUpdateOperationsInput | string
+    keyHash?: StringFieldUpdateOperationsInput | string
+    keyPreview?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastUsedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    care2xSyncs?: Care2xSyncUncheckedUpdateManyWithoutApiKeyNestedInput
+    recouvrementSyncs?: Care2xRecouvrementSyncUncheckedUpdateManyWithoutApiKeyNestedInput
+  }
+
+  export type FacilityApiKeyCreateManyInput = {
+    id?: string
+    facilityId: string
+    keyHash: string
+    keyPreview: string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    lastUsedAt?: Date | string | null
+  }
+
+  export type FacilityApiKeyUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    keyHash?: StringFieldUpdateOperationsInput | string
+    keyPreview?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastUsedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type FacilityApiKeyUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    facilityId?: StringFieldUpdateOperationsInput | string
+    keyHash?: StringFieldUpdateOperationsInput | string
+    keyPreview?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastUsedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type Care2xSyncCreateInput = {
+    id?: string
+    batchRef: string
+    entriesCount: number
+    totalAmount: Decimal | DecimalJsLike | number | string
+    periodStart: Date | string
+    periodEnd: Date | string
+    receivedAt?: Date | string
+    facility: FacilityCreateNestedOneWithoutCare2xSyncsInput
+    apiKey: FacilityApiKeyCreateNestedOneWithoutCare2xSyncsInput
+    entries?: Care2xSyncEntryCreateNestedManyWithoutSyncInput
+  }
+
+  export type Care2xSyncUncheckedCreateInput = {
+    id?: string
+    facilityId: string
+    apiKeyId: string
+    batchRef: string
+    entriesCount: number
+    totalAmount: Decimal | DecimalJsLike | number | string
+    periodStart: Date | string
+    periodEnd: Date | string
+    receivedAt?: Date | string
+    entries?: Care2xSyncEntryUncheckedCreateNestedManyWithoutSyncInput
+  }
+
+  export type Care2xSyncUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    batchRef?: StringFieldUpdateOperationsInput | string
+    entriesCount?: IntFieldUpdateOperationsInput | number
+    totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    periodStart?: DateTimeFieldUpdateOperationsInput | Date | string
+    periodEnd?: DateTimeFieldUpdateOperationsInput | Date | string
+    receivedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    facility?: FacilityUpdateOneRequiredWithoutCare2xSyncsNestedInput
+    apiKey?: FacilityApiKeyUpdateOneRequiredWithoutCare2xSyncsNestedInput
+    entries?: Care2xSyncEntryUpdateManyWithoutSyncNestedInput
+  }
+
+  export type Care2xSyncUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    facilityId?: StringFieldUpdateOperationsInput | string
+    apiKeyId?: StringFieldUpdateOperationsInput | string
+    batchRef?: StringFieldUpdateOperationsInput | string
+    entriesCount?: IntFieldUpdateOperationsInput | number
+    totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    periodStart?: DateTimeFieldUpdateOperationsInput | Date | string
+    periodEnd?: DateTimeFieldUpdateOperationsInput | Date | string
+    receivedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    entries?: Care2xSyncEntryUncheckedUpdateManyWithoutSyncNestedInput
+  }
+
+  export type Care2xSyncCreateManyInput = {
+    id?: string
+    facilityId: string
+    apiKeyId: string
+    batchRef: string
+    entriesCount: number
+    totalAmount: Decimal | DecimalJsLike | number | string
+    periodStart: Date | string
+    periodEnd: Date | string
+    receivedAt?: Date | string
+  }
+
+  export type Care2xSyncUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    batchRef?: StringFieldUpdateOperationsInput | string
+    entriesCount?: IntFieldUpdateOperationsInput | number
+    totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    periodStart?: DateTimeFieldUpdateOperationsInput | Date | string
+    periodEnd?: DateTimeFieldUpdateOperationsInput | Date | string
+    receivedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type Care2xSyncUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    facilityId?: StringFieldUpdateOperationsInput | string
+    apiKeyId?: StringFieldUpdateOperationsInput | string
+    batchRef?: StringFieldUpdateOperationsInput | string
+    entriesCount?: IntFieldUpdateOperationsInput | number
+    totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    periodStart?: DateTimeFieldUpdateOperationsInput | Date | string
+    periodEnd?: DateTimeFieldUpdateOperationsInput | Date | string
+    receivedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type Care2xSyncEntryCreateInput = {
+    id?: string
+    localId: string
+    montant: Decimal | DecimalJsLike | number | string
+    date: Date | string
+    typePaiement: string
+    sync: Care2xSyncCreateNestedOneWithoutEntriesInput
+  }
+
+  export type Care2xSyncEntryUncheckedCreateInput = {
+    id?: string
+    syncId: string
+    localId: string
+    montant: Decimal | DecimalJsLike | number | string
+    date: Date | string
+    typePaiement: string
+  }
+
+  export type Care2xSyncEntryUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    localId?: StringFieldUpdateOperationsInput | string
+    montant?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    typePaiement?: StringFieldUpdateOperationsInput | string
+    sync?: Care2xSyncUpdateOneRequiredWithoutEntriesNestedInput
+  }
+
+  export type Care2xSyncEntryUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    syncId?: StringFieldUpdateOperationsInput | string
+    localId?: StringFieldUpdateOperationsInput | string
+    montant?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    typePaiement?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type Care2xSyncEntryCreateManyInput = {
+    id?: string
+    syncId: string
+    localId: string
+    montant: Decimal | DecimalJsLike | number | string
+    date: Date | string
+    typePaiement: string
+  }
+
+  export type Care2xSyncEntryUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    localId?: StringFieldUpdateOperationsInput | string
+    montant?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    typePaiement?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type Care2xSyncEntryUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    syncId?: StringFieldUpdateOperationsInput | string
+    localId?: StringFieldUpdateOperationsInput | string
+    montant?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    typePaiement?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type Care2xRecouvrementSyncCreateInput = {
+    id?: string
+    batchRef: string
+    totalFacture: Decimal | DecimalJsLike | number | string
+    totalRecouvre: Decimal | DecimalJsLike | number | string
+    rapport: JsonNullValueInput | InputJsonValue
+    receivedAt?: Date | string
+    facility: FacilityCreateNestedOneWithoutRecouvrementSyncsInput
+    apiKey: FacilityApiKeyCreateNestedOneWithoutRecouvrementSyncsInput
+  }
+
+  export type Care2xRecouvrementSyncUncheckedCreateInput = {
+    id?: string
+    facilityId: string
+    apiKeyId: string
+    batchRef: string
+    totalFacture: Decimal | DecimalJsLike | number | string
+    totalRecouvre: Decimal | DecimalJsLike | number | string
+    rapport: JsonNullValueInput | InputJsonValue
+    receivedAt?: Date | string
+  }
+
+  export type Care2xRecouvrementSyncUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    batchRef?: StringFieldUpdateOperationsInput | string
+    totalFacture?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    totalRecouvre?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    rapport?: JsonNullValueInput | InputJsonValue
+    receivedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    facility?: FacilityUpdateOneRequiredWithoutRecouvrementSyncsNestedInput
+    apiKey?: FacilityApiKeyUpdateOneRequiredWithoutRecouvrementSyncsNestedInput
+  }
+
+  export type Care2xRecouvrementSyncUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    facilityId?: StringFieldUpdateOperationsInput | string
+    apiKeyId?: StringFieldUpdateOperationsInput | string
+    batchRef?: StringFieldUpdateOperationsInput | string
+    totalFacture?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    totalRecouvre?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    rapport?: JsonNullValueInput | InputJsonValue
+    receivedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type Care2xRecouvrementSyncCreateManyInput = {
+    id?: string
+    facilityId: string
+    apiKeyId: string
+    batchRef: string
+    totalFacture: Decimal | DecimalJsLike | number | string
+    totalRecouvre: Decimal | DecimalJsLike | number | string
+    rapport: JsonNullValueInput | InputJsonValue
+    receivedAt?: Date | string
+  }
+
+  export type Care2xRecouvrementSyncUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    batchRef?: StringFieldUpdateOperationsInput | string
+    totalFacture?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    totalRecouvre?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    rapport?: JsonNullValueInput | InputJsonValue
+    receivedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type Care2xRecouvrementSyncUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    facilityId?: StringFieldUpdateOperationsInput | string
+    apiKeyId?: StringFieldUpdateOperationsInput | string
+    batchRef?: StringFieldUpdateOperationsInput | string
+    totalFacture?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    totalRecouvre?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    rapport?: JsonNullValueInput | InputJsonValue
+    receivedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type Care2xVersionCreateInput = {
+    id?: string
+    version: string
+    releaseNotes?: string | null
+    filename: string
+    filePath: string
+    fileSize: number
+    downloadUrl: string
+    isActive?: boolean
+    createdAt?: Date | string
+  }
+
+  export type Care2xVersionUncheckedCreateInput = {
+    id?: string
+    version: string
+    releaseNotes?: string | null
+    filename: string
+    filePath: string
+    fileSize: number
+    downloadUrl: string
+    isActive?: boolean
+    createdAt?: Date | string
+  }
+
+  export type Care2xVersionUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    version?: StringFieldUpdateOperationsInput | string
+    releaseNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    filename?: StringFieldUpdateOperationsInput | string
+    filePath?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    downloadUrl?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type Care2xVersionUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    version?: StringFieldUpdateOperationsInput | string
+    releaseNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    filename?: StringFieldUpdateOperationsInput | string
+    filePath?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    downloadUrl?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type Care2xVersionCreateManyInput = {
+    id?: string
+    version: string
+    releaseNotes?: string | null
+    filename: string
+    filePath: string
+    fileSize: number
+    downloadUrl: string
+    isActive?: boolean
+    createdAt?: Date | string
+  }
+
+  export type Care2xVersionUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    version?: StringFieldUpdateOperationsInput | string
+    releaseNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    filename?: StringFieldUpdateOperationsInput | string
+    filePath?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    downloadUrl?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type Care2xVersionUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    version?: StringFieldUpdateOperationsInput | string
+    releaseNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    filename?: StringFieldUpdateOperationsInput | string
+    filePath?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    downloadUrl?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type PlanningEventCreateInput = {
     id?: string
     title: string
@@ -37098,6 +44246,23 @@ export namespace Prisma {
     none?: BudgetWhereInput
   }
 
+  export type FacilityApiKeyNullableScalarRelationFilter = {
+    is?: FacilityApiKeyWhereInput | null
+    isNot?: FacilityApiKeyWhereInput | null
+  }
+
+  export type Care2xSyncListRelationFilter = {
+    every?: Care2xSyncWhereInput
+    some?: Care2xSyncWhereInput
+    none?: Care2xSyncWhereInput
+  }
+
+  export type Care2xRecouvrementSyncListRelationFilter = {
+    every?: Care2xRecouvrementSyncWhereInput
+    some?: Care2xRecouvrementSyncWhereInput
+    none?: Care2xRecouvrementSyncWhereInput
+  }
+
   export type DeclarationOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -37107,6 +44272,14 @@ export namespace Prisma {
   }
 
   export type BudgetOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type Care2xSyncOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type Care2xRecouvrementSyncOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -38570,6 +45743,274 @@ export namespace Prisma {
     _max?: NestedJsonNullableFilter<$PrismaModel>
   }
 
+  export type FacilityApiKeyCountOrderByAggregateInput = {
+    id?: SortOrder
+    facilityId?: SortOrder
+    keyHash?: SortOrder
+    keyPreview?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    lastUsedAt?: SortOrder
+  }
+
+  export type FacilityApiKeyMaxOrderByAggregateInput = {
+    id?: SortOrder
+    facilityId?: SortOrder
+    keyHash?: SortOrder
+    keyPreview?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    lastUsedAt?: SortOrder
+  }
+
+  export type FacilityApiKeyMinOrderByAggregateInput = {
+    id?: SortOrder
+    facilityId?: SortOrder
+    keyHash?: SortOrder
+    keyPreview?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    lastUsedAt?: SortOrder
+  }
+
+  export type FacilityApiKeyScalarRelationFilter = {
+    is?: FacilityApiKeyWhereInput
+    isNot?: FacilityApiKeyWhereInput
+  }
+
+  export type Care2xSyncEntryListRelationFilter = {
+    every?: Care2xSyncEntryWhereInput
+    some?: Care2xSyncEntryWhereInput
+    none?: Care2xSyncEntryWhereInput
+  }
+
+  export type Care2xSyncEntryOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type Care2xSyncCountOrderByAggregateInput = {
+    id?: SortOrder
+    facilityId?: SortOrder
+    apiKeyId?: SortOrder
+    batchRef?: SortOrder
+    entriesCount?: SortOrder
+    totalAmount?: SortOrder
+    periodStart?: SortOrder
+    periodEnd?: SortOrder
+    receivedAt?: SortOrder
+  }
+
+  export type Care2xSyncAvgOrderByAggregateInput = {
+    entriesCount?: SortOrder
+    totalAmount?: SortOrder
+  }
+
+  export type Care2xSyncMaxOrderByAggregateInput = {
+    id?: SortOrder
+    facilityId?: SortOrder
+    apiKeyId?: SortOrder
+    batchRef?: SortOrder
+    entriesCount?: SortOrder
+    totalAmount?: SortOrder
+    periodStart?: SortOrder
+    periodEnd?: SortOrder
+    receivedAt?: SortOrder
+  }
+
+  export type Care2xSyncMinOrderByAggregateInput = {
+    id?: SortOrder
+    facilityId?: SortOrder
+    apiKeyId?: SortOrder
+    batchRef?: SortOrder
+    entriesCount?: SortOrder
+    totalAmount?: SortOrder
+    periodStart?: SortOrder
+    periodEnd?: SortOrder
+    receivedAt?: SortOrder
+  }
+
+  export type Care2xSyncSumOrderByAggregateInput = {
+    entriesCount?: SortOrder
+    totalAmount?: SortOrder
+  }
+
+  export type Care2xSyncScalarRelationFilter = {
+    is?: Care2xSyncWhereInput
+    isNot?: Care2xSyncWhereInput
+  }
+
+  export type Care2xSyncEntryCountOrderByAggregateInput = {
+    id?: SortOrder
+    syncId?: SortOrder
+    localId?: SortOrder
+    montant?: SortOrder
+    date?: SortOrder
+    typePaiement?: SortOrder
+  }
+
+  export type Care2xSyncEntryAvgOrderByAggregateInput = {
+    montant?: SortOrder
+  }
+
+  export type Care2xSyncEntryMaxOrderByAggregateInput = {
+    id?: SortOrder
+    syncId?: SortOrder
+    localId?: SortOrder
+    montant?: SortOrder
+    date?: SortOrder
+    typePaiement?: SortOrder
+  }
+
+  export type Care2xSyncEntryMinOrderByAggregateInput = {
+    id?: SortOrder
+    syncId?: SortOrder
+    localId?: SortOrder
+    montant?: SortOrder
+    date?: SortOrder
+    typePaiement?: SortOrder
+  }
+
+  export type Care2xSyncEntrySumOrderByAggregateInput = {
+    montant?: SortOrder
+  }
+  export type JsonFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
+  export type Care2xRecouvrementSyncCountOrderByAggregateInput = {
+    id?: SortOrder
+    facilityId?: SortOrder
+    apiKeyId?: SortOrder
+    batchRef?: SortOrder
+    totalFacture?: SortOrder
+    totalRecouvre?: SortOrder
+    rapport?: SortOrder
+    receivedAt?: SortOrder
+  }
+
+  export type Care2xRecouvrementSyncAvgOrderByAggregateInput = {
+    totalFacture?: SortOrder
+    totalRecouvre?: SortOrder
+  }
+
+  export type Care2xRecouvrementSyncMaxOrderByAggregateInput = {
+    id?: SortOrder
+    facilityId?: SortOrder
+    apiKeyId?: SortOrder
+    batchRef?: SortOrder
+    totalFacture?: SortOrder
+    totalRecouvre?: SortOrder
+    receivedAt?: SortOrder
+  }
+
+  export type Care2xRecouvrementSyncMinOrderByAggregateInput = {
+    id?: SortOrder
+    facilityId?: SortOrder
+    apiKeyId?: SortOrder
+    batchRef?: SortOrder
+    totalFacture?: SortOrder
+    totalRecouvre?: SortOrder
+    receivedAt?: SortOrder
+  }
+
+  export type Care2xRecouvrementSyncSumOrderByAggregateInput = {
+    totalFacture?: SortOrder
+    totalRecouvre?: SortOrder
+  }
+  export type JsonWithAggregatesFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonWithAggregatesFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonWithAggregatesFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedJsonFilter<$PrismaModel>
+    _max?: NestedJsonFilter<$PrismaModel>
+  }
+
+  export type Care2xVersionCountOrderByAggregateInput = {
+    id?: SortOrder
+    version?: SortOrder
+    releaseNotes?: SortOrder
+    filename?: SortOrder
+    filePath?: SortOrder
+    fileSize?: SortOrder
+    downloadUrl?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type Care2xVersionAvgOrderByAggregateInput = {
+    fileSize?: SortOrder
+  }
+
+  export type Care2xVersionMaxOrderByAggregateInput = {
+    id?: SortOrder
+    version?: SortOrder
+    releaseNotes?: SortOrder
+    filename?: SortOrder
+    filePath?: SortOrder
+    fileSize?: SortOrder
+    downloadUrl?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type Care2xVersionMinOrderByAggregateInput = {
+    id?: SortOrder
+    version?: SortOrder
+    releaseNotes?: SortOrder
+    filename?: SortOrder
+    filePath?: SortOrder
+    fileSize?: SortOrder
+    downloadUrl?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type Care2xVersionSumOrderByAggregateInput = {
+    fileSize?: SortOrder
+  }
+
   export type EnumPlanningEventTypeFilter<$PrismaModel = never> = {
     equals?: $Enums.PlanningEventType | EnumPlanningEventTypeFieldRefInput<$PrismaModel>
     in?: $Enums.PlanningEventType[] | ListEnumPlanningEventTypeFieldRefInput<$PrismaModel>
@@ -39016,6 +46457,26 @@ export namespace Prisma {
     connect?: PlanningEventWhereUniqueInput | PlanningEventWhereUniqueInput[]
   }
 
+  export type FacilityApiKeyCreateNestedOneWithoutFacilityInput = {
+    create?: XOR<FacilityApiKeyCreateWithoutFacilityInput, FacilityApiKeyUncheckedCreateWithoutFacilityInput>
+    connectOrCreate?: FacilityApiKeyCreateOrConnectWithoutFacilityInput
+    connect?: FacilityApiKeyWhereUniqueInput
+  }
+
+  export type Care2xSyncCreateNestedManyWithoutFacilityInput = {
+    create?: XOR<Care2xSyncCreateWithoutFacilityInput, Care2xSyncUncheckedCreateWithoutFacilityInput> | Care2xSyncCreateWithoutFacilityInput[] | Care2xSyncUncheckedCreateWithoutFacilityInput[]
+    connectOrCreate?: Care2xSyncCreateOrConnectWithoutFacilityInput | Care2xSyncCreateOrConnectWithoutFacilityInput[]
+    createMany?: Care2xSyncCreateManyFacilityInputEnvelope
+    connect?: Care2xSyncWhereUniqueInput | Care2xSyncWhereUniqueInput[]
+  }
+
+  export type Care2xRecouvrementSyncCreateNestedManyWithoutFacilityInput = {
+    create?: XOR<Care2xRecouvrementSyncCreateWithoutFacilityInput, Care2xRecouvrementSyncUncheckedCreateWithoutFacilityInput> | Care2xRecouvrementSyncCreateWithoutFacilityInput[] | Care2xRecouvrementSyncUncheckedCreateWithoutFacilityInput[]
+    connectOrCreate?: Care2xRecouvrementSyncCreateOrConnectWithoutFacilityInput | Care2xRecouvrementSyncCreateOrConnectWithoutFacilityInput[]
+    createMany?: Care2xRecouvrementSyncCreateManyFacilityInputEnvelope
+    connect?: Care2xRecouvrementSyncWhereUniqueInput | Care2xRecouvrementSyncWhereUniqueInput[]
+  }
+
   export type UserUncheckedCreateNestedManyWithoutFacilityInput = {
     create?: XOR<UserCreateWithoutFacilityInput, UserUncheckedCreateWithoutFacilityInput> | UserCreateWithoutFacilityInput[] | UserUncheckedCreateWithoutFacilityInput[]
     connectOrCreate?: UserCreateOrConnectWithoutFacilityInput | UserCreateOrConnectWithoutFacilityInput[]
@@ -39063,6 +46524,26 @@ export namespace Prisma {
     connectOrCreate?: PlanningEventCreateOrConnectWithoutFacilityInput | PlanningEventCreateOrConnectWithoutFacilityInput[]
     createMany?: PlanningEventCreateManyFacilityInputEnvelope
     connect?: PlanningEventWhereUniqueInput | PlanningEventWhereUniqueInput[]
+  }
+
+  export type FacilityApiKeyUncheckedCreateNestedOneWithoutFacilityInput = {
+    create?: XOR<FacilityApiKeyCreateWithoutFacilityInput, FacilityApiKeyUncheckedCreateWithoutFacilityInput>
+    connectOrCreate?: FacilityApiKeyCreateOrConnectWithoutFacilityInput
+    connect?: FacilityApiKeyWhereUniqueInput
+  }
+
+  export type Care2xSyncUncheckedCreateNestedManyWithoutFacilityInput = {
+    create?: XOR<Care2xSyncCreateWithoutFacilityInput, Care2xSyncUncheckedCreateWithoutFacilityInput> | Care2xSyncCreateWithoutFacilityInput[] | Care2xSyncUncheckedCreateWithoutFacilityInput[]
+    connectOrCreate?: Care2xSyncCreateOrConnectWithoutFacilityInput | Care2xSyncCreateOrConnectWithoutFacilityInput[]
+    createMany?: Care2xSyncCreateManyFacilityInputEnvelope
+    connect?: Care2xSyncWhereUniqueInput | Care2xSyncWhereUniqueInput[]
+  }
+
+  export type Care2xRecouvrementSyncUncheckedCreateNestedManyWithoutFacilityInput = {
+    create?: XOR<Care2xRecouvrementSyncCreateWithoutFacilityInput, Care2xRecouvrementSyncUncheckedCreateWithoutFacilityInput> | Care2xRecouvrementSyncCreateWithoutFacilityInput[] | Care2xRecouvrementSyncUncheckedCreateWithoutFacilityInput[]
+    connectOrCreate?: Care2xRecouvrementSyncCreateOrConnectWithoutFacilityInput | Care2xRecouvrementSyncCreateOrConnectWithoutFacilityInput[]
+    createMany?: Care2xRecouvrementSyncCreateManyFacilityInputEnvelope
+    connect?: Care2xRecouvrementSyncWhereUniqueInput | Care2xRecouvrementSyncWhereUniqueInput[]
   }
 
   export type EnumFacilityTypeFieldUpdateOperationsInput = {
@@ -39187,6 +46668,44 @@ export namespace Prisma {
     deleteMany?: PlanningEventScalarWhereInput | PlanningEventScalarWhereInput[]
   }
 
+  export type FacilityApiKeyUpdateOneWithoutFacilityNestedInput = {
+    create?: XOR<FacilityApiKeyCreateWithoutFacilityInput, FacilityApiKeyUncheckedCreateWithoutFacilityInput>
+    connectOrCreate?: FacilityApiKeyCreateOrConnectWithoutFacilityInput
+    upsert?: FacilityApiKeyUpsertWithoutFacilityInput
+    disconnect?: FacilityApiKeyWhereInput | boolean
+    delete?: FacilityApiKeyWhereInput | boolean
+    connect?: FacilityApiKeyWhereUniqueInput
+    update?: XOR<XOR<FacilityApiKeyUpdateToOneWithWhereWithoutFacilityInput, FacilityApiKeyUpdateWithoutFacilityInput>, FacilityApiKeyUncheckedUpdateWithoutFacilityInput>
+  }
+
+  export type Care2xSyncUpdateManyWithoutFacilityNestedInput = {
+    create?: XOR<Care2xSyncCreateWithoutFacilityInput, Care2xSyncUncheckedCreateWithoutFacilityInput> | Care2xSyncCreateWithoutFacilityInput[] | Care2xSyncUncheckedCreateWithoutFacilityInput[]
+    connectOrCreate?: Care2xSyncCreateOrConnectWithoutFacilityInput | Care2xSyncCreateOrConnectWithoutFacilityInput[]
+    upsert?: Care2xSyncUpsertWithWhereUniqueWithoutFacilityInput | Care2xSyncUpsertWithWhereUniqueWithoutFacilityInput[]
+    createMany?: Care2xSyncCreateManyFacilityInputEnvelope
+    set?: Care2xSyncWhereUniqueInput | Care2xSyncWhereUniqueInput[]
+    disconnect?: Care2xSyncWhereUniqueInput | Care2xSyncWhereUniqueInput[]
+    delete?: Care2xSyncWhereUniqueInput | Care2xSyncWhereUniqueInput[]
+    connect?: Care2xSyncWhereUniqueInput | Care2xSyncWhereUniqueInput[]
+    update?: Care2xSyncUpdateWithWhereUniqueWithoutFacilityInput | Care2xSyncUpdateWithWhereUniqueWithoutFacilityInput[]
+    updateMany?: Care2xSyncUpdateManyWithWhereWithoutFacilityInput | Care2xSyncUpdateManyWithWhereWithoutFacilityInput[]
+    deleteMany?: Care2xSyncScalarWhereInput | Care2xSyncScalarWhereInput[]
+  }
+
+  export type Care2xRecouvrementSyncUpdateManyWithoutFacilityNestedInput = {
+    create?: XOR<Care2xRecouvrementSyncCreateWithoutFacilityInput, Care2xRecouvrementSyncUncheckedCreateWithoutFacilityInput> | Care2xRecouvrementSyncCreateWithoutFacilityInput[] | Care2xRecouvrementSyncUncheckedCreateWithoutFacilityInput[]
+    connectOrCreate?: Care2xRecouvrementSyncCreateOrConnectWithoutFacilityInput | Care2xRecouvrementSyncCreateOrConnectWithoutFacilityInput[]
+    upsert?: Care2xRecouvrementSyncUpsertWithWhereUniqueWithoutFacilityInput | Care2xRecouvrementSyncUpsertWithWhereUniqueWithoutFacilityInput[]
+    createMany?: Care2xRecouvrementSyncCreateManyFacilityInputEnvelope
+    set?: Care2xRecouvrementSyncWhereUniqueInput | Care2xRecouvrementSyncWhereUniqueInput[]
+    disconnect?: Care2xRecouvrementSyncWhereUniqueInput | Care2xRecouvrementSyncWhereUniqueInput[]
+    delete?: Care2xRecouvrementSyncWhereUniqueInput | Care2xRecouvrementSyncWhereUniqueInput[]
+    connect?: Care2xRecouvrementSyncWhereUniqueInput | Care2xRecouvrementSyncWhereUniqueInput[]
+    update?: Care2xRecouvrementSyncUpdateWithWhereUniqueWithoutFacilityInput | Care2xRecouvrementSyncUpdateWithWhereUniqueWithoutFacilityInput[]
+    updateMany?: Care2xRecouvrementSyncUpdateManyWithWhereWithoutFacilityInput | Care2xRecouvrementSyncUpdateManyWithWhereWithoutFacilityInput[]
+    deleteMany?: Care2xRecouvrementSyncScalarWhereInput | Care2xRecouvrementSyncScalarWhereInput[]
+  }
+
   export type UserUncheckedUpdateManyWithoutFacilityNestedInput = {
     create?: XOR<UserCreateWithoutFacilityInput, UserUncheckedCreateWithoutFacilityInput> | UserCreateWithoutFacilityInput[] | UserUncheckedCreateWithoutFacilityInput[]
     connectOrCreate?: UserCreateOrConnectWithoutFacilityInput | UserCreateOrConnectWithoutFacilityInput[]
@@ -39283,6 +46802,44 @@ export namespace Prisma {
     update?: PlanningEventUpdateWithWhereUniqueWithoutFacilityInput | PlanningEventUpdateWithWhereUniqueWithoutFacilityInput[]
     updateMany?: PlanningEventUpdateManyWithWhereWithoutFacilityInput | PlanningEventUpdateManyWithWhereWithoutFacilityInput[]
     deleteMany?: PlanningEventScalarWhereInput | PlanningEventScalarWhereInput[]
+  }
+
+  export type FacilityApiKeyUncheckedUpdateOneWithoutFacilityNestedInput = {
+    create?: XOR<FacilityApiKeyCreateWithoutFacilityInput, FacilityApiKeyUncheckedCreateWithoutFacilityInput>
+    connectOrCreate?: FacilityApiKeyCreateOrConnectWithoutFacilityInput
+    upsert?: FacilityApiKeyUpsertWithoutFacilityInput
+    disconnect?: FacilityApiKeyWhereInput | boolean
+    delete?: FacilityApiKeyWhereInput | boolean
+    connect?: FacilityApiKeyWhereUniqueInput
+    update?: XOR<XOR<FacilityApiKeyUpdateToOneWithWhereWithoutFacilityInput, FacilityApiKeyUpdateWithoutFacilityInput>, FacilityApiKeyUncheckedUpdateWithoutFacilityInput>
+  }
+
+  export type Care2xSyncUncheckedUpdateManyWithoutFacilityNestedInput = {
+    create?: XOR<Care2xSyncCreateWithoutFacilityInput, Care2xSyncUncheckedCreateWithoutFacilityInput> | Care2xSyncCreateWithoutFacilityInput[] | Care2xSyncUncheckedCreateWithoutFacilityInput[]
+    connectOrCreate?: Care2xSyncCreateOrConnectWithoutFacilityInput | Care2xSyncCreateOrConnectWithoutFacilityInput[]
+    upsert?: Care2xSyncUpsertWithWhereUniqueWithoutFacilityInput | Care2xSyncUpsertWithWhereUniqueWithoutFacilityInput[]
+    createMany?: Care2xSyncCreateManyFacilityInputEnvelope
+    set?: Care2xSyncWhereUniqueInput | Care2xSyncWhereUniqueInput[]
+    disconnect?: Care2xSyncWhereUniqueInput | Care2xSyncWhereUniqueInput[]
+    delete?: Care2xSyncWhereUniqueInput | Care2xSyncWhereUniqueInput[]
+    connect?: Care2xSyncWhereUniqueInput | Care2xSyncWhereUniqueInput[]
+    update?: Care2xSyncUpdateWithWhereUniqueWithoutFacilityInput | Care2xSyncUpdateWithWhereUniqueWithoutFacilityInput[]
+    updateMany?: Care2xSyncUpdateManyWithWhereWithoutFacilityInput | Care2xSyncUpdateManyWithWhereWithoutFacilityInput[]
+    deleteMany?: Care2xSyncScalarWhereInput | Care2xSyncScalarWhereInput[]
+  }
+
+  export type Care2xRecouvrementSyncUncheckedUpdateManyWithoutFacilityNestedInput = {
+    create?: XOR<Care2xRecouvrementSyncCreateWithoutFacilityInput, Care2xRecouvrementSyncUncheckedCreateWithoutFacilityInput> | Care2xRecouvrementSyncCreateWithoutFacilityInput[] | Care2xRecouvrementSyncUncheckedCreateWithoutFacilityInput[]
+    connectOrCreate?: Care2xRecouvrementSyncCreateOrConnectWithoutFacilityInput | Care2xRecouvrementSyncCreateOrConnectWithoutFacilityInput[]
+    upsert?: Care2xRecouvrementSyncUpsertWithWhereUniqueWithoutFacilityInput | Care2xRecouvrementSyncUpsertWithWhereUniqueWithoutFacilityInput[]
+    createMany?: Care2xRecouvrementSyncCreateManyFacilityInputEnvelope
+    set?: Care2xRecouvrementSyncWhereUniqueInput | Care2xRecouvrementSyncWhereUniqueInput[]
+    disconnect?: Care2xRecouvrementSyncWhereUniqueInput | Care2xRecouvrementSyncWhereUniqueInput[]
+    delete?: Care2xRecouvrementSyncWhereUniqueInput | Care2xRecouvrementSyncWhereUniqueInput[]
+    connect?: Care2xRecouvrementSyncWhereUniqueInput | Care2xRecouvrementSyncWhereUniqueInput[]
+    update?: Care2xRecouvrementSyncUpdateWithWhereUniqueWithoutFacilityInput | Care2xRecouvrementSyncUpdateWithWhereUniqueWithoutFacilityInput[]
+    updateMany?: Care2xRecouvrementSyncUpdateManyWithWhereWithoutFacilityInput | Care2xRecouvrementSyncUpdateManyWithWhereWithoutFacilityInput[]
+    deleteMany?: Care2xRecouvrementSyncScalarWhereInput | Care2xRecouvrementSyncScalarWhereInput[]
   }
 
   export type OrganizationCreateNestedOneWithoutUsersInput = {
@@ -40563,6 +48120,216 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutAuditLogsInput, UserUpdateWithoutAuditLogsInput>, UserUncheckedUpdateWithoutAuditLogsInput>
   }
 
+  export type FacilityCreateNestedOneWithoutApiKeyInput = {
+    create?: XOR<FacilityCreateWithoutApiKeyInput, FacilityUncheckedCreateWithoutApiKeyInput>
+    connectOrCreate?: FacilityCreateOrConnectWithoutApiKeyInput
+    connect?: FacilityWhereUniqueInput
+  }
+
+  export type Care2xSyncCreateNestedManyWithoutApiKeyInput = {
+    create?: XOR<Care2xSyncCreateWithoutApiKeyInput, Care2xSyncUncheckedCreateWithoutApiKeyInput> | Care2xSyncCreateWithoutApiKeyInput[] | Care2xSyncUncheckedCreateWithoutApiKeyInput[]
+    connectOrCreate?: Care2xSyncCreateOrConnectWithoutApiKeyInput | Care2xSyncCreateOrConnectWithoutApiKeyInput[]
+    createMany?: Care2xSyncCreateManyApiKeyInputEnvelope
+    connect?: Care2xSyncWhereUniqueInput | Care2xSyncWhereUniqueInput[]
+  }
+
+  export type Care2xRecouvrementSyncCreateNestedManyWithoutApiKeyInput = {
+    create?: XOR<Care2xRecouvrementSyncCreateWithoutApiKeyInput, Care2xRecouvrementSyncUncheckedCreateWithoutApiKeyInput> | Care2xRecouvrementSyncCreateWithoutApiKeyInput[] | Care2xRecouvrementSyncUncheckedCreateWithoutApiKeyInput[]
+    connectOrCreate?: Care2xRecouvrementSyncCreateOrConnectWithoutApiKeyInput | Care2xRecouvrementSyncCreateOrConnectWithoutApiKeyInput[]
+    createMany?: Care2xRecouvrementSyncCreateManyApiKeyInputEnvelope
+    connect?: Care2xRecouvrementSyncWhereUniqueInput | Care2xRecouvrementSyncWhereUniqueInput[]
+  }
+
+  export type Care2xSyncUncheckedCreateNestedManyWithoutApiKeyInput = {
+    create?: XOR<Care2xSyncCreateWithoutApiKeyInput, Care2xSyncUncheckedCreateWithoutApiKeyInput> | Care2xSyncCreateWithoutApiKeyInput[] | Care2xSyncUncheckedCreateWithoutApiKeyInput[]
+    connectOrCreate?: Care2xSyncCreateOrConnectWithoutApiKeyInput | Care2xSyncCreateOrConnectWithoutApiKeyInput[]
+    createMany?: Care2xSyncCreateManyApiKeyInputEnvelope
+    connect?: Care2xSyncWhereUniqueInput | Care2xSyncWhereUniqueInput[]
+  }
+
+  export type Care2xRecouvrementSyncUncheckedCreateNestedManyWithoutApiKeyInput = {
+    create?: XOR<Care2xRecouvrementSyncCreateWithoutApiKeyInput, Care2xRecouvrementSyncUncheckedCreateWithoutApiKeyInput> | Care2xRecouvrementSyncCreateWithoutApiKeyInput[] | Care2xRecouvrementSyncUncheckedCreateWithoutApiKeyInput[]
+    connectOrCreate?: Care2xRecouvrementSyncCreateOrConnectWithoutApiKeyInput | Care2xRecouvrementSyncCreateOrConnectWithoutApiKeyInput[]
+    createMany?: Care2xRecouvrementSyncCreateManyApiKeyInputEnvelope
+    connect?: Care2xRecouvrementSyncWhereUniqueInput | Care2xRecouvrementSyncWhereUniqueInput[]
+  }
+
+  export type FacilityUpdateOneRequiredWithoutApiKeyNestedInput = {
+    create?: XOR<FacilityCreateWithoutApiKeyInput, FacilityUncheckedCreateWithoutApiKeyInput>
+    connectOrCreate?: FacilityCreateOrConnectWithoutApiKeyInput
+    upsert?: FacilityUpsertWithoutApiKeyInput
+    connect?: FacilityWhereUniqueInput
+    update?: XOR<XOR<FacilityUpdateToOneWithWhereWithoutApiKeyInput, FacilityUpdateWithoutApiKeyInput>, FacilityUncheckedUpdateWithoutApiKeyInput>
+  }
+
+  export type Care2xSyncUpdateManyWithoutApiKeyNestedInput = {
+    create?: XOR<Care2xSyncCreateWithoutApiKeyInput, Care2xSyncUncheckedCreateWithoutApiKeyInput> | Care2xSyncCreateWithoutApiKeyInput[] | Care2xSyncUncheckedCreateWithoutApiKeyInput[]
+    connectOrCreate?: Care2xSyncCreateOrConnectWithoutApiKeyInput | Care2xSyncCreateOrConnectWithoutApiKeyInput[]
+    upsert?: Care2xSyncUpsertWithWhereUniqueWithoutApiKeyInput | Care2xSyncUpsertWithWhereUniqueWithoutApiKeyInput[]
+    createMany?: Care2xSyncCreateManyApiKeyInputEnvelope
+    set?: Care2xSyncWhereUniqueInput | Care2xSyncWhereUniqueInput[]
+    disconnect?: Care2xSyncWhereUniqueInput | Care2xSyncWhereUniqueInput[]
+    delete?: Care2xSyncWhereUniqueInput | Care2xSyncWhereUniqueInput[]
+    connect?: Care2xSyncWhereUniqueInput | Care2xSyncWhereUniqueInput[]
+    update?: Care2xSyncUpdateWithWhereUniqueWithoutApiKeyInput | Care2xSyncUpdateWithWhereUniqueWithoutApiKeyInput[]
+    updateMany?: Care2xSyncUpdateManyWithWhereWithoutApiKeyInput | Care2xSyncUpdateManyWithWhereWithoutApiKeyInput[]
+    deleteMany?: Care2xSyncScalarWhereInput | Care2xSyncScalarWhereInput[]
+  }
+
+  export type Care2xRecouvrementSyncUpdateManyWithoutApiKeyNestedInput = {
+    create?: XOR<Care2xRecouvrementSyncCreateWithoutApiKeyInput, Care2xRecouvrementSyncUncheckedCreateWithoutApiKeyInput> | Care2xRecouvrementSyncCreateWithoutApiKeyInput[] | Care2xRecouvrementSyncUncheckedCreateWithoutApiKeyInput[]
+    connectOrCreate?: Care2xRecouvrementSyncCreateOrConnectWithoutApiKeyInput | Care2xRecouvrementSyncCreateOrConnectWithoutApiKeyInput[]
+    upsert?: Care2xRecouvrementSyncUpsertWithWhereUniqueWithoutApiKeyInput | Care2xRecouvrementSyncUpsertWithWhereUniqueWithoutApiKeyInput[]
+    createMany?: Care2xRecouvrementSyncCreateManyApiKeyInputEnvelope
+    set?: Care2xRecouvrementSyncWhereUniqueInput | Care2xRecouvrementSyncWhereUniqueInput[]
+    disconnect?: Care2xRecouvrementSyncWhereUniqueInput | Care2xRecouvrementSyncWhereUniqueInput[]
+    delete?: Care2xRecouvrementSyncWhereUniqueInput | Care2xRecouvrementSyncWhereUniqueInput[]
+    connect?: Care2xRecouvrementSyncWhereUniqueInput | Care2xRecouvrementSyncWhereUniqueInput[]
+    update?: Care2xRecouvrementSyncUpdateWithWhereUniqueWithoutApiKeyInput | Care2xRecouvrementSyncUpdateWithWhereUniqueWithoutApiKeyInput[]
+    updateMany?: Care2xRecouvrementSyncUpdateManyWithWhereWithoutApiKeyInput | Care2xRecouvrementSyncUpdateManyWithWhereWithoutApiKeyInput[]
+    deleteMany?: Care2xRecouvrementSyncScalarWhereInput | Care2xRecouvrementSyncScalarWhereInput[]
+  }
+
+  export type Care2xSyncUncheckedUpdateManyWithoutApiKeyNestedInput = {
+    create?: XOR<Care2xSyncCreateWithoutApiKeyInput, Care2xSyncUncheckedCreateWithoutApiKeyInput> | Care2xSyncCreateWithoutApiKeyInput[] | Care2xSyncUncheckedCreateWithoutApiKeyInput[]
+    connectOrCreate?: Care2xSyncCreateOrConnectWithoutApiKeyInput | Care2xSyncCreateOrConnectWithoutApiKeyInput[]
+    upsert?: Care2xSyncUpsertWithWhereUniqueWithoutApiKeyInput | Care2xSyncUpsertWithWhereUniqueWithoutApiKeyInput[]
+    createMany?: Care2xSyncCreateManyApiKeyInputEnvelope
+    set?: Care2xSyncWhereUniqueInput | Care2xSyncWhereUniqueInput[]
+    disconnect?: Care2xSyncWhereUniqueInput | Care2xSyncWhereUniqueInput[]
+    delete?: Care2xSyncWhereUniqueInput | Care2xSyncWhereUniqueInput[]
+    connect?: Care2xSyncWhereUniqueInput | Care2xSyncWhereUniqueInput[]
+    update?: Care2xSyncUpdateWithWhereUniqueWithoutApiKeyInput | Care2xSyncUpdateWithWhereUniqueWithoutApiKeyInput[]
+    updateMany?: Care2xSyncUpdateManyWithWhereWithoutApiKeyInput | Care2xSyncUpdateManyWithWhereWithoutApiKeyInput[]
+    deleteMany?: Care2xSyncScalarWhereInput | Care2xSyncScalarWhereInput[]
+  }
+
+  export type Care2xRecouvrementSyncUncheckedUpdateManyWithoutApiKeyNestedInput = {
+    create?: XOR<Care2xRecouvrementSyncCreateWithoutApiKeyInput, Care2xRecouvrementSyncUncheckedCreateWithoutApiKeyInput> | Care2xRecouvrementSyncCreateWithoutApiKeyInput[] | Care2xRecouvrementSyncUncheckedCreateWithoutApiKeyInput[]
+    connectOrCreate?: Care2xRecouvrementSyncCreateOrConnectWithoutApiKeyInput | Care2xRecouvrementSyncCreateOrConnectWithoutApiKeyInput[]
+    upsert?: Care2xRecouvrementSyncUpsertWithWhereUniqueWithoutApiKeyInput | Care2xRecouvrementSyncUpsertWithWhereUniqueWithoutApiKeyInput[]
+    createMany?: Care2xRecouvrementSyncCreateManyApiKeyInputEnvelope
+    set?: Care2xRecouvrementSyncWhereUniqueInput | Care2xRecouvrementSyncWhereUniqueInput[]
+    disconnect?: Care2xRecouvrementSyncWhereUniqueInput | Care2xRecouvrementSyncWhereUniqueInput[]
+    delete?: Care2xRecouvrementSyncWhereUniqueInput | Care2xRecouvrementSyncWhereUniqueInput[]
+    connect?: Care2xRecouvrementSyncWhereUniqueInput | Care2xRecouvrementSyncWhereUniqueInput[]
+    update?: Care2xRecouvrementSyncUpdateWithWhereUniqueWithoutApiKeyInput | Care2xRecouvrementSyncUpdateWithWhereUniqueWithoutApiKeyInput[]
+    updateMany?: Care2xRecouvrementSyncUpdateManyWithWhereWithoutApiKeyInput | Care2xRecouvrementSyncUpdateManyWithWhereWithoutApiKeyInput[]
+    deleteMany?: Care2xRecouvrementSyncScalarWhereInput | Care2xRecouvrementSyncScalarWhereInput[]
+  }
+
+  export type FacilityCreateNestedOneWithoutCare2xSyncsInput = {
+    create?: XOR<FacilityCreateWithoutCare2xSyncsInput, FacilityUncheckedCreateWithoutCare2xSyncsInput>
+    connectOrCreate?: FacilityCreateOrConnectWithoutCare2xSyncsInput
+    connect?: FacilityWhereUniqueInput
+  }
+
+  export type FacilityApiKeyCreateNestedOneWithoutCare2xSyncsInput = {
+    create?: XOR<FacilityApiKeyCreateWithoutCare2xSyncsInput, FacilityApiKeyUncheckedCreateWithoutCare2xSyncsInput>
+    connectOrCreate?: FacilityApiKeyCreateOrConnectWithoutCare2xSyncsInput
+    connect?: FacilityApiKeyWhereUniqueInput
+  }
+
+  export type Care2xSyncEntryCreateNestedManyWithoutSyncInput = {
+    create?: XOR<Care2xSyncEntryCreateWithoutSyncInput, Care2xSyncEntryUncheckedCreateWithoutSyncInput> | Care2xSyncEntryCreateWithoutSyncInput[] | Care2xSyncEntryUncheckedCreateWithoutSyncInput[]
+    connectOrCreate?: Care2xSyncEntryCreateOrConnectWithoutSyncInput | Care2xSyncEntryCreateOrConnectWithoutSyncInput[]
+    createMany?: Care2xSyncEntryCreateManySyncInputEnvelope
+    connect?: Care2xSyncEntryWhereUniqueInput | Care2xSyncEntryWhereUniqueInput[]
+  }
+
+  export type Care2xSyncEntryUncheckedCreateNestedManyWithoutSyncInput = {
+    create?: XOR<Care2xSyncEntryCreateWithoutSyncInput, Care2xSyncEntryUncheckedCreateWithoutSyncInput> | Care2xSyncEntryCreateWithoutSyncInput[] | Care2xSyncEntryUncheckedCreateWithoutSyncInput[]
+    connectOrCreate?: Care2xSyncEntryCreateOrConnectWithoutSyncInput | Care2xSyncEntryCreateOrConnectWithoutSyncInput[]
+    createMany?: Care2xSyncEntryCreateManySyncInputEnvelope
+    connect?: Care2xSyncEntryWhereUniqueInput | Care2xSyncEntryWhereUniqueInput[]
+  }
+
+  export type FacilityUpdateOneRequiredWithoutCare2xSyncsNestedInput = {
+    create?: XOR<FacilityCreateWithoutCare2xSyncsInput, FacilityUncheckedCreateWithoutCare2xSyncsInput>
+    connectOrCreate?: FacilityCreateOrConnectWithoutCare2xSyncsInput
+    upsert?: FacilityUpsertWithoutCare2xSyncsInput
+    connect?: FacilityWhereUniqueInput
+    update?: XOR<XOR<FacilityUpdateToOneWithWhereWithoutCare2xSyncsInput, FacilityUpdateWithoutCare2xSyncsInput>, FacilityUncheckedUpdateWithoutCare2xSyncsInput>
+  }
+
+  export type FacilityApiKeyUpdateOneRequiredWithoutCare2xSyncsNestedInput = {
+    create?: XOR<FacilityApiKeyCreateWithoutCare2xSyncsInput, FacilityApiKeyUncheckedCreateWithoutCare2xSyncsInput>
+    connectOrCreate?: FacilityApiKeyCreateOrConnectWithoutCare2xSyncsInput
+    upsert?: FacilityApiKeyUpsertWithoutCare2xSyncsInput
+    connect?: FacilityApiKeyWhereUniqueInput
+    update?: XOR<XOR<FacilityApiKeyUpdateToOneWithWhereWithoutCare2xSyncsInput, FacilityApiKeyUpdateWithoutCare2xSyncsInput>, FacilityApiKeyUncheckedUpdateWithoutCare2xSyncsInput>
+  }
+
+  export type Care2xSyncEntryUpdateManyWithoutSyncNestedInput = {
+    create?: XOR<Care2xSyncEntryCreateWithoutSyncInput, Care2xSyncEntryUncheckedCreateWithoutSyncInput> | Care2xSyncEntryCreateWithoutSyncInput[] | Care2xSyncEntryUncheckedCreateWithoutSyncInput[]
+    connectOrCreate?: Care2xSyncEntryCreateOrConnectWithoutSyncInput | Care2xSyncEntryCreateOrConnectWithoutSyncInput[]
+    upsert?: Care2xSyncEntryUpsertWithWhereUniqueWithoutSyncInput | Care2xSyncEntryUpsertWithWhereUniqueWithoutSyncInput[]
+    createMany?: Care2xSyncEntryCreateManySyncInputEnvelope
+    set?: Care2xSyncEntryWhereUniqueInput | Care2xSyncEntryWhereUniqueInput[]
+    disconnect?: Care2xSyncEntryWhereUniqueInput | Care2xSyncEntryWhereUniqueInput[]
+    delete?: Care2xSyncEntryWhereUniqueInput | Care2xSyncEntryWhereUniqueInput[]
+    connect?: Care2xSyncEntryWhereUniqueInput | Care2xSyncEntryWhereUniqueInput[]
+    update?: Care2xSyncEntryUpdateWithWhereUniqueWithoutSyncInput | Care2xSyncEntryUpdateWithWhereUniqueWithoutSyncInput[]
+    updateMany?: Care2xSyncEntryUpdateManyWithWhereWithoutSyncInput | Care2xSyncEntryUpdateManyWithWhereWithoutSyncInput[]
+    deleteMany?: Care2xSyncEntryScalarWhereInput | Care2xSyncEntryScalarWhereInput[]
+  }
+
+  export type Care2xSyncEntryUncheckedUpdateManyWithoutSyncNestedInput = {
+    create?: XOR<Care2xSyncEntryCreateWithoutSyncInput, Care2xSyncEntryUncheckedCreateWithoutSyncInput> | Care2xSyncEntryCreateWithoutSyncInput[] | Care2xSyncEntryUncheckedCreateWithoutSyncInput[]
+    connectOrCreate?: Care2xSyncEntryCreateOrConnectWithoutSyncInput | Care2xSyncEntryCreateOrConnectWithoutSyncInput[]
+    upsert?: Care2xSyncEntryUpsertWithWhereUniqueWithoutSyncInput | Care2xSyncEntryUpsertWithWhereUniqueWithoutSyncInput[]
+    createMany?: Care2xSyncEntryCreateManySyncInputEnvelope
+    set?: Care2xSyncEntryWhereUniqueInput | Care2xSyncEntryWhereUniqueInput[]
+    disconnect?: Care2xSyncEntryWhereUniqueInput | Care2xSyncEntryWhereUniqueInput[]
+    delete?: Care2xSyncEntryWhereUniqueInput | Care2xSyncEntryWhereUniqueInput[]
+    connect?: Care2xSyncEntryWhereUniqueInput | Care2xSyncEntryWhereUniqueInput[]
+    update?: Care2xSyncEntryUpdateWithWhereUniqueWithoutSyncInput | Care2xSyncEntryUpdateWithWhereUniqueWithoutSyncInput[]
+    updateMany?: Care2xSyncEntryUpdateManyWithWhereWithoutSyncInput | Care2xSyncEntryUpdateManyWithWhereWithoutSyncInput[]
+    deleteMany?: Care2xSyncEntryScalarWhereInput | Care2xSyncEntryScalarWhereInput[]
+  }
+
+  export type Care2xSyncCreateNestedOneWithoutEntriesInput = {
+    create?: XOR<Care2xSyncCreateWithoutEntriesInput, Care2xSyncUncheckedCreateWithoutEntriesInput>
+    connectOrCreate?: Care2xSyncCreateOrConnectWithoutEntriesInput
+    connect?: Care2xSyncWhereUniqueInput
+  }
+
+  export type Care2xSyncUpdateOneRequiredWithoutEntriesNestedInput = {
+    create?: XOR<Care2xSyncCreateWithoutEntriesInput, Care2xSyncUncheckedCreateWithoutEntriesInput>
+    connectOrCreate?: Care2xSyncCreateOrConnectWithoutEntriesInput
+    upsert?: Care2xSyncUpsertWithoutEntriesInput
+    connect?: Care2xSyncWhereUniqueInput
+    update?: XOR<XOR<Care2xSyncUpdateToOneWithWhereWithoutEntriesInput, Care2xSyncUpdateWithoutEntriesInput>, Care2xSyncUncheckedUpdateWithoutEntriesInput>
+  }
+
+  export type FacilityCreateNestedOneWithoutRecouvrementSyncsInput = {
+    create?: XOR<FacilityCreateWithoutRecouvrementSyncsInput, FacilityUncheckedCreateWithoutRecouvrementSyncsInput>
+    connectOrCreate?: FacilityCreateOrConnectWithoutRecouvrementSyncsInput
+    connect?: FacilityWhereUniqueInput
+  }
+
+  export type FacilityApiKeyCreateNestedOneWithoutRecouvrementSyncsInput = {
+    create?: XOR<FacilityApiKeyCreateWithoutRecouvrementSyncsInput, FacilityApiKeyUncheckedCreateWithoutRecouvrementSyncsInput>
+    connectOrCreate?: FacilityApiKeyCreateOrConnectWithoutRecouvrementSyncsInput
+    connect?: FacilityApiKeyWhereUniqueInput
+  }
+
+  export type FacilityUpdateOneRequiredWithoutRecouvrementSyncsNestedInput = {
+    create?: XOR<FacilityCreateWithoutRecouvrementSyncsInput, FacilityUncheckedCreateWithoutRecouvrementSyncsInput>
+    connectOrCreate?: FacilityCreateOrConnectWithoutRecouvrementSyncsInput
+    upsert?: FacilityUpsertWithoutRecouvrementSyncsInput
+    connect?: FacilityWhereUniqueInput
+    update?: XOR<XOR<FacilityUpdateToOneWithWhereWithoutRecouvrementSyncsInput, FacilityUpdateWithoutRecouvrementSyncsInput>, FacilityUncheckedUpdateWithoutRecouvrementSyncsInput>
+  }
+
+  export type FacilityApiKeyUpdateOneRequiredWithoutRecouvrementSyncsNestedInput = {
+    create?: XOR<FacilityApiKeyCreateWithoutRecouvrementSyncsInput, FacilityApiKeyUncheckedCreateWithoutRecouvrementSyncsInput>
+    connectOrCreate?: FacilityApiKeyCreateOrConnectWithoutRecouvrementSyncsInput
+    upsert?: FacilityApiKeyUpsertWithoutRecouvrementSyncsInput
+    connect?: FacilityApiKeyWhereUniqueInput
+    update?: XOR<XOR<FacilityApiKeyUpdateToOneWithWhereWithoutRecouvrementSyncsInput, FacilityApiKeyUpdateWithoutRecouvrementSyncsInput>, FacilityApiKeyUncheckedUpdateWithoutRecouvrementSyncsInput>
+  }
+
   export type UserCreateNestedOneWithoutPlanningEventsInput = {
     create?: XOR<UserCreateWithoutPlanningEventsInput, UserUncheckedCreateWithoutPlanningEventsInput>
     connectOrCreate?: UserCreateOrConnectWithoutPlanningEventsInput
@@ -41076,6 +48843,29 @@ export namespace Prisma {
     gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
   }
+  export type NestedJsonFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<NestedJsonFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>,
+        Required<NestedJsonFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>
+
+  export type NestedJsonFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
 
   export type NestedEnumPlanningEventTypeFilter<$PrismaModel = never> = {
     equals?: $Enums.PlanningEventType | EnumPlanningEventTypeFieldRefInput<$PrismaModel>
@@ -41318,6 +49108,9 @@ export namespace Prisma {
     budgets?: BudgetCreateNestedManyWithoutFacilityInput
     statDeadlines?: StatDeadlineCreateNestedManyWithoutFacilityInput
     planningEvents?: PlanningEventCreateNestedManyWithoutFacilityInput
+    apiKey?: FacilityApiKeyCreateNestedOneWithoutFacilityInput
+    care2xSyncs?: Care2xSyncCreateNestedManyWithoutFacilityInput
+    recouvrementSyncs?: Care2xRecouvrementSyncCreateNestedManyWithoutFacilityInput
   }
 
   export type FacilityUncheckedCreateWithoutRegionInput = {
@@ -41340,6 +49133,9 @@ export namespace Prisma {
     budgets?: BudgetUncheckedCreateNestedManyWithoutFacilityInput
     statDeadlines?: StatDeadlineUncheckedCreateNestedManyWithoutFacilityInput
     planningEvents?: PlanningEventUncheckedCreateNestedManyWithoutFacilityInput
+    apiKey?: FacilityApiKeyUncheckedCreateNestedOneWithoutFacilityInput
+    care2xSyncs?: Care2xSyncUncheckedCreateNestedManyWithoutFacilityInput
+    recouvrementSyncs?: Care2xRecouvrementSyncUncheckedCreateNestedManyWithoutFacilityInput
   }
 
   export type FacilityCreateOrConnectWithoutRegionInput = {
@@ -42063,6 +49859,99 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type FacilityApiKeyCreateWithoutFacilityInput = {
+    id?: string
+    keyHash: string
+    keyPreview: string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    lastUsedAt?: Date | string | null
+    care2xSyncs?: Care2xSyncCreateNestedManyWithoutApiKeyInput
+    recouvrementSyncs?: Care2xRecouvrementSyncCreateNestedManyWithoutApiKeyInput
+  }
+
+  export type FacilityApiKeyUncheckedCreateWithoutFacilityInput = {
+    id?: string
+    keyHash: string
+    keyPreview: string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    lastUsedAt?: Date | string | null
+    care2xSyncs?: Care2xSyncUncheckedCreateNestedManyWithoutApiKeyInput
+    recouvrementSyncs?: Care2xRecouvrementSyncUncheckedCreateNestedManyWithoutApiKeyInput
+  }
+
+  export type FacilityApiKeyCreateOrConnectWithoutFacilityInput = {
+    where: FacilityApiKeyWhereUniqueInput
+    create: XOR<FacilityApiKeyCreateWithoutFacilityInput, FacilityApiKeyUncheckedCreateWithoutFacilityInput>
+  }
+
+  export type Care2xSyncCreateWithoutFacilityInput = {
+    id?: string
+    batchRef: string
+    entriesCount: number
+    totalAmount: Decimal | DecimalJsLike | number | string
+    periodStart: Date | string
+    periodEnd: Date | string
+    receivedAt?: Date | string
+    apiKey: FacilityApiKeyCreateNestedOneWithoutCare2xSyncsInput
+    entries?: Care2xSyncEntryCreateNestedManyWithoutSyncInput
+  }
+
+  export type Care2xSyncUncheckedCreateWithoutFacilityInput = {
+    id?: string
+    apiKeyId: string
+    batchRef: string
+    entriesCount: number
+    totalAmount: Decimal | DecimalJsLike | number | string
+    periodStart: Date | string
+    periodEnd: Date | string
+    receivedAt?: Date | string
+    entries?: Care2xSyncEntryUncheckedCreateNestedManyWithoutSyncInput
+  }
+
+  export type Care2xSyncCreateOrConnectWithoutFacilityInput = {
+    where: Care2xSyncWhereUniqueInput
+    create: XOR<Care2xSyncCreateWithoutFacilityInput, Care2xSyncUncheckedCreateWithoutFacilityInput>
+  }
+
+  export type Care2xSyncCreateManyFacilityInputEnvelope = {
+    data: Care2xSyncCreateManyFacilityInput | Care2xSyncCreateManyFacilityInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type Care2xRecouvrementSyncCreateWithoutFacilityInput = {
+    id?: string
+    batchRef: string
+    totalFacture: Decimal | DecimalJsLike | number | string
+    totalRecouvre: Decimal | DecimalJsLike | number | string
+    rapport: JsonNullValueInput | InputJsonValue
+    receivedAt?: Date | string
+    apiKey: FacilityApiKeyCreateNestedOneWithoutRecouvrementSyncsInput
+  }
+
+  export type Care2xRecouvrementSyncUncheckedCreateWithoutFacilityInput = {
+    id?: string
+    apiKeyId: string
+    batchRef: string
+    totalFacture: Decimal | DecimalJsLike | number | string
+    totalRecouvre: Decimal | DecimalJsLike | number | string
+    rapport: JsonNullValueInput | InputJsonValue
+    receivedAt?: Date | string
+  }
+
+  export type Care2xRecouvrementSyncCreateOrConnectWithoutFacilityInput = {
+    where: Care2xRecouvrementSyncWhereUniqueInput
+    create: XOR<Care2xRecouvrementSyncCreateWithoutFacilityInput, Care2xRecouvrementSyncUncheckedCreateWithoutFacilityInput>
+  }
+
+  export type Care2xRecouvrementSyncCreateManyFacilityInputEnvelope = {
+    data: Care2xRecouvrementSyncCreateManyFacilityInput | Care2xRecouvrementSyncCreateManyFacilityInput[]
+    skipDuplicates?: boolean
+  }
+
   export type RegionUpsertWithoutFacilitiesInput = {
     update: XOR<RegionUpdateWithoutFacilitiesInput, RegionUncheckedUpdateWithoutFacilitiesInput>
     create: XOR<RegionCreateWithoutFacilitiesInput, RegionUncheckedCreateWithoutFacilitiesInput>
@@ -42270,6 +50159,102 @@ export namespace Prisma {
     data: XOR<PlanningEventUpdateManyMutationInput, PlanningEventUncheckedUpdateManyWithoutFacilityInput>
   }
 
+  export type FacilityApiKeyUpsertWithoutFacilityInput = {
+    update: XOR<FacilityApiKeyUpdateWithoutFacilityInput, FacilityApiKeyUncheckedUpdateWithoutFacilityInput>
+    create: XOR<FacilityApiKeyCreateWithoutFacilityInput, FacilityApiKeyUncheckedCreateWithoutFacilityInput>
+    where?: FacilityApiKeyWhereInput
+  }
+
+  export type FacilityApiKeyUpdateToOneWithWhereWithoutFacilityInput = {
+    where?: FacilityApiKeyWhereInput
+    data: XOR<FacilityApiKeyUpdateWithoutFacilityInput, FacilityApiKeyUncheckedUpdateWithoutFacilityInput>
+  }
+
+  export type FacilityApiKeyUpdateWithoutFacilityInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    keyHash?: StringFieldUpdateOperationsInput | string
+    keyPreview?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastUsedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    care2xSyncs?: Care2xSyncUpdateManyWithoutApiKeyNestedInput
+    recouvrementSyncs?: Care2xRecouvrementSyncUpdateManyWithoutApiKeyNestedInput
+  }
+
+  export type FacilityApiKeyUncheckedUpdateWithoutFacilityInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    keyHash?: StringFieldUpdateOperationsInput | string
+    keyPreview?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastUsedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    care2xSyncs?: Care2xSyncUncheckedUpdateManyWithoutApiKeyNestedInput
+    recouvrementSyncs?: Care2xRecouvrementSyncUncheckedUpdateManyWithoutApiKeyNestedInput
+  }
+
+  export type Care2xSyncUpsertWithWhereUniqueWithoutFacilityInput = {
+    where: Care2xSyncWhereUniqueInput
+    update: XOR<Care2xSyncUpdateWithoutFacilityInput, Care2xSyncUncheckedUpdateWithoutFacilityInput>
+    create: XOR<Care2xSyncCreateWithoutFacilityInput, Care2xSyncUncheckedCreateWithoutFacilityInput>
+  }
+
+  export type Care2xSyncUpdateWithWhereUniqueWithoutFacilityInput = {
+    where: Care2xSyncWhereUniqueInput
+    data: XOR<Care2xSyncUpdateWithoutFacilityInput, Care2xSyncUncheckedUpdateWithoutFacilityInput>
+  }
+
+  export type Care2xSyncUpdateManyWithWhereWithoutFacilityInput = {
+    where: Care2xSyncScalarWhereInput
+    data: XOR<Care2xSyncUpdateManyMutationInput, Care2xSyncUncheckedUpdateManyWithoutFacilityInput>
+  }
+
+  export type Care2xSyncScalarWhereInput = {
+    AND?: Care2xSyncScalarWhereInput | Care2xSyncScalarWhereInput[]
+    OR?: Care2xSyncScalarWhereInput[]
+    NOT?: Care2xSyncScalarWhereInput | Care2xSyncScalarWhereInput[]
+    id?: StringFilter<"Care2xSync"> | string
+    facilityId?: StringFilter<"Care2xSync"> | string
+    apiKeyId?: StringFilter<"Care2xSync"> | string
+    batchRef?: StringFilter<"Care2xSync"> | string
+    entriesCount?: IntFilter<"Care2xSync"> | number
+    totalAmount?: DecimalFilter<"Care2xSync"> | Decimal | DecimalJsLike | number | string
+    periodStart?: DateTimeFilter<"Care2xSync"> | Date | string
+    periodEnd?: DateTimeFilter<"Care2xSync"> | Date | string
+    receivedAt?: DateTimeFilter<"Care2xSync"> | Date | string
+  }
+
+  export type Care2xRecouvrementSyncUpsertWithWhereUniqueWithoutFacilityInput = {
+    where: Care2xRecouvrementSyncWhereUniqueInput
+    update: XOR<Care2xRecouvrementSyncUpdateWithoutFacilityInput, Care2xRecouvrementSyncUncheckedUpdateWithoutFacilityInput>
+    create: XOR<Care2xRecouvrementSyncCreateWithoutFacilityInput, Care2xRecouvrementSyncUncheckedCreateWithoutFacilityInput>
+  }
+
+  export type Care2xRecouvrementSyncUpdateWithWhereUniqueWithoutFacilityInput = {
+    where: Care2xRecouvrementSyncWhereUniqueInput
+    data: XOR<Care2xRecouvrementSyncUpdateWithoutFacilityInput, Care2xRecouvrementSyncUncheckedUpdateWithoutFacilityInput>
+  }
+
+  export type Care2xRecouvrementSyncUpdateManyWithWhereWithoutFacilityInput = {
+    where: Care2xRecouvrementSyncScalarWhereInput
+    data: XOR<Care2xRecouvrementSyncUpdateManyMutationInput, Care2xRecouvrementSyncUncheckedUpdateManyWithoutFacilityInput>
+  }
+
+  export type Care2xRecouvrementSyncScalarWhereInput = {
+    AND?: Care2xRecouvrementSyncScalarWhereInput | Care2xRecouvrementSyncScalarWhereInput[]
+    OR?: Care2xRecouvrementSyncScalarWhereInput[]
+    NOT?: Care2xRecouvrementSyncScalarWhereInput | Care2xRecouvrementSyncScalarWhereInput[]
+    id?: StringFilter<"Care2xRecouvrementSync"> | string
+    facilityId?: StringFilter<"Care2xRecouvrementSync"> | string
+    apiKeyId?: StringFilter<"Care2xRecouvrementSync"> | string
+    batchRef?: StringFilter<"Care2xRecouvrementSync"> | string
+    totalFacture?: DecimalFilter<"Care2xRecouvrementSync"> | Decimal | DecimalJsLike | number | string
+    totalRecouvre?: DecimalFilter<"Care2xRecouvrementSync"> | Decimal | DecimalJsLike | number | string
+    rapport?: JsonFilter<"Care2xRecouvrementSync">
+    receivedAt?: DateTimeFilter<"Care2xRecouvrementSync"> | Date | string
+  }
+
   export type OrganizationCreateWithoutUsersInput = {
     id?: string
     name: string
@@ -42352,6 +50337,9 @@ export namespace Prisma {
     budgets?: BudgetCreateNestedManyWithoutFacilityInput
     statDeadlines?: StatDeadlineCreateNestedManyWithoutFacilityInput
     planningEvents?: PlanningEventCreateNestedManyWithoutFacilityInput
+    apiKey?: FacilityApiKeyCreateNestedOneWithoutFacilityInput
+    care2xSyncs?: Care2xSyncCreateNestedManyWithoutFacilityInput
+    recouvrementSyncs?: Care2xRecouvrementSyncCreateNestedManyWithoutFacilityInput
   }
 
   export type FacilityUncheckedCreateWithoutUsersInput = {
@@ -42374,6 +50362,9 @@ export namespace Prisma {
     budgets?: BudgetUncheckedCreateNestedManyWithoutFacilityInput
     statDeadlines?: StatDeadlineUncheckedCreateNestedManyWithoutFacilityInput
     planningEvents?: PlanningEventUncheckedCreateNestedManyWithoutFacilityInput
+    apiKey?: FacilityApiKeyUncheckedCreateNestedOneWithoutFacilityInput
+    care2xSyncs?: Care2xSyncUncheckedCreateNestedManyWithoutFacilityInput
+    recouvrementSyncs?: Care2xRecouvrementSyncUncheckedCreateNestedManyWithoutFacilityInput
   }
 
   export type FacilityCreateOrConnectWithoutUsersInput = {
@@ -42906,6 +50897,9 @@ export namespace Prisma {
     budgets?: BudgetUpdateManyWithoutFacilityNestedInput
     statDeadlines?: StatDeadlineUpdateManyWithoutFacilityNestedInput
     planningEvents?: PlanningEventUpdateManyWithoutFacilityNestedInput
+    apiKey?: FacilityApiKeyUpdateOneWithoutFacilityNestedInput
+    care2xSyncs?: Care2xSyncUpdateManyWithoutFacilityNestedInput
+    recouvrementSyncs?: Care2xRecouvrementSyncUpdateManyWithoutFacilityNestedInput
   }
 
   export type FacilityUncheckedUpdateWithoutUsersInput = {
@@ -42928,6 +50922,9 @@ export namespace Prisma {
     budgets?: BudgetUncheckedUpdateManyWithoutFacilityNestedInput
     statDeadlines?: StatDeadlineUncheckedUpdateManyWithoutFacilityNestedInput
     planningEvents?: PlanningEventUncheckedUpdateManyWithoutFacilityNestedInput
+    apiKey?: FacilityApiKeyUncheckedUpdateOneWithoutFacilityNestedInput
+    care2xSyncs?: Care2xSyncUncheckedUpdateManyWithoutFacilityNestedInput
+    recouvrementSyncs?: Care2xRecouvrementSyncUncheckedUpdateManyWithoutFacilityNestedInput
   }
 
   export type DeclarationUpsertWithWhereUniqueWithoutSubmittedByInput = {
@@ -43379,6 +51376,9 @@ export namespace Prisma {
     budgets?: BudgetCreateNestedManyWithoutFacilityInput
     statDeadlines?: StatDeadlineCreateNestedManyWithoutFacilityInput
     planningEvents?: PlanningEventCreateNestedManyWithoutFacilityInput
+    apiKey?: FacilityApiKeyCreateNestedOneWithoutFacilityInput
+    care2xSyncs?: Care2xSyncCreateNestedManyWithoutFacilityInput
+    recouvrementSyncs?: Care2xRecouvrementSyncCreateNestedManyWithoutFacilityInput
   }
 
   export type FacilityUncheckedCreateWithoutPeriodConfigsInput = {
@@ -43401,6 +51401,9 @@ export namespace Prisma {
     budgets?: BudgetUncheckedCreateNestedManyWithoutFacilityInput
     statDeadlines?: StatDeadlineUncheckedCreateNestedManyWithoutFacilityInput
     planningEvents?: PlanningEventUncheckedCreateNestedManyWithoutFacilityInput
+    apiKey?: FacilityApiKeyUncheckedCreateNestedOneWithoutFacilityInput
+    care2xSyncs?: Care2xSyncUncheckedCreateNestedManyWithoutFacilityInput
+    recouvrementSyncs?: Care2xRecouvrementSyncUncheckedCreateNestedManyWithoutFacilityInput
   }
 
   export type FacilityCreateOrConnectWithoutPeriodConfigsInput = {
@@ -43476,6 +51479,9 @@ export namespace Prisma {
     budgets?: BudgetUpdateManyWithoutFacilityNestedInput
     statDeadlines?: StatDeadlineUpdateManyWithoutFacilityNestedInput
     planningEvents?: PlanningEventUpdateManyWithoutFacilityNestedInput
+    apiKey?: FacilityApiKeyUpdateOneWithoutFacilityNestedInput
+    care2xSyncs?: Care2xSyncUpdateManyWithoutFacilityNestedInput
+    recouvrementSyncs?: Care2xRecouvrementSyncUpdateManyWithoutFacilityNestedInput
   }
 
   export type FacilityUncheckedUpdateWithoutPeriodConfigsInput = {
@@ -43498,6 +51504,9 @@ export namespace Prisma {
     budgets?: BudgetUncheckedUpdateManyWithoutFacilityNestedInput
     statDeadlines?: StatDeadlineUncheckedUpdateManyWithoutFacilityNestedInput
     planningEvents?: PlanningEventUncheckedUpdateManyWithoutFacilityNestedInput
+    apiKey?: FacilityApiKeyUncheckedUpdateOneWithoutFacilityNestedInput
+    care2xSyncs?: Care2xSyncUncheckedUpdateManyWithoutFacilityNestedInput
+    recouvrementSyncs?: Care2xRecouvrementSyncUncheckedUpdateManyWithoutFacilityNestedInput
   }
 
   export type FacilityCreateWithoutDeclarationsInput = {
@@ -43520,6 +51529,9 @@ export namespace Prisma {
     budgets?: BudgetCreateNestedManyWithoutFacilityInput
     statDeadlines?: StatDeadlineCreateNestedManyWithoutFacilityInput
     planningEvents?: PlanningEventCreateNestedManyWithoutFacilityInput
+    apiKey?: FacilityApiKeyCreateNestedOneWithoutFacilityInput
+    care2xSyncs?: Care2xSyncCreateNestedManyWithoutFacilityInput
+    recouvrementSyncs?: Care2xRecouvrementSyncCreateNestedManyWithoutFacilityInput
   }
 
   export type FacilityUncheckedCreateWithoutDeclarationsInput = {
@@ -43542,6 +51554,9 @@ export namespace Prisma {
     budgets?: BudgetUncheckedCreateNestedManyWithoutFacilityInput
     statDeadlines?: StatDeadlineUncheckedCreateNestedManyWithoutFacilityInput
     planningEvents?: PlanningEventUncheckedCreateNestedManyWithoutFacilityInput
+    apiKey?: FacilityApiKeyUncheckedCreateNestedOneWithoutFacilityInput
+    care2xSyncs?: Care2xSyncUncheckedCreateNestedManyWithoutFacilityInput
+    recouvrementSyncs?: Care2xRecouvrementSyncUncheckedCreateNestedManyWithoutFacilityInput
   }
 
   export type FacilityCreateOrConnectWithoutDeclarationsInput = {
@@ -43798,6 +51813,9 @@ export namespace Prisma {
     budgets?: BudgetUpdateManyWithoutFacilityNestedInput
     statDeadlines?: StatDeadlineUpdateManyWithoutFacilityNestedInput
     planningEvents?: PlanningEventUpdateManyWithoutFacilityNestedInput
+    apiKey?: FacilityApiKeyUpdateOneWithoutFacilityNestedInput
+    care2xSyncs?: Care2xSyncUpdateManyWithoutFacilityNestedInput
+    recouvrementSyncs?: Care2xRecouvrementSyncUpdateManyWithoutFacilityNestedInput
   }
 
   export type FacilityUncheckedUpdateWithoutDeclarationsInput = {
@@ -43820,6 +51838,9 @@ export namespace Prisma {
     budgets?: BudgetUncheckedUpdateManyWithoutFacilityNestedInput
     statDeadlines?: StatDeadlineUncheckedUpdateManyWithoutFacilityNestedInput
     planningEvents?: PlanningEventUncheckedUpdateManyWithoutFacilityNestedInput
+    apiKey?: FacilityApiKeyUncheckedUpdateOneWithoutFacilityNestedInput
+    care2xSyncs?: Care2xSyncUncheckedUpdateManyWithoutFacilityNestedInput
+    recouvrementSyncs?: Care2xRecouvrementSyncUncheckedUpdateManyWithoutFacilityNestedInput
   }
 
   export type UserUpsertWithoutDeclarationsInput = {
@@ -44385,6 +52406,9 @@ export namespace Prisma {
     statSheets?: StatSheetCreateNestedManyWithoutFacilityInput
     statDeadlines?: StatDeadlineCreateNestedManyWithoutFacilityInput
     planningEvents?: PlanningEventCreateNestedManyWithoutFacilityInput
+    apiKey?: FacilityApiKeyCreateNestedOneWithoutFacilityInput
+    care2xSyncs?: Care2xSyncCreateNestedManyWithoutFacilityInput
+    recouvrementSyncs?: Care2xRecouvrementSyncCreateNestedManyWithoutFacilityInput
   }
 
   export type FacilityUncheckedCreateWithoutBudgetsInput = {
@@ -44407,6 +52431,9 @@ export namespace Prisma {
     statSheets?: StatSheetUncheckedCreateNestedManyWithoutFacilityInput
     statDeadlines?: StatDeadlineUncheckedCreateNestedManyWithoutFacilityInput
     planningEvents?: PlanningEventUncheckedCreateNestedManyWithoutFacilityInput
+    apiKey?: FacilityApiKeyUncheckedCreateNestedOneWithoutFacilityInput
+    care2xSyncs?: Care2xSyncUncheckedCreateNestedManyWithoutFacilityInput
+    recouvrementSyncs?: Care2xRecouvrementSyncUncheckedCreateNestedManyWithoutFacilityInput
   }
 
   export type FacilityCreateOrConnectWithoutBudgetsInput = {
@@ -44445,6 +52472,9 @@ export namespace Prisma {
     statSheets?: StatSheetUpdateManyWithoutFacilityNestedInput
     statDeadlines?: StatDeadlineUpdateManyWithoutFacilityNestedInput
     planningEvents?: PlanningEventUpdateManyWithoutFacilityNestedInput
+    apiKey?: FacilityApiKeyUpdateOneWithoutFacilityNestedInput
+    care2xSyncs?: Care2xSyncUpdateManyWithoutFacilityNestedInput
+    recouvrementSyncs?: Care2xRecouvrementSyncUpdateManyWithoutFacilityNestedInput
   }
 
   export type FacilityUncheckedUpdateWithoutBudgetsInput = {
@@ -44467,6 +52497,9 @@ export namespace Prisma {
     statSheets?: StatSheetUncheckedUpdateManyWithoutFacilityNestedInput
     statDeadlines?: StatDeadlineUncheckedUpdateManyWithoutFacilityNestedInput
     planningEvents?: PlanningEventUncheckedUpdateManyWithoutFacilityNestedInput
+    apiKey?: FacilityApiKeyUncheckedUpdateOneWithoutFacilityNestedInput
+    care2xSyncs?: Care2xSyncUncheckedUpdateManyWithoutFacilityNestedInput
+    recouvrementSyncs?: Care2xRecouvrementSyncUncheckedUpdateManyWithoutFacilityNestedInput
   }
 
   export type FacilityCreateWithoutStatSheetsInput = {
@@ -44489,6 +52522,9 @@ export namespace Prisma {
     budgets?: BudgetCreateNestedManyWithoutFacilityInput
     statDeadlines?: StatDeadlineCreateNestedManyWithoutFacilityInput
     planningEvents?: PlanningEventCreateNestedManyWithoutFacilityInput
+    apiKey?: FacilityApiKeyCreateNestedOneWithoutFacilityInput
+    care2xSyncs?: Care2xSyncCreateNestedManyWithoutFacilityInput
+    recouvrementSyncs?: Care2xRecouvrementSyncCreateNestedManyWithoutFacilityInput
   }
 
   export type FacilityUncheckedCreateWithoutStatSheetsInput = {
@@ -44511,6 +52547,9 @@ export namespace Prisma {
     budgets?: BudgetUncheckedCreateNestedManyWithoutFacilityInput
     statDeadlines?: StatDeadlineUncheckedCreateNestedManyWithoutFacilityInput
     planningEvents?: PlanningEventUncheckedCreateNestedManyWithoutFacilityInput
+    apiKey?: FacilityApiKeyUncheckedCreateNestedOneWithoutFacilityInput
+    care2xSyncs?: Care2xSyncUncheckedCreateNestedManyWithoutFacilityInput
+    recouvrementSyncs?: Care2xRecouvrementSyncUncheckedCreateNestedManyWithoutFacilityInput
   }
 
   export type FacilityCreateOrConnectWithoutStatSheetsInput = {
@@ -44668,6 +52707,9 @@ export namespace Prisma {
     budgets?: BudgetUpdateManyWithoutFacilityNestedInput
     statDeadlines?: StatDeadlineUpdateManyWithoutFacilityNestedInput
     planningEvents?: PlanningEventUpdateManyWithoutFacilityNestedInput
+    apiKey?: FacilityApiKeyUpdateOneWithoutFacilityNestedInput
+    care2xSyncs?: Care2xSyncUpdateManyWithoutFacilityNestedInput
+    recouvrementSyncs?: Care2xRecouvrementSyncUpdateManyWithoutFacilityNestedInput
   }
 
   export type FacilityUncheckedUpdateWithoutStatSheetsInput = {
@@ -44690,6 +52732,9 @@ export namespace Prisma {
     budgets?: BudgetUncheckedUpdateManyWithoutFacilityNestedInput
     statDeadlines?: StatDeadlineUncheckedUpdateManyWithoutFacilityNestedInput
     planningEvents?: PlanningEventUncheckedUpdateManyWithoutFacilityNestedInput
+    apiKey?: FacilityApiKeyUncheckedUpdateOneWithoutFacilityNestedInput
+    care2xSyncs?: Care2xSyncUncheckedUpdateManyWithoutFacilityNestedInput
+    recouvrementSyncs?: Care2xRecouvrementSyncUncheckedUpdateManyWithoutFacilityNestedInput
   }
 
   export type UserUpsertWithoutStatSheetsInput = {
@@ -45143,6 +53188,9 @@ export namespace Prisma {
     statSheets?: StatSheetCreateNestedManyWithoutFacilityInput
     budgets?: BudgetCreateNestedManyWithoutFacilityInput
     planningEvents?: PlanningEventCreateNestedManyWithoutFacilityInput
+    apiKey?: FacilityApiKeyCreateNestedOneWithoutFacilityInput
+    care2xSyncs?: Care2xSyncCreateNestedManyWithoutFacilityInput
+    recouvrementSyncs?: Care2xRecouvrementSyncCreateNestedManyWithoutFacilityInput
   }
 
   export type FacilityUncheckedCreateWithoutStatDeadlinesInput = {
@@ -45165,6 +53213,9 @@ export namespace Prisma {
     statSheets?: StatSheetUncheckedCreateNestedManyWithoutFacilityInput
     budgets?: BudgetUncheckedCreateNestedManyWithoutFacilityInput
     planningEvents?: PlanningEventUncheckedCreateNestedManyWithoutFacilityInput
+    apiKey?: FacilityApiKeyUncheckedCreateNestedOneWithoutFacilityInput
+    care2xSyncs?: Care2xSyncUncheckedCreateNestedManyWithoutFacilityInput
+    recouvrementSyncs?: Care2xRecouvrementSyncUncheckedCreateNestedManyWithoutFacilityInput
   }
 
   export type FacilityCreateOrConnectWithoutStatDeadlinesInput = {
@@ -45305,6 +53356,9 @@ export namespace Prisma {
     statSheets?: StatSheetUpdateManyWithoutFacilityNestedInput
     budgets?: BudgetUpdateManyWithoutFacilityNestedInput
     planningEvents?: PlanningEventUpdateManyWithoutFacilityNestedInput
+    apiKey?: FacilityApiKeyUpdateOneWithoutFacilityNestedInput
+    care2xSyncs?: Care2xSyncUpdateManyWithoutFacilityNestedInput
+    recouvrementSyncs?: Care2xRecouvrementSyncUpdateManyWithoutFacilityNestedInput
   }
 
   export type FacilityUncheckedUpdateWithoutStatDeadlinesInput = {
@@ -45327,6 +53381,9 @@ export namespace Prisma {
     statSheets?: StatSheetUncheckedUpdateManyWithoutFacilityNestedInput
     budgets?: BudgetUncheckedUpdateManyWithoutFacilityNestedInput
     planningEvents?: PlanningEventUncheckedUpdateManyWithoutFacilityNestedInput
+    apiKey?: FacilityApiKeyUncheckedUpdateOneWithoutFacilityNestedInput
+    care2xSyncs?: Care2xSyncUncheckedUpdateManyWithoutFacilityNestedInput
+    recouvrementSyncs?: Care2xRecouvrementSyncUncheckedUpdateManyWithoutFacilityNestedInput
   }
 
   export type UserUpsertWithoutStatDeadlinesInput = {
@@ -46326,6 +54383,696 @@ export namespace Prisma {
     planningEvents?: PlanningEventUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
+  export type FacilityCreateWithoutApiKeyInput = {
+    id?: string
+    name: string
+    code: string
+    type: $Enums.FacilityType
+    address?: string | null
+    phone?: string | null
+    email?: string | null
+    latitude?: number | null
+    longitude?: number | null
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    region: RegionCreateNestedOneWithoutFacilitiesInput
+    users?: UserCreateNestedManyWithoutFacilityInput
+    declarations?: DeclarationCreateNestedManyWithoutFacilityInput
+    periodConfigs?: DeclarationPeriodConfigCreateNestedManyWithoutFacilityInput
+    statSheets?: StatSheetCreateNestedManyWithoutFacilityInput
+    budgets?: BudgetCreateNestedManyWithoutFacilityInput
+    statDeadlines?: StatDeadlineCreateNestedManyWithoutFacilityInput
+    planningEvents?: PlanningEventCreateNestedManyWithoutFacilityInput
+    care2xSyncs?: Care2xSyncCreateNestedManyWithoutFacilityInput
+    recouvrementSyncs?: Care2xRecouvrementSyncCreateNestedManyWithoutFacilityInput
+  }
+
+  export type FacilityUncheckedCreateWithoutApiKeyInput = {
+    id?: string
+    name: string
+    code: string
+    type: $Enums.FacilityType
+    regionId: string
+    address?: string | null
+    phone?: string | null
+    email?: string | null
+    latitude?: number | null
+    longitude?: number | null
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    users?: UserUncheckedCreateNestedManyWithoutFacilityInput
+    declarations?: DeclarationUncheckedCreateNestedManyWithoutFacilityInput
+    periodConfigs?: DeclarationPeriodConfigUncheckedCreateNestedManyWithoutFacilityInput
+    statSheets?: StatSheetUncheckedCreateNestedManyWithoutFacilityInput
+    budgets?: BudgetUncheckedCreateNestedManyWithoutFacilityInput
+    statDeadlines?: StatDeadlineUncheckedCreateNestedManyWithoutFacilityInput
+    planningEvents?: PlanningEventUncheckedCreateNestedManyWithoutFacilityInput
+    care2xSyncs?: Care2xSyncUncheckedCreateNestedManyWithoutFacilityInput
+    recouvrementSyncs?: Care2xRecouvrementSyncUncheckedCreateNestedManyWithoutFacilityInput
+  }
+
+  export type FacilityCreateOrConnectWithoutApiKeyInput = {
+    where: FacilityWhereUniqueInput
+    create: XOR<FacilityCreateWithoutApiKeyInput, FacilityUncheckedCreateWithoutApiKeyInput>
+  }
+
+  export type Care2xSyncCreateWithoutApiKeyInput = {
+    id?: string
+    batchRef: string
+    entriesCount: number
+    totalAmount: Decimal | DecimalJsLike | number | string
+    periodStart: Date | string
+    periodEnd: Date | string
+    receivedAt?: Date | string
+    facility: FacilityCreateNestedOneWithoutCare2xSyncsInput
+    entries?: Care2xSyncEntryCreateNestedManyWithoutSyncInput
+  }
+
+  export type Care2xSyncUncheckedCreateWithoutApiKeyInput = {
+    id?: string
+    facilityId: string
+    batchRef: string
+    entriesCount: number
+    totalAmount: Decimal | DecimalJsLike | number | string
+    periodStart: Date | string
+    periodEnd: Date | string
+    receivedAt?: Date | string
+    entries?: Care2xSyncEntryUncheckedCreateNestedManyWithoutSyncInput
+  }
+
+  export type Care2xSyncCreateOrConnectWithoutApiKeyInput = {
+    where: Care2xSyncWhereUniqueInput
+    create: XOR<Care2xSyncCreateWithoutApiKeyInput, Care2xSyncUncheckedCreateWithoutApiKeyInput>
+  }
+
+  export type Care2xSyncCreateManyApiKeyInputEnvelope = {
+    data: Care2xSyncCreateManyApiKeyInput | Care2xSyncCreateManyApiKeyInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type Care2xRecouvrementSyncCreateWithoutApiKeyInput = {
+    id?: string
+    batchRef: string
+    totalFacture: Decimal | DecimalJsLike | number | string
+    totalRecouvre: Decimal | DecimalJsLike | number | string
+    rapport: JsonNullValueInput | InputJsonValue
+    receivedAt?: Date | string
+    facility: FacilityCreateNestedOneWithoutRecouvrementSyncsInput
+  }
+
+  export type Care2xRecouvrementSyncUncheckedCreateWithoutApiKeyInput = {
+    id?: string
+    facilityId: string
+    batchRef: string
+    totalFacture: Decimal | DecimalJsLike | number | string
+    totalRecouvre: Decimal | DecimalJsLike | number | string
+    rapport: JsonNullValueInput | InputJsonValue
+    receivedAt?: Date | string
+  }
+
+  export type Care2xRecouvrementSyncCreateOrConnectWithoutApiKeyInput = {
+    where: Care2xRecouvrementSyncWhereUniqueInput
+    create: XOR<Care2xRecouvrementSyncCreateWithoutApiKeyInput, Care2xRecouvrementSyncUncheckedCreateWithoutApiKeyInput>
+  }
+
+  export type Care2xRecouvrementSyncCreateManyApiKeyInputEnvelope = {
+    data: Care2xRecouvrementSyncCreateManyApiKeyInput | Care2xRecouvrementSyncCreateManyApiKeyInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type FacilityUpsertWithoutApiKeyInput = {
+    update: XOR<FacilityUpdateWithoutApiKeyInput, FacilityUncheckedUpdateWithoutApiKeyInput>
+    create: XOR<FacilityCreateWithoutApiKeyInput, FacilityUncheckedCreateWithoutApiKeyInput>
+    where?: FacilityWhereInput
+  }
+
+  export type FacilityUpdateToOneWithWhereWithoutApiKeyInput = {
+    where?: FacilityWhereInput
+    data: XOR<FacilityUpdateWithoutApiKeyInput, FacilityUncheckedUpdateWithoutApiKeyInput>
+  }
+
+  export type FacilityUpdateWithoutApiKeyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    type?: EnumFacilityTypeFieldUpdateOperationsInput | $Enums.FacilityType
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    latitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    longitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    region?: RegionUpdateOneRequiredWithoutFacilitiesNestedInput
+    users?: UserUpdateManyWithoutFacilityNestedInput
+    declarations?: DeclarationUpdateManyWithoutFacilityNestedInput
+    periodConfigs?: DeclarationPeriodConfigUpdateManyWithoutFacilityNestedInput
+    statSheets?: StatSheetUpdateManyWithoutFacilityNestedInput
+    budgets?: BudgetUpdateManyWithoutFacilityNestedInput
+    statDeadlines?: StatDeadlineUpdateManyWithoutFacilityNestedInput
+    planningEvents?: PlanningEventUpdateManyWithoutFacilityNestedInput
+    care2xSyncs?: Care2xSyncUpdateManyWithoutFacilityNestedInput
+    recouvrementSyncs?: Care2xRecouvrementSyncUpdateManyWithoutFacilityNestedInput
+  }
+
+  export type FacilityUncheckedUpdateWithoutApiKeyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    type?: EnumFacilityTypeFieldUpdateOperationsInput | $Enums.FacilityType
+    regionId?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    latitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    longitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: UserUncheckedUpdateManyWithoutFacilityNestedInput
+    declarations?: DeclarationUncheckedUpdateManyWithoutFacilityNestedInput
+    periodConfigs?: DeclarationPeriodConfigUncheckedUpdateManyWithoutFacilityNestedInput
+    statSheets?: StatSheetUncheckedUpdateManyWithoutFacilityNestedInput
+    budgets?: BudgetUncheckedUpdateManyWithoutFacilityNestedInput
+    statDeadlines?: StatDeadlineUncheckedUpdateManyWithoutFacilityNestedInput
+    planningEvents?: PlanningEventUncheckedUpdateManyWithoutFacilityNestedInput
+    care2xSyncs?: Care2xSyncUncheckedUpdateManyWithoutFacilityNestedInput
+    recouvrementSyncs?: Care2xRecouvrementSyncUncheckedUpdateManyWithoutFacilityNestedInput
+  }
+
+  export type Care2xSyncUpsertWithWhereUniqueWithoutApiKeyInput = {
+    where: Care2xSyncWhereUniqueInput
+    update: XOR<Care2xSyncUpdateWithoutApiKeyInput, Care2xSyncUncheckedUpdateWithoutApiKeyInput>
+    create: XOR<Care2xSyncCreateWithoutApiKeyInput, Care2xSyncUncheckedCreateWithoutApiKeyInput>
+  }
+
+  export type Care2xSyncUpdateWithWhereUniqueWithoutApiKeyInput = {
+    where: Care2xSyncWhereUniqueInput
+    data: XOR<Care2xSyncUpdateWithoutApiKeyInput, Care2xSyncUncheckedUpdateWithoutApiKeyInput>
+  }
+
+  export type Care2xSyncUpdateManyWithWhereWithoutApiKeyInput = {
+    where: Care2xSyncScalarWhereInput
+    data: XOR<Care2xSyncUpdateManyMutationInput, Care2xSyncUncheckedUpdateManyWithoutApiKeyInput>
+  }
+
+  export type Care2xRecouvrementSyncUpsertWithWhereUniqueWithoutApiKeyInput = {
+    where: Care2xRecouvrementSyncWhereUniqueInput
+    update: XOR<Care2xRecouvrementSyncUpdateWithoutApiKeyInput, Care2xRecouvrementSyncUncheckedUpdateWithoutApiKeyInput>
+    create: XOR<Care2xRecouvrementSyncCreateWithoutApiKeyInput, Care2xRecouvrementSyncUncheckedCreateWithoutApiKeyInput>
+  }
+
+  export type Care2xRecouvrementSyncUpdateWithWhereUniqueWithoutApiKeyInput = {
+    where: Care2xRecouvrementSyncWhereUniqueInput
+    data: XOR<Care2xRecouvrementSyncUpdateWithoutApiKeyInput, Care2xRecouvrementSyncUncheckedUpdateWithoutApiKeyInput>
+  }
+
+  export type Care2xRecouvrementSyncUpdateManyWithWhereWithoutApiKeyInput = {
+    where: Care2xRecouvrementSyncScalarWhereInput
+    data: XOR<Care2xRecouvrementSyncUpdateManyMutationInput, Care2xRecouvrementSyncUncheckedUpdateManyWithoutApiKeyInput>
+  }
+
+  export type FacilityCreateWithoutCare2xSyncsInput = {
+    id?: string
+    name: string
+    code: string
+    type: $Enums.FacilityType
+    address?: string | null
+    phone?: string | null
+    email?: string | null
+    latitude?: number | null
+    longitude?: number | null
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    region: RegionCreateNestedOneWithoutFacilitiesInput
+    users?: UserCreateNestedManyWithoutFacilityInput
+    declarations?: DeclarationCreateNestedManyWithoutFacilityInput
+    periodConfigs?: DeclarationPeriodConfigCreateNestedManyWithoutFacilityInput
+    statSheets?: StatSheetCreateNestedManyWithoutFacilityInput
+    budgets?: BudgetCreateNestedManyWithoutFacilityInput
+    statDeadlines?: StatDeadlineCreateNestedManyWithoutFacilityInput
+    planningEvents?: PlanningEventCreateNestedManyWithoutFacilityInput
+    apiKey?: FacilityApiKeyCreateNestedOneWithoutFacilityInput
+    recouvrementSyncs?: Care2xRecouvrementSyncCreateNestedManyWithoutFacilityInput
+  }
+
+  export type FacilityUncheckedCreateWithoutCare2xSyncsInput = {
+    id?: string
+    name: string
+    code: string
+    type: $Enums.FacilityType
+    regionId: string
+    address?: string | null
+    phone?: string | null
+    email?: string | null
+    latitude?: number | null
+    longitude?: number | null
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    users?: UserUncheckedCreateNestedManyWithoutFacilityInput
+    declarations?: DeclarationUncheckedCreateNestedManyWithoutFacilityInput
+    periodConfigs?: DeclarationPeriodConfigUncheckedCreateNestedManyWithoutFacilityInput
+    statSheets?: StatSheetUncheckedCreateNestedManyWithoutFacilityInput
+    budgets?: BudgetUncheckedCreateNestedManyWithoutFacilityInput
+    statDeadlines?: StatDeadlineUncheckedCreateNestedManyWithoutFacilityInput
+    planningEvents?: PlanningEventUncheckedCreateNestedManyWithoutFacilityInput
+    apiKey?: FacilityApiKeyUncheckedCreateNestedOneWithoutFacilityInput
+    recouvrementSyncs?: Care2xRecouvrementSyncUncheckedCreateNestedManyWithoutFacilityInput
+  }
+
+  export type FacilityCreateOrConnectWithoutCare2xSyncsInput = {
+    where: FacilityWhereUniqueInput
+    create: XOR<FacilityCreateWithoutCare2xSyncsInput, FacilityUncheckedCreateWithoutCare2xSyncsInput>
+  }
+
+  export type FacilityApiKeyCreateWithoutCare2xSyncsInput = {
+    id?: string
+    keyHash: string
+    keyPreview: string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    lastUsedAt?: Date | string | null
+    facility: FacilityCreateNestedOneWithoutApiKeyInput
+    recouvrementSyncs?: Care2xRecouvrementSyncCreateNestedManyWithoutApiKeyInput
+  }
+
+  export type FacilityApiKeyUncheckedCreateWithoutCare2xSyncsInput = {
+    id?: string
+    facilityId: string
+    keyHash: string
+    keyPreview: string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    lastUsedAt?: Date | string | null
+    recouvrementSyncs?: Care2xRecouvrementSyncUncheckedCreateNestedManyWithoutApiKeyInput
+  }
+
+  export type FacilityApiKeyCreateOrConnectWithoutCare2xSyncsInput = {
+    where: FacilityApiKeyWhereUniqueInput
+    create: XOR<FacilityApiKeyCreateWithoutCare2xSyncsInput, FacilityApiKeyUncheckedCreateWithoutCare2xSyncsInput>
+  }
+
+  export type Care2xSyncEntryCreateWithoutSyncInput = {
+    id?: string
+    localId: string
+    montant: Decimal | DecimalJsLike | number | string
+    date: Date | string
+    typePaiement: string
+  }
+
+  export type Care2xSyncEntryUncheckedCreateWithoutSyncInput = {
+    id?: string
+    localId: string
+    montant: Decimal | DecimalJsLike | number | string
+    date: Date | string
+    typePaiement: string
+  }
+
+  export type Care2xSyncEntryCreateOrConnectWithoutSyncInput = {
+    where: Care2xSyncEntryWhereUniqueInput
+    create: XOR<Care2xSyncEntryCreateWithoutSyncInput, Care2xSyncEntryUncheckedCreateWithoutSyncInput>
+  }
+
+  export type Care2xSyncEntryCreateManySyncInputEnvelope = {
+    data: Care2xSyncEntryCreateManySyncInput | Care2xSyncEntryCreateManySyncInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type FacilityUpsertWithoutCare2xSyncsInput = {
+    update: XOR<FacilityUpdateWithoutCare2xSyncsInput, FacilityUncheckedUpdateWithoutCare2xSyncsInput>
+    create: XOR<FacilityCreateWithoutCare2xSyncsInput, FacilityUncheckedCreateWithoutCare2xSyncsInput>
+    where?: FacilityWhereInput
+  }
+
+  export type FacilityUpdateToOneWithWhereWithoutCare2xSyncsInput = {
+    where?: FacilityWhereInput
+    data: XOR<FacilityUpdateWithoutCare2xSyncsInput, FacilityUncheckedUpdateWithoutCare2xSyncsInput>
+  }
+
+  export type FacilityUpdateWithoutCare2xSyncsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    type?: EnumFacilityTypeFieldUpdateOperationsInput | $Enums.FacilityType
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    latitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    longitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    region?: RegionUpdateOneRequiredWithoutFacilitiesNestedInput
+    users?: UserUpdateManyWithoutFacilityNestedInput
+    declarations?: DeclarationUpdateManyWithoutFacilityNestedInput
+    periodConfigs?: DeclarationPeriodConfigUpdateManyWithoutFacilityNestedInput
+    statSheets?: StatSheetUpdateManyWithoutFacilityNestedInput
+    budgets?: BudgetUpdateManyWithoutFacilityNestedInput
+    statDeadlines?: StatDeadlineUpdateManyWithoutFacilityNestedInput
+    planningEvents?: PlanningEventUpdateManyWithoutFacilityNestedInput
+    apiKey?: FacilityApiKeyUpdateOneWithoutFacilityNestedInput
+    recouvrementSyncs?: Care2xRecouvrementSyncUpdateManyWithoutFacilityNestedInput
+  }
+
+  export type FacilityUncheckedUpdateWithoutCare2xSyncsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    type?: EnumFacilityTypeFieldUpdateOperationsInput | $Enums.FacilityType
+    regionId?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    latitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    longitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: UserUncheckedUpdateManyWithoutFacilityNestedInput
+    declarations?: DeclarationUncheckedUpdateManyWithoutFacilityNestedInput
+    periodConfigs?: DeclarationPeriodConfigUncheckedUpdateManyWithoutFacilityNestedInput
+    statSheets?: StatSheetUncheckedUpdateManyWithoutFacilityNestedInput
+    budgets?: BudgetUncheckedUpdateManyWithoutFacilityNestedInput
+    statDeadlines?: StatDeadlineUncheckedUpdateManyWithoutFacilityNestedInput
+    planningEvents?: PlanningEventUncheckedUpdateManyWithoutFacilityNestedInput
+    apiKey?: FacilityApiKeyUncheckedUpdateOneWithoutFacilityNestedInput
+    recouvrementSyncs?: Care2xRecouvrementSyncUncheckedUpdateManyWithoutFacilityNestedInput
+  }
+
+  export type FacilityApiKeyUpsertWithoutCare2xSyncsInput = {
+    update: XOR<FacilityApiKeyUpdateWithoutCare2xSyncsInput, FacilityApiKeyUncheckedUpdateWithoutCare2xSyncsInput>
+    create: XOR<FacilityApiKeyCreateWithoutCare2xSyncsInput, FacilityApiKeyUncheckedCreateWithoutCare2xSyncsInput>
+    where?: FacilityApiKeyWhereInput
+  }
+
+  export type FacilityApiKeyUpdateToOneWithWhereWithoutCare2xSyncsInput = {
+    where?: FacilityApiKeyWhereInput
+    data: XOR<FacilityApiKeyUpdateWithoutCare2xSyncsInput, FacilityApiKeyUncheckedUpdateWithoutCare2xSyncsInput>
+  }
+
+  export type FacilityApiKeyUpdateWithoutCare2xSyncsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    keyHash?: StringFieldUpdateOperationsInput | string
+    keyPreview?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastUsedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    facility?: FacilityUpdateOneRequiredWithoutApiKeyNestedInput
+    recouvrementSyncs?: Care2xRecouvrementSyncUpdateManyWithoutApiKeyNestedInput
+  }
+
+  export type FacilityApiKeyUncheckedUpdateWithoutCare2xSyncsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    facilityId?: StringFieldUpdateOperationsInput | string
+    keyHash?: StringFieldUpdateOperationsInput | string
+    keyPreview?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastUsedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    recouvrementSyncs?: Care2xRecouvrementSyncUncheckedUpdateManyWithoutApiKeyNestedInput
+  }
+
+  export type Care2xSyncEntryUpsertWithWhereUniqueWithoutSyncInput = {
+    where: Care2xSyncEntryWhereUniqueInput
+    update: XOR<Care2xSyncEntryUpdateWithoutSyncInput, Care2xSyncEntryUncheckedUpdateWithoutSyncInput>
+    create: XOR<Care2xSyncEntryCreateWithoutSyncInput, Care2xSyncEntryUncheckedCreateWithoutSyncInput>
+  }
+
+  export type Care2xSyncEntryUpdateWithWhereUniqueWithoutSyncInput = {
+    where: Care2xSyncEntryWhereUniqueInput
+    data: XOR<Care2xSyncEntryUpdateWithoutSyncInput, Care2xSyncEntryUncheckedUpdateWithoutSyncInput>
+  }
+
+  export type Care2xSyncEntryUpdateManyWithWhereWithoutSyncInput = {
+    where: Care2xSyncEntryScalarWhereInput
+    data: XOR<Care2xSyncEntryUpdateManyMutationInput, Care2xSyncEntryUncheckedUpdateManyWithoutSyncInput>
+  }
+
+  export type Care2xSyncEntryScalarWhereInput = {
+    AND?: Care2xSyncEntryScalarWhereInput | Care2xSyncEntryScalarWhereInput[]
+    OR?: Care2xSyncEntryScalarWhereInput[]
+    NOT?: Care2xSyncEntryScalarWhereInput | Care2xSyncEntryScalarWhereInput[]
+    id?: StringFilter<"Care2xSyncEntry"> | string
+    syncId?: StringFilter<"Care2xSyncEntry"> | string
+    localId?: StringFilter<"Care2xSyncEntry"> | string
+    montant?: DecimalFilter<"Care2xSyncEntry"> | Decimal | DecimalJsLike | number | string
+    date?: DateTimeFilter<"Care2xSyncEntry"> | Date | string
+    typePaiement?: StringFilter<"Care2xSyncEntry"> | string
+  }
+
+  export type Care2xSyncCreateWithoutEntriesInput = {
+    id?: string
+    batchRef: string
+    entriesCount: number
+    totalAmount: Decimal | DecimalJsLike | number | string
+    periodStart: Date | string
+    periodEnd: Date | string
+    receivedAt?: Date | string
+    facility: FacilityCreateNestedOneWithoutCare2xSyncsInput
+    apiKey: FacilityApiKeyCreateNestedOneWithoutCare2xSyncsInput
+  }
+
+  export type Care2xSyncUncheckedCreateWithoutEntriesInput = {
+    id?: string
+    facilityId: string
+    apiKeyId: string
+    batchRef: string
+    entriesCount: number
+    totalAmount: Decimal | DecimalJsLike | number | string
+    periodStart: Date | string
+    periodEnd: Date | string
+    receivedAt?: Date | string
+  }
+
+  export type Care2xSyncCreateOrConnectWithoutEntriesInput = {
+    where: Care2xSyncWhereUniqueInput
+    create: XOR<Care2xSyncCreateWithoutEntriesInput, Care2xSyncUncheckedCreateWithoutEntriesInput>
+  }
+
+  export type Care2xSyncUpsertWithoutEntriesInput = {
+    update: XOR<Care2xSyncUpdateWithoutEntriesInput, Care2xSyncUncheckedUpdateWithoutEntriesInput>
+    create: XOR<Care2xSyncCreateWithoutEntriesInput, Care2xSyncUncheckedCreateWithoutEntriesInput>
+    where?: Care2xSyncWhereInput
+  }
+
+  export type Care2xSyncUpdateToOneWithWhereWithoutEntriesInput = {
+    where?: Care2xSyncWhereInput
+    data: XOR<Care2xSyncUpdateWithoutEntriesInput, Care2xSyncUncheckedUpdateWithoutEntriesInput>
+  }
+
+  export type Care2xSyncUpdateWithoutEntriesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    batchRef?: StringFieldUpdateOperationsInput | string
+    entriesCount?: IntFieldUpdateOperationsInput | number
+    totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    periodStart?: DateTimeFieldUpdateOperationsInput | Date | string
+    periodEnd?: DateTimeFieldUpdateOperationsInput | Date | string
+    receivedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    facility?: FacilityUpdateOneRequiredWithoutCare2xSyncsNestedInput
+    apiKey?: FacilityApiKeyUpdateOneRequiredWithoutCare2xSyncsNestedInput
+  }
+
+  export type Care2xSyncUncheckedUpdateWithoutEntriesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    facilityId?: StringFieldUpdateOperationsInput | string
+    apiKeyId?: StringFieldUpdateOperationsInput | string
+    batchRef?: StringFieldUpdateOperationsInput | string
+    entriesCount?: IntFieldUpdateOperationsInput | number
+    totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    periodStart?: DateTimeFieldUpdateOperationsInput | Date | string
+    periodEnd?: DateTimeFieldUpdateOperationsInput | Date | string
+    receivedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FacilityCreateWithoutRecouvrementSyncsInput = {
+    id?: string
+    name: string
+    code: string
+    type: $Enums.FacilityType
+    address?: string | null
+    phone?: string | null
+    email?: string | null
+    latitude?: number | null
+    longitude?: number | null
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    region: RegionCreateNestedOneWithoutFacilitiesInput
+    users?: UserCreateNestedManyWithoutFacilityInput
+    declarations?: DeclarationCreateNestedManyWithoutFacilityInput
+    periodConfigs?: DeclarationPeriodConfigCreateNestedManyWithoutFacilityInput
+    statSheets?: StatSheetCreateNestedManyWithoutFacilityInput
+    budgets?: BudgetCreateNestedManyWithoutFacilityInput
+    statDeadlines?: StatDeadlineCreateNestedManyWithoutFacilityInput
+    planningEvents?: PlanningEventCreateNestedManyWithoutFacilityInput
+    apiKey?: FacilityApiKeyCreateNestedOneWithoutFacilityInput
+    care2xSyncs?: Care2xSyncCreateNestedManyWithoutFacilityInput
+  }
+
+  export type FacilityUncheckedCreateWithoutRecouvrementSyncsInput = {
+    id?: string
+    name: string
+    code: string
+    type: $Enums.FacilityType
+    regionId: string
+    address?: string | null
+    phone?: string | null
+    email?: string | null
+    latitude?: number | null
+    longitude?: number | null
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    users?: UserUncheckedCreateNestedManyWithoutFacilityInput
+    declarations?: DeclarationUncheckedCreateNestedManyWithoutFacilityInput
+    periodConfigs?: DeclarationPeriodConfigUncheckedCreateNestedManyWithoutFacilityInput
+    statSheets?: StatSheetUncheckedCreateNestedManyWithoutFacilityInput
+    budgets?: BudgetUncheckedCreateNestedManyWithoutFacilityInput
+    statDeadlines?: StatDeadlineUncheckedCreateNestedManyWithoutFacilityInput
+    planningEvents?: PlanningEventUncheckedCreateNestedManyWithoutFacilityInput
+    apiKey?: FacilityApiKeyUncheckedCreateNestedOneWithoutFacilityInput
+    care2xSyncs?: Care2xSyncUncheckedCreateNestedManyWithoutFacilityInput
+  }
+
+  export type FacilityCreateOrConnectWithoutRecouvrementSyncsInput = {
+    where: FacilityWhereUniqueInput
+    create: XOR<FacilityCreateWithoutRecouvrementSyncsInput, FacilityUncheckedCreateWithoutRecouvrementSyncsInput>
+  }
+
+  export type FacilityApiKeyCreateWithoutRecouvrementSyncsInput = {
+    id?: string
+    keyHash: string
+    keyPreview: string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    lastUsedAt?: Date | string | null
+    facility: FacilityCreateNestedOneWithoutApiKeyInput
+    care2xSyncs?: Care2xSyncCreateNestedManyWithoutApiKeyInput
+  }
+
+  export type FacilityApiKeyUncheckedCreateWithoutRecouvrementSyncsInput = {
+    id?: string
+    facilityId: string
+    keyHash: string
+    keyPreview: string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    lastUsedAt?: Date | string | null
+    care2xSyncs?: Care2xSyncUncheckedCreateNestedManyWithoutApiKeyInput
+  }
+
+  export type FacilityApiKeyCreateOrConnectWithoutRecouvrementSyncsInput = {
+    where: FacilityApiKeyWhereUniqueInput
+    create: XOR<FacilityApiKeyCreateWithoutRecouvrementSyncsInput, FacilityApiKeyUncheckedCreateWithoutRecouvrementSyncsInput>
+  }
+
+  export type FacilityUpsertWithoutRecouvrementSyncsInput = {
+    update: XOR<FacilityUpdateWithoutRecouvrementSyncsInput, FacilityUncheckedUpdateWithoutRecouvrementSyncsInput>
+    create: XOR<FacilityCreateWithoutRecouvrementSyncsInput, FacilityUncheckedCreateWithoutRecouvrementSyncsInput>
+    where?: FacilityWhereInput
+  }
+
+  export type FacilityUpdateToOneWithWhereWithoutRecouvrementSyncsInput = {
+    where?: FacilityWhereInput
+    data: XOR<FacilityUpdateWithoutRecouvrementSyncsInput, FacilityUncheckedUpdateWithoutRecouvrementSyncsInput>
+  }
+
+  export type FacilityUpdateWithoutRecouvrementSyncsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    type?: EnumFacilityTypeFieldUpdateOperationsInput | $Enums.FacilityType
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    latitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    longitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    region?: RegionUpdateOneRequiredWithoutFacilitiesNestedInput
+    users?: UserUpdateManyWithoutFacilityNestedInput
+    declarations?: DeclarationUpdateManyWithoutFacilityNestedInput
+    periodConfigs?: DeclarationPeriodConfigUpdateManyWithoutFacilityNestedInput
+    statSheets?: StatSheetUpdateManyWithoutFacilityNestedInput
+    budgets?: BudgetUpdateManyWithoutFacilityNestedInput
+    statDeadlines?: StatDeadlineUpdateManyWithoutFacilityNestedInput
+    planningEvents?: PlanningEventUpdateManyWithoutFacilityNestedInput
+    apiKey?: FacilityApiKeyUpdateOneWithoutFacilityNestedInput
+    care2xSyncs?: Care2xSyncUpdateManyWithoutFacilityNestedInput
+  }
+
+  export type FacilityUncheckedUpdateWithoutRecouvrementSyncsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    type?: EnumFacilityTypeFieldUpdateOperationsInput | $Enums.FacilityType
+    regionId?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    latitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    longitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: UserUncheckedUpdateManyWithoutFacilityNestedInput
+    declarations?: DeclarationUncheckedUpdateManyWithoutFacilityNestedInput
+    periodConfigs?: DeclarationPeriodConfigUncheckedUpdateManyWithoutFacilityNestedInput
+    statSheets?: StatSheetUncheckedUpdateManyWithoutFacilityNestedInput
+    budgets?: BudgetUncheckedUpdateManyWithoutFacilityNestedInput
+    statDeadlines?: StatDeadlineUncheckedUpdateManyWithoutFacilityNestedInput
+    planningEvents?: PlanningEventUncheckedUpdateManyWithoutFacilityNestedInput
+    apiKey?: FacilityApiKeyUncheckedUpdateOneWithoutFacilityNestedInput
+    care2xSyncs?: Care2xSyncUncheckedUpdateManyWithoutFacilityNestedInput
+  }
+
+  export type FacilityApiKeyUpsertWithoutRecouvrementSyncsInput = {
+    update: XOR<FacilityApiKeyUpdateWithoutRecouvrementSyncsInput, FacilityApiKeyUncheckedUpdateWithoutRecouvrementSyncsInput>
+    create: XOR<FacilityApiKeyCreateWithoutRecouvrementSyncsInput, FacilityApiKeyUncheckedCreateWithoutRecouvrementSyncsInput>
+    where?: FacilityApiKeyWhereInput
+  }
+
+  export type FacilityApiKeyUpdateToOneWithWhereWithoutRecouvrementSyncsInput = {
+    where?: FacilityApiKeyWhereInput
+    data: XOR<FacilityApiKeyUpdateWithoutRecouvrementSyncsInput, FacilityApiKeyUncheckedUpdateWithoutRecouvrementSyncsInput>
+  }
+
+  export type FacilityApiKeyUpdateWithoutRecouvrementSyncsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    keyHash?: StringFieldUpdateOperationsInput | string
+    keyPreview?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastUsedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    facility?: FacilityUpdateOneRequiredWithoutApiKeyNestedInput
+    care2xSyncs?: Care2xSyncUpdateManyWithoutApiKeyNestedInput
+  }
+
+  export type FacilityApiKeyUncheckedUpdateWithoutRecouvrementSyncsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    facilityId?: StringFieldUpdateOperationsInput | string
+    keyHash?: StringFieldUpdateOperationsInput | string
+    keyPreview?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastUsedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    care2xSyncs?: Care2xSyncUncheckedUpdateManyWithoutApiKeyNestedInput
+  }
+
   export type UserCreateWithoutPlanningEventsInput = {
     id?: string
     email: string
@@ -46411,6 +55158,9 @@ export namespace Prisma {
     statSheets?: StatSheetCreateNestedManyWithoutFacilityInput
     budgets?: BudgetCreateNestedManyWithoutFacilityInput
     statDeadlines?: StatDeadlineCreateNestedManyWithoutFacilityInput
+    apiKey?: FacilityApiKeyCreateNestedOneWithoutFacilityInput
+    care2xSyncs?: Care2xSyncCreateNestedManyWithoutFacilityInput
+    recouvrementSyncs?: Care2xRecouvrementSyncCreateNestedManyWithoutFacilityInput
   }
 
   export type FacilityUncheckedCreateWithoutPlanningEventsInput = {
@@ -46433,6 +55183,9 @@ export namespace Prisma {
     statSheets?: StatSheetUncheckedCreateNestedManyWithoutFacilityInput
     budgets?: BudgetUncheckedCreateNestedManyWithoutFacilityInput
     statDeadlines?: StatDeadlineUncheckedCreateNestedManyWithoutFacilityInput
+    apiKey?: FacilityApiKeyUncheckedCreateNestedOneWithoutFacilityInput
+    care2xSyncs?: Care2xSyncUncheckedCreateNestedManyWithoutFacilityInput
+    recouvrementSyncs?: Care2xRecouvrementSyncUncheckedCreateNestedManyWithoutFacilityInput
   }
 
   export type FacilityCreateOrConnectWithoutPlanningEventsInput = {
@@ -46573,6 +55326,9 @@ export namespace Prisma {
     statSheets?: StatSheetUpdateManyWithoutFacilityNestedInput
     budgets?: BudgetUpdateManyWithoutFacilityNestedInput
     statDeadlines?: StatDeadlineUpdateManyWithoutFacilityNestedInput
+    apiKey?: FacilityApiKeyUpdateOneWithoutFacilityNestedInput
+    care2xSyncs?: Care2xSyncUpdateManyWithoutFacilityNestedInput
+    recouvrementSyncs?: Care2xRecouvrementSyncUpdateManyWithoutFacilityNestedInput
   }
 
   export type FacilityUncheckedUpdateWithoutPlanningEventsInput = {
@@ -46595,6 +55351,9 @@ export namespace Prisma {
     statSheets?: StatSheetUncheckedUpdateManyWithoutFacilityNestedInput
     budgets?: BudgetUncheckedUpdateManyWithoutFacilityNestedInput
     statDeadlines?: StatDeadlineUncheckedUpdateManyWithoutFacilityNestedInput
+    apiKey?: FacilityApiKeyUncheckedUpdateOneWithoutFacilityNestedInput
+    care2xSyncs?: Care2xSyncUncheckedUpdateManyWithoutFacilityNestedInput
+    recouvrementSyncs?: Care2xRecouvrementSyncUncheckedUpdateManyWithoutFacilityNestedInput
   }
 
   export type RegionUpsertWithoutPlanningEventsInput = {
@@ -46868,6 +55627,9 @@ export namespace Prisma {
     budgets?: BudgetUpdateManyWithoutFacilityNestedInput
     statDeadlines?: StatDeadlineUpdateManyWithoutFacilityNestedInput
     planningEvents?: PlanningEventUpdateManyWithoutFacilityNestedInput
+    apiKey?: FacilityApiKeyUpdateOneWithoutFacilityNestedInput
+    care2xSyncs?: Care2xSyncUpdateManyWithoutFacilityNestedInput
+    recouvrementSyncs?: Care2xRecouvrementSyncUpdateManyWithoutFacilityNestedInput
   }
 
   export type FacilityUncheckedUpdateWithoutRegionInput = {
@@ -46890,6 +55652,9 @@ export namespace Prisma {
     budgets?: BudgetUncheckedUpdateManyWithoutFacilityNestedInput
     statDeadlines?: StatDeadlineUncheckedUpdateManyWithoutFacilityNestedInput
     planningEvents?: PlanningEventUncheckedUpdateManyWithoutFacilityNestedInput
+    apiKey?: FacilityApiKeyUncheckedUpdateOneWithoutFacilityNestedInput
+    care2xSyncs?: Care2xSyncUncheckedUpdateManyWithoutFacilityNestedInput
+    recouvrementSyncs?: Care2xRecouvrementSyncUncheckedUpdateManyWithoutFacilityNestedInput
   }
 
   export type FacilityUncheckedUpdateManyWithoutRegionInput = {
@@ -47209,6 +55974,27 @@ export namespace Prisma {
     isCompleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+  }
+
+  export type Care2xSyncCreateManyFacilityInput = {
+    id?: string
+    apiKeyId: string
+    batchRef: string
+    entriesCount: number
+    totalAmount: Decimal | DecimalJsLike | number | string
+    periodStart: Date | string
+    periodEnd: Date | string
+    receivedAt?: Date | string
+  }
+
+  export type Care2xRecouvrementSyncCreateManyFacilityInput = {
+    id?: string
+    apiKeyId: string
+    batchRef: string
+    totalFacture: Decimal | DecimalJsLike | number | string
+    totalRecouvre: Decimal | DecimalJsLike | number | string
+    rapport: JsonNullValueInput | InputJsonValue
+    receivedAt?: Date | string
   }
 
   export type UserUpdateWithoutFacilityInput = {
@@ -47556,6 +56342,71 @@ export namespace Prisma {
     isCompleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type Care2xSyncUpdateWithoutFacilityInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    batchRef?: StringFieldUpdateOperationsInput | string
+    entriesCount?: IntFieldUpdateOperationsInput | number
+    totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    periodStart?: DateTimeFieldUpdateOperationsInput | Date | string
+    periodEnd?: DateTimeFieldUpdateOperationsInput | Date | string
+    receivedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    apiKey?: FacilityApiKeyUpdateOneRequiredWithoutCare2xSyncsNestedInput
+    entries?: Care2xSyncEntryUpdateManyWithoutSyncNestedInput
+  }
+
+  export type Care2xSyncUncheckedUpdateWithoutFacilityInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    apiKeyId?: StringFieldUpdateOperationsInput | string
+    batchRef?: StringFieldUpdateOperationsInput | string
+    entriesCount?: IntFieldUpdateOperationsInput | number
+    totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    periodStart?: DateTimeFieldUpdateOperationsInput | Date | string
+    periodEnd?: DateTimeFieldUpdateOperationsInput | Date | string
+    receivedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    entries?: Care2xSyncEntryUncheckedUpdateManyWithoutSyncNestedInput
+  }
+
+  export type Care2xSyncUncheckedUpdateManyWithoutFacilityInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    apiKeyId?: StringFieldUpdateOperationsInput | string
+    batchRef?: StringFieldUpdateOperationsInput | string
+    entriesCount?: IntFieldUpdateOperationsInput | number
+    totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    periodStart?: DateTimeFieldUpdateOperationsInput | Date | string
+    periodEnd?: DateTimeFieldUpdateOperationsInput | Date | string
+    receivedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type Care2xRecouvrementSyncUpdateWithoutFacilityInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    batchRef?: StringFieldUpdateOperationsInput | string
+    totalFacture?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    totalRecouvre?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    rapport?: JsonNullValueInput | InputJsonValue
+    receivedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    apiKey?: FacilityApiKeyUpdateOneRequiredWithoutRecouvrementSyncsNestedInput
+  }
+
+  export type Care2xRecouvrementSyncUncheckedUpdateWithoutFacilityInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    apiKeyId?: StringFieldUpdateOperationsInput | string
+    batchRef?: StringFieldUpdateOperationsInput | string
+    totalFacture?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    totalRecouvre?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    rapport?: JsonNullValueInput | InputJsonValue
+    receivedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type Care2xRecouvrementSyncUncheckedUpdateManyWithoutFacilityInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    apiKeyId?: StringFieldUpdateOperationsInput | string
+    batchRef?: StringFieldUpdateOperationsInput | string
+    totalFacture?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    totalRecouvre?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    rapport?: JsonNullValueInput | InputJsonValue
+    receivedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type DeclarationCreateManySubmittedByInput = {
@@ -48440,6 +57291,124 @@ export namespace Prisma {
     fileType?: StringFieldUpdateOperationsInput | string
     fileSize?: IntFieldUpdateOperationsInput | number
     uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type Care2xSyncCreateManyApiKeyInput = {
+    id?: string
+    facilityId: string
+    batchRef: string
+    entriesCount: number
+    totalAmount: Decimal | DecimalJsLike | number | string
+    periodStart: Date | string
+    periodEnd: Date | string
+    receivedAt?: Date | string
+  }
+
+  export type Care2xRecouvrementSyncCreateManyApiKeyInput = {
+    id?: string
+    facilityId: string
+    batchRef: string
+    totalFacture: Decimal | DecimalJsLike | number | string
+    totalRecouvre: Decimal | DecimalJsLike | number | string
+    rapport: JsonNullValueInput | InputJsonValue
+    receivedAt?: Date | string
+  }
+
+  export type Care2xSyncUpdateWithoutApiKeyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    batchRef?: StringFieldUpdateOperationsInput | string
+    entriesCount?: IntFieldUpdateOperationsInput | number
+    totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    periodStart?: DateTimeFieldUpdateOperationsInput | Date | string
+    periodEnd?: DateTimeFieldUpdateOperationsInput | Date | string
+    receivedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    facility?: FacilityUpdateOneRequiredWithoutCare2xSyncsNestedInput
+    entries?: Care2xSyncEntryUpdateManyWithoutSyncNestedInput
+  }
+
+  export type Care2xSyncUncheckedUpdateWithoutApiKeyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    facilityId?: StringFieldUpdateOperationsInput | string
+    batchRef?: StringFieldUpdateOperationsInput | string
+    entriesCount?: IntFieldUpdateOperationsInput | number
+    totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    periodStart?: DateTimeFieldUpdateOperationsInput | Date | string
+    periodEnd?: DateTimeFieldUpdateOperationsInput | Date | string
+    receivedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    entries?: Care2xSyncEntryUncheckedUpdateManyWithoutSyncNestedInput
+  }
+
+  export type Care2xSyncUncheckedUpdateManyWithoutApiKeyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    facilityId?: StringFieldUpdateOperationsInput | string
+    batchRef?: StringFieldUpdateOperationsInput | string
+    entriesCount?: IntFieldUpdateOperationsInput | number
+    totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    periodStart?: DateTimeFieldUpdateOperationsInput | Date | string
+    periodEnd?: DateTimeFieldUpdateOperationsInput | Date | string
+    receivedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type Care2xRecouvrementSyncUpdateWithoutApiKeyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    batchRef?: StringFieldUpdateOperationsInput | string
+    totalFacture?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    totalRecouvre?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    rapport?: JsonNullValueInput | InputJsonValue
+    receivedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    facility?: FacilityUpdateOneRequiredWithoutRecouvrementSyncsNestedInput
+  }
+
+  export type Care2xRecouvrementSyncUncheckedUpdateWithoutApiKeyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    facilityId?: StringFieldUpdateOperationsInput | string
+    batchRef?: StringFieldUpdateOperationsInput | string
+    totalFacture?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    totalRecouvre?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    rapport?: JsonNullValueInput | InputJsonValue
+    receivedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type Care2xRecouvrementSyncUncheckedUpdateManyWithoutApiKeyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    facilityId?: StringFieldUpdateOperationsInput | string
+    batchRef?: StringFieldUpdateOperationsInput | string
+    totalFacture?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    totalRecouvre?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    rapport?: JsonNullValueInput | InputJsonValue
+    receivedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type Care2xSyncEntryCreateManySyncInput = {
+    id?: string
+    localId: string
+    montant: Decimal | DecimalJsLike | number | string
+    date: Date | string
+    typePaiement: string
+  }
+
+  export type Care2xSyncEntryUpdateWithoutSyncInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    localId?: StringFieldUpdateOperationsInput | string
+    montant?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    typePaiement?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type Care2xSyncEntryUncheckedUpdateWithoutSyncInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    localId?: StringFieldUpdateOperationsInput | string
+    montant?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    typePaiement?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type Care2xSyncEntryUncheckedUpdateManyWithoutSyncInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    localId?: StringFieldUpdateOperationsInput | string
+    montant?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    typePaiement?: StringFieldUpdateOperationsInput | string
   }
 
 
