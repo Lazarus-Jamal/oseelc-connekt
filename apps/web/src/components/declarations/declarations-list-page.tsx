@@ -52,7 +52,7 @@ export function DeclarationsListPage({ userRole = '', userRegionId }: { userRole
   // Load regions
   useEffect(() => {
     if (!showRegionFilter) return
-    fetch('/api/admin/regions?limit=100').then((r) => r.json()).then((d) => {
+    fetch('/api/regions').then((r) => r.json()).then((d) => {
       if (d.success) setRegions(d.data || [])
     })
   }, [showRegionFilter])

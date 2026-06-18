@@ -343,7 +343,7 @@ function RegionsTab({ year, month }: { year: number; month: number | null }) {
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    fetch('/api/admin/regions?limit=100').then((r) => r.json()).then((d) => {
+    fetch('/api/regions').then((r) => r.json()).then((d) => {
       if (d.success) { setRegions(d.data || []); if (d.data?.[0]) setSelectedRegion(d.data[0].id) }
     }).catch(() => {})
   }, [])
@@ -452,7 +452,7 @@ function FacilitiesTab({ year, month }: { year: number; month: number | null }) 
   const [selectedIndicator, setSelectedIndicator] = useState('')
 
   useEffect(() => {
-    fetch('/api/admin/regions?limit=100').then((r) => r.json()).then((d) => {
+    fetch('/api/regions').then((r) => r.json()).then((d) => {
       if (d.success) setRegions(d.data || [])
     })
   }, [])
@@ -584,7 +584,7 @@ function InferencesTab({ year, month }: { year: number; month: number | null }) 
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    fetch('/api/admin/regions?limit=100').then((r) => r.json()).then((d) => {
+    fetch('/api/regions').then((r) => r.json()).then((d) => {
       if (d.success) setRegions(d.data || [])
     })
   }, [])
