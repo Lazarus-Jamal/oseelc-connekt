@@ -94,7 +94,12 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
     return NextResponse.json({ success: true, data, unreadCount, pagination: { page, total, totalPages: Math.ceil(total / limit) } })
   } catch (e: any) {
     console.error('[GET /api/messages]', e)
-    return NextResponse.json({ success: false, error: e.message || 'Erreur serveur' }, { status: 500 })
+    return NextResponse.json({
+      success: false,
+      error: e.message || 'Erreur serveur',
+      code: e?.code,
+      detail: e?.meta?.cause ?? e?.stack?.split('\n')[0],
+    }, { status: 500 })
   }
 }
 
