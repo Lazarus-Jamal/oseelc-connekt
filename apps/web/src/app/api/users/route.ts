@@ -97,7 +97,7 @@ export async function POST(req: NextRequest) {
         email: parsed.data.email,
         name: parsed.data.name,
         role: parsed.data.role,
-        phone: parsed.data.phone,
+        phone: parsed.data.phone || null,
         facilityId: parsed.data.facilityId || null,
         regionId: parsed.data.regionId || null,
         organizationId: parsed.data.organizationId || null,
