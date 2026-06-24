@@ -46,11 +46,14 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
         email: parsed.data.email,
         name: parsed.data.name,
         role: parsed.data.role,
-        phone: parsed.data.phone || null,
-        facilityId: parsed.data.facilityId || null,
-        regionId: parsed.data.regionId || null,
-        organizationId: parsed.data.organizationId || null,
-        isActive: parsed.data.isActive,
+        // Only update optional FK fields when explicitly sent in the body.
+        // undefined = field absent (toggleStatus) → skip to preserve existing value
+        // ''        = field sent empty (form) → convert to null (valid nullable FK)
+        ...(parsed.data.phone !== undefined          ? { phone: parsed.data.phone || null } : {}),
+        ...(parsed.data.facilityId !== undefined     ? { facilityId: parsed.data.facilityId || null } : {}),
+        ...(parsed.data.regionId !== undefined       ? { regionId: parsed.data.regionId || null } : {}),
+        ...(parsed.data.organizationId !== undefined ? { organizationId: parsed.data.organizationId || null } : {}),
+        ...(parsed.data.isActive !== undefined       ? { isActive: parsed.data.isActive } : {}),
       },
       select: { id: true, email: true, name: true, role: true, isActive: true },
     })
@@ -58,7 +61,12 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
     return NextResponse.json({ success: true, data: user })
   } catch (error: any) {
     console.error('Error updating user:', error)
-    return NextResponse.json({ success: false, error: 'Erreur interne du serveur' }, { status: 500 })
+    return NextResponse.json({
+      success: false,
+      error: 'Erreur interne du serveur',
+      code: error?.code,
+      detail: error?.meta?.cause ?? error?.message,
+    }, { status: 500 })
   }
 }
 
