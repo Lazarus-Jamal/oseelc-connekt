@@ -252,6 +252,12 @@
       "namedRegex": "^/admin/indicators(?:/)?$"
     },
     {
+      "page": "/admin/permissions",
+      "regex": "^/admin/permissions(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/permissions(?:/)?$"
+    },
+    {
       "page": "/admin/regions",
       "regex": "^/admin/regions(?:/)?$",
       "routeKeys": {},
