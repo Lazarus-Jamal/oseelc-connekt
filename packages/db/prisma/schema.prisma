@@ -643,6 +643,18 @@ model Care2xVersion {
   @@map("care2x_versions")
 }
 
+// ─── PERMISSIONS UI ──────────────────────────────────────────────────────────
+
+model PagePermission {
+  id      String  @id @default(cuid())
+  role    Role
+  pageKey String  // ex: "analytics", "analytics.overview", "admin.users"
+  granted Boolean @default(true)
+
+  @@unique([role, pageKey])
+  @@map("page_permissions")
+}
+
 // ─── PLANNING ─────────────────────────────────────────────────────────────────
 
 model PlanningEvent {

@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useState, useMemo } from 'react'
 import { toast } from 'sonner'
 import {
   BarChart, Bar, LineChart, Line, PieChart, Pie, Cell,
@@ -12,6 +12,7 @@ import {
   AlertTriangle, TrendingUp, Building2, Filter,
 } from 'lucide-react'
 import { PageHeader } from '@/components/ui/page-header'
+import { usePermissions } from '@/contexts/permissions-context'
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -79,8 +80,22 @@ function SectionTitle({ children }: { children: React.ReactNode }) {
 
 // ─── Composant principal ─────────────────────────────────────────────────────
 
+const ALL_CARE2X_TABS = [
+  { id: 'dashboard' as const, pageKey: 'care2x.overview', label: "Vue d'ensemble",  icon: TrendingUp },
+  { id: 'keys'      as const, pageKey: 'care2x.keys',     label: 'Clés API',        icon: KeyRound   },
+  { id: 'syncs'     as const, pageKey: 'care2x.syncs',    label: 'Historique syncs',icon: BarChart2  },
+  { id: 'versions'  as const, pageKey: 'care2x.versions', label: 'Versions',        icon: PackageOpen},
+]
+
 export function Care2xKeysPage() {
+  const { canAccess } = usePermissions()
   const [tab, setTab] = useState<'dashboard' | 'keys' | 'syncs' | 'versions'>('dashboard')
+
+  const visibleTabs = useMemo(
+    () => ALL_CARE2X_TABS.filter((t) => canAccess(t.pageKey)),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [canAccess]
+  )
 
   // Filtres
   const [filterRegion,   setFilterRegion]   = useState('')
@@ -279,12 +294,7 @@ export function Care2xKeysPage() {
 
       {/* Tabs */}
       <div className="flex gap-1 mb-6 border-b border-gray-200">
-        {([
-          { id: 'dashboard', label: 'Vue d\'ensemble',    icon: TrendingUp    },
-          { id: 'keys',      label: 'Clés API',           icon: KeyRound      },
-          { id: 'syncs',     label: 'Historique syncs',   icon: BarChart2     },
-          { id: 'versions',  label: 'Versions',           icon: PackageOpen   },
-        ] as const).map(t => (
+        {visibleTabs.map(t => (
           <button key={t.id} onClick={() => setTab(t.id)}
             className={`flex items-center gap-2 px-4 py-2.5 text-sm font-medium border-b-2 -mb-px transition-colors ${
               tab === t.id ? 'border-blue-600 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700'

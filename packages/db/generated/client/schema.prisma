@@ -143,16 +143,17 @@ model Facility {
   createdAt DateTime     @default(now())
   updatedAt DateTime     @updatedAt
 
-  region         Region                    @relation(fields: [regionId], references: [id])
-  users          User[]
-  declarations   Declaration[]
-  periodConfigs  DeclarationPeriodConfig[]
-  statSheets     StatSheet[]
-  budgets        Budget[]
-  statDeadlines  StatDeadline[]
-  planningEvents PlanningEvent[]
-  apiKey         FacilityApiKey?
-  care2xSyncs    Care2xSync[]
+  region            Region                    @relation(fields: [regionId], references: [id])
+  users             User[]
+  declarations      Declaration[]
+  periodConfigs     DeclarationPeriodConfig[]
+  statSheets        StatSheet[]
+  budgets           Budget[]
+  statDeadlines     StatDeadline[]
+  planningEvents    PlanningEvent[]
+  apiKey            FacilityApiKey?
+  care2xSyncs       Care2xSync[]
+  recouvrementSyncs Care2xRecouvrementSync[]
 
   @@map("facilities")
 }
@@ -483,11 +484,17 @@ model AdminMessage {
   createdAt   DateTime        @default(now())
   updatedAt   DateTime        @updatedAt
 
+  // Direct reply thread
+  replyToId String?
+  replyTo   AdminMessage?  @relation("MessageReplies", fields: [replyToId], references: [id])
+  replies   AdminMessage[] @relation("MessageReplies")
+
   sender     User                    @relation("SentMessages", fields: [senderId], references: [id])
   recipients AdminMessageRecipient[]
   documents  AdminMessageDocument[]
 
   @@index([senderId])
+  @@index([replyToId])
   @@map("admin_messages")
 }
 
@@ -563,8 +570,9 @@ model FacilityApiKey {
   updatedAt  DateTime  @updatedAt
   lastUsedAt DateTime?
 
-  facility    Facility     @relation(fields: [facilityId], references: [id], onDelete: Cascade)
-  care2xSyncs Care2xSync[]
+  facility          Facility                 @relation(fields: [facilityId], references: [id], onDelete: Cascade)
+  care2xSyncs       Care2xSync[]
+  recouvrementSyncs Care2xRecouvrementSync[]
 
   @@map("facility_api_keys")
 }
@@ -601,6 +609,49 @@ model Care2xSyncEntry {
 
   @@index([syncId])
   @@map("care2x_sync_entries")
+}
+
+model Care2xRecouvrementSync {
+  id            String   @id @default(cuid())
+  facilityId    String
+  apiKeyId      String
+  batchRef      String   @unique
+  totalFacture  Decimal  @db.Decimal(15, 2)
+  totalRecouvre Decimal  @db.Decimal(15, 2)
+  rapport       Json
+  receivedAt    DateTime @default(now())
+
+  facility Facility       @relation(fields: [facilityId], references: [id])
+  apiKey   FacilityApiKey @relation(fields: [apiKeyId], references: [id])
+
+  @@index([facilityId])
+  @@map("care2x_recouvrement_syncs")
+}
+
+model Care2xVersion {
+  id           String   @id @default(cuid())
+  version      String   @unique
+  releaseNotes String?
+  filename     String
+  filePath     String
+  fileSize     Int
+  downloadUrl  String
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+
+  @@map("care2x_versions")
+}
+
+// ─── PERMISSIONS UI ──────────────────────────────────────────────────────────
+
+model PagePermission {
+  id      String  @id @default(cuid())
+  role    Role
+  pageKey String // ex: "analytics", "analytics.overview", "admin.users"
+  granted Boolean @default(true)
+
+  @@unique([role, pageKey])
+  @@map("page_permissions")
 }
 
 // ─── PLANNING ─────────────────────────────────────────────────────────────────

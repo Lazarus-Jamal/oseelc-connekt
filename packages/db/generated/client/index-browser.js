@@ -458,6 +458,13 @@ exports.Prisma.Care2xVersionScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.PagePermissionScalarFieldEnum = {
+  id: 'id',
+  role: 'role',
+  pageKey: 'pageKey',
+  granted: 'granted'
+};
+
 exports.Prisma.PlanningEventScalarFieldEnum = {
   id: 'id',
   title: 'title',
@@ -623,6 +630,7 @@ exports.Prisma.ModelName = {
   Care2xSyncEntry: 'Care2xSyncEntry',
   Care2xRecouvrementSync: 'Care2xRecouvrementSync',
   Care2xVersion: 'Care2xVersion',
+  PagePermission: 'PagePermission',
   PlanningEvent: 'PlanningEvent'
 };
 

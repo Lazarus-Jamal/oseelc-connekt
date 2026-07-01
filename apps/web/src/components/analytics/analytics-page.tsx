@@ -12,6 +12,7 @@ import {
   XCircle, Activity, Users, Heart, Baby, Syringe, Printer, ChevronDown, Search,
 } from 'lucide-react'
 import { MONTHS_FR } from '@care-connekt/shared'
+import { usePermissions } from '@/contexts/permissions-context'
 
 // ── Types ──────────────────────────────────────────────────────────────────────
 interface Region { id: string; name: string; code: string; total: number; reporting: number; coverage: number }
@@ -1052,17 +1053,18 @@ function ReportTab({ year, month }: { year: number; month: number | null }) {
 // ── Main Component ────────────────────────────────────────────────────────────
 const SCOPED_ROLES = ['REGIONAL_DIRECTOR', 'CONTROLEUR_REGIONAL', 'DATA_MANAGER']
 
-const TABS = [
-  { key: 'overview',    label: 'Aperçu national',  icon: Globe2 },
-  { key: 'regions',     label: 'Par région',        icon: MapPin },
-  { key: 'facilities',  label: 'Par centre',        icon: Building2 },
-  { key: 'explorer',    label: 'Explorateur',       icon: Search },
-  { key: 'inferences',  label: 'Inférences',        icon: TrendingUp },
-  { key: 'report',      label: 'Rapport',           icon: Printer },
+const ALL_TABS = [
+  { key: 'overview',    pageKey: 'analytics.overview',   label: 'Aperçu national', icon: Globe2 },
+  { key: 'regions',     pageKey: 'analytics.regions',    label: 'Par région',      icon: MapPin },
+  { key: 'facilities',  pageKey: 'analytics.facilities', label: 'Par centre',      icon: Building2 },
+  { key: 'explorer',    pageKey: 'analytics.explorer',   label: 'Explorateur',     icon: Search },
+  { key: 'inferences',  pageKey: 'analytics.inferences', label: 'Inférences',      icon: TrendingUp },
+  { key: 'report',      pageKey: 'analytics.report',     label: 'Rapport',         icon: Printer },
 ]
 
 export function AnalyticsPage() {
   const { data: session } = useSession()
+  const { canAccess } = usePermissions()
   const [tab, setTab] = useState('overview')
   const [year, setYear] = useState(new Date().getFullYear())
   const [month, setMonth] = useState<number | null>(null)
@@ -1071,6 +1073,11 @@ export function AnalyticsPage() {
   const isScoped = SCOPED_ROLES.includes(userRole)
   const forcedRegionId   = isScoped ? (session?.user?.regionId   ?? null) : null
   const forcedFacilityId = (userRole === 'DATA_MANAGER') ? (session?.user?.facilityId ?? null) : null
+
+  const TABS = ALL_TABS.filter((t) => canAccess(t.pageKey))
+
+  // Si l'onglet actif est retiré des permissions, basculer vers le premier disponible
+  const activeTab = TABS.find((t) => t.key === tab) ? tab : (TABS[0]?.key ?? 'overview')
 
   return (
     <div className="space-y-5 print:space-y-4">
@@ -1088,7 +1095,7 @@ export function AnalyticsPage() {
         {TABS.map((t) => (
           <button key={t.key} onClick={() => setTab(t.key)}
             className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all ${
-              tab === t.key ? 'bg-white dark:bg-gray-900 text-gray-900 dark:text-white shadow-sm' : 'text-gray-500 hover:text-gray-700 dark:hover:text-gray-300'
+              activeTab === t.key ? 'bg-white dark:bg-gray-900 text-gray-900 dark:text-white shadow-sm' : 'text-gray-500 hover:text-gray-700 dark:hover:text-gray-300'
             }`}>
             <t.icon className="w-4 h-4" />
             {t.label}
@@ -1098,12 +1105,12 @@ export function AnalyticsPage() {
 
       {/* Content */}
       <div>
-        {tab === 'overview'   && <OverviewTab    year={year} month={month} />}
-        {tab === 'regions'    && <RegionsTab     year={year} month={month} forcedRegionId={forcedRegionId} />}
-        {tab === 'facilities' && <FacilitiesTab  year={year} month={month} forcedRegionId={forcedRegionId} forcedFacilityId={forcedFacilityId} />}
-        {tab === 'explorer'   && <ExplorerTab    year={year} month={month} />}
-        {tab === 'inferences' && <InferencesTab  year={year} month={month} forcedRegionId={forcedRegionId} />}
-        {tab === 'report'     && <ReportTab      year={year} month={month} />}
+        {activeTab === 'overview'   && <OverviewTab    year={year} month={month} />}
+        {activeTab === 'regions'    && <RegionsTab     year={year} month={month} forcedRegionId={forcedRegionId} />}
+        {activeTab === 'facilities' && <FacilitiesTab  year={year} month={month} forcedRegionId={forcedRegionId} forcedFacilityId={forcedFacilityId} />}
+        {activeTab === 'explorer'   && <ExplorerTab    year={year} month={month} />}
+        {activeTab === 'inferences' && <InferencesTab  year={year} month={month} forcedRegionId={forcedRegionId} />}
+        {activeTab === 'report'     && <ReportTab      year={year} month={month} />}
       </div>
     </div>
   )

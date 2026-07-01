@@ -154,6 +154,11 @@ export type Care2xRecouvrementSync = $Result.DefaultSelection<Prisma.$Care2xReco
  */
 export type Care2xVersion = $Result.DefaultSelection<Prisma.$Care2xVersionPayload>
 /**
+ * Model PagePermission
+ * 
+ */
+export type PagePermission = $Result.DefaultSelection<Prisma.$PagePermissionPayload>
+/**
  * Model PlanningEvent
  * 
  */
@@ -729,6 +734,16 @@ export class PrismaClient<
   get care2xVersion(): Prisma.Care2xVersionDelegate<ExtArgs, ClientOptions>;
 
   /**
+   * `prisma.pagePermission`: Exposes CRUD operations for the **PagePermission** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more PagePermissions
+    * const pagePermissions = await prisma.pagePermission.findMany()
+    * ```
+    */
+  get pagePermission(): Prisma.PagePermissionDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.planningEvent`: Exposes CRUD operations for the **PlanningEvent** model.
     * Example usage:
     * ```ts
@@ -1206,6 +1221,7 @@ export namespace Prisma {
     Care2xSyncEntry: 'Care2xSyncEntry',
     Care2xRecouvrementSync: 'Care2xRecouvrementSync',
     Care2xVersion: 'Care2xVersion',
+    PagePermission: 'PagePermission',
     PlanningEvent: 'PlanningEvent'
   };
 
@@ -1225,7 +1241,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "organization" | "region" | "facility" | "user" | "session" | "declarationPeriodConfig" | "declaration" | "declarationItem" | "declarationDocument" | "declarationHistory" | "category" | "budget" | "statSheet" | "statIndicator" | "statValue" | "statDocument" | "statDeadline" | "notification" | "pushSubscription" | "adminMessage" | "adminMessageRecipient" | "adminMessageDocument" | "auditLog" | "facilityApiKey" | "care2xSync" | "care2xSyncEntry" | "care2xRecouvrementSync" | "care2xVersion" | "planningEvent"
+      modelProps: "organization" | "region" | "facility" | "user" | "session" | "declarationPeriodConfig" | "declaration" | "declarationItem" | "declarationDocument" | "declarationHistory" | "category" | "budget" | "statSheet" | "statIndicator" | "statValue" | "statDocument" | "statDeadline" | "notification" | "pushSubscription" | "adminMessage" | "adminMessageRecipient" | "adminMessageDocument" | "auditLog" | "facilityApiKey" | "care2xSync" | "care2xSyncEntry" | "care2xRecouvrementSync" | "care2xVersion" | "pagePermission" | "planningEvent"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -3301,6 +3317,80 @@ export namespace Prisma {
           }
         }
       }
+      PagePermission: {
+        payload: Prisma.$PagePermissionPayload<ExtArgs>
+        fields: Prisma.PagePermissionFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PagePermissionFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PagePermissionPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PagePermissionFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PagePermissionPayload>
+          }
+          findFirst: {
+            args: Prisma.PagePermissionFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PagePermissionPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PagePermissionFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PagePermissionPayload>
+          }
+          findMany: {
+            args: Prisma.PagePermissionFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PagePermissionPayload>[]
+          }
+          create: {
+            args: Prisma.PagePermissionCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PagePermissionPayload>
+          }
+          createMany: {
+            args: Prisma.PagePermissionCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PagePermissionCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PagePermissionPayload>[]
+          }
+          delete: {
+            args: Prisma.PagePermissionDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PagePermissionPayload>
+          }
+          update: {
+            args: Prisma.PagePermissionUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PagePermissionPayload>
+          }
+          deleteMany: {
+            args: Prisma.PagePermissionDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PagePermissionUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.PagePermissionUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PagePermissionPayload>[]
+          }
+          upsert: {
+            args: Prisma.PagePermissionUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PagePermissionPayload>
+          }
+          aggregate: {
+            args: Prisma.PagePermissionAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePagePermission>
+          }
+          groupBy: {
+            args: Prisma.PagePermissionGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PagePermissionGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PagePermissionCountArgs<ExtArgs>
+            result: $Utils.Optional<PagePermissionCountAggregateOutputType> | number
+          }
+        }
+      }
       PlanningEvent: {
         payload: Prisma.$PlanningEventPayload<ExtArgs>
         fields: Prisma.PlanningEventFieldRefs
@@ -3499,6 +3589,7 @@ export namespace Prisma {
     care2xSyncEntry?: Care2xSyncEntryOmit
     care2xRecouvrementSync?: Care2xRecouvrementSyncOmit
     care2xVersion?: Care2xVersionOmit
+    pagePermission?: PagePermissionOmit
     planningEvent?: PlanningEventOmit
   }
 
@@ -37072,6 +37163,988 @@ export namespace Prisma {
 
 
   /**
+   * Model PagePermission
+   */
+
+  export type AggregatePagePermission = {
+    _count: PagePermissionCountAggregateOutputType | null
+    _min: PagePermissionMinAggregateOutputType | null
+    _max: PagePermissionMaxAggregateOutputType | null
+  }
+
+  export type PagePermissionMinAggregateOutputType = {
+    id: string | null
+    role: $Enums.Role | null
+    pageKey: string | null
+    granted: boolean | null
+  }
+
+  export type PagePermissionMaxAggregateOutputType = {
+    id: string | null
+    role: $Enums.Role | null
+    pageKey: string | null
+    granted: boolean | null
+  }
+
+  export type PagePermissionCountAggregateOutputType = {
+    id: number
+    role: number
+    pageKey: number
+    granted: number
+    _all: number
+  }
+
+
+  export type PagePermissionMinAggregateInputType = {
+    id?: true
+    role?: true
+    pageKey?: true
+    granted?: true
+  }
+
+  export type PagePermissionMaxAggregateInputType = {
+    id?: true
+    role?: true
+    pageKey?: true
+    granted?: true
+  }
+
+  export type PagePermissionCountAggregateInputType = {
+    id?: true
+    role?: true
+    pageKey?: true
+    granted?: true
+    _all?: true
+  }
+
+  export type PagePermissionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PagePermission to aggregate.
+     */
+    where?: PagePermissionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PagePermissions to fetch.
+     */
+    orderBy?: PagePermissionOrderByWithRelationInput | PagePermissionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PagePermissionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PagePermissions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PagePermissions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned PagePermissions
+    **/
+    _count?: true | PagePermissionCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PagePermissionMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PagePermissionMaxAggregateInputType
+  }
+
+  export type GetPagePermissionAggregateType<T extends PagePermissionAggregateArgs> = {
+        [P in keyof T & keyof AggregatePagePermission]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePagePermission[P]>
+      : GetScalarType<T[P], AggregatePagePermission[P]>
+  }
+
+
+
+
+  export type PagePermissionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PagePermissionWhereInput
+    orderBy?: PagePermissionOrderByWithAggregationInput | PagePermissionOrderByWithAggregationInput[]
+    by: PagePermissionScalarFieldEnum[] | PagePermissionScalarFieldEnum
+    having?: PagePermissionScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PagePermissionCountAggregateInputType | true
+    _min?: PagePermissionMinAggregateInputType
+    _max?: PagePermissionMaxAggregateInputType
+  }
+
+  export type PagePermissionGroupByOutputType = {
+    id: string
+    role: $Enums.Role
+    pageKey: string
+    granted: boolean
+    _count: PagePermissionCountAggregateOutputType | null
+    _min: PagePermissionMinAggregateOutputType | null
+    _max: PagePermissionMaxAggregateOutputType | null
+  }
+
+  type GetPagePermissionGroupByPayload<T extends PagePermissionGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PagePermissionGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PagePermissionGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PagePermissionGroupByOutputType[P]>
+            : GetScalarType<T[P], PagePermissionGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PagePermissionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    role?: boolean
+    pageKey?: boolean
+    granted?: boolean
+  }, ExtArgs["result"]["pagePermission"]>
+
+  export type PagePermissionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    role?: boolean
+    pageKey?: boolean
+    granted?: boolean
+  }, ExtArgs["result"]["pagePermission"]>
+
+  export type PagePermissionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    role?: boolean
+    pageKey?: boolean
+    granted?: boolean
+  }, ExtArgs["result"]["pagePermission"]>
+
+  export type PagePermissionSelectScalar = {
+    id?: boolean
+    role?: boolean
+    pageKey?: boolean
+    granted?: boolean
+  }
+
+  export type PagePermissionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "role" | "pageKey" | "granted", ExtArgs["result"]["pagePermission"]>
+
+  export type $PagePermissionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "PagePermission"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      role: $Enums.Role
+      pageKey: string
+      granted: boolean
+    }, ExtArgs["result"]["pagePermission"]>
+    composites: {}
+  }
+
+  type PagePermissionGetPayload<S extends boolean | null | undefined | PagePermissionDefaultArgs> = $Result.GetResult<Prisma.$PagePermissionPayload, S>
+
+  type PagePermissionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PagePermissionFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PagePermissionCountAggregateInputType | true
+    }
+
+  export interface PagePermissionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['PagePermission'], meta: { name: 'PagePermission' } }
+    /**
+     * Find zero or one PagePermission that matches the filter.
+     * @param {PagePermissionFindUniqueArgs} args - Arguments to find a PagePermission
+     * @example
+     * // Get one PagePermission
+     * const pagePermission = await prisma.pagePermission.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PagePermissionFindUniqueArgs>(args: SelectSubset<T, PagePermissionFindUniqueArgs<ExtArgs>>): Prisma__PagePermissionClient<$Result.GetResult<Prisma.$PagePermissionPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one PagePermission that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PagePermissionFindUniqueOrThrowArgs} args - Arguments to find a PagePermission
+     * @example
+     * // Get one PagePermission
+     * const pagePermission = await prisma.pagePermission.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PagePermissionFindUniqueOrThrowArgs>(args: SelectSubset<T, PagePermissionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PagePermissionClient<$Result.GetResult<Prisma.$PagePermissionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PagePermission that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PagePermissionFindFirstArgs} args - Arguments to find a PagePermission
+     * @example
+     * // Get one PagePermission
+     * const pagePermission = await prisma.pagePermission.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PagePermissionFindFirstArgs>(args?: SelectSubset<T, PagePermissionFindFirstArgs<ExtArgs>>): Prisma__PagePermissionClient<$Result.GetResult<Prisma.$PagePermissionPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PagePermission that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PagePermissionFindFirstOrThrowArgs} args - Arguments to find a PagePermission
+     * @example
+     * // Get one PagePermission
+     * const pagePermission = await prisma.pagePermission.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PagePermissionFindFirstOrThrowArgs>(args?: SelectSubset<T, PagePermissionFindFirstOrThrowArgs<ExtArgs>>): Prisma__PagePermissionClient<$Result.GetResult<Prisma.$PagePermissionPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more PagePermissions that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PagePermissionFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all PagePermissions
+     * const pagePermissions = await prisma.pagePermission.findMany()
+     * 
+     * // Get first 10 PagePermissions
+     * const pagePermissions = await prisma.pagePermission.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const pagePermissionWithIdOnly = await prisma.pagePermission.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PagePermissionFindManyArgs>(args?: SelectSubset<T, PagePermissionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PagePermissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a PagePermission.
+     * @param {PagePermissionCreateArgs} args - Arguments to create a PagePermission.
+     * @example
+     * // Create one PagePermission
+     * const PagePermission = await prisma.pagePermission.create({
+     *   data: {
+     *     // ... data to create a PagePermission
+     *   }
+     * })
+     * 
+     */
+    create<T extends PagePermissionCreateArgs>(args: SelectSubset<T, PagePermissionCreateArgs<ExtArgs>>): Prisma__PagePermissionClient<$Result.GetResult<Prisma.$PagePermissionPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many PagePermissions.
+     * @param {PagePermissionCreateManyArgs} args - Arguments to create many PagePermissions.
+     * @example
+     * // Create many PagePermissions
+     * const pagePermission = await prisma.pagePermission.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PagePermissionCreateManyArgs>(args?: SelectSubset<T, PagePermissionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many PagePermissions and returns the data saved in the database.
+     * @param {PagePermissionCreateManyAndReturnArgs} args - Arguments to create many PagePermissions.
+     * @example
+     * // Create many PagePermissions
+     * const pagePermission = await prisma.pagePermission.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many PagePermissions and only return the `id`
+     * const pagePermissionWithIdOnly = await prisma.pagePermission.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PagePermissionCreateManyAndReturnArgs>(args?: SelectSubset<T, PagePermissionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PagePermissionPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a PagePermission.
+     * @param {PagePermissionDeleteArgs} args - Arguments to delete one PagePermission.
+     * @example
+     * // Delete one PagePermission
+     * const PagePermission = await prisma.pagePermission.delete({
+     *   where: {
+     *     // ... filter to delete one PagePermission
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PagePermissionDeleteArgs>(args: SelectSubset<T, PagePermissionDeleteArgs<ExtArgs>>): Prisma__PagePermissionClient<$Result.GetResult<Prisma.$PagePermissionPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one PagePermission.
+     * @param {PagePermissionUpdateArgs} args - Arguments to update one PagePermission.
+     * @example
+     * // Update one PagePermission
+     * const pagePermission = await prisma.pagePermission.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PagePermissionUpdateArgs>(args: SelectSubset<T, PagePermissionUpdateArgs<ExtArgs>>): Prisma__PagePermissionClient<$Result.GetResult<Prisma.$PagePermissionPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more PagePermissions.
+     * @param {PagePermissionDeleteManyArgs} args - Arguments to filter PagePermissions to delete.
+     * @example
+     * // Delete a few PagePermissions
+     * const { count } = await prisma.pagePermission.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PagePermissionDeleteManyArgs>(args?: SelectSubset<T, PagePermissionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PagePermissions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PagePermissionUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many PagePermissions
+     * const pagePermission = await prisma.pagePermission.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PagePermissionUpdateManyArgs>(args: SelectSubset<T, PagePermissionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PagePermissions and returns the data updated in the database.
+     * @param {PagePermissionUpdateManyAndReturnArgs} args - Arguments to update many PagePermissions.
+     * @example
+     * // Update many PagePermissions
+     * const pagePermission = await prisma.pagePermission.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more PagePermissions and only return the `id`
+     * const pagePermissionWithIdOnly = await prisma.pagePermission.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends PagePermissionUpdateManyAndReturnArgs>(args: SelectSubset<T, PagePermissionUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PagePermissionPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one PagePermission.
+     * @param {PagePermissionUpsertArgs} args - Arguments to update or create a PagePermission.
+     * @example
+     * // Update or create a PagePermission
+     * const pagePermission = await prisma.pagePermission.upsert({
+     *   create: {
+     *     // ... data to create a PagePermission
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the PagePermission we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PagePermissionUpsertArgs>(args: SelectSubset<T, PagePermissionUpsertArgs<ExtArgs>>): Prisma__PagePermissionClient<$Result.GetResult<Prisma.$PagePermissionPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of PagePermissions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PagePermissionCountArgs} args - Arguments to filter PagePermissions to count.
+     * @example
+     * // Count the number of PagePermissions
+     * const count = await prisma.pagePermission.count({
+     *   where: {
+     *     // ... the filter for the PagePermissions we want to count
+     *   }
+     * })
+    **/
+    count<T extends PagePermissionCountArgs>(
+      args?: Subset<T, PagePermissionCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PagePermissionCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a PagePermission.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PagePermissionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PagePermissionAggregateArgs>(args: Subset<T, PagePermissionAggregateArgs>): Prisma.PrismaPromise<GetPagePermissionAggregateType<T>>
+
+    /**
+     * Group by PagePermission.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PagePermissionGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PagePermissionGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PagePermissionGroupByArgs['orderBy'] }
+        : { orderBy?: PagePermissionGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PagePermissionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPagePermissionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the PagePermission model
+   */
+  readonly fields: PagePermissionFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for PagePermission.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PagePermissionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the PagePermission model
+   */
+  interface PagePermissionFieldRefs {
+    readonly id: FieldRef<"PagePermission", 'String'>
+    readonly role: FieldRef<"PagePermission", 'Role'>
+    readonly pageKey: FieldRef<"PagePermission", 'String'>
+    readonly granted: FieldRef<"PagePermission", 'Boolean'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * PagePermission findUnique
+   */
+  export type PagePermissionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PagePermission
+     */
+    select?: PagePermissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PagePermission
+     */
+    omit?: PagePermissionOmit<ExtArgs> | null
+    /**
+     * Filter, which PagePermission to fetch.
+     */
+    where: PagePermissionWhereUniqueInput
+  }
+
+  /**
+   * PagePermission findUniqueOrThrow
+   */
+  export type PagePermissionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PagePermission
+     */
+    select?: PagePermissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PagePermission
+     */
+    omit?: PagePermissionOmit<ExtArgs> | null
+    /**
+     * Filter, which PagePermission to fetch.
+     */
+    where: PagePermissionWhereUniqueInput
+  }
+
+  /**
+   * PagePermission findFirst
+   */
+  export type PagePermissionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PagePermission
+     */
+    select?: PagePermissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PagePermission
+     */
+    omit?: PagePermissionOmit<ExtArgs> | null
+    /**
+     * Filter, which PagePermission to fetch.
+     */
+    where?: PagePermissionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PagePermissions to fetch.
+     */
+    orderBy?: PagePermissionOrderByWithRelationInput | PagePermissionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PagePermissions.
+     */
+    cursor?: PagePermissionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PagePermissions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PagePermissions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PagePermissions.
+     */
+    distinct?: PagePermissionScalarFieldEnum | PagePermissionScalarFieldEnum[]
+  }
+
+  /**
+   * PagePermission findFirstOrThrow
+   */
+  export type PagePermissionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PagePermission
+     */
+    select?: PagePermissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PagePermission
+     */
+    omit?: PagePermissionOmit<ExtArgs> | null
+    /**
+     * Filter, which PagePermission to fetch.
+     */
+    where?: PagePermissionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PagePermissions to fetch.
+     */
+    orderBy?: PagePermissionOrderByWithRelationInput | PagePermissionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PagePermissions.
+     */
+    cursor?: PagePermissionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PagePermissions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PagePermissions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PagePermissions.
+     */
+    distinct?: PagePermissionScalarFieldEnum | PagePermissionScalarFieldEnum[]
+  }
+
+  /**
+   * PagePermission findMany
+   */
+  export type PagePermissionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PagePermission
+     */
+    select?: PagePermissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PagePermission
+     */
+    omit?: PagePermissionOmit<ExtArgs> | null
+    /**
+     * Filter, which PagePermissions to fetch.
+     */
+    where?: PagePermissionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PagePermissions to fetch.
+     */
+    orderBy?: PagePermissionOrderByWithRelationInput | PagePermissionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing PagePermissions.
+     */
+    cursor?: PagePermissionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PagePermissions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PagePermissions.
+     */
+    skip?: number
+    distinct?: PagePermissionScalarFieldEnum | PagePermissionScalarFieldEnum[]
+  }
+
+  /**
+   * PagePermission create
+   */
+  export type PagePermissionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PagePermission
+     */
+    select?: PagePermissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PagePermission
+     */
+    omit?: PagePermissionOmit<ExtArgs> | null
+    /**
+     * The data needed to create a PagePermission.
+     */
+    data: XOR<PagePermissionCreateInput, PagePermissionUncheckedCreateInput>
+  }
+
+  /**
+   * PagePermission createMany
+   */
+  export type PagePermissionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many PagePermissions.
+     */
+    data: PagePermissionCreateManyInput | PagePermissionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PagePermission createManyAndReturn
+   */
+  export type PagePermissionCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PagePermission
+     */
+    select?: PagePermissionSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PagePermission
+     */
+    omit?: PagePermissionOmit<ExtArgs> | null
+    /**
+     * The data used to create many PagePermissions.
+     */
+    data: PagePermissionCreateManyInput | PagePermissionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PagePermission update
+   */
+  export type PagePermissionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PagePermission
+     */
+    select?: PagePermissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PagePermission
+     */
+    omit?: PagePermissionOmit<ExtArgs> | null
+    /**
+     * The data needed to update a PagePermission.
+     */
+    data: XOR<PagePermissionUpdateInput, PagePermissionUncheckedUpdateInput>
+    /**
+     * Choose, which PagePermission to update.
+     */
+    where: PagePermissionWhereUniqueInput
+  }
+
+  /**
+   * PagePermission updateMany
+   */
+  export type PagePermissionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update PagePermissions.
+     */
+    data: XOR<PagePermissionUpdateManyMutationInput, PagePermissionUncheckedUpdateManyInput>
+    /**
+     * Filter which PagePermissions to update
+     */
+    where?: PagePermissionWhereInput
+    /**
+     * Limit how many PagePermissions to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PagePermission updateManyAndReturn
+   */
+  export type PagePermissionUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PagePermission
+     */
+    select?: PagePermissionSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PagePermission
+     */
+    omit?: PagePermissionOmit<ExtArgs> | null
+    /**
+     * The data used to update PagePermissions.
+     */
+    data: XOR<PagePermissionUpdateManyMutationInput, PagePermissionUncheckedUpdateManyInput>
+    /**
+     * Filter which PagePermissions to update
+     */
+    where?: PagePermissionWhereInput
+    /**
+     * Limit how many PagePermissions to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PagePermission upsert
+   */
+  export type PagePermissionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PagePermission
+     */
+    select?: PagePermissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PagePermission
+     */
+    omit?: PagePermissionOmit<ExtArgs> | null
+    /**
+     * The filter to search for the PagePermission to update in case it exists.
+     */
+    where: PagePermissionWhereUniqueInput
+    /**
+     * In case the PagePermission found by the `where` argument doesn't exist, create a new PagePermission with this data.
+     */
+    create: XOR<PagePermissionCreateInput, PagePermissionUncheckedCreateInput>
+    /**
+     * In case the PagePermission was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PagePermissionUpdateInput, PagePermissionUncheckedUpdateInput>
+  }
+
+  /**
+   * PagePermission delete
+   */
+  export type PagePermissionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PagePermission
+     */
+    select?: PagePermissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PagePermission
+     */
+    omit?: PagePermissionOmit<ExtArgs> | null
+    /**
+     * Filter which PagePermission to delete.
+     */
+    where: PagePermissionWhereUniqueInput
+  }
+
+  /**
+   * PagePermission deleteMany
+   */
+  export type PagePermissionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PagePermissions to delete
+     */
+    where?: PagePermissionWhereInput
+    /**
+     * Limit how many PagePermissions to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * PagePermission without action
+   */
+  export type PagePermissionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PagePermission
+     */
+    select?: PagePermissionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PagePermission
+     */
+    omit?: PagePermissionOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Model PlanningEvent
    */
 
@@ -38746,6 +39819,16 @@ export namespace Prisma {
   };
 
   export type Care2xVersionScalarFieldEnum = (typeof Care2xVersionScalarFieldEnum)[keyof typeof Care2xVersionScalarFieldEnum]
+
+
+  export const PagePermissionScalarFieldEnum: {
+    id: 'id',
+    role: 'role',
+    pageKey: 'pageKey',
+    granted: 'granted'
+  };
+
+  export type PagePermissionScalarFieldEnum = (typeof PagePermissionScalarFieldEnum)[keyof typeof PagePermissionScalarFieldEnum]
 
 
   export const PlanningEventScalarFieldEnum: {
@@ -41359,6 +42442,54 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"Care2xVersion"> | Date | string
   }
 
+  export type PagePermissionWhereInput = {
+    AND?: PagePermissionWhereInput | PagePermissionWhereInput[]
+    OR?: PagePermissionWhereInput[]
+    NOT?: PagePermissionWhereInput | PagePermissionWhereInput[]
+    id?: StringFilter<"PagePermission"> | string
+    role?: EnumRoleFilter<"PagePermission"> | $Enums.Role
+    pageKey?: StringFilter<"PagePermission"> | string
+    granted?: BoolFilter<"PagePermission"> | boolean
+  }
+
+  export type PagePermissionOrderByWithRelationInput = {
+    id?: SortOrder
+    role?: SortOrder
+    pageKey?: SortOrder
+    granted?: SortOrder
+  }
+
+  export type PagePermissionWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    role_pageKey?: PagePermissionRolePageKeyCompoundUniqueInput
+    AND?: PagePermissionWhereInput | PagePermissionWhereInput[]
+    OR?: PagePermissionWhereInput[]
+    NOT?: PagePermissionWhereInput | PagePermissionWhereInput[]
+    role?: EnumRoleFilter<"PagePermission"> | $Enums.Role
+    pageKey?: StringFilter<"PagePermission"> | string
+    granted?: BoolFilter<"PagePermission"> | boolean
+  }, "id" | "role_pageKey">
+
+  export type PagePermissionOrderByWithAggregationInput = {
+    id?: SortOrder
+    role?: SortOrder
+    pageKey?: SortOrder
+    granted?: SortOrder
+    _count?: PagePermissionCountOrderByAggregateInput
+    _max?: PagePermissionMaxOrderByAggregateInput
+    _min?: PagePermissionMinOrderByAggregateInput
+  }
+
+  export type PagePermissionScalarWhereWithAggregatesInput = {
+    AND?: PagePermissionScalarWhereWithAggregatesInput | PagePermissionScalarWhereWithAggregatesInput[]
+    OR?: PagePermissionScalarWhereWithAggregatesInput[]
+    NOT?: PagePermissionScalarWhereWithAggregatesInput | PagePermissionScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"PagePermission"> | string
+    role?: EnumRoleWithAggregatesFilter<"PagePermission"> | $Enums.Role
+    pageKey?: StringWithAggregatesFilter<"PagePermission"> | string
+    granted?: BoolWithAggregatesFilter<"PagePermission"> | boolean
+  }
+
   export type PlanningEventWhereInput = {
     AND?: PlanningEventWhereInput | PlanningEventWhereInput[]
     OR?: PlanningEventWhereInput[]
@@ -43952,6 +45083,55 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type PagePermissionCreateInput = {
+    id?: string
+    role: $Enums.Role
+    pageKey: string
+    granted?: boolean
+  }
+
+  export type PagePermissionUncheckedCreateInput = {
+    id?: string
+    role: $Enums.Role
+    pageKey: string
+    granted?: boolean
+  }
+
+  export type PagePermissionUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    pageKey?: StringFieldUpdateOperationsInput | string
+    granted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type PagePermissionUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    pageKey?: StringFieldUpdateOperationsInput | string
+    granted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type PagePermissionCreateManyInput = {
+    id?: string
+    role: $Enums.Role
+    pageKey: string
+    granted?: boolean
+  }
+
+  export type PagePermissionUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    pageKey?: StringFieldUpdateOperationsInput | string
+    granted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type PagePermissionUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    pageKey?: StringFieldUpdateOperationsInput | string
+    granted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
   export type PlanningEventCreateInput = {
     id?: string
     title: string
@@ -46116,6 +47296,32 @@ export namespace Prisma {
 
   export type Care2xVersionSumOrderByAggregateInput = {
     fileSize?: SortOrder
+  }
+
+  export type PagePermissionRolePageKeyCompoundUniqueInput = {
+    role: $Enums.Role
+    pageKey: string
+  }
+
+  export type PagePermissionCountOrderByAggregateInput = {
+    id?: SortOrder
+    role?: SortOrder
+    pageKey?: SortOrder
+    granted?: SortOrder
+  }
+
+  export type PagePermissionMaxOrderByAggregateInput = {
+    id?: SortOrder
+    role?: SortOrder
+    pageKey?: SortOrder
+    granted?: SortOrder
+  }
+
+  export type PagePermissionMinOrderByAggregateInput = {
+    id?: SortOrder
+    role?: SortOrder
+    pageKey?: SortOrder
+    granted?: SortOrder
   }
 
   export type EnumPlanningEventTypeFilter<$PrismaModel = never> = {

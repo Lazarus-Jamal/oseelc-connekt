@@ -3,34 +3,17 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import type { Session } from 'next-auth'
 import type React from 'react'
 import { cn } from '@/lib/utils'
 import {
-  LayoutDashboard,
-  FileText,
-  TrendingDown,
-  BarChart3,
-  FileBarChart,
-  FileCheck,
-  Tag,
-  Users,
-  Building2,
-  Settings,
-  Bell,
-  X,
-  ChevronRight,
-  MapPin,
-  MessageSquare,
-  FlaskConical,
-  CalendarClock,
-  Shield,
-  FileUp,
-  Trophy,
-  Globe,
-  Wifi,
+  LayoutDashboard, FileText, TrendingDown, BarChart3, FileBarChart,
+  FileCheck, Tag, Users, Building2, Settings, Bell, X, ChevronRight,
+  MapPin, MessageSquare, FlaskConical, CalendarClock, Shield, FileUp,
+  Trophy, Globe, Wifi, ShieldCheck,
 } from 'lucide-react'
+import { usePermissions } from '@/contexts/permissions-context'
 
 interface SidebarProps {
   session: Session
@@ -42,36 +25,37 @@ interface NavItem {
   label: string
   href: string
   icon: React.ElementType
-  roles?: string[]
+  pageKey: string
 }
 
 const NAV_ITEMS: NavItem[] = [
-  { label: 'Tableau de bord', href: '/dashboard', icon: LayoutDashboard },
-  { label: 'Déclarations', href: '/declarations', icon: FileText, roles: ['SUPER_ADMIN', 'DIRECTION', 'REGIONAL_DIRECTOR', 'FACILITY_CHIEF', 'FINANCIER', 'CONTROLEUR', 'CONTROLEUR_REGIONAL', 'CAISSIER'] },
-  { label: 'Dépenses', href: '/expenses', icon: TrendingDown, roles: ['SUPER_ADMIN', 'DIRECTION', 'REGIONAL_DIRECTOR', 'FACILITY_CHIEF', 'FINANCIER'] },
-  { label: 'Statistiques', href: '/statistics', icon: BarChart3, roles: ['SUPER_ADMIN', 'DATA_ADMIN', 'DIRECTION', 'REGIONAL_DIRECTOR', 'FACILITY_CHIEF', 'DATA_MANAGER', 'CONTROLEUR', 'CONTROLEUR_REGIONAL'] },
-  { label: 'Import statistiques', href: '/statistics/import', icon: FileUp, roles: ['SUPER_ADMIN', 'DATA_ADMIN', 'DATA_MANAGER'] },
-  { label: 'Rapports', href: '/reports', icon: FileBarChart, roles: ['SUPER_ADMIN', 'DATA_ADMIN', 'DIRECTION', 'REGIONAL_DIRECTOR', 'FACILITY_CHIEF', 'DATA_MANAGER', 'CONTROLEUR', 'CONTROLEUR_REGIONAL'] },
-  { label: 'Analyse des données', href: '/analytics', icon: FlaskConical, roles: ['SUPER_ADMIN', 'DATA_ADMIN', 'DIRECTION', 'REGIONAL_DIRECTOR', 'DATA_MANAGER', 'CONTROLEUR', 'CONTROLEUR_REGIONAL'] },
-  { label: 'Benchmarking', href: '/benchmarking', icon: Trophy, roles: ['SUPER_ADMIN', 'DATA_ADMIN', 'DIRECTION', 'REGIONAL_DIRECTOR'] },
-  { label: 'Carte géographique', href: '/map', icon: MapPin, roles: ['SUPER_ADMIN', 'DATA_ADMIN', 'DIRECTION', 'REGIONAL_DIRECTOR'] },
-  { label: 'Suivi budgétaire', href: '/budget', icon: FileCheck, roles: ['SUPER_ADMIN', 'DIRECTION', 'REGIONAL_DIRECTOR', 'CONTROLEUR', 'CONTROLEUR_REGIONAL'] },
-  { label: 'Catégories', href: '/categories', icon: Tag, roles: ['SUPER_ADMIN', 'DIRECTION', 'FINANCIER'] },
-  { label: 'Planning & Agenda', href: '/planning', icon: CalendarClock },
-  { label: 'Messagerie', href: '/messages', icon: MessageSquare },
-  { label: 'Notifications', href: '/notifications', icon: Bell },
+  { label: 'Tableau de bord',     href: '/dashboard',         icon: LayoutDashboard, pageKey: 'dashboard' },
+  { label: 'Déclarations',        href: '/declarations',      icon: FileText,        pageKey: 'declarations' },
+  { label: 'Dépenses',            href: '/expenses',          icon: TrendingDown,    pageKey: 'expenses' },
+  { label: 'Statistiques',        href: '/statistics',        icon: BarChart3,       pageKey: 'statistics' },
+  { label: 'Import statistiques', href: '/statistics/import', icon: FileUp,          pageKey: 'statistics.import' },
+  { label: 'Rapports',            href: '/reports',           icon: FileBarChart,    pageKey: 'reports' },
+  { label: 'Analyse des données', href: '/analytics',         icon: FlaskConical,    pageKey: 'analytics' },
+  { label: 'Benchmarking',        href: '/benchmarking',      icon: Trophy,          pageKey: 'benchmarking' },
+  { label: 'Carte géographique',  href: '/map',               icon: MapPin,          pageKey: 'map' },
+  { label: 'Suivi budgétaire',    href: '/budget',            icon: FileCheck,       pageKey: 'budget' },
+  { label: 'Catégories',          href: '/categories',        icon: Tag,             pageKey: 'categories' },
+  { label: 'Planning & Agenda',   href: '/planning',          icon: CalendarClock,   pageKey: 'planning' },
+  { label: 'Messagerie',          href: '/messages',          icon: MessageSquare,   pageKey: 'messages' },
+  { label: 'Notifications',       href: '/notifications',     icon: Bell,            pageKey: 'notifications' },
 ]
 
 const ADMIN_ITEMS: NavItem[] = [
-  { label: 'Utilisateurs', href: '/admin/users', icon: Users, roles: ['SUPER_ADMIN', 'DIRECTION', 'REGIONAL_DIRECTOR'] },
-  { label: 'Régions sanitaires', href: '/admin/regions', icon: MapPin, roles: ['SUPER_ADMIN', 'DATA_ADMIN', 'DIRECTION', 'REGIONAL_DIRECTOR'] },
-  { label: 'Formations sanitaires', href: '/admin/facilities', icon: Building2, roles: ['SUPER_ADMIN', 'DATA_ADMIN', 'DIRECTION', 'REGIONAL_DIRECTOR'] },
-  { label: 'Indicateurs stat.', href: '/admin/indicators', icon: BarChart3, roles: ['SUPER_ADMIN', 'DATA_ADMIN', 'DIRECTION'] },
-  { label: 'Délais de promptitude', href: '/admin/deadlines', icon: CalendarClock, roles: ['SUPER_ADMIN', 'DATA_ADMIN', 'DATA_MANAGER'] },
-  { label: 'Journal d\'audit', href: '/admin/audit', icon: Shield, roles: ['SUPER_ADMIN', 'DIRECTION'] },
-  { label: 'Intégration DHIS2', href: '/admin/dhis2', icon: Globe, roles: ['SUPER_ADMIN', 'DATA_ADMIN', 'DIRECTION'] },
-  { label: 'Configuration', href: '/admin/config', icon: Settings, roles: ['SUPER_ADMIN'] },
-  { label: 'Clés API Care2x', href: '/admin/care2x-keys', icon: Wifi, roles: ['SUPER_ADMIN'] },
+  { label: 'Utilisateurs',         href: '/admin/users',        icon: Users,       pageKey: 'admin.users' },
+  { label: 'Régions sanitaires',   href: '/admin/regions',      icon: MapPin,      pageKey: 'admin.regions' },
+  { label: 'Formations sanitaires',href: '/admin/facilities',   icon: Building2,   pageKey: 'admin.facilities' },
+  { label: 'Indicateurs stat.',    href: '/admin/indicators',   icon: BarChart3,   pageKey: 'admin.indicators' },
+  { label: 'Délais de promptitude',href: '/admin/deadlines',    icon: CalendarClock,pageKey: 'admin.deadlines' },
+  { label: "Journal d'audit",      href: '/admin/audit',        icon: Shield,      pageKey: 'admin.audit' },
+  { label: 'Intégration DHIS2',    href: '/admin/dhis2',        icon: Globe,       pageKey: 'admin.dhis2' },
+  { label: 'Configuration',        href: '/admin/config',       icon: Settings,    pageKey: 'admin.config' },
+  { label: 'Clés API Care2x',      href: '/admin/care2x-keys',  icon: Wifi,        pageKey: 'admin.care2x' },
+  { label: 'Gestion des droits',   href: '/admin/permissions',  icon: ShieldCheck, pageKey: 'admin.permissions' },
 ]
 
 const ROLE_BADGE: Record<string, string> = {
@@ -89,12 +73,12 @@ const ROLE_BADGE: Record<string, string> = {
 
 export function Sidebar({ session, isOpen, onClose }: SidebarProps) {
   const pathname = usePathname() || ''
+  const { canAccess, ready } = usePermissions()
 
   if (!session) return null
 
-  const role = session.user.role
-  const filteredNav = NAV_ITEMS.filter((item) => !item.roles || item.roles.includes(role))
-  const filteredAdmin = ADMIN_ITEMS.filter((item) => !item.roles || item.roles.includes(role))
+  const filteredNav = ready ? NAV_ITEMS.filter((item) => canAccess(item.pageKey)) : []
+  const filteredAdmin = ready ? ADMIN_ITEMS.filter((item) => canAccess(item.pageKey)) : []
 
   const isActivePath = (href: string) => {
     if (!pathname) return false
@@ -178,7 +162,7 @@ export function Sidebar({ session, isOpen, onClose }: SidebarProps) {
           </div>
           <div className="flex-1 min-w-0">
             <p className="text-xs font-bold text-white truncate">{session.user.name}</p>
-            <p className="text-[10px] text-slate-500 truncate">{ROLE_BADGE[role] || role}</p>
+            <p className="text-[10px] text-slate-500 truncate">{ROLE_BADGE[session.user.role] || session.user.role}</p>
           </div>
           <ChevronRight className="w-3 h-3 text-slate-600" />
         </Link>

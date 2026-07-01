@@ -5,6 +5,7 @@ import type { Session } from 'next-auth'
 import { Header } from './header'
 import { Sidebar } from './sidebar'
 import { cacheReferenceData } from '@/lib/offline-data-cache'
+import { PermissionsProvider } from '@/contexts/permissions-context'
 
 interface Props {
   session: Session
@@ -38,6 +39,7 @@ export function DashboardShell({ session, children }: Props) {
   }, [session])
 
   return (
+    <PermissionsProvider>
     <div className="flex h-screen bg-slate-50 dark:bg-slate-950">
       {/* Sidebar mobile overlay */}
       {sidebarOpen && (
@@ -65,5 +67,6 @@ export function DashboardShell({ session, children }: Props) {
         </main>
       </div>
     </div>
+    </PermissionsProvider>
   )
 }
