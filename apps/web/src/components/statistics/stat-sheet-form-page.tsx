@@ -43,14 +43,21 @@ export function StatSheetFormPage() {
     const params = new URLSearchParams({ limit: '200' })
     const userFacilityId = (session.user as any).facilityId
     const userRegionId   = (session.user as any).regionId
-    if (role === 'DATA_MANAGER' && userFacilityId) {
+    if (role === 'FACILITY_CHIEF' && userFacilityId) {
+      params.set('facilityId', userFacilityId)
+    } else if (role === 'DATA_MANAGER' && userFacilityId) {
       params.set('facilityId', userFacilityId)
     } else if (role === 'DATA_MANAGER' && userRegionId) {
       params.set('regionId', userRegionId)
     }
     fetch(`/api/facilities?${params}`)
       .then((r) => r.json())
-      .then((d) => { setFacilities(d.data || []) })
+      .then((d) => {
+        const list = d.data || []
+        setFacilities(list)
+        // Auto-sélectionner si une seule option (ex : FACILITY_CHIEF)
+        if (list.length === 1) setFacilityId(list[0].id)
+      })
       .catch(() => {})
       .finally(() => setFacilitiesLoading(false))
   }, [session, role])

@@ -78,7 +78,7 @@ export async function POST(req: NextRequest) {
 
   const { role, id: userId, regionId: userRegionId, facilityId: userFacilityId } = session.user
 
-  if (!['DATA_MANAGER', 'DATA_ADMIN', 'SUPER_ADMIN'].includes(role)) {
+  if (!['DATA_MANAGER', 'DATA_ADMIN', 'SUPER_ADMIN', 'FACILITY_CHIEF'].includes(role)) {
     return NextResponse.json({ success: false, error: 'Action non autorisée' }, { status: 403 })
   }
 
@@ -89,6 +89,13 @@ export async function POST(req: NextRequest) {
   }
 
   const { facilityId, month, year, values } = parsed.data
+
+  // Scope check: FACILITY_CHIEF → uniquement son propre centre
+  if (role === 'FACILITY_CHIEF') {
+    if (!userFacilityId || facilityId !== userFacilityId) {
+      return NextResponse.json({ success: false, error: 'Non autorisé pour ce centre' }, { status: 403 })
+    }
+  }
 
   // Scope check for DATA_MANAGER based on level
   if (role === 'DATA_MANAGER') {
