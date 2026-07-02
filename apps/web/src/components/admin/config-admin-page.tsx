@@ -2,9 +2,10 @@
 
 import { useEffect, useState } from 'react'
 import { toast } from 'sonner'
-import { Settings, Loader2, Building2, Plus, Pencil, Trash2, X, Check } from 'lucide-react'
+import { Settings, Loader2, Building2, Plus, Pencil, Trash2, X, Check, AlertTriangle } from 'lucide-react'
 import { PageHeader } from '@/components/ui/page-header'
 import { PERIOD_TYPE_LABELS } from '@care-connekt/shared'
+import ResetDbModal from './reset-db-modal'
 
 interface Organization {
   id: string
@@ -35,6 +36,7 @@ export function ConfigAdminPage() {
   const [editOrgTarget, setEditOrgTarget] = useState<Organization | null>(null)
   const [deleteOrgTarget, setDeleteOrgTarget] = useState<Organization | null>(null)
   const [deleteOrgLoading, setDeleteOrgLoading] = useState(false)
+  const [showResetModal, setShowResetModal] = useState(false)
 
   const load = () => {
     fetch('/api/config/period')
@@ -391,6 +393,32 @@ export function ConfigAdminPage() {
           </div>
         </div>
       )}
+
+      {/* Zone dangereuse */}
+      <div className="bg-white dark:bg-gray-900 rounded-xl border-2 border-red-200 dark:border-red-900/50 overflow-hidden">
+        <div className="px-5 py-4 border-b border-red-100 dark:border-red-900/30 bg-red-50 dark:bg-red-900/10 flex items-center gap-3">
+          <AlertTriangle className="w-4 h-4 text-red-600 flex-shrink-0" />
+          <div>
+            <h2 className="font-semibold text-red-700 dark:text-red-400">Zone dangereuse</h2>
+            <p className="text-xs text-red-500 mt-0.5">Les actions ci-dessous sont irréversibles</p>
+          </div>
+        </div>
+        <div className="px-5 py-4 flex items-center justify-between gap-4">
+          <div>
+            <p className="text-sm font-medium text-gray-900 dark:text-white">Réinitialiser la base de données</p>
+            <p className="text-xs text-gray-500 mt-0.5">Supprime les données Care2x, déclarations, statistiques, messages ou tout le système</p>
+          </div>
+          <button
+            onClick={() => setShowResetModal(true)}
+            className="flex-shrink-0 inline-flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-sm font-medium rounded-lg transition"
+          >
+            <Trash2 className="w-4 h-4" />
+            Réinitialiser
+          </button>
+        </div>
+      </div>
+
+      {showResetModal && <ResetDbModal onClose={() => setShowResetModal(false)} />}
 
       {showNew && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
