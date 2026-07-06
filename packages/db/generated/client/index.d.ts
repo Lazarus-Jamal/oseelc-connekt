@@ -149,6 +149,11 @@ export type Care2xSyncEntry = $Result.DefaultSelection<Prisma.$Care2xSyncEntryPa
  */
 export type Care2xRecouvrementSync = $Result.DefaultSelection<Prisma.$Care2xRecouvrementSyncPayload>
 /**
+ * Model Care2xRapportJournalier
+ * 
+ */
+export type Care2xRapportJournalier = $Result.DefaultSelection<Prisma.$Care2xRapportJournalierPayload>
+/**
  * Model Care2xVersion
  * 
  */
@@ -724,6 +729,16 @@ export class PrismaClient<
   get care2xRecouvrementSync(): Prisma.Care2xRecouvrementSyncDelegate<ExtArgs, ClientOptions>;
 
   /**
+   * `prisma.care2xRapportJournalier`: Exposes CRUD operations for the **Care2xRapportJournalier** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Care2xRapportJournaliers
+    * const care2xRapportJournaliers = await prisma.care2xRapportJournalier.findMany()
+    * ```
+    */
+  get care2xRapportJournalier(): Prisma.Care2xRapportJournalierDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.care2xVersion`: Exposes CRUD operations for the **Care2xVersion** model.
     * Example usage:
     * ```ts
@@ -1220,6 +1235,7 @@ export namespace Prisma {
     Care2xSync: 'Care2xSync',
     Care2xSyncEntry: 'Care2xSyncEntry',
     Care2xRecouvrementSync: 'Care2xRecouvrementSync',
+    Care2xRapportJournalier: 'Care2xRapportJournalier',
     Care2xVersion: 'Care2xVersion',
     PagePermission: 'PagePermission',
     PlanningEvent: 'PlanningEvent'
@@ -1241,7 +1257,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "organization" | "region" | "facility" | "user" | "session" | "declarationPeriodConfig" | "declaration" | "declarationItem" | "declarationDocument" | "declarationHistory" | "category" | "budget" | "statSheet" | "statIndicator" | "statValue" | "statDocument" | "statDeadline" | "notification" | "pushSubscription" | "adminMessage" | "adminMessageRecipient" | "adminMessageDocument" | "auditLog" | "facilityApiKey" | "care2xSync" | "care2xSyncEntry" | "care2xRecouvrementSync" | "care2xVersion" | "pagePermission" | "planningEvent"
+      modelProps: "organization" | "region" | "facility" | "user" | "session" | "declarationPeriodConfig" | "declaration" | "declarationItem" | "declarationDocument" | "declarationHistory" | "category" | "budget" | "statSheet" | "statIndicator" | "statValue" | "statDocument" | "statDeadline" | "notification" | "pushSubscription" | "adminMessage" | "adminMessageRecipient" | "adminMessageDocument" | "auditLog" | "facilityApiKey" | "care2xSync" | "care2xSyncEntry" | "care2xRecouvrementSync" | "care2xRapportJournalier" | "care2xVersion" | "pagePermission" | "planningEvent"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -3243,6 +3259,80 @@ export namespace Prisma {
           }
         }
       }
+      Care2xRapportJournalier: {
+        payload: Prisma.$Care2xRapportJournalierPayload<ExtArgs>
+        fields: Prisma.Care2xRapportJournalierFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.Care2xRapportJournalierFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Care2xRapportJournalierPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.Care2xRapportJournalierFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Care2xRapportJournalierPayload>
+          }
+          findFirst: {
+            args: Prisma.Care2xRapportJournalierFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Care2xRapportJournalierPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.Care2xRapportJournalierFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Care2xRapportJournalierPayload>
+          }
+          findMany: {
+            args: Prisma.Care2xRapportJournalierFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Care2xRapportJournalierPayload>[]
+          }
+          create: {
+            args: Prisma.Care2xRapportJournalierCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Care2xRapportJournalierPayload>
+          }
+          createMany: {
+            args: Prisma.Care2xRapportJournalierCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.Care2xRapportJournalierCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Care2xRapportJournalierPayload>[]
+          }
+          delete: {
+            args: Prisma.Care2xRapportJournalierDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Care2xRapportJournalierPayload>
+          }
+          update: {
+            args: Prisma.Care2xRapportJournalierUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Care2xRapportJournalierPayload>
+          }
+          deleteMany: {
+            args: Prisma.Care2xRapportJournalierDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.Care2xRapportJournalierUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.Care2xRapportJournalierUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Care2xRapportJournalierPayload>[]
+          }
+          upsert: {
+            args: Prisma.Care2xRapportJournalierUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Care2xRapportJournalierPayload>
+          }
+          aggregate: {
+            args: Prisma.Care2xRapportJournalierAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateCare2xRapportJournalier>
+          }
+          groupBy: {
+            args: Prisma.Care2xRapportJournalierGroupByArgs<ExtArgs>
+            result: $Utils.Optional<Care2xRapportJournalierGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.Care2xRapportJournalierCountArgs<ExtArgs>
+            result: $Utils.Optional<Care2xRapportJournalierCountAggregateOutputType> | number
+          }
+        }
+      }
       Care2xVersion: {
         payload: Prisma.$Care2xVersionPayload<ExtArgs>
         fields: Prisma.Care2xVersionFieldRefs
@@ -3588,6 +3678,7 @@ export namespace Prisma {
     care2xSync?: Care2xSyncOmit
     care2xSyncEntry?: Care2xSyncEntryOmit
     care2xRecouvrementSync?: Care2xRecouvrementSyncOmit
+    care2xRapportJournalier?: Care2xRapportJournalierOmit
     care2xVersion?: Care2xVersionOmit
     pagePermission?: PagePermissionOmit
     planningEvent?: PlanningEventOmit
@@ -3787,6 +3878,7 @@ export namespace Prisma {
     planningEvents: number
     care2xSyncs: number
     recouvrementSyncs: number
+    rapportsJournaliers: number
   }
 
   export type FacilityCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3799,6 +3891,7 @@ export namespace Prisma {
     planningEvents?: boolean | FacilityCountOutputTypeCountPlanningEventsArgs
     care2xSyncs?: boolean | FacilityCountOutputTypeCountCare2xSyncsArgs
     recouvrementSyncs?: boolean | FacilityCountOutputTypeCountRecouvrementSyncsArgs
+    rapportsJournaliers?: boolean | FacilityCountOutputTypeCountRapportsJournaliersArgs
   }
 
   // Custom InputTypes
@@ -3873,6 +3966,13 @@ export namespace Prisma {
    */
   export type FacilityCountOutputTypeCountRecouvrementSyncsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: Care2xRecouvrementSyncWhereInput
+  }
+
+  /**
+   * FacilityCountOutputType without action
+   */
+  export type FacilityCountOutputTypeCountRapportsJournaliersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: Care2xRapportJournalierWhereInput
   }
 
 
@@ -4173,11 +4273,13 @@ export namespace Prisma {
   export type FacilityApiKeyCountOutputType = {
     care2xSyncs: number
     recouvrementSyncs: number
+    rapportsJournaliers: number
   }
 
   export type FacilityApiKeyCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     care2xSyncs?: boolean | FacilityApiKeyCountOutputTypeCountCare2xSyncsArgs
     recouvrementSyncs?: boolean | FacilityApiKeyCountOutputTypeCountRecouvrementSyncsArgs
+    rapportsJournaliers?: boolean | FacilityApiKeyCountOutputTypeCountRapportsJournaliersArgs
   }
 
   // Custom InputTypes
@@ -4203,6 +4305,13 @@ export namespace Prisma {
    */
   export type FacilityApiKeyCountOutputTypeCountRecouvrementSyncsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: Care2xRecouvrementSyncWhereInput
+  }
+
+  /**
+   * FacilityApiKeyCountOutputType without action
+   */
+  export type FacilityApiKeyCountOutputTypeCountRapportsJournaliersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: Care2xRapportJournalierWhereInput
   }
 
 
@@ -6881,6 +6990,7 @@ export namespace Prisma {
     apiKey?: boolean | Facility$apiKeyArgs<ExtArgs>
     care2xSyncs?: boolean | Facility$care2xSyncsArgs<ExtArgs>
     recouvrementSyncs?: boolean | Facility$recouvrementSyncsArgs<ExtArgs>
+    rapportsJournaliers?: boolean | Facility$rapportsJournaliersArgs<ExtArgs>
     _count?: boolean | FacilityCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["facility"]>
 
@@ -6947,6 +7057,7 @@ export namespace Prisma {
     apiKey?: boolean | Facility$apiKeyArgs<ExtArgs>
     care2xSyncs?: boolean | Facility$care2xSyncsArgs<ExtArgs>
     recouvrementSyncs?: boolean | Facility$recouvrementSyncsArgs<ExtArgs>
+    rapportsJournaliers?: boolean | Facility$rapportsJournaliersArgs<ExtArgs>
     _count?: boolean | FacilityCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type FacilityIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -6970,6 +7081,7 @@ export namespace Prisma {
       apiKey: Prisma.$FacilityApiKeyPayload<ExtArgs> | null
       care2xSyncs: Prisma.$Care2xSyncPayload<ExtArgs>[]
       recouvrementSyncs: Prisma.$Care2xRecouvrementSyncPayload<ExtArgs>[]
+      rapportsJournaliers: Prisma.$Care2xRapportJournalierPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -7390,6 +7502,7 @@ export namespace Prisma {
     apiKey<T extends Facility$apiKeyArgs<ExtArgs> = {}>(args?: Subset<T, Facility$apiKeyArgs<ExtArgs>>): Prisma__FacilityApiKeyClient<$Result.GetResult<Prisma.$FacilityApiKeyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     care2xSyncs<T extends Facility$care2xSyncsArgs<ExtArgs> = {}>(args?: Subset<T, Facility$care2xSyncsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Care2xSyncPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     recouvrementSyncs<T extends Facility$recouvrementSyncsArgs<ExtArgs> = {}>(args?: Subset<T, Facility$recouvrementSyncsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Care2xRecouvrementSyncPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    rapportsJournaliers<T extends Facility$rapportsJournaliersArgs<ExtArgs> = {}>(args?: Subset<T, Facility$rapportsJournaliersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Care2xRapportJournalierPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -8060,6 +8173,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: Care2xRecouvrementSyncScalarFieldEnum | Care2xRecouvrementSyncScalarFieldEnum[]
+  }
+
+  /**
+   * Facility.rapportsJournaliers
+   */
+  export type Facility$rapportsJournaliersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Care2xRapportJournalier
+     */
+    select?: Care2xRapportJournalierSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Care2xRapportJournalier
+     */
+    omit?: Care2xRapportJournalierOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Care2xRapportJournalierInclude<ExtArgs> | null
+    where?: Care2xRapportJournalierWhereInput
+    orderBy?: Care2xRapportJournalierOrderByWithRelationInput | Care2xRapportJournalierOrderByWithRelationInput[]
+    cursor?: Care2xRapportJournalierWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Care2xRapportJournalierScalarFieldEnum | Care2xRapportJournalierScalarFieldEnum[]
   }
 
   /**
@@ -31687,6 +31824,7 @@ export namespace Prisma {
     facility?: boolean | FacilityDefaultArgs<ExtArgs>
     care2xSyncs?: boolean | FacilityApiKey$care2xSyncsArgs<ExtArgs>
     recouvrementSyncs?: boolean | FacilityApiKey$recouvrementSyncsArgs<ExtArgs>
+    rapportsJournaliers?: boolean | FacilityApiKey$rapportsJournaliersArgs<ExtArgs>
     _count?: boolean | FacilityApiKeyCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["facilityApiKey"]>
 
@@ -31730,6 +31868,7 @@ export namespace Prisma {
     facility?: boolean | FacilityDefaultArgs<ExtArgs>
     care2xSyncs?: boolean | FacilityApiKey$care2xSyncsArgs<ExtArgs>
     recouvrementSyncs?: boolean | FacilityApiKey$recouvrementSyncsArgs<ExtArgs>
+    rapportsJournaliers?: boolean | FacilityApiKey$rapportsJournaliersArgs<ExtArgs>
     _count?: boolean | FacilityApiKeyCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type FacilityApiKeyIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -31745,6 +31884,7 @@ export namespace Prisma {
       facility: Prisma.$FacilityPayload<ExtArgs>
       care2xSyncs: Prisma.$Care2xSyncPayload<ExtArgs>[]
       recouvrementSyncs: Prisma.$Care2xRecouvrementSyncPayload<ExtArgs>[]
+      rapportsJournaliers: Prisma.$Care2xRapportJournalierPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -32152,6 +32292,7 @@ export namespace Prisma {
     facility<T extends FacilityDefaultArgs<ExtArgs> = {}>(args?: Subset<T, FacilityDefaultArgs<ExtArgs>>): Prisma__FacilityClient<$Result.GetResult<Prisma.$FacilityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     care2xSyncs<T extends FacilityApiKey$care2xSyncsArgs<ExtArgs> = {}>(args?: Subset<T, FacilityApiKey$care2xSyncsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Care2xSyncPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     recouvrementSyncs<T extends FacilityApiKey$recouvrementSyncsArgs<ExtArgs> = {}>(args?: Subset<T, FacilityApiKey$recouvrementSyncsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Care2xRecouvrementSyncPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    rapportsJournaliers<T extends FacilityApiKey$rapportsJournaliersArgs<ExtArgs> = {}>(args?: Subset<T, FacilityApiKey$rapportsJournaliersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Care2xRapportJournalierPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -32630,6 +32771,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: Care2xRecouvrementSyncScalarFieldEnum | Care2xRecouvrementSyncScalarFieldEnum[]
+  }
+
+  /**
+   * FacilityApiKey.rapportsJournaliers
+   */
+  export type FacilityApiKey$rapportsJournaliersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Care2xRapportJournalier
+     */
+    select?: Care2xRapportJournalierSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Care2xRapportJournalier
+     */
+    omit?: Care2xRapportJournalierOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Care2xRapportJournalierInclude<ExtArgs> | null
+    where?: Care2xRapportJournalierWhereInput
+    orderBy?: Care2xRapportJournalierOrderByWithRelationInput | Care2xRapportJournalierOrderByWithRelationInput[]
+    cursor?: Care2xRapportJournalierWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Care2xRapportJournalierScalarFieldEnum | Care2xRapportJournalierScalarFieldEnum[]
   }
 
   /**
@@ -36078,6 +36243,1153 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: Care2xRecouvrementSyncInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Care2xRapportJournalier
+   */
+
+  export type AggregateCare2xRapportJournalier = {
+    _count: Care2xRapportJournalierCountAggregateOutputType | null
+    _min: Care2xRapportJournalierMinAggregateOutputType | null
+    _max: Care2xRapportJournalierMaxAggregateOutputType | null
+  }
+
+  export type Care2xRapportJournalierMinAggregateOutputType = {
+    id: string | null
+    facilityId: string | null
+    date: Date | null
+    receivedAt: Date | null
+    apiKeyId: string | null
+  }
+
+  export type Care2xRapportJournalierMaxAggregateOutputType = {
+    id: string | null
+    facilityId: string | null
+    date: Date | null
+    receivedAt: Date | null
+    apiKeyId: string | null
+  }
+
+  export type Care2xRapportJournalierCountAggregateOutputType = {
+    id: number
+    facilityId: number
+    date: number
+    parGroupe: number
+    parPaiement: number
+    parAvance: number
+    rembParMode: number
+    totRow: number
+    openRow: number
+    credits: number
+    rembRow: number
+    caissiers: number
+    receivedAt: number
+    apiKeyId: number
+    _all: number
+  }
+
+
+  export type Care2xRapportJournalierMinAggregateInputType = {
+    id?: true
+    facilityId?: true
+    date?: true
+    receivedAt?: true
+    apiKeyId?: true
+  }
+
+  export type Care2xRapportJournalierMaxAggregateInputType = {
+    id?: true
+    facilityId?: true
+    date?: true
+    receivedAt?: true
+    apiKeyId?: true
+  }
+
+  export type Care2xRapportJournalierCountAggregateInputType = {
+    id?: true
+    facilityId?: true
+    date?: true
+    parGroupe?: true
+    parPaiement?: true
+    parAvance?: true
+    rembParMode?: true
+    totRow?: true
+    openRow?: true
+    credits?: true
+    rembRow?: true
+    caissiers?: true
+    receivedAt?: true
+    apiKeyId?: true
+    _all?: true
+  }
+
+  export type Care2xRapportJournalierAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Care2xRapportJournalier to aggregate.
+     */
+    where?: Care2xRapportJournalierWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Care2xRapportJournaliers to fetch.
+     */
+    orderBy?: Care2xRapportJournalierOrderByWithRelationInput | Care2xRapportJournalierOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: Care2xRapportJournalierWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Care2xRapportJournaliers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Care2xRapportJournaliers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Care2xRapportJournaliers
+    **/
+    _count?: true | Care2xRapportJournalierCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Care2xRapportJournalierMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Care2xRapportJournalierMaxAggregateInputType
+  }
+
+  export type GetCare2xRapportJournalierAggregateType<T extends Care2xRapportJournalierAggregateArgs> = {
+        [P in keyof T & keyof AggregateCare2xRapportJournalier]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateCare2xRapportJournalier[P]>
+      : GetScalarType<T[P], AggregateCare2xRapportJournalier[P]>
+  }
+
+
+
+
+  export type Care2xRapportJournalierGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: Care2xRapportJournalierWhereInput
+    orderBy?: Care2xRapportJournalierOrderByWithAggregationInput | Care2xRapportJournalierOrderByWithAggregationInput[]
+    by: Care2xRapportJournalierScalarFieldEnum[] | Care2xRapportJournalierScalarFieldEnum
+    having?: Care2xRapportJournalierScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Care2xRapportJournalierCountAggregateInputType | true
+    _min?: Care2xRapportJournalierMinAggregateInputType
+    _max?: Care2xRapportJournalierMaxAggregateInputType
+  }
+
+  export type Care2xRapportJournalierGroupByOutputType = {
+    id: string
+    facilityId: string
+    date: Date
+    parGroupe: JsonValue
+    parPaiement: JsonValue
+    parAvance: JsonValue
+    rembParMode: JsonValue
+    totRow: JsonValue
+    openRow: JsonValue
+    credits: JsonValue
+    rembRow: JsonValue
+    caissiers: JsonValue
+    receivedAt: Date
+    apiKeyId: string
+    _count: Care2xRapportJournalierCountAggregateOutputType | null
+    _min: Care2xRapportJournalierMinAggregateOutputType | null
+    _max: Care2xRapportJournalierMaxAggregateOutputType | null
+  }
+
+  type GetCare2xRapportJournalierGroupByPayload<T extends Care2xRapportJournalierGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<Care2xRapportJournalierGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Care2xRapportJournalierGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Care2xRapportJournalierGroupByOutputType[P]>
+            : GetScalarType<T[P], Care2xRapportJournalierGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type Care2xRapportJournalierSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    facilityId?: boolean
+    date?: boolean
+    parGroupe?: boolean
+    parPaiement?: boolean
+    parAvance?: boolean
+    rembParMode?: boolean
+    totRow?: boolean
+    openRow?: boolean
+    credits?: boolean
+    rembRow?: boolean
+    caissiers?: boolean
+    receivedAt?: boolean
+    apiKeyId?: boolean
+    facility?: boolean | FacilityDefaultArgs<ExtArgs>
+    apiKey?: boolean | FacilityApiKeyDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["care2xRapportJournalier"]>
+
+  export type Care2xRapportJournalierSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    facilityId?: boolean
+    date?: boolean
+    parGroupe?: boolean
+    parPaiement?: boolean
+    parAvance?: boolean
+    rembParMode?: boolean
+    totRow?: boolean
+    openRow?: boolean
+    credits?: boolean
+    rembRow?: boolean
+    caissiers?: boolean
+    receivedAt?: boolean
+    apiKeyId?: boolean
+    facility?: boolean | FacilityDefaultArgs<ExtArgs>
+    apiKey?: boolean | FacilityApiKeyDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["care2xRapportJournalier"]>
+
+  export type Care2xRapportJournalierSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    facilityId?: boolean
+    date?: boolean
+    parGroupe?: boolean
+    parPaiement?: boolean
+    parAvance?: boolean
+    rembParMode?: boolean
+    totRow?: boolean
+    openRow?: boolean
+    credits?: boolean
+    rembRow?: boolean
+    caissiers?: boolean
+    receivedAt?: boolean
+    apiKeyId?: boolean
+    facility?: boolean | FacilityDefaultArgs<ExtArgs>
+    apiKey?: boolean | FacilityApiKeyDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["care2xRapportJournalier"]>
+
+  export type Care2xRapportJournalierSelectScalar = {
+    id?: boolean
+    facilityId?: boolean
+    date?: boolean
+    parGroupe?: boolean
+    parPaiement?: boolean
+    parAvance?: boolean
+    rembParMode?: boolean
+    totRow?: boolean
+    openRow?: boolean
+    credits?: boolean
+    rembRow?: boolean
+    caissiers?: boolean
+    receivedAt?: boolean
+    apiKeyId?: boolean
+  }
+
+  export type Care2xRapportJournalierOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "facilityId" | "date" | "parGroupe" | "parPaiement" | "parAvance" | "rembParMode" | "totRow" | "openRow" | "credits" | "rembRow" | "caissiers" | "receivedAt" | "apiKeyId", ExtArgs["result"]["care2xRapportJournalier"]>
+  export type Care2xRapportJournalierInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    facility?: boolean | FacilityDefaultArgs<ExtArgs>
+    apiKey?: boolean | FacilityApiKeyDefaultArgs<ExtArgs>
+  }
+  export type Care2xRapportJournalierIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    facility?: boolean | FacilityDefaultArgs<ExtArgs>
+    apiKey?: boolean | FacilityApiKeyDefaultArgs<ExtArgs>
+  }
+  export type Care2xRapportJournalierIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    facility?: boolean | FacilityDefaultArgs<ExtArgs>
+    apiKey?: boolean | FacilityApiKeyDefaultArgs<ExtArgs>
+  }
+
+  export type $Care2xRapportJournalierPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Care2xRapportJournalier"
+    objects: {
+      facility: Prisma.$FacilityPayload<ExtArgs>
+      apiKey: Prisma.$FacilityApiKeyPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      facilityId: string
+      date: Date
+      parGroupe: Prisma.JsonValue
+      parPaiement: Prisma.JsonValue
+      parAvance: Prisma.JsonValue
+      rembParMode: Prisma.JsonValue
+      totRow: Prisma.JsonValue
+      openRow: Prisma.JsonValue
+      credits: Prisma.JsonValue
+      rembRow: Prisma.JsonValue
+      caissiers: Prisma.JsonValue
+      receivedAt: Date
+      apiKeyId: string
+    }, ExtArgs["result"]["care2xRapportJournalier"]>
+    composites: {}
+  }
+
+  type Care2xRapportJournalierGetPayload<S extends boolean | null | undefined | Care2xRapportJournalierDefaultArgs> = $Result.GetResult<Prisma.$Care2xRapportJournalierPayload, S>
+
+  type Care2xRapportJournalierCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<Care2xRapportJournalierFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: Care2xRapportJournalierCountAggregateInputType | true
+    }
+
+  export interface Care2xRapportJournalierDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Care2xRapportJournalier'], meta: { name: 'Care2xRapportJournalier' } }
+    /**
+     * Find zero or one Care2xRapportJournalier that matches the filter.
+     * @param {Care2xRapportJournalierFindUniqueArgs} args - Arguments to find a Care2xRapportJournalier
+     * @example
+     * // Get one Care2xRapportJournalier
+     * const care2xRapportJournalier = await prisma.care2xRapportJournalier.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends Care2xRapportJournalierFindUniqueArgs>(args: SelectSubset<T, Care2xRapportJournalierFindUniqueArgs<ExtArgs>>): Prisma__Care2xRapportJournalierClient<$Result.GetResult<Prisma.$Care2xRapportJournalierPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Care2xRapportJournalier that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {Care2xRapportJournalierFindUniqueOrThrowArgs} args - Arguments to find a Care2xRapportJournalier
+     * @example
+     * // Get one Care2xRapportJournalier
+     * const care2xRapportJournalier = await prisma.care2xRapportJournalier.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends Care2xRapportJournalierFindUniqueOrThrowArgs>(args: SelectSubset<T, Care2xRapportJournalierFindUniqueOrThrowArgs<ExtArgs>>): Prisma__Care2xRapportJournalierClient<$Result.GetResult<Prisma.$Care2xRapportJournalierPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Care2xRapportJournalier that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Care2xRapportJournalierFindFirstArgs} args - Arguments to find a Care2xRapportJournalier
+     * @example
+     * // Get one Care2xRapportJournalier
+     * const care2xRapportJournalier = await prisma.care2xRapportJournalier.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends Care2xRapportJournalierFindFirstArgs>(args?: SelectSubset<T, Care2xRapportJournalierFindFirstArgs<ExtArgs>>): Prisma__Care2xRapportJournalierClient<$Result.GetResult<Prisma.$Care2xRapportJournalierPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Care2xRapportJournalier that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Care2xRapportJournalierFindFirstOrThrowArgs} args - Arguments to find a Care2xRapportJournalier
+     * @example
+     * // Get one Care2xRapportJournalier
+     * const care2xRapportJournalier = await prisma.care2xRapportJournalier.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends Care2xRapportJournalierFindFirstOrThrowArgs>(args?: SelectSubset<T, Care2xRapportJournalierFindFirstOrThrowArgs<ExtArgs>>): Prisma__Care2xRapportJournalierClient<$Result.GetResult<Prisma.$Care2xRapportJournalierPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Care2xRapportJournaliers that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Care2xRapportJournalierFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Care2xRapportJournaliers
+     * const care2xRapportJournaliers = await prisma.care2xRapportJournalier.findMany()
+     * 
+     * // Get first 10 Care2xRapportJournaliers
+     * const care2xRapportJournaliers = await prisma.care2xRapportJournalier.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const care2xRapportJournalierWithIdOnly = await prisma.care2xRapportJournalier.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends Care2xRapportJournalierFindManyArgs>(args?: SelectSubset<T, Care2xRapportJournalierFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Care2xRapportJournalierPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Care2xRapportJournalier.
+     * @param {Care2xRapportJournalierCreateArgs} args - Arguments to create a Care2xRapportJournalier.
+     * @example
+     * // Create one Care2xRapportJournalier
+     * const Care2xRapportJournalier = await prisma.care2xRapportJournalier.create({
+     *   data: {
+     *     // ... data to create a Care2xRapportJournalier
+     *   }
+     * })
+     * 
+     */
+    create<T extends Care2xRapportJournalierCreateArgs>(args: SelectSubset<T, Care2xRapportJournalierCreateArgs<ExtArgs>>): Prisma__Care2xRapportJournalierClient<$Result.GetResult<Prisma.$Care2xRapportJournalierPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Care2xRapportJournaliers.
+     * @param {Care2xRapportJournalierCreateManyArgs} args - Arguments to create many Care2xRapportJournaliers.
+     * @example
+     * // Create many Care2xRapportJournaliers
+     * const care2xRapportJournalier = await prisma.care2xRapportJournalier.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends Care2xRapportJournalierCreateManyArgs>(args?: SelectSubset<T, Care2xRapportJournalierCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Care2xRapportJournaliers and returns the data saved in the database.
+     * @param {Care2xRapportJournalierCreateManyAndReturnArgs} args - Arguments to create many Care2xRapportJournaliers.
+     * @example
+     * // Create many Care2xRapportJournaliers
+     * const care2xRapportJournalier = await prisma.care2xRapportJournalier.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Care2xRapportJournaliers and only return the `id`
+     * const care2xRapportJournalierWithIdOnly = await prisma.care2xRapportJournalier.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends Care2xRapportJournalierCreateManyAndReturnArgs>(args?: SelectSubset<T, Care2xRapportJournalierCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Care2xRapportJournalierPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Care2xRapportJournalier.
+     * @param {Care2xRapportJournalierDeleteArgs} args - Arguments to delete one Care2xRapportJournalier.
+     * @example
+     * // Delete one Care2xRapportJournalier
+     * const Care2xRapportJournalier = await prisma.care2xRapportJournalier.delete({
+     *   where: {
+     *     // ... filter to delete one Care2xRapportJournalier
+     *   }
+     * })
+     * 
+     */
+    delete<T extends Care2xRapportJournalierDeleteArgs>(args: SelectSubset<T, Care2xRapportJournalierDeleteArgs<ExtArgs>>): Prisma__Care2xRapportJournalierClient<$Result.GetResult<Prisma.$Care2xRapportJournalierPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Care2xRapportJournalier.
+     * @param {Care2xRapportJournalierUpdateArgs} args - Arguments to update one Care2xRapportJournalier.
+     * @example
+     * // Update one Care2xRapportJournalier
+     * const care2xRapportJournalier = await prisma.care2xRapportJournalier.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends Care2xRapportJournalierUpdateArgs>(args: SelectSubset<T, Care2xRapportJournalierUpdateArgs<ExtArgs>>): Prisma__Care2xRapportJournalierClient<$Result.GetResult<Prisma.$Care2xRapportJournalierPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Care2xRapportJournaliers.
+     * @param {Care2xRapportJournalierDeleteManyArgs} args - Arguments to filter Care2xRapportJournaliers to delete.
+     * @example
+     * // Delete a few Care2xRapportJournaliers
+     * const { count } = await prisma.care2xRapportJournalier.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends Care2xRapportJournalierDeleteManyArgs>(args?: SelectSubset<T, Care2xRapportJournalierDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Care2xRapportJournaliers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Care2xRapportJournalierUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Care2xRapportJournaliers
+     * const care2xRapportJournalier = await prisma.care2xRapportJournalier.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends Care2xRapportJournalierUpdateManyArgs>(args: SelectSubset<T, Care2xRapportJournalierUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Care2xRapportJournaliers and returns the data updated in the database.
+     * @param {Care2xRapportJournalierUpdateManyAndReturnArgs} args - Arguments to update many Care2xRapportJournaliers.
+     * @example
+     * // Update many Care2xRapportJournaliers
+     * const care2xRapportJournalier = await prisma.care2xRapportJournalier.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Care2xRapportJournaliers and only return the `id`
+     * const care2xRapportJournalierWithIdOnly = await prisma.care2xRapportJournalier.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends Care2xRapportJournalierUpdateManyAndReturnArgs>(args: SelectSubset<T, Care2xRapportJournalierUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Care2xRapportJournalierPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Care2xRapportJournalier.
+     * @param {Care2xRapportJournalierUpsertArgs} args - Arguments to update or create a Care2xRapportJournalier.
+     * @example
+     * // Update or create a Care2xRapportJournalier
+     * const care2xRapportJournalier = await prisma.care2xRapportJournalier.upsert({
+     *   create: {
+     *     // ... data to create a Care2xRapportJournalier
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Care2xRapportJournalier we want to update
+     *   }
+     * })
+     */
+    upsert<T extends Care2xRapportJournalierUpsertArgs>(args: SelectSubset<T, Care2xRapportJournalierUpsertArgs<ExtArgs>>): Prisma__Care2xRapportJournalierClient<$Result.GetResult<Prisma.$Care2xRapportJournalierPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Care2xRapportJournaliers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Care2xRapportJournalierCountArgs} args - Arguments to filter Care2xRapportJournaliers to count.
+     * @example
+     * // Count the number of Care2xRapportJournaliers
+     * const count = await prisma.care2xRapportJournalier.count({
+     *   where: {
+     *     // ... the filter for the Care2xRapportJournaliers we want to count
+     *   }
+     * })
+    **/
+    count<T extends Care2xRapportJournalierCountArgs>(
+      args?: Subset<T, Care2xRapportJournalierCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Care2xRapportJournalierCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Care2xRapportJournalier.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Care2xRapportJournalierAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Care2xRapportJournalierAggregateArgs>(args: Subset<T, Care2xRapportJournalierAggregateArgs>): Prisma.PrismaPromise<GetCare2xRapportJournalierAggregateType<T>>
+
+    /**
+     * Group by Care2xRapportJournalier.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Care2xRapportJournalierGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends Care2xRapportJournalierGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: Care2xRapportJournalierGroupByArgs['orderBy'] }
+        : { orderBy?: Care2xRapportJournalierGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, Care2xRapportJournalierGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCare2xRapportJournalierGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Care2xRapportJournalier model
+   */
+  readonly fields: Care2xRapportJournalierFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Care2xRapportJournalier.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__Care2xRapportJournalierClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    facility<T extends FacilityDefaultArgs<ExtArgs> = {}>(args?: Subset<T, FacilityDefaultArgs<ExtArgs>>): Prisma__FacilityClient<$Result.GetResult<Prisma.$FacilityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    apiKey<T extends FacilityApiKeyDefaultArgs<ExtArgs> = {}>(args?: Subset<T, FacilityApiKeyDefaultArgs<ExtArgs>>): Prisma__FacilityApiKeyClient<$Result.GetResult<Prisma.$FacilityApiKeyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Care2xRapportJournalier model
+   */
+  interface Care2xRapportJournalierFieldRefs {
+    readonly id: FieldRef<"Care2xRapportJournalier", 'String'>
+    readonly facilityId: FieldRef<"Care2xRapportJournalier", 'String'>
+    readonly date: FieldRef<"Care2xRapportJournalier", 'DateTime'>
+    readonly parGroupe: FieldRef<"Care2xRapportJournalier", 'Json'>
+    readonly parPaiement: FieldRef<"Care2xRapportJournalier", 'Json'>
+    readonly parAvance: FieldRef<"Care2xRapportJournalier", 'Json'>
+    readonly rembParMode: FieldRef<"Care2xRapportJournalier", 'Json'>
+    readonly totRow: FieldRef<"Care2xRapportJournalier", 'Json'>
+    readonly openRow: FieldRef<"Care2xRapportJournalier", 'Json'>
+    readonly credits: FieldRef<"Care2xRapportJournalier", 'Json'>
+    readonly rembRow: FieldRef<"Care2xRapportJournalier", 'Json'>
+    readonly caissiers: FieldRef<"Care2xRapportJournalier", 'Json'>
+    readonly receivedAt: FieldRef<"Care2xRapportJournalier", 'DateTime'>
+    readonly apiKeyId: FieldRef<"Care2xRapportJournalier", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Care2xRapportJournalier findUnique
+   */
+  export type Care2xRapportJournalierFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Care2xRapportJournalier
+     */
+    select?: Care2xRapportJournalierSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Care2xRapportJournalier
+     */
+    omit?: Care2xRapportJournalierOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Care2xRapportJournalierInclude<ExtArgs> | null
+    /**
+     * Filter, which Care2xRapportJournalier to fetch.
+     */
+    where: Care2xRapportJournalierWhereUniqueInput
+  }
+
+  /**
+   * Care2xRapportJournalier findUniqueOrThrow
+   */
+  export type Care2xRapportJournalierFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Care2xRapportJournalier
+     */
+    select?: Care2xRapportJournalierSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Care2xRapportJournalier
+     */
+    omit?: Care2xRapportJournalierOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Care2xRapportJournalierInclude<ExtArgs> | null
+    /**
+     * Filter, which Care2xRapportJournalier to fetch.
+     */
+    where: Care2xRapportJournalierWhereUniqueInput
+  }
+
+  /**
+   * Care2xRapportJournalier findFirst
+   */
+  export type Care2xRapportJournalierFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Care2xRapportJournalier
+     */
+    select?: Care2xRapportJournalierSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Care2xRapportJournalier
+     */
+    omit?: Care2xRapportJournalierOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Care2xRapportJournalierInclude<ExtArgs> | null
+    /**
+     * Filter, which Care2xRapportJournalier to fetch.
+     */
+    where?: Care2xRapportJournalierWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Care2xRapportJournaliers to fetch.
+     */
+    orderBy?: Care2xRapportJournalierOrderByWithRelationInput | Care2xRapportJournalierOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Care2xRapportJournaliers.
+     */
+    cursor?: Care2xRapportJournalierWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Care2xRapportJournaliers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Care2xRapportJournaliers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Care2xRapportJournaliers.
+     */
+    distinct?: Care2xRapportJournalierScalarFieldEnum | Care2xRapportJournalierScalarFieldEnum[]
+  }
+
+  /**
+   * Care2xRapportJournalier findFirstOrThrow
+   */
+  export type Care2xRapportJournalierFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Care2xRapportJournalier
+     */
+    select?: Care2xRapportJournalierSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Care2xRapportJournalier
+     */
+    omit?: Care2xRapportJournalierOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Care2xRapportJournalierInclude<ExtArgs> | null
+    /**
+     * Filter, which Care2xRapportJournalier to fetch.
+     */
+    where?: Care2xRapportJournalierWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Care2xRapportJournaliers to fetch.
+     */
+    orderBy?: Care2xRapportJournalierOrderByWithRelationInput | Care2xRapportJournalierOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Care2xRapportJournaliers.
+     */
+    cursor?: Care2xRapportJournalierWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Care2xRapportJournaliers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Care2xRapportJournaliers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Care2xRapportJournaliers.
+     */
+    distinct?: Care2xRapportJournalierScalarFieldEnum | Care2xRapportJournalierScalarFieldEnum[]
+  }
+
+  /**
+   * Care2xRapportJournalier findMany
+   */
+  export type Care2xRapportJournalierFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Care2xRapportJournalier
+     */
+    select?: Care2xRapportJournalierSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Care2xRapportJournalier
+     */
+    omit?: Care2xRapportJournalierOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Care2xRapportJournalierInclude<ExtArgs> | null
+    /**
+     * Filter, which Care2xRapportJournaliers to fetch.
+     */
+    where?: Care2xRapportJournalierWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Care2xRapportJournaliers to fetch.
+     */
+    orderBy?: Care2xRapportJournalierOrderByWithRelationInput | Care2xRapportJournalierOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Care2xRapportJournaliers.
+     */
+    cursor?: Care2xRapportJournalierWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Care2xRapportJournaliers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Care2xRapportJournaliers.
+     */
+    skip?: number
+    distinct?: Care2xRapportJournalierScalarFieldEnum | Care2xRapportJournalierScalarFieldEnum[]
+  }
+
+  /**
+   * Care2xRapportJournalier create
+   */
+  export type Care2xRapportJournalierCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Care2xRapportJournalier
+     */
+    select?: Care2xRapportJournalierSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Care2xRapportJournalier
+     */
+    omit?: Care2xRapportJournalierOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Care2xRapportJournalierInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Care2xRapportJournalier.
+     */
+    data: XOR<Care2xRapportJournalierCreateInput, Care2xRapportJournalierUncheckedCreateInput>
+  }
+
+  /**
+   * Care2xRapportJournalier createMany
+   */
+  export type Care2xRapportJournalierCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Care2xRapportJournaliers.
+     */
+    data: Care2xRapportJournalierCreateManyInput | Care2xRapportJournalierCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Care2xRapportJournalier createManyAndReturn
+   */
+  export type Care2xRapportJournalierCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Care2xRapportJournalier
+     */
+    select?: Care2xRapportJournalierSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Care2xRapportJournalier
+     */
+    omit?: Care2xRapportJournalierOmit<ExtArgs> | null
+    /**
+     * The data used to create many Care2xRapportJournaliers.
+     */
+    data: Care2xRapportJournalierCreateManyInput | Care2xRapportJournalierCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Care2xRapportJournalierIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Care2xRapportJournalier update
+   */
+  export type Care2xRapportJournalierUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Care2xRapportJournalier
+     */
+    select?: Care2xRapportJournalierSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Care2xRapportJournalier
+     */
+    omit?: Care2xRapportJournalierOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Care2xRapportJournalierInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Care2xRapportJournalier.
+     */
+    data: XOR<Care2xRapportJournalierUpdateInput, Care2xRapportJournalierUncheckedUpdateInput>
+    /**
+     * Choose, which Care2xRapportJournalier to update.
+     */
+    where: Care2xRapportJournalierWhereUniqueInput
+  }
+
+  /**
+   * Care2xRapportJournalier updateMany
+   */
+  export type Care2xRapportJournalierUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Care2xRapportJournaliers.
+     */
+    data: XOR<Care2xRapportJournalierUpdateManyMutationInput, Care2xRapportJournalierUncheckedUpdateManyInput>
+    /**
+     * Filter which Care2xRapportJournaliers to update
+     */
+    where?: Care2xRapportJournalierWhereInput
+    /**
+     * Limit how many Care2xRapportJournaliers to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Care2xRapportJournalier updateManyAndReturn
+   */
+  export type Care2xRapportJournalierUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Care2xRapportJournalier
+     */
+    select?: Care2xRapportJournalierSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Care2xRapportJournalier
+     */
+    omit?: Care2xRapportJournalierOmit<ExtArgs> | null
+    /**
+     * The data used to update Care2xRapportJournaliers.
+     */
+    data: XOR<Care2xRapportJournalierUpdateManyMutationInput, Care2xRapportJournalierUncheckedUpdateManyInput>
+    /**
+     * Filter which Care2xRapportJournaliers to update
+     */
+    where?: Care2xRapportJournalierWhereInput
+    /**
+     * Limit how many Care2xRapportJournaliers to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Care2xRapportJournalierIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Care2xRapportJournalier upsert
+   */
+  export type Care2xRapportJournalierUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Care2xRapportJournalier
+     */
+    select?: Care2xRapportJournalierSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Care2xRapportJournalier
+     */
+    omit?: Care2xRapportJournalierOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Care2xRapportJournalierInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Care2xRapportJournalier to update in case it exists.
+     */
+    where: Care2xRapportJournalierWhereUniqueInput
+    /**
+     * In case the Care2xRapportJournalier found by the `where` argument doesn't exist, create a new Care2xRapportJournalier with this data.
+     */
+    create: XOR<Care2xRapportJournalierCreateInput, Care2xRapportJournalierUncheckedCreateInput>
+    /**
+     * In case the Care2xRapportJournalier was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<Care2xRapportJournalierUpdateInput, Care2xRapportJournalierUncheckedUpdateInput>
+  }
+
+  /**
+   * Care2xRapportJournalier delete
+   */
+  export type Care2xRapportJournalierDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Care2xRapportJournalier
+     */
+    select?: Care2xRapportJournalierSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Care2xRapportJournalier
+     */
+    omit?: Care2xRapportJournalierOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Care2xRapportJournalierInclude<ExtArgs> | null
+    /**
+     * Filter which Care2xRapportJournalier to delete.
+     */
+    where: Care2xRapportJournalierWhereUniqueInput
+  }
+
+  /**
+   * Care2xRapportJournalier deleteMany
+   */
+  export type Care2xRapportJournalierDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Care2xRapportJournaliers to delete
+     */
+    where?: Care2xRapportJournalierWhereInput
+    /**
+     * Limit how many Care2xRapportJournaliers to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Care2xRapportJournalier without action
+   */
+  export type Care2xRapportJournalierDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Care2xRapportJournalier
+     */
+    select?: Care2xRapportJournalierSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Care2xRapportJournalier
+     */
+    omit?: Care2xRapportJournalierOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Care2xRapportJournalierInclude<ExtArgs> | null
   }
 
 
@@ -39806,6 +41118,26 @@ export namespace Prisma {
   export type Care2xRecouvrementSyncScalarFieldEnum = (typeof Care2xRecouvrementSyncScalarFieldEnum)[keyof typeof Care2xRecouvrementSyncScalarFieldEnum]
 
 
+  export const Care2xRapportJournalierScalarFieldEnum: {
+    id: 'id',
+    facilityId: 'facilityId',
+    date: 'date',
+    parGroupe: 'parGroupe',
+    parPaiement: 'parPaiement',
+    parAvance: 'parAvance',
+    rembParMode: 'rembParMode',
+    totRow: 'totRow',
+    openRow: 'openRow',
+    credits: 'credits',
+    rembRow: 'rembRow',
+    caissiers: 'caissiers',
+    receivedAt: 'receivedAt',
+    apiKeyId: 'apiKeyId'
+  };
+
+  export type Care2xRapportJournalierScalarFieldEnum = (typeof Care2xRapportJournalierScalarFieldEnum)[keyof typeof Care2xRapportJournalierScalarFieldEnum]
+
+
   export const Care2xVersionScalarFieldEnum: {
     id: 'id',
     version: 'version',
@@ -40334,6 +41666,7 @@ export namespace Prisma {
     apiKey?: XOR<FacilityApiKeyNullableScalarRelationFilter, FacilityApiKeyWhereInput> | null
     care2xSyncs?: Care2xSyncListRelationFilter
     recouvrementSyncs?: Care2xRecouvrementSyncListRelationFilter
+    rapportsJournaliers?: Care2xRapportJournalierListRelationFilter
   }
 
   export type FacilityOrderByWithRelationInput = {
@@ -40361,6 +41694,7 @@ export namespace Prisma {
     apiKey?: FacilityApiKeyOrderByWithRelationInput
     care2xSyncs?: Care2xSyncOrderByRelationAggregateInput
     recouvrementSyncs?: Care2xRecouvrementSyncOrderByRelationAggregateInput
+    rapportsJournaliers?: Care2xRapportJournalierOrderByRelationAggregateInput
   }
 
   export type FacilityWhereUniqueInput = Prisma.AtLeast<{
@@ -40391,6 +41725,7 @@ export namespace Prisma {
     apiKey?: XOR<FacilityApiKeyNullableScalarRelationFilter, FacilityApiKeyWhereInput> | null
     care2xSyncs?: Care2xSyncListRelationFilter
     recouvrementSyncs?: Care2xRecouvrementSyncListRelationFilter
+    rapportsJournaliers?: Care2xRapportJournalierListRelationFilter
   }, "id" | "code">
 
   export type FacilityOrderByWithAggregationInput = {
@@ -42087,6 +43422,7 @@ export namespace Prisma {
     facility?: XOR<FacilityScalarRelationFilter, FacilityWhereInput>
     care2xSyncs?: Care2xSyncListRelationFilter
     recouvrementSyncs?: Care2xRecouvrementSyncListRelationFilter
+    rapportsJournaliers?: Care2xRapportJournalierListRelationFilter
   }
 
   export type FacilityApiKeyOrderByWithRelationInput = {
@@ -42101,6 +43437,7 @@ export namespace Prisma {
     facility?: FacilityOrderByWithRelationInput
     care2xSyncs?: Care2xSyncOrderByRelationAggregateInput
     recouvrementSyncs?: Care2xRecouvrementSyncOrderByRelationAggregateInput
+    rapportsJournaliers?: Care2xRapportJournalierOrderByRelationAggregateInput
   }
 
   export type FacilityApiKeyWhereUniqueInput = Prisma.AtLeast<{
@@ -42118,6 +43455,7 @@ export namespace Prisma {
     facility?: XOR<FacilityScalarRelationFilter, FacilityWhereInput>
     care2xSyncs?: Care2xSyncListRelationFilter
     recouvrementSyncs?: Care2xRecouvrementSyncListRelationFilter
+    rapportsJournaliers?: Care2xRapportJournalierListRelationFilter
   }, "id" | "facilityId" | "keyHash">
 
   export type FacilityApiKeyOrderByWithAggregationInput = {
@@ -42366,6 +43704,110 @@ export namespace Prisma {
     totalRecouvre?: DecimalWithAggregatesFilter<"Care2xRecouvrementSync"> | Decimal | DecimalJsLike | number | string
     rapport?: JsonWithAggregatesFilter<"Care2xRecouvrementSync">
     receivedAt?: DateTimeWithAggregatesFilter<"Care2xRecouvrementSync"> | Date | string
+  }
+
+  export type Care2xRapportJournalierWhereInput = {
+    AND?: Care2xRapportJournalierWhereInput | Care2xRapportJournalierWhereInput[]
+    OR?: Care2xRapportJournalierWhereInput[]
+    NOT?: Care2xRapportJournalierWhereInput | Care2xRapportJournalierWhereInput[]
+    id?: StringFilter<"Care2xRapportJournalier"> | string
+    facilityId?: StringFilter<"Care2xRapportJournalier"> | string
+    date?: DateTimeFilter<"Care2xRapportJournalier"> | Date | string
+    parGroupe?: JsonFilter<"Care2xRapportJournalier">
+    parPaiement?: JsonFilter<"Care2xRapportJournalier">
+    parAvance?: JsonFilter<"Care2xRapportJournalier">
+    rembParMode?: JsonFilter<"Care2xRapportJournalier">
+    totRow?: JsonFilter<"Care2xRapportJournalier">
+    openRow?: JsonFilter<"Care2xRapportJournalier">
+    credits?: JsonFilter<"Care2xRapportJournalier">
+    rembRow?: JsonFilter<"Care2xRapportJournalier">
+    caissiers?: JsonFilter<"Care2xRapportJournalier">
+    receivedAt?: DateTimeFilter<"Care2xRapportJournalier"> | Date | string
+    apiKeyId?: StringFilter<"Care2xRapportJournalier"> | string
+    facility?: XOR<FacilityScalarRelationFilter, FacilityWhereInput>
+    apiKey?: XOR<FacilityApiKeyScalarRelationFilter, FacilityApiKeyWhereInput>
+  }
+
+  export type Care2xRapportJournalierOrderByWithRelationInput = {
+    id?: SortOrder
+    facilityId?: SortOrder
+    date?: SortOrder
+    parGroupe?: SortOrder
+    parPaiement?: SortOrder
+    parAvance?: SortOrder
+    rembParMode?: SortOrder
+    totRow?: SortOrder
+    openRow?: SortOrder
+    credits?: SortOrder
+    rembRow?: SortOrder
+    caissiers?: SortOrder
+    receivedAt?: SortOrder
+    apiKeyId?: SortOrder
+    facility?: FacilityOrderByWithRelationInput
+    apiKey?: FacilityApiKeyOrderByWithRelationInput
+  }
+
+  export type Care2xRapportJournalierWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    facilityId_date?: Care2xRapportJournalierFacilityIdDateCompoundUniqueInput
+    AND?: Care2xRapportJournalierWhereInput | Care2xRapportJournalierWhereInput[]
+    OR?: Care2xRapportJournalierWhereInput[]
+    NOT?: Care2xRapportJournalierWhereInput | Care2xRapportJournalierWhereInput[]
+    facilityId?: StringFilter<"Care2xRapportJournalier"> | string
+    date?: DateTimeFilter<"Care2xRapportJournalier"> | Date | string
+    parGroupe?: JsonFilter<"Care2xRapportJournalier">
+    parPaiement?: JsonFilter<"Care2xRapportJournalier">
+    parAvance?: JsonFilter<"Care2xRapportJournalier">
+    rembParMode?: JsonFilter<"Care2xRapportJournalier">
+    totRow?: JsonFilter<"Care2xRapportJournalier">
+    openRow?: JsonFilter<"Care2xRapportJournalier">
+    credits?: JsonFilter<"Care2xRapportJournalier">
+    rembRow?: JsonFilter<"Care2xRapportJournalier">
+    caissiers?: JsonFilter<"Care2xRapportJournalier">
+    receivedAt?: DateTimeFilter<"Care2xRapportJournalier"> | Date | string
+    apiKeyId?: StringFilter<"Care2xRapportJournalier"> | string
+    facility?: XOR<FacilityScalarRelationFilter, FacilityWhereInput>
+    apiKey?: XOR<FacilityApiKeyScalarRelationFilter, FacilityApiKeyWhereInput>
+  }, "id" | "facilityId_date">
+
+  export type Care2xRapportJournalierOrderByWithAggregationInput = {
+    id?: SortOrder
+    facilityId?: SortOrder
+    date?: SortOrder
+    parGroupe?: SortOrder
+    parPaiement?: SortOrder
+    parAvance?: SortOrder
+    rembParMode?: SortOrder
+    totRow?: SortOrder
+    openRow?: SortOrder
+    credits?: SortOrder
+    rembRow?: SortOrder
+    caissiers?: SortOrder
+    receivedAt?: SortOrder
+    apiKeyId?: SortOrder
+    _count?: Care2xRapportJournalierCountOrderByAggregateInput
+    _max?: Care2xRapportJournalierMaxOrderByAggregateInput
+    _min?: Care2xRapportJournalierMinOrderByAggregateInput
+  }
+
+  export type Care2xRapportJournalierScalarWhereWithAggregatesInput = {
+    AND?: Care2xRapportJournalierScalarWhereWithAggregatesInput | Care2xRapportJournalierScalarWhereWithAggregatesInput[]
+    OR?: Care2xRapportJournalierScalarWhereWithAggregatesInput[]
+    NOT?: Care2xRapportJournalierScalarWhereWithAggregatesInput | Care2xRapportJournalierScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Care2xRapportJournalier"> | string
+    facilityId?: StringWithAggregatesFilter<"Care2xRapportJournalier"> | string
+    date?: DateTimeWithAggregatesFilter<"Care2xRapportJournalier"> | Date | string
+    parGroupe?: JsonWithAggregatesFilter<"Care2xRapportJournalier">
+    parPaiement?: JsonWithAggregatesFilter<"Care2xRapportJournalier">
+    parAvance?: JsonWithAggregatesFilter<"Care2xRapportJournalier">
+    rembParMode?: JsonWithAggregatesFilter<"Care2xRapportJournalier">
+    totRow?: JsonWithAggregatesFilter<"Care2xRapportJournalier">
+    openRow?: JsonWithAggregatesFilter<"Care2xRapportJournalier">
+    credits?: JsonWithAggregatesFilter<"Care2xRapportJournalier">
+    rembRow?: JsonWithAggregatesFilter<"Care2xRapportJournalier">
+    caissiers?: JsonWithAggregatesFilter<"Care2xRapportJournalier">
+    receivedAt?: DateTimeWithAggregatesFilter<"Care2xRapportJournalier"> | Date | string
+    apiKeyId?: StringWithAggregatesFilter<"Care2xRapportJournalier"> | string
   }
 
   export type Care2xVersionWhereInput = {
@@ -42799,6 +44241,7 @@ export namespace Prisma {
     apiKey?: FacilityApiKeyCreateNestedOneWithoutFacilityInput
     care2xSyncs?: Care2xSyncCreateNestedManyWithoutFacilityInput
     recouvrementSyncs?: Care2xRecouvrementSyncCreateNestedManyWithoutFacilityInput
+    rapportsJournaliers?: Care2xRapportJournalierCreateNestedManyWithoutFacilityInput
   }
 
   export type FacilityUncheckedCreateInput = {
@@ -42825,6 +44268,7 @@ export namespace Prisma {
     apiKey?: FacilityApiKeyUncheckedCreateNestedOneWithoutFacilityInput
     care2xSyncs?: Care2xSyncUncheckedCreateNestedManyWithoutFacilityInput
     recouvrementSyncs?: Care2xRecouvrementSyncUncheckedCreateNestedManyWithoutFacilityInput
+    rapportsJournaliers?: Care2xRapportJournalierUncheckedCreateNestedManyWithoutFacilityInput
   }
 
   export type FacilityUpdateInput = {
@@ -42851,6 +44295,7 @@ export namespace Prisma {
     apiKey?: FacilityApiKeyUpdateOneWithoutFacilityNestedInput
     care2xSyncs?: Care2xSyncUpdateManyWithoutFacilityNestedInput
     recouvrementSyncs?: Care2xRecouvrementSyncUpdateManyWithoutFacilityNestedInput
+    rapportsJournaliers?: Care2xRapportJournalierUpdateManyWithoutFacilityNestedInput
   }
 
   export type FacilityUncheckedUpdateInput = {
@@ -42877,6 +44322,7 @@ export namespace Prisma {
     apiKey?: FacilityApiKeyUncheckedUpdateOneWithoutFacilityNestedInput
     care2xSyncs?: Care2xSyncUncheckedUpdateManyWithoutFacilityNestedInput
     recouvrementSyncs?: Care2xRecouvrementSyncUncheckedUpdateManyWithoutFacilityNestedInput
+    rapportsJournaliers?: Care2xRapportJournalierUncheckedUpdateManyWithoutFacilityNestedInput
   }
 
   export type FacilityCreateManyInput = {
@@ -44703,6 +46149,7 @@ export namespace Prisma {
     facility: FacilityCreateNestedOneWithoutApiKeyInput
     care2xSyncs?: Care2xSyncCreateNestedManyWithoutApiKeyInput
     recouvrementSyncs?: Care2xRecouvrementSyncCreateNestedManyWithoutApiKeyInput
+    rapportsJournaliers?: Care2xRapportJournalierCreateNestedManyWithoutApiKeyInput
   }
 
   export type FacilityApiKeyUncheckedCreateInput = {
@@ -44716,6 +46163,7 @@ export namespace Prisma {
     lastUsedAt?: Date | string | null
     care2xSyncs?: Care2xSyncUncheckedCreateNestedManyWithoutApiKeyInput
     recouvrementSyncs?: Care2xRecouvrementSyncUncheckedCreateNestedManyWithoutApiKeyInput
+    rapportsJournaliers?: Care2xRapportJournalierUncheckedCreateNestedManyWithoutApiKeyInput
   }
 
   export type FacilityApiKeyUpdateInput = {
@@ -44729,6 +46177,7 @@ export namespace Prisma {
     facility?: FacilityUpdateOneRequiredWithoutApiKeyNestedInput
     care2xSyncs?: Care2xSyncUpdateManyWithoutApiKeyNestedInput
     recouvrementSyncs?: Care2xRecouvrementSyncUpdateManyWithoutApiKeyNestedInput
+    rapportsJournaliers?: Care2xRapportJournalierUpdateManyWithoutApiKeyNestedInput
   }
 
   export type FacilityApiKeyUncheckedUpdateInput = {
@@ -44742,6 +46191,7 @@ export namespace Prisma {
     lastUsedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     care2xSyncs?: Care2xSyncUncheckedUpdateManyWithoutApiKeyNestedInput
     recouvrementSyncs?: Care2xRecouvrementSyncUncheckedUpdateManyWithoutApiKeyNestedInput
+    rapportsJournaliers?: Care2xRapportJournalierUncheckedUpdateManyWithoutApiKeyNestedInput
   }
 
   export type FacilityApiKeyCreateManyInput = {
@@ -44997,6 +46447,123 @@ export namespace Prisma {
     totalRecouvre?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     rapport?: JsonNullValueInput | InputJsonValue
     receivedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type Care2xRapportJournalierCreateInput = {
+    id?: string
+    date: Date | string
+    parGroupe: JsonNullValueInput | InputJsonValue
+    parPaiement: JsonNullValueInput | InputJsonValue
+    parAvance: JsonNullValueInput | InputJsonValue
+    rembParMode: JsonNullValueInput | InputJsonValue
+    totRow: JsonNullValueInput | InputJsonValue
+    openRow: JsonNullValueInput | InputJsonValue
+    credits: JsonNullValueInput | InputJsonValue
+    rembRow: JsonNullValueInput | InputJsonValue
+    caissiers: JsonNullValueInput | InputJsonValue
+    receivedAt?: Date | string
+    facility: FacilityCreateNestedOneWithoutRapportsJournaliersInput
+    apiKey: FacilityApiKeyCreateNestedOneWithoutRapportsJournaliersInput
+  }
+
+  export type Care2xRapportJournalierUncheckedCreateInput = {
+    id?: string
+    facilityId: string
+    date: Date | string
+    parGroupe: JsonNullValueInput | InputJsonValue
+    parPaiement: JsonNullValueInput | InputJsonValue
+    parAvance: JsonNullValueInput | InputJsonValue
+    rembParMode: JsonNullValueInput | InputJsonValue
+    totRow: JsonNullValueInput | InputJsonValue
+    openRow: JsonNullValueInput | InputJsonValue
+    credits: JsonNullValueInput | InputJsonValue
+    rembRow: JsonNullValueInput | InputJsonValue
+    caissiers: JsonNullValueInput | InputJsonValue
+    receivedAt?: Date | string
+    apiKeyId: string
+  }
+
+  export type Care2xRapportJournalierUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    parGroupe?: JsonNullValueInput | InputJsonValue
+    parPaiement?: JsonNullValueInput | InputJsonValue
+    parAvance?: JsonNullValueInput | InputJsonValue
+    rembParMode?: JsonNullValueInput | InputJsonValue
+    totRow?: JsonNullValueInput | InputJsonValue
+    openRow?: JsonNullValueInput | InputJsonValue
+    credits?: JsonNullValueInput | InputJsonValue
+    rembRow?: JsonNullValueInput | InputJsonValue
+    caissiers?: JsonNullValueInput | InputJsonValue
+    receivedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    facility?: FacilityUpdateOneRequiredWithoutRapportsJournaliersNestedInput
+    apiKey?: FacilityApiKeyUpdateOneRequiredWithoutRapportsJournaliersNestedInput
+  }
+
+  export type Care2xRapportJournalierUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    facilityId?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    parGroupe?: JsonNullValueInput | InputJsonValue
+    parPaiement?: JsonNullValueInput | InputJsonValue
+    parAvance?: JsonNullValueInput | InputJsonValue
+    rembParMode?: JsonNullValueInput | InputJsonValue
+    totRow?: JsonNullValueInput | InputJsonValue
+    openRow?: JsonNullValueInput | InputJsonValue
+    credits?: JsonNullValueInput | InputJsonValue
+    rembRow?: JsonNullValueInput | InputJsonValue
+    caissiers?: JsonNullValueInput | InputJsonValue
+    receivedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    apiKeyId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type Care2xRapportJournalierCreateManyInput = {
+    id?: string
+    facilityId: string
+    date: Date | string
+    parGroupe: JsonNullValueInput | InputJsonValue
+    parPaiement: JsonNullValueInput | InputJsonValue
+    parAvance: JsonNullValueInput | InputJsonValue
+    rembParMode: JsonNullValueInput | InputJsonValue
+    totRow: JsonNullValueInput | InputJsonValue
+    openRow: JsonNullValueInput | InputJsonValue
+    credits: JsonNullValueInput | InputJsonValue
+    rembRow: JsonNullValueInput | InputJsonValue
+    caissiers: JsonNullValueInput | InputJsonValue
+    receivedAt?: Date | string
+    apiKeyId: string
+  }
+
+  export type Care2xRapportJournalierUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    parGroupe?: JsonNullValueInput | InputJsonValue
+    parPaiement?: JsonNullValueInput | InputJsonValue
+    parAvance?: JsonNullValueInput | InputJsonValue
+    rembParMode?: JsonNullValueInput | InputJsonValue
+    totRow?: JsonNullValueInput | InputJsonValue
+    openRow?: JsonNullValueInput | InputJsonValue
+    credits?: JsonNullValueInput | InputJsonValue
+    rembRow?: JsonNullValueInput | InputJsonValue
+    caissiers?: JsonNullValueInput | InputJsonValue
+    receivedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type Care2xRapportJournalierUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    facilityId?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    parGroupe?: JsonNullValueInput | InputJsonValue
+    parPaiement?: JsonNullValueInput | InputJsonValue
+    parAvance?: JsonNullValueInput | InputJsonValue
+    rembParMode?: JsonNullValueInput | InputJsonValue
+    totRow?: JsonNullValueInput | InputJsonValue
+    openRow?: JsonNullValueInput | InputJsonValue
+    credits?: JsonNullValueInput | InputJsonValue
+    rembRow?: JsonNullValueInput | InputJsonValue
+    caissiers?: JsonNullValueInput | InputJsonValue
+    receivedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    apiKeyId?: StringFieldUpdateOperationsInput | string
   }
 
   export type Care2xVersionCreateInput = {
@@ -45542,6 +47109,12 @@ export namespace Prisma {
     none?: Care2xRecouvrementSyncWhereInput
   }
 
+  export type Care2xRapportJournalierListRelationFilter = {
+    every?: Care2xRapportJournalierWhereInput
+    some?: Care2xRapportJournalierWhereInput
+    none?: Care2xRapportJournalierWhereInput
+  }
+
   export type DeclarationOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -45559,6 +47132,10 @@ export namespace Prisma {
   }
 
   export type Care2xRecouvrementSyncOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type Care2xRapportJournalierOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -47254,6 +48831,44 @@ export namespace Prisma {
     _max?: NestedJsonFilter<$PrismaModel>
   }
 
+  export type Care2xRapportJournalierFacilityIdDateCompoundUniqueInput = {
+    facilityId: string
+    date: Date | string
+  }
+
+  export type Care2xRapportJournalierCountOrderByAggregateInput = {
+    id?: SortOrder
+    facilityId?: SortOrder
+    date?: SortOrder
+    parGroupe?: SortOrder
+    parPaiement?: SortOrder
+    parAvance?: SortOrder
+    rembParMode?: SortOrder
+    totRow?: SortOrder
+    openRow?: SortOrder
+    credits?: SortOrder
+    rembRow?: SortOrder
+    caissiers?: SortOrder
+    receivedAt?: SortOrder
+    apiKeyId?: SortOrder
+  }
+
+  export type Care2xRapportJournalierMaxOrderByAggregateInput = {
+    id?: SortOrder
+    facilityId?: SortOrder
+    date?: SortOrder
+    receivedAt?: SortOrder
+    apiKeyId?: SortOrder
+  }
+
+  export type Care2xRapportJournalierMinOrderByAggregateInput = {
+    id?: SortOrder
+    facilityId?: SortOrder
+    date?: SortOrder
+    receivedAt?: SortOrder
+    apiKeyId?: SortOrder
+  }
+
   export type Care2xVersionCountOrderByAggregateInput = {
     id?: SortOrder
     version?: SortOrder
@@ -47790,6 +49405,13 @@ export namespace Prisma {
     connect?: Care2xRecouvrementSyncWhereUniqueInput | Care2xRecouvrementSyncWhereUniqueInput[]
   }
 
+  export type Care2xRapportJournalierCreateNestedManyWithoutFacilityInput = {
+    create?: XOR<Care2xRapportJournalierCreateWithoutFacilityInput, Care2xRapportJournalierUncheckedCreateWithoutFacilityInput> | Care2xRapportJournalierCreateWithoutFacilityInput[] | Care2xRapportJournalierUncheckedCreateWithoutFacilityInput[]
+    connectOrCreate?: Care2xRapportJournalierCreateOrConnectWithoutFacilityInput | Care2xRapportJournalierCreateOrConnectWithoutFacilityInput[]
+    createMany?: Care2xRapportJournalierCreateManyFacilityInputEnvelope
+    connect?: Care2xRapportJournalierWhereUniqueInput | Care2xRapportJournalierWhereUniqueInput[]
+  }
+
   export type UserUncheckedCreateNestedManyWithoutFacilityInput = {
     create?: XOR<UserCreateWithoutFacilityInput, UserUncheckedCreateWithoutFacilityInput> | UserCreateWithoutFacilityInput[] | UserUncheckedCreateWithoutFacilityInput[]
     connectOrCreate?: UserCreateOrConnectWithoutFacilityInput | UserCreateOrConnectWithoutFacilityInput[]
@@ -47857,6 +49479,13 @@ export namespace Prisma {
     connectOrCreate?: Care2xRecouvrementSyncCreateOrConnectWithoutFacilityInput | Care2xRecouvrementSyncCreateOrConnectWithoutFacilityInput[]
     createMany?: Care2xRecouvrementSyncCreateManyFacilityInputEnvelope
     connect?: Care2xRecouvrementSyncWhereUniqueInput | Care2xRecouvrementSyncWhereUniqueInput[]
+  }
+
+  export type Care2xRapportJournalierUncheckedCreateNestedManyWithoutFacilityInput = {
+    create?: XOR<Care2xRapportJournalierCreateWithoutFacilityInput, Care2xRapportJournalierUncheckedCreateWithoutFacilityInput> | Care2xRapportJournalierCreateWithoutFacilityInput[] | Care2xRapportJournalierUncheckedCreateWithoutFacilityInput[]
+    connectOrCreate?: Care2xRapportJournalierCreateOrConnectWithoutFacilityInput | Care2xRapportJournalierCreateOrConnectWithoutFacilityInput[]
+    createMany?: Care2xRapportJournalierCreateManyFacilityInputEnvelope
+    connect?: Care2xRapportJournalierWhereUniqueInput | Care2xRapportJournalierWhereUniqueInput[]
   }
 
   export type EnumFacilityTypeFieldUpdateOperationsInput = {
@@ -48019,6 +49648,20 @@ export namespace Prisma {
     deleteMany?: Care2xRecouvrementSyncScalarWhereInput | Care2xRecouvrementSyncScalarWhereInput[]
   }
 
+  export type Care2xRapportJournalierUpdateManyWithoutFacilityNestedInput = {
+    create?: XOR<Care2xRapportJournalierCreateWithoutFacilityInput, Care2xRapportJournalierUncheckedCreateWithoutFacilityInput> | Care2xRapportJournalierCreateWithoutFacilityInput[] | Care2xRapportJournalierUncheckedCreateWithoutFacilityInput[]
+    connectOrCreate?: Care2xRapportJournalierCreateOrConnectWithoutFacilityInput | Care2xRapportJournalierCreateOrConnectWithoutFacilityInput[]
+    upsert?: Care2xRapportJournalierUpsertWithWhereUniqueWithoutFacilityInput | Care2xRapportJournalierUpsertWithWhereUniqueWithoutFacilityInput[]
+    createMany?: Care2xRapportJournalierCreateManyFacilityInputEnvelope
+    set?: Care2xRapportJournalierWhereUniqueInput | Care2xRapportJournalierWhereUniqueInput[]
+    disconnect?: Care2xRapportJournalierWhereUniqueInput | Care2xRapportJournalierWhereUniqueInput[]
+    delete?: Care2xRapportJournalierWhereUniqueInput | Care2xRapportJournalierWhereUniqueInput[]
+    connect?: Care2xRapportJournalierWhereUniqueInput | Care2xRapportJournalierWhereUniqueInput[]
+    update?: Care2xRapportJournalierUpdateWithWhereUniqueWithoutFacilityInput | Care2xRapportJournalierUpdateWithWhereUniqueWithoutFacilityInput[]
+    updateMany?: Care2xRapportJournalierUpdateManyWithWhereWithoutFacilityInput | Care2xRapportJournalierUpdateManyWithWhereWithoutFacilityInput[]
+    deleteMany?: Care2xRapportJournalierScalarWhereInput | Care2xRapportJournalierScalarWhereInput[]
+  }
+
   export type UserUncheckedUpdateManyWithoutFacilityNestedInput = {
     create?: XOR<UserCreateWithoutFacilityInput, UserUncheckedCreateWithoutFacilityInput> | UserCreateWithoutFacilityInput[] | UserUncheckedCreateWithoutFacilityInput[]
     connectOrCreate?: UserCreateOrConnectWithoutFacilityInput | UserCreateOrConnectWithoutFacilityInput[]
@@ -48153,6 +49796,20 @@ export namespace Prisma {
     update?: Care2xRecouvrementSyncUpdateWithWhereUniqueWithoutFacilityInput | Care2xRecouvrementSyncUpdateWithWhereUniqueWithoutFacilityInput[]
     updateMany?: Care2xRecouvrementSyncUpdateManyWithWhereWithoutFacilityInput | Care2xRecouvrementSyncUpdateManyWithWhereWithoutFacilityInput[]
     deleteMany?: Care2xRecouvrementSyncScalarWhereInput | Care2xRecouvrementSyncScalarWhereInput[]
+  }
+
+  export type Care2xRapportJournalierUncheckedUpdateManyWithoutFacilityNestedInput = {
+    create?: XOR<Care2xRapportJournalierCreateWithoutFacilityInput, Care2xRapportJournalierUncheckedCreateWithoutFacilityInput> | Care2xRapportJournalierCreateWithoutFacilityInput[] | Care2xRapportJournalierUncheckedCreateWithoutFacilityInput[]
+    connectOrCreate?: Care2xRapportJournalierCreateOrConnectWithoutFacilityInput | Care2xRapportJournalierCreateOrConnectWithoutFacilityInput[]
+    upsert?: Care2xRapportJournalierUpsertWithWhereUniqueWithoutFacilityInput | Care2xRapportJournalierUpsertWithWhereUniqueWithoutFacilityInput[]
+    createMany?: Care2xRapportJournalierCreateManyFacilityInputEnvelope
+    set?: Care2xRapportJournalierWhereUniqueInput | Care2xRapportJournalierWhereUniqueInput[]
+    disconnect?: Care2xRapportJournalierWhereUniqueInput | Care2xRapportJournalierWhereUniqueInput[]
+    delete?: Care2xRapportJournalierWhereUniqueInput | Care2xRapportJournalierWhereUniqueInput[]
+    connect?: Care2xRapportJournalierWhereUniqueInput | Care2xRapportJournalierWhereUniqueInput[]
+    update?: Care2xRapportJournalierUpdateWithWhereUniqueWithoutFacilityInput | Care2xRapportJournalierUpdateWithWhereUniqueWithoutFacilityInput[]
+    updateMany?: Care2xRapportJournalierUpdateManyWithWhereWithoutFacilityInput | Care2xRapportJournalierUpdateManyWithWhereWithoutFacilityInput[]
+    deleteMany?: Care2xRapportJournalierScalarWhereInput | Care2xRapportJournalierScalarWhereInput[]
   }
 
   export type OrganizationCreateNestedOneWithoutUsersInput = {
@@ -49511,6 +51168,13 @@ export namespace Prisma {
     connect?: Care2xRecouvrementSyncWhereUniqueInput | Care2xRecouvrementSyncWhereUniqueInput[]
   }
 
+  export type Care2xRapportJournalierCreateNestedManyWithoutApiKeyInput = {
+    create?: XOR<Care2xRapportJournalierCreateWithoutApiKeyInput, Care2xRapportJournalierUncheckedCreateWithoutApiKeyInput> | Care2xRapportJournalierCreateWithoutApiKeyInput[] | Care2xRapportJournalierUncheckedCreateWithoutApiKeyInput[]
+    connectOrCreate?: Care2xRapportJournalierCreateOrConnectWithoutApiKeyInput | Care2xRapportJournalierCreateOrConnectWithoutApiKeyInput[]
+    createMany?: Care2xRapportJournalierCreateManyApiKeyInputEnvelope
+    connect?: Care2xRapportJournalierWhereUniqueInput | Care2xRapportJournalierWhereUniqueInput[]
+  }
+
   export type Care2xSyncUncheckedCreateNestedManyWithoutApiKeyInput = {
     create?: XOR<Care2xSyncCreateWithoutApiKeyInput, Care2xSyncUncheckedCreateWithoutApiKeyInput> | Care2xSyncCreateWithoutApiKeyInput[] | Care2xSyncUncheckedCreateWithoutApiKeyInput[]
     connectOrCreate?: Care2xSyncCreateOrConnectWithoutApiKeyInput | Care2xSyncCreateOrConnectWithoutApiKeyInput[]
@@ -49523,6 +51187,13 @@ export namespace Prisma {
     connectOrCreate?: Care2xRecouvrementSyncCreateOrConnectWithoutApiKeyInput | Care2xRecouvrementSyncCreateOrConnectWithoutApiKeyInput[]
     createMany?: Care2xRecouvrementSyncCreateManyApiKeyInputEnvelope
     connect?: Care2xRecouvrementSyncWhereUniqueInput | Care2xRecouvrementSyncWhereUniqueInput[]
+  }
+
+  export type Care2xRapportJournalierUncheckedCreateNestedManyWithoutApiKeyInput = {
+    create?: XOR<Care2xRapportJournalierCreateWithoutApiKeyInput, Care2xRapportJournalierUncheckedCreateWithoutApiKeyInput> | Care2xRapportJournalierCreateWithoutApiKeyInput[] | Care2xRapportJournalierUncheckedCreateWithoutApiKeyInput[]
+    connectOrCreate?: Care2xRapportJournalierCreateOrConnectWithoutApiKeyInput | Care2xRapportJournalierCreateOrConnectWithoutApiKeyInput[]
+    createMany?: Care2xRapportJournalierCreateManyApiKeyInputEnvelope
+    connect?: Care2xRapportJournalierWhereUniqueInput | Care2xRapportJournalierWhereUniqueInput[]
   }
 
   export type FacilityUpdateOneRequiredWithoutApiKeyNestedInput = {
@@ -49561,6 +51232,20 @@ export namespace Prisma {
     deleteMany?: Care2xRecouvrementSyncScalarWhereInput | Care2xRecouvrementSyncScalarWhereInput[]
   }
 
+  export type Care2xRapportJournalierUpdateManyWithoutApiKeyNestedInput = {
+    create?: XOR<Care2xRapportJournalierCreateWithoutApiKeyInput, Care2xRapportJournalierUncheckedCreateWithoutApiKeyInput> | Care2xRapportJournalierCreateWithoutApiKeyInput[] | Care2xRapportJournalierUncheckedCreateWithoutApiKeyInput[]
+    connectOrCreate?: Care2xRapportJournalierCreateOrConnectWithoutApiKeyInput | Care2xRapportJournalierCreateOrConnectWithoutApiKeyInput[]
+    upsert?: Care2xRapportJournalierUpsertWithWhereUniqueWithoutApiKeyInput | Care2xRapportJournalierUpsertWithWhereUniqueWithoutApiKeyInput[]
+    createMany?: Care2xRapportJournalierCreateManyApiKeyInputEnvelope
+    set?: Care2xRapportJournalierWhereUniqueInput | Care2xRapportJournalierWhereUniqueInput[]
+    disconnect?: Care2xRapportJournalierWhereUniqueInput | Care2xRapportJournalierWhereUniqueInput[]
+    delete?: Care2xRapportJournalierWhereUniqueInput | Care2xRapportJournalierWhereUniqueInput[]
+    connect?: Care2xRapportJournalierWhereUniqueInput | Care2xRapportJournalierWhereUniqueInput[]
+    update?: Care2xRapportJournalierUpdateWithWhereUniqueWithoutApiKeyInput | Care2xRapportJournalierUpdateWithWhereUniqueWithoutApiKeyInput[]
+    updateMany?: Care2xRapportJournalierUpdateManyWithWhereWithoutApiKeyInput | Care2xRapportJournalierUpdateManyWithWhereWithoutApiKeyInput[]
+    deleteMany?: Care2xRapportJournalierScalarWhereInput | Care2xRapportJournalierScalarWhereInput[]
+  }
+
   export type Care2xSyncUncheckedUpdateManyWithoutApiKeyNestedInput = {
     create?: XOR<Care2xSyncCreateWithoutApiKeyInput, Care2xSyncUncheckedCreateWithoutApiKeyInput> | Care2xSyncCreateWithoutApiKeyInput[] | Care2xSyncUncheckedCreateWithoutApiKeyInput[]
     connectOrCreate?: Care2xSyncCreateOrConnectWithoutApiKeyInput | Care2xSyncCreateOrConnectWithoutApiKeyInput[]
@@ -49587,6 +51272,20 @@ export namespace Prisma {
     update?: Care2xRecouvrementSyncUpdateWithWhereUniqueWithoutApiKeyInput | Care2xRecouvrementSyncUpdateWithWhereUniqueWithoutApiKeyInput[]
     updateMany?: Care2xRecouvrementSyncUpdateManyWithWhereWithoutApiKeyInput | Care2xRecouvrementSyncUpdateManyWithWhereWithoutApiKeyInput[]
     deleteMany?: Care2xRecouvrementSyncScalarWhereInput | Care2xRecouvrementSyncScalarWhereInput[]
+  }
+
+  export type Care2xRapportJournalierUncheckedUpdateManyWithoutApiKeyNestedInput = {
+    create?: XOR<Care2xRapportJournalierCreateWithoutApiKeyInput, Care2xRapportJournalierUncheckedCreateWithoutApiKeyInput> | Care2xRapportJournalierCreateWithoutApiKeyInput[] | Care2xRapportJournalierUncheckedCreateWithoutApiKeyInput[]
+    connectOrCreate?: Care2xRapportJournalierCreateOrConnectWithoutApiKeyInput | Care2xRapportJournalierCreateOrConnectWithoutApiKeyInput[]
+    upsert?: Care2xRapportJournalierUpsertWithWhereUniqueWithoutApiKeyInput | Care2xRapportJournalierUpsertWithWhereUniqueWithoutApiKeyInput[]
+    createMany?: Care2xRapportJournalierCreateManyApiKeyInputEnvelope
+    set?: Care2xRapportJournalierWhereUniqueInput | Care2xRapportJournalierWhereUniqueInput[]
+    disconnect?: Care2xRapportJournalierWhereUniqueInput | Care2xRapportJournalierWhereUniqueInput[]
+    delete?: Care2xRapportJournalierWhereUniqueInput | Care2xRapportJournalierWhereUniqueInput[]
+    connect?: Care2xRapportJournalierWhereUniqueInput | Care2xRapportJournalierWhereUniqueInput[]
+    update?: Care2xRapportJournalierUpdateWithWhereUniqueWithoutApiKeyInput | Care2xRapportJournalierUpdateWithWhereUniqueWithoutApiKeyInput[]
+    updateMany?: Care2xRapportJournalierUpdateManyWithWhereWithoutApiKeyInput | Care2xRapportJournalierUpdateManyWithWhereWithoutApiKeyInput[]
+    deleteMany?: Care2xRapportJournalierScalarWhereInput | Care2xRapportJournalierScalarWhereInput[]
   }
 
   export type FacilityCreateNestedOneWithoutCare2xSyncsInput = {
@@ -49699,6 +51398,34 @@ export namespace Prisma {
     upsert?: FacilityApiKeyUpsertWithoutRecouvrementSyncsInput
     connect?: FacilityApiKeyWhereUniqueInput
     update?: XOR<XOR<FacilityApiKeyUpdateToOneWithWhereWithoutRecouvrementSyncsInput, FacilityApiKeyUpdateWithoutRecouvrementSyncsInput>, FacilityApiKeyUncheckedUpdateWithoutRecouvrementSyncsInput>
+  }
+
+  export type FacilityCreateNestedOneWithoutRapportsJournaliersInput = {
+    create?: XOR<FacilityCreateWithoutRapportsJournaliersInput, FacilityUncheckedCreateWithoutRapportsJournaliersInput>
+    connectOrCreate?: FacilityCreateOrConnectWithoutRapportsJournaliersInput
+    connect?: FacilityWhereUniqueInput
+  }
+
+  export type FacilityApiKeyCreateNestedOneWithoutRapportsJournaliersInput = {
+    create?: XOR<FacilityApiKeyCreateWithoutRapportsJournaliersInput, FacilityApiKeyUncheckedCreateWithoutRapportsJournaliersInput>
+    connectOrCreate?: FacilityApiKeyCreateOrConnectWithoutRapportsJournaliersInput
+    connect?: FacilityApiKeyWhereUniqueInput
+  }
+
+  export type FacilityUpdateOneRequiredWithoutRapportsJournaliersNestedInput = {
+    create?: XOR<FacilityCreateWithoutRapportsJournaliersInput, FacilityUncheckedCreateWithoutRapportsJournaliersInput>
+    connectOrCreate?: FacilityCreateOrConnectWithoutRapportsJournaliersInput
+    upsert?: FacilityUpsertWithoutRapportsJournaliersInput
+    connect?: FacilityWhereUniqueInput
+    update?: XOR<XOR<FacilityUpdateToOneWithWhereWithoutRapportsJournaliersInput, FacilityUpdateWithoutRapportsJournaliersInput>, FacilityUncheckedUpdateWithoutRapportsJournaliersInput>
+  }
+
+  export type FacilityApiKeyUpdateOneRequiredWithoutRapportsJournaliersNestedInput = {
+    create?: XOR<FacilityApiKeyCreateWithoutRapportsJournaliersInput, FacilityApiKeyUncheckedCreateWithoutRapportsJournaliersInput>
+    connectOrCreate?: FacilityApiKeyCreateOrConnectWithoutRapportsJournaliersInput
+    upsert?: FacilityApiKeyUpsertWithoutRapportsJournaliersInput
+    connect?: FacilityApiKeyWhereUniqueInput
+    update?: XOR<XOR<FacilityApiKeyUpdateToOneWithWhereWithoutRapportsJournaliersInput, FacilityApiKeyUpdateWithoutRapportsJournaliersInput>, FacilityApiKeyUncheckedUpdateWithoutRapportsJournaliersInput>
   }
 
   export type UserCreateNestedOneWithoutPlanningEventsInput = {
@@ -50482,6 +52209,7 @@ export namespace Prisma {
     apiKey?: FacilityApiKeyCreateNestedOneWithoutFacilityInput
     care2xSyncs?: Care2xSyncCreateNestedManyWithoutFacilityInput
     recouvrementSyncs?: Care2xRecouvrementSyncCreateNestedManyWithoutFacilityInput
+    rapportsJournaliers?: Care2xRapportJournalierCreateNestedManyWithoutFacilityInput
   }
 
   export type FacilityUncheckedCreateWithoutRegionInput = {
@@ -50507,6 +52235,7 @@ export namespace Prisma {
     apiKey?: FacilityApiKeyUncheckedCreateNestedOneWithoutFacilityInput
     care2xSyncs?: Care2xSyncUncheckedCreateNestedManyWithoutFacilityInput
     recouvrementSyncs?: Care2xRecouvrementSyncUncheckedCreateNestedManyWithoutFacilityInput
+    rapportsJournaliers?: Care2xRapportJournalierUncheckedCreateNestedManyWithoutFacilityInput
   }
 
   export type FacilityCreateOrConnectWithoutRegionInput = {
@@ -51240,6 +52969,7 @@ export namespace Prisma {
     lastUsedAt?: Date | string | null
     care2xSyncs?: Care2xSyncCreateNestedManyWithoutApiKeyInput
     recouvrementSyncs?: Care2xRecouvrementSyncCreateNestedManyWithoutApiKeyInput
+    rapportsJournaliers?: Care2xRapportJournalierCreateNestedManyWithoutApiKeyInput
   }
 
   export type FacilityApiKeyUncheckedCreateWithoutFacilityInput = {
@@ -51252,6 +52982,7 @@ export namespace Prisma {
     lastUsedAt?: Date | string | null
     care2xSyncs?: Care2xSyncUncheckedCreateNestedManyWithoutApiKeyInput
     recouvrementSyncs?: Care2xRecouvrementSyncUncheckedCreateNestedManyWithoutApiKeyInput
+    rapportsJournaliers?: Care2xRapportJournalierUncheckedCreateNestedManyWithoutApiKeyInput
   }
 
   export type FacilityApiKeyCreateOrConnectWithoutFacilityInput = {
@@ -51320,6 +53051,48 @@ export namespace Prisma {
 
   export type Care2xRecouvrementSyncCreateManyFacilityInputEnvelope = {
     data: Care2xRecouvrementSyncCreateManyFacilityInput | Care2xRecouvrementSyncCreateManyFacilityInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type Care2xRapportJournalierCreateWithoutFacilityInput = {
+    id?: string
+    date: Date | string
+    parGroupe: JsonNullValueInput | InputJsonValue
+    parPaiement: JsonNullValueInput | InputJsonValue
+    parAvance: JsonNullValueInput | InputJsonValue
+    rembParMode: JsonNullValueInput | InputJsonValue
+    totRow: JsonNullValueInput | InputJsonValue
+    openRow: JsonNullValueInput | InputJsonValue
+    credits: JsonNullValueInput | InputJsonValue
+    rembRow: JsonNullValueInput | InputJsonValue
+    caissiers: JsonNullValueInput | InputJsonValue
+    receivedAt?: Date | string
+    apiKey: FacilityApiKeyCreateNestedOneWithoutRapportsJournaliersInput
+  }
+
+  export type Care2xRapportJournalierUncheckedCreateWithoutFacilityInput = {
+    id?: string
+    date: Date | string
+    parGroupe: JsonNullValueInput | InputJsonValue
+    parPaiement: JsonNullValueInput | InputJsonValue
+    parAvance: JsonNullValueInput | InputJsonValue
+    rembParMode: JsonNullValueInput | InputJsonValue
+    totRow: JsonNullValueInput | InputJsonValue
+    openRow: JsonNullValueInput | InputJsonValue
+    credits: JsonNullValueInput | InputJsonValue
+    rembRow: JsonNullValueInput | InputJsonValue
+    caissiers: JsonNullValueInput | InputJsonValue
+    receivedAt?: Date | string
+    apiKeyId: string
+  }
+
+  export type Care2xRapportJournalierCreateOrConnectWithoutFacilityInput = {
+    where: Care2xRapportJournalierWhereUniqueInput
+    create: XOR<Care2xRapportJournalierCreateWithoutFacilityInput, Care2xRapportJournalierUncheckedCreateWithoutFacilityInput>
+  }
+
+  export type Care2xRapportJournalierCreateManyFacilityInputEnvelope = {
+    data: Care2xRapportJournalierCreateManyFacilityInput | Care2xRapportJournalierCreateManyFacilityInput[]
     skipDuplicates?: boolean
   }
 
@@ -51551,6 +53324,7 @@ export namespace Prisma {
     lastUsedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     care2xSyncs?: Care2xSyncUpdateManyWithoutApiKeyNestedInput
     recouvrementSyncs?: Care2xRecouvrementSyncUpdateManyWithoutApiKeyNestedInput
+    rapportsJournaliers?: Care2xRapportJournalierUpdateManyWithoutApiKeyNestedInput
   }
 
   export type FacilityApiKeyUncheckedUpdateWithoutFacilityInput = {
@@ -51563,6 +53337,7 @@ export namespace Prisma {
     lastUsedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     care2xSyncs?: Care2xSyncUncheckedUpdateManyWithoutApiKeyNestedInput
     recouvrementSyncs?: Care2xRecouvrementSyncUncheckedUpdateManyWithoutApiKeyNestedInput
+    rapportsJournaliers?: Care2xRapportJournalierUncheckedUpdateManyWithoutApiKeyNestedInput
   }
 
   export type Care2xSyncUpsertWithWhereUniqueWithoutFacilityInput = {
@@ -51624,6 +53399,42 @@ export namespace Prisma {
     totalRecouvre?: DecimalFilter<"Care2xRecouvrementSync"> | Decimal | DecimalJsLike | number | string
     rapport?: JsonFilter<"Care2xRecouvrementSync">
     receivedAt?: DateTimeFilter<"Care2xRecouvrementSync"> | Date | string
+  }
+
+  export type Care2xRapportJournalierUpsertWithWhereUniqueWithoutFacilityInput = {
+    where: Care2xRapportJournalierWhereUniqueInput
+    update: XOR<Care2xRapportJournalierUpdateWithoutFacilityInput, Care2xRapportJournalierUncheckedUpdateWithoutFacilityInput>
+    create: XOR<Care2xRapportJournalierCreateWithoutFacilityInput, Care2xRapportJournalierUncheckedCreateWithoutFacilityInput>
+  }
+
+  export type Care2xRapportJournalierUpdateWithWhereUniqueWithoutFacilityInput = {
+    where: Care2xRapportJournalierWhereUniqueInput
+    data: XOR<Care2xRapportJournalierUpdateWithoutFacilityInput, Care2xRapportJournalierUncheckedUpdateWithoutFacilityInput>
+  }
+
+  export type Care2xRapportJournalierUpdateManyWithWhereWithoutFacilityInput = {
+    where: Care2xRapportJournalierScalarWhereInput
+    data: XOR<Care2xRapportJournalierUpdateManyMutationInput, Care2xRapportJournalierUncheckedUpdateManyWithoutFacilityInput>
+  }
+
+  export type Care2xRapportJournalierScalarWhereInput = {
+    AND?: Care2xRapportJournalierScalarWhereInput | Care2xRapportJournalierScalarWhereInput[]
+    OR?: Care2xRapportJournalierScalarWhereInput[]
+    NOT?: Care2xRapportJournalierScalarWhereInput | Care2xRapportJournalierScalarWhereInput[]
+    id?: StringFilter<"Care2xRapportJournalier"> | string
+    facilityId?: StringFilter<"Care2xRapportJournalier"> | string
+    date?: DateTimeFilter<"Care2xRapportJournalier"> | Date | string
+    parGroupe?: JsonFilter<"Care2xRapportJournalier">
+    parPaiement?: JsonFilter<"Care2xRapportJournalier">
+    parAvance?: JsonFilter<"Care2xRapportJournalier">
+    rembParMode?: JsonFilter<"Care2xRapportJournalier">
+    totRow?: JsonFilter<"Care2xRapportJournalier">
+    openRow?: JsonFilter<"Care2xRapportJournalier">
+    credits?: JsonFilter<"Care2xRapportJournalier">
+    rembRow?: JsonFilter<"Care2xRapportJournalier">
+    caissiers?: JsonFilter<"Care2xRapportJournalier">
+    receivedAt?: DateTimeFilter<"Care2xRapportJournalier"> | Date | string
+    apiKeyId?: StringFilter<"Care2xRapportJournalier"> | string
   }
 
   export type OrganizationCreateWithoutUsersInput = {
@@ -51711,6 +53522,7 @@ export namespace Prisma {
     apiKey?: FacilityApiKeyCreateNestedOneWithoutFacilityInput
     care2xSyncs?: Care2xSyncCreateNestedManyWithoutFacilityInput
     recouvrementSyncs?: Care2xRecouvrementSyncCreateNestedManyWithoutFacilityInput
+    rapportsJournaliers?: Care2xRapportJournalierCreateNestedManyWithoutFacilityInput
   }
 
   export type FacilityUncheckedCreateWithoutUsersInput = {
@@ -51736,6 +53548,7 @@ export namespace Prisma {
     apiKey?: FacilityApiKeyUncheckedCreateNestedOneWithoutFacilityInput
     care2xSyncs?: Care2xSyncUncheckedCreateNestedManyWithoutFacilityInput
     recouvrementSyncs?: Care2xRecouvrementSyncUncheckedCreateNestedManyWithoutFacilityInput
+    rapportsJournaliers?: Care2xRapportJournalierUncheckedCreateNestedManyWithoutFacilityInput
   }
 
   export type FacilityCreateOrConnectWithoutUsersInput = {
@@ -52275,6 +54088,7 @@ export namespace Prisma {
     apiKey?: FacilityApiKeyUpdateOneWithoutFacilityNestedInput
     care2xSyncs?: Care2xSyncUpdateManyWithoutFacilityNestedInput
     recouvrementSyncs?: Care2xRecouvrementSyncUpdateManyWithoutFacilityNestedInput
+    rapportsJournaliers?: Care2xRapportJournalierUpdateManyWithoutFacilityNestedInput
   }
 
   export type FacilityUncheckedUpdateWithoutUsersInput = {
@@ -52300,6 +54114,7 @@ export namespace Prisma {
     apiKey?: FacilityApiKeyUncheckedUpdateOneWithoutFacilityNestedInput
     care2xSyncs?: Care2xSyncUncheckedUpdateManyWithoutFacilityNestedInput
     recouvrementSyncs?: Care2xRecouvrementSyncUncheckedUpdateManyWithoutFacilityNestedInput
+    rapportsJournaliers?: Care2xRapportJournalierUncheckedUpdateManyWithoutFacilityNestedInput
   }
 
   export type DeclarationUpsertWithWhereUniqueWithoutSubmittedByInput = {
@@ -52755,6 +54570,7 @@ export namespace Prisma {
     apiKey?: FacilityApiKeyCreateNestedOneWithoutFacilityInput
     care2xSyncs?: Care2xSyncCreateNestedManyWithoutFacilityInput
     recouvrementSyncs?: Care2xRecouvrementSyncCreateNestedManyWithoutFacilityInput
+    rapportsJournaliers?: Care2xRapportJournalierCreateNestedManyWithoutFacilityInput
   }
 
   export type FacilityUncheckedCreateWithoutPeriodConfigsInput = {
@@ -52780,6 +54596,7 @@ export namespace Prisma {
     apiKey?: FacilityApiKeyUncheckedCreateNestedOneWithoutFacilityInput
     care2xSyncs?: Care2xSyncUncheckedCreateNestedManyWithoutFacilityInput
     recouvrementSyncs?: Care2xRecouvrementSyncUncheckedCreateNestedManyWithoutFacilityInput
+    rapportsJournaliers?: Care2xRapportJournalierUncheckedCreateNestedManyWithoutFacilityInput
   }
 
   export type FacilityCreateOrConnectWithoutPeriodConfigsInput = {
@@ -52858,6 +54675,7 @@ export namespace Prisma {
     apiKey?: FacilityApiKeyUpdateOneWithoutFacilityNestedInput
     care2xSyncs?: Care2xSyncUpdateManyWithoutFacilityNestedInput
     recouvrementSyncs?: Care2xRecouvrementSyncUpdateManyWithoutFacilityNestedInput
+    rapportsJournaliers?: Care2xRapportJournalierUpdateManyWithoutFacilityNestedInput
   }
 
   export type FacilityUncheckedUpdateWithoutPeriodConfigsInput = {
@@ -52883,6 +54701,7 @@ export namespace Prisma {
     apiKey?: FacilityApiKeyUncheckedUpdateOneWithoutFacilityNestedInput
     care2xSyncs?: Care2xSyncUncheckedUpdateManyWithoutFacilityNestedInput
     recouvrementSyncs?: Care2xRecouvrementSyncUncheckedUpdateManyWithoutFacilityNestedInput
+    rapportsJournaliers?: Care2xRapportJournalierUncheckedUpdateManyWithoutFacilityNestedInput
   }
 
   export type FacilityCreateWithoutDeclarationsInput = {
@@ -52908,6 +54727,7 @@ export namespace Prisma {
     apiKey?: FacilityApiKeyCreateNestedOneWithoutFacilityInput
     care2xSyncs?: Care2xSyncCreateNestedManyWithoutFacilityInput
     recouvrementSyncs?: Care2xRecouvrementSyncCreateNestedManyWithoutFacilityInput
+    rapportsJournaliers?: Care2xRapportJournalierCreateNestedManyWithoutFacilityInput
   }
 
   export type FacilityUncheckedCreateWithoutDeclarationsInput = {
@@ -52933,6 +54753,7 @@ export namespace Prisma {
     apiKey?: FacilityApiKeyUncheckedCreateNestedOneWithoutFacilityInput
     care2xSyncs?: Care2xSyncUncheckedCreateNestedManyWithoutFacilityInput
     recouvrementSyncs?: Care2xRecouvrementSyncUncheckedCreateNestedManyWithoutFacilityInput
+    rapportsJournaliers?: Care2xRapportJournalierUncheckedCreateNestedManyWithoutFacilityInput
   }
 
   export type FacilityCreateOrConnectWithoutDeclarationsInput = {
@@ -53192,6 +55013,7 @@ export namespace Prisma {
     apiKey?: FacilityApiKeyUpdateOneWithoutFacilityNestedInput
     care2xSyncs?: Care2xSyncUpdateManyWithoutFacilityNestedInput
     recouvrementSyncs?: Care2xRecouvrementSyncUpdateManyWithoutFacilityNestedInput
+    rapportsJournaliers?: Care2xRapportJournalierUpdateManyWithoutFacilityNestedInput
   }
 
   export type FacilityUncheckedUpdateWithoutDeclarationsInput = {
@@ -53217,6 +55039,7 @@ export namespace Prisma {
     apiKey?: FacilityApiKeyUncheckedUpdateOneWithoutFacilityNestedInput
     care2xSyncs?: Care2xSyncUncheckedUpdateManyWithoutFacilityNestedInput
     recouvrementSyncs?: Care2xRecouvrementSyncUncheckedUpdateManyWithoutFacilityNestedInput
+    rapportsJournaliers?: Care2xRapportJournalierUncheckedUpdateManyWithoutFacilityNestedInput
   }
 
   export type UserUpsertWithoutDeclarationsInput = {
@@ -53785,6 +55608,7 @@ export namespace Prisma {
     apiKey?: FacilityApiKeyCreateNestedOneWithoutFacilityInput
     care2xSyncs?: Care2xSyncCreateNestedManyWithoutFacilityInput
     recouvrementSyncs?: Care2xRecouvrementSyncCreateNestedManyWithoutFacilityInput
+    rapportsJournaliers?: Care2xRapportJournalierCreateNestedManyWithoutFacilityInput
   }
 
   export type FacilityUncheckedCreateWithoutBudgetsInput = {
@@ -53810,6 +55634,7 @@ export namespace Prisma {
     apiKey?: FacilityApiKeyUncheckedCreateNestedOneWithoutFacilityInput
     care2xSyncs?: Care2xSyncUncheckedCreateNestedManyWithoutFacilityInput
     recouvrementSyncs?: Care2xRecouvrementSyncUncheckedCreateNestedManyWithoutFacilityInput
+    rapportsJournaliers?: Care2xRapportJournalierUncheckedCreateNestedManyWithoutFacilityInput
   }
 
   export type FacilityCreateOrConnectWithoutBudgetsInput = {
@@ -53851,6 +55676,7 @@ export namespace Prisma {
     apiKey?: FacilityApiKeyUpdateOneWithoutFacilityNestedInput
     care2xSyncs?: Care2xSyncUpdateManyWithoutFacilityNestedInput
     recouvrementSyncs?: Care2xRecouvrementSyncUpdateManyWithoutFacilityNestedInput
+    rapportsJournaliers?: Care2xRapportJournalierUpdateManyWithoutFacilityNestedInput
   }
 
   export type FacilityUncheckedUpdateWithoutBudgetsInput = {
@@ -53876,6 +55702,7 @@ export namespace Prisma {
     apiKey?: FacilityApiKeyUncheckedUpdateOneWithoutFacilityNestedInput
     care2xSyncs?: Care2xSyncUncheckedUpdateManyWithoutFacilityNestedInput
     recouvrementSyncs?: Care2xRecouvrementSyncUncheckedUpdateManyWithoutFacilityNestedInput
+    rapportsJournaliers?: Care2xRapportJournalierUncheckedUpdateManyWithoutFacilityNestedInput
   }
 
   export type FacilityCreateWithoutStatSheetsInput = {
@@ -53901,6 +55728,7 @@ export namespace Prisma {
     apiKey?: FacilityApiKeyCreateNestedOneWithoutFacilityInput
     care2xSyncs?: Care2xSyncCreateNestedManyWithoutFacilityInput
     recouvrementSyncs?: Care2xRecouvrementSyncCreateNestedManyWithoutFacilityInput
+    rapportsJournaliers?: Care2xRapportJournalierCreateNestedManyWithoutFacilityInput
   }
 
   export type FacilityUncheckedCreateWithoutStatSheetsInput = {
@@ -53926,6 +55754,7 @@ export namespace Prisma {
     apiKey?: FacilityApiKeyUncheckedCreateNestedOneWithoutFacilityInput
     care2xSyncs?: Care2xSyncUncheckedCreateNestedManyWithoutFacilityInput
     recouvrementSyncs?: Care2xRecouvrementSyncUncheckedCreateNestedManyWithoutFacilityInput
+    rapportsJournaliers?: Care2xRapportJournalierUncheckedCreateNestedManyWithoutFacilityInput
   }
 
   export type FacilityCreateOrConnectWithoutStatSheetsInput = {
@@ -54086,6 +55915,7 @@ export namespace Prisma {
     apiKey?: FacilityApiKeyUpdateOneWithoutFacilityNestedInput
     care2xSyncs?: Care2xSyncUpdateManyWithoutFacilityNestedInput
     recouvrementSyncs?: Care2xRecouvrementSyncUpdateManyWithoutFacilityNestedInput
+    rapportsJournaliers?: Care2xRapportJournalierUpdateManyWithoutFacilityNestedInput
   }
 
   export type FacilityUncheckedUpdateWithoutStatSheetsInput = {
@@ -54111,6 +55941,7 @@ export namespace Prisma {
     apiKey?: FacilityApiKeyUncheckedUpdateOneWithoutFacilityNestedInput
     care2xSyncs?: Care2xSyncUncheckedUpdateManyWithoutFacilityNestedInput
     recouvrementSyncs?: Care2xRecouvrementSyncUncheckedUpdateManyWithoutFacilityNestedInput
+    rapportsJournaliers?: Care2xRapportJournalierUncheckedUpdateManyWithoutFacilityNestedInput
   }
 
   export type UserUpsertWithoutStatSheetsInput = {
@@ -54567,6 +56398,7 @@ export namespace Prisma {
     apiKey?: FacilityApiKeyCreateNestedOneWithoutFacilityInput
     care2xSyncs?: Care2xSyncCreateNestedManyWithoutFacilityInput
     recouvrementSyncs?: Care2xRecouvrementSyncCreateNestedManyWithoutFacilityInput
+    rapportsJournaliers?: Care2xRapportJournalierCreateNestedManyWithoutFacilityInput
   }
 
   export type FacilityUncheckedCreateWithoutStatDeadlinesInput = {
@@ -54592,6 +56424,7 @@ export namespace Prisma {
     apiKey?: FacilityApiKeyUncheckedCreateNestedOneWithoutFacilityInput
     care2xSyncs?: Care2xSyncUncheckedCreateNestedManyWithoutFacilityInput
     recouvrementSyncs?: Care2xRecouvrementSyncUncheckedCreateNestedManyWithoutFacilityInput
+    rapportsJournaliers?: Care2xRapportJournalierUncheckedCreateNestedManyWithoutFacilityInput
   }
 
   export type FacilityCreateOrConnectWithoutStatDeadlinesInput = {
@@ -54735,6 +56568,7 @@ export namespace Prisma {
     apiKey?: FacilityApiKeyUpdateOneWithoutFacilityNestedInput
     care2xSyncs?: Care2xSyncUpdateManyWithoutFacilityNestedInput
     recouvrementSyncs?: Care2xRecouvrementSyncUpdateManyWithoutFacilityNestedInput
+    rapportsJournaliers?: Care2xRapportJournalierUpdateManyWithoutFacilityNestedInput
   }
 
   export type FacilityUncheckedUpdateWithoutStatDeadlinesInput = {
@@ -54760,6 +56594,7 @@ export namespace Prisma {
     apiKey?: FacilityApiKeyUncheckedUpdateOneWithoutFacilityNestedInput
     care2xSyncs?: Care2xSyncUncheckedUpdateManyWithoutFacilityNestedInput
     recouvrementSyncs?: Care2xRecouvrementSyncUncheckedUpdateManyWithoutFacilityNestedInput
+    rapportsJournaliers?: Care2xRapportJournalierUncheckedUpdateManyWithoutFacilityNestedInput
   }
 
   export type UserUpsertWithoutStatDeadlinesInput = {
@@ -55936,6 +57771,7 @@ export namespace Prisma {
     planningEvents?: PlanningEventCreateNestedManyWithoutFacilityInput
     care2xSyncs?: Care2xSyncCreateNestedManyWithoutFacilityInput
     recouvrementSyncs?: Care2xRecouvrementSyncCreateNestedManyWithoutFacilityInput
+    rapportsJournaliers?: Care2xRapportJournalierCreateNestedManyWithoutFacilityInput
   }
 
   export type FacilityUncheckedCreateWithoutApiKeyInput = {
@@ -55961,6 +57797,7 @@ export namespace Prisma {
     planningEvents?: PlanningEventUncheckedCreateNestedManyWithoutFacilityInput
     care2xSyncs?: Care2xSyncUncheckedCreateNestedManyWithoutFacilityInput
     recouvrementSyncs?: Care2xRecouvrementSyncUncheckedCreateNestedManyWithoutFacilityInput
+    rapportsJournaliers?: Care2xRapportJournalierUncheckedCreateNestedManyWithoutFacilityInput
   }
 
   export type FacilityCreateOrConnectWithoutApiKeyInput = {
@@ -56032,6 +57869,48 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type Care2xRapportJournalierCreateWithoutApiKeyInput = {
+    id?: string
+    date: Date | string
+    parGroupe: JsonNullValueInput | InputJsonValue
+    parPaiement: JsonNullValueInput | InputJsonValue
+    parAvance: JsonNullValueInput | InputJsonValue
+    rembParMode: JsonNullValueInput | InputJsonValue
+    totRow: JsonNullValueInput | InputJsonValue
+    openRow: JsonNullValueInput | InputJsonValue
+    credits: JsonNullValueInput | InputJsonValue
+    rembRow: JsonNullValueInput | InputJsonValue
+    caissiers: JsonNullValueInput | InputJsonValue
+    receivedAt?: Date | string
+    facility: FacilityCreateNestedOneWithoutRapportsJournaliersInput
+  }
+
+  export type Care2xRapportJournalierUncheckedCreateWithoutApiKeyInput = {
+    id?: string
+    facilityId: string
+    date: Date | string
+    parGroupe: JsonNullValueInput | InputJsonValue
+    parPaiement: JsonNullValueInput | InputJsonValue
+    parAvance: JsonNullValueInput | InputJsonValue
+    rembParMode: JsonNullValueInput | InputJsonValue
+    totRow: JsonNullValueInput | InputJsonValue
+    openRow: JsonNullValueInput | InputJsonValue
+    credits: JsonNullValueInput | InputJsonValue
+    rembRow: JsonNullValueInput | InputJsonValue
+    caissiers: JsonNullValueInput | InputJsonValue
+    receivedAt?: Date | string
+  }
+
+  export type Care2xRapportJournalierCreateOrConnectWithoutApiKeyInput = {
+    where: Care2xRapportJournalierWhereUniqueInput
+    create: XOR<Care2xRapportJournalierCreateWithoutApiKeyInput, Care2xRapportJournalierUncheckedCreateWithoutApiKeyInput>
+  }
+
+  export type Care2xRapportJournalierCreateManyApiKeyInputEnvelope = {
+    data: Care2xRapportJournalierCreateManyApiKeyInput | Care2xRapportJournalierCreateManyApiKeyInput[]
+    skipDuplicates?: boolean
+  }
+
   export type FacilityUpsertWithoutApiKeyInput = {
     update: XOR<FacilityUpdateWithoutApiKeyInput, FacilityUncheckedUpdateWithoutApiKeyInput>
     create: XOR<FacilityCreateWithoutApiKeyInput, FacilityUncheckedCreateWithoutApiKeyInput>
@@ -56066,6 +57945,7 @@ export namespace Prisma {
     planningEvents?: PlanningEventUpdateManyWithoutFacilityNestedInput
     care2xSyncs?: Care2xSyncUpdateManyWithoutFacilityNestedInput
     recouvrementSyncs?: Care2xRecouvrementSyncUpdateManyWithoutFacilityNestedInput
+    rapportsJournaliers?: Care2xRapportJournalierUpdateManyWithoutFacilityNestedInput
   }
 
   export type FacilityUncheckedUpdateWithoutApiKeyInput = {
@@ -56091,6 +57971,7 @@ export namespace Prisma {
     planningEvents?: PlanningEventUncheckedUpdateManyWithoutFacilityNestedInput
     care2xSyncs?: Care2xSyncUncheckedUpdateManyWithoutFacilityNestedInput
     recouvrementSyncs?: Care2xRecouvrementSyncUncheckedUpdateManyWithoutFacilityNestedInput
+    rapportsJournaliers?: Care2xRapportJournalierUncheckedUpdateManyWithoutFacilityNestedInput
   }
 
   export type Care2xSyncUpsertWithWhereUniqueWithoutApiKeyInput = {
@@ -56125,6 +58006,22 @@ export namespace Prisma {
     data: XOR<Care2xRecouvrementSyncUpdateManyMutationInput, Care2xRecouvrementSyncUncheckedUpdateManyWithoutApiKeyInput>
   }
 
+  export type Care2xRapportJournalierUpsertWithWhereUniqueWithoutApiKeyInput = {
+    where: Care2xRapportJournalierWhereUniqueInput
+    update: XOR<Care2xRapportJournalierUpdateWithoutApiKeyInput, Care2xRapportJournalierUncheckedUpdateWithoutApiKeyInput>
+    create: XOR<Care2xRapportJournalierCreateWithoutApiKeyInput, Care2xRapportJournalierUncheckedCreateWithoutApiKeyInput>
+  }
+
+  export type Care2xRapportJournalierUpdateWithWhereUniqueWithoutApiKeyInput = {
+    where: Care2xRapportJournalierWhereUniqueInput
+    data: XOR<Care2xRapportJournalierUpdateWithoutApiKeyInput, Care2xRapportJournalierUncheckedUpdateWithoutApiKeyInput>
+  }
+
+  export type Care2xRapportJournalierUpdateManyWithWhereWithoutApiKeyInput = {
+    where: Care2xRapportJournalierScalarWhereInput
+    data: XOR<Care2xRapportJournalierUpdateManyMutationInput, Care2xRapportJournalierUncheckedUpdateManyWithoutApiKeyInput>
+  }
+
   export type FacilityCreateWithoutCare2xSyncsInput = {
     id?: string
     name: string
@@ -56148,6 +58045,7 @@ export namespace Prisma {
     planningEvents?: PlanningEventCreateNestedManyWithoutFacilityInput
     apiKey?: FacilityApiKeyCreateNestedOneWithoutFacilityInput
     recouvrementSyncs?: Care2xRecouvrementSyncCreateNestedManyWithoutFacilityInput
+    rapportsJournaliers?: Care2xRapportJournalierCreateNestedManyWithoutFacilityInput
   }
 
   export type FacilityUncheckedCreateWithoutCare2xSyncsInput = {
@@ -56173,6 +58071,7 @@ export namespace Prisma {
     planningEvents?: PlanningEventUncheckedCreateNestedManyWithoutFacilityInput
     apiKey?: FacilityApiKeyUncheckedCreateNestedOneWithoutFacilityInput
     recouvrementSyncs?: Care2xRecouvrementSyncUncheckedCreateNestedManyWithoutFacilityInput
+    rapportsJournaliers?: Care2xRapportJournalierUncheckedCreateNestedManyWithoutFacilityInput
   }
 
   export type FacilityCreateOrConnectWithoutCare2xSyncsInput = {
@@ -56190,6 +58089,7 @@ export namespace Prisma {
     lastUsedAt?: Date | string | null
     facility: FacilityCreateNestedOneWithoutApiKeyInput
     recouvrementSyncs?: Care2xRecouvrementSyncCreateNestedManyWithoutApiKeyInput
+    rapportsJournaliers?: Care2xRapportJournalierCreateNestedManyWithoutApiKeyInput
   }
 
   export type FacilityApiKeyUncheckedCreateWithoutCare2xSyncsInput = {
@@ -56202,6 +58102,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     lastUsedAt?: Date | string | null
     recouvrementSyncs?: Care2xRecouvrementSyncUncheckedCreateNestedManyWithoutApiKeyInput
+    rapportsJournaliers?: Care2xRapportJournalierUncheckedCreateNestedManyWithoutApiKeyInput
   }
 
   export type FacilityApiKeyCreateOrConnectWithoutCare2xSyncsInput = {
@@ -56269,6 +58170,7 @@ export namespace Prisma {
     planningEvents?: PlanningEventUpdateManyWithoutFacilityNestedInput
     apiKey?: FacilityApiKeyUpdateOneWithoutFacilityNestedInput
     recouvrementSyncs?: Care2xRecouvrementSyncUpdateManyWithoutFacilityNestedInput
+    rapportsJournaliers?: Care2xRapportJournalierUpdateManyWithoutFacilityNestedInput
   }
 
   export type FacilityUncheckedUpdateWithoutCare2xSyncsInput = {
@@ -56294,6 +58196,7 @@ export namespace Prisma {
     planningEvents?: PlanningEventUncheckedUpdateManyWithoutFacilityNestedInput
     apiKey?: FacilityApiKeyUncheckedUpdateOneWithoutFacilityNestedInput
     recouvrementSyncs?: Care2xRecouvrementSyncUncheckedUpdateManyWithoutFacilityNestedInput
+    rapportsJournaliers?: Care2xRapportJournalierUncheckedUpdateManyWithoutFacilityNestedInput
   }
 
   export type FacilityApiKeyUpsertWithoutCare2xSyncsInput = {
@@ -56317,6 +58220,7 @@ export namespace Prisma {
     lastUsedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     facility?: FacilityUpdateOneRequiredWithoutApiKeyNestedInput
     recouvrementSyncs?: Care2xRecouvrementSyncUpdateManyWithoutApiKeyNestedInput
+    rapportsJournaliers?: Care2xRapportJournalierUpdateManyWithoutApiKeyNestedInput
   }
 
   export type FacilityApiKeyUncheckedUpdateWithoutCare2xSyncsInput = {
@@ -56329,6 +58233,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     lastUsedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     recouvrementSyncs?: Care2xRecouvrementSyncUncheckedUpdateManyWithoutApiKeyNestedInput
+    rapportsJournaliers?: Care2xRapportJournalierUncheckedUpdateManyWithoutApiKeyNestedInput
   }
 
   export type Care2xSyncEntryUpsertWithWhereUniqueWithoutSyncInput = {
@@ -56446,6 +58351,7 @@ export namespace Prisma {
     planningEvents?: PlanningEventCreateNestedManyWithoutFacilityInput
     apiKey?: FacilityApiKeyCreateNestedOneWithoutFacilityInput
     care2xSyncs?: Care2xSyncCreateNestedManyWithoutFacilityInput
+    rapportsJournaliers?: Care2xRapportJournalierCreateNestedManyWithoutFacilityInput
   }
 
   export type FacilityUncheckedCreateWithoutRecouvrementSyncsInput = {
@@ -56471,6 +58377,7 @@ export namespace Prisma {
     planningEvents?: PlanningEventUncheckedCreateNestedManyWithoutFacilityInput
     apiKey?: FacilityApiKeyUncheckedCreateNestedOneWithoutFacilityInput
     care2xSyncs?: Care2xSyncUncheckedCreateNestedManyWithoutFacilityInput
+    rapportsJournaliers?: Care2xRapportJournalierUncheckedCreateNestedManyWithoutFacilityInput
   }
 
   export type FacilityCreateOrConnectWithoutRecouvrementSyncsInput = {
@@ -56488,6 +58395,7 @@ export namespace Prisma {
     lastUsedAt?: Date | string | null
     facility: FacilityCreateNestedOneWithoutApiKeyInput
     care2xSyncs?: Care2xSyncCreateNestedManyWithoutApiKeyInput
+    rapportsJournaliers?: Care2xRapportJournalierCreateNestedManyWithoutApiKeyInput
   }
 
   export type FacilityApiKeyUncheckedCreateWithoutRecouvrementSyncsInput = {
@@ -56500,6 +58408,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     lastUsedAt?: Date | string | null
     care2xSyncs?: Care2xSyncUncheckedCreateNestedManyWithoutApiKeyInput
+    rapportsJournaliers?: Care2xRapportJournalierUncheckedCreateNestedManyWithoutApiKeyInput
   }
 
   export type FacilityApiKeyCreateOrConnectWithoutRecouvrementSyncsInput = {
@@ -56541,6 +58450,7 @@ export namespace Prisma {
     planningEvents?: PlanningEventUpdateManyWithoutFacilityNestedInput
     apiKey?: FacilityApiKeyUpdateOneWithoutFacilityNestedInput
     care2xSyncs?: Care2xSyncUpdateManyWithoutFacilityNestedInput
+    rapportsJournaliers?: Care2xRapportJournalierUpdateManyWithoutFacilityNestedInput
   }
 
   export type FacilityUncheckedUpdateWithoutRecouvrementSyncsInput = {
@@ -56566,6 +58476,7 @@ export namespace Prisma {
     planningEvents?: PlanningEventUncheckedUpdateManyWithoutFacilityNestedInput
     apiKey?: FacilityApiKeyUncheckedUpdateOneWithoutFacilityNestedInput
     care2xSyncs?: Care2xSyncUncheckedUpdateManyWithoutFacilityNestedInput
+    rapportsJournaliers?: Care2xRapportJournalierUncheckedUpdateManyWithoutFacilityNestedInput
   }
 
   export type FacilityApiKeyUpsertWithoutRecouvrementSyncsInput = {
@@ -56589,6 +58500,7 @@ export namespace Prisma {
     lastUsedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     facility?: FacilityUpdateOneRequiredWithoutApiKeyNestedInput
     care2xSyncs?: Care2xSyncUpdateManyWithoutApiKeyNestedInput
+    rapportsJournaliers?: Care2xRapportJournalierUpdateManyWithoutApiKeyNestedInput
   }
 
   export type FacilityApiKeyUncheckedUpdateWithoutRecouvrementSyncsInput = {
@@ -56601,6 +58513,195 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     lastUsedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     care2xSyncs?: Care2xSyncUncheckedUpdateManyWithoutApiKeyNestedInput
+    rapportsJournaliers?: Care2xRapportJournalierUncheckedUpdateManyWithoutApiKeyNestedInput
+  }
+
+  export type FacilityCreateWithoutRapportsJournaliersInput = {
+    id?: string
+    name: string
+    code: string
+    type: $Enums.FacilityType
+    address?: string | null
+    phone?: string | null
+    email?: string | null
+    latitude?: number | null
+    longitude?: number | null
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    region: RegionCreateNestedOneWithoutFacilitiesInput
+    users?: UserCreateNestedManyWithoutFacilityInput
+    declarations?: DeclarationCreateNestedManyWithoutFacilityInput
+    periodConfigs?: DeclarationPeriodConfigCreateNestedManyWithoutFacilityInput
+    statSheets?: StatSheetCreateNestedManyWithoutFacilityInput
+    budgets?: BudgetCreateNestedManyWithoutFacilityInput
+    statDeadlines?: StatDeadlineCreateNestedManyWithoutFacilityInput
+    planningEvents?: PlanningEventCreateNestedManyWithoutFacilityInput
+    apiKey?: FacilityApiKeyCreateNestedOneWithoutFacilityInput
+    care2xSyncs?: Care2xSyncCreateNestedManyWithoutFacilityInput
+    recouvrementSyncs?: Care2xRecouvrementSyncCreateNestedManyWithoutFacilityInput
+  }
+
+  export type FacilityUncheckedCreateWithoutRapportsJournaliersInput = {
+    id?: string
+    name: string
+    code: string
+    type: $Enums.FacilityType
+    regionId: string
+    address?: string | null
+    phone?: string | null
+    email?: string | null
+    latitude?: number | null
+    longitude?: number | null
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    users?: UserUncheckedCreateNestedManyWithoutFacilityInput
+    declarations?: DeclarationUncheckedCreateNestedManyWithoutFacilityInput
+    periodConfigs?: DeclarationPeriodConfigUncheckedCreateNestedManyWithoutFacilityInput
+    statSheets?: StatSheetUncheckedCreateNestedManyWithoutFacilityInput
+    budgets?: BudgetUncheckedCreateNestedManyWithoutFacilityInput
+    statDeadlines?: StatDeadlineUncheckedCreateNestedManyWithoutFacilityInput
+    planningEvents?: PlanningEventUncheckedCreateNestedManyWithoutFacilityInput
+    apiKey?: FacilityApiKeyUncheckedCreateNestedOneWithoutFacilityInput
+    care2xSyncs?: Care2xSyncUncheckedCreateNestedManyWithoutFacilityInput
+    recouvrementSyncs?: Care2xRecouvrementSyncUncheckedCreateNestedManyWithoutFacilityInput
+  }
+
+  export type FacilityCreateOrConnectWithoutRapportsJournaliersInput = {
+    where: FacilityWhereUniqueInput
+    create: XOR<FacilityCreateWithoutRapportsJournaliersInput, FacilityUncheckedCreateWithoutRapportsJournaliersInput>
+  }
+
+  export type FacilityApiKeyCreateWithoutRapportsJournaliersInput = {
+    id?: string
+    keyHash: string
+    keyPreview: string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    lastUsedAt?: Date | string | null
+    facility: FacilityCreateNestedOneWithoutApiKeyInput
+    care2xSyncs?: Care2xSyncCreateNestedManyWithoutApiKeyInput
+    recouvrementSyncs?: Care2xRecouvrementSyncCreateNestedManyWithoutApiKeyInput
+  }
+
+  export type FacilityApiKeyUncheckedCreateWithoutRapportsJournaliersInput = {
+    id?: string
+    facilityId: string
+    keyHash: string
+    keyPreview: string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    lastUsedAt?: Date | string | null
+    care2xSyncs?: Care2xSyncUncheckedCreateNestedManyWithoutApiKeyInput
+    recouvrementSyncs?: Care2xRecouvrementSyncUncheckedCreateNestedManyWithoutApiKeyInput
+  }
+
+  export type FacilityApiKeyCreateOrConnectWithoutRapportsJournaliersInput = {
+    where: FacilityApiKeyWhereUniqueInput
+    create: XOR<FacilityApiKeyCreateWithoutRapportsJournaliersInput, FacilityApiKeyUncheckedCreateWithoutRapportsJournaliersInput>
+  }
+
+  export type FacilityUpsertWithoutRapportsJournaliersInput = {
+    update: XOR<FacilityUpdateWithoutRapportsJournaliersInput, FacilityUncheckedUpdateWithoutRapportsJournaliersInput>
+    create: XOR<FacilityCreateWithoutRapportsJournaliersInput, FacilityUncheckedCreateWithoutRapportsJournaliersInput>
+    where?: FacilityWhereInput
+  }
+
+  export type FacilityUpdateToOneWithWhereWithoutRapportsJournaliersInput = {
+    where?: FacilityWhereInput
+    data: XOR<FacilityUpdateWithoutRapportsJournaliersInput, FacilityUncheckedUpdateWithoutRapportsJournaliersInput>
+  }
+
+  export type FacilityUpdateWithoutRapportsJournaliersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    type?: EnumFacilityTypeFieldUpdateOperationsInput | $Enums.FacilityType
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    latitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    longitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    region?: RegionUpdateOneRequiredWithoutFacilitiesNestedInput
+    users?: UserUpdateManyWithoutFacilityNestedInput
+    declarations?: DeclarationUpdateManyWithoutFacilityNestedInput
+    periodConfigs?: DeclarationPeriodConfigUpdateManyWithoutFacilityNestedInput
+    statSheets?: StatSheetUpdateManyWithoutFacilityNestedInput
+    budgets?: BudgetUpdateManyWithoutFacilityNestedInput
+    statDeadlines?: StatDeadlineUpdateManyWithoutFacilityNestedInput
+    planningEvents?: PlanningEventUpdateManyWithoutFacilityNestedInput
+    apiKey?: FacilityApiKeyUpdateOneWithoutFacilityNestedInput
+    care2xSyncs?: Care2xSyncUpdateManyWithoutFacilityNestedInput
+    recouvrementSyncs?: Care2xRecouvrementSyncUpdateManyWithoutFacilityNestedInput
+  }
+
+  export type FacilityUncheckedUpdateWithoutRapportsJournaliersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    type?: EnumFacilityTypeFieldUpdateOperationsInput | $Enums.FacilityType
+    regionId?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    latitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    longitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: UserUncheckedUpdateManyWithoutFacilityNestedInput
+    declarations?: DeclarationUncheckedUpdateManyWithoutFacilityNestedInput
+    periodConfigs?: DeclarationPeriodConfigUncheckedUpdateManyWithoutFacilityNestedInput
+    statSheets?: StatSheetUncheckedUpdateManyWithoutFacilityNestedInput
+    budgets?: BudgetUncheckedUpdateManyWithoutFacilityNestedInput
+    statDeadlines?: StatDeadlineUncheckedUpdateManyWithoutFacilityNestedInput
+    planningEvents?: PlanningEventUncheckedUpdateManyWithoutFacilityNestedInput
+    apiKey?: FacilityApiKeyUncheckedUpdateOneWithoutFacilityNestedInput
+    care2xSyncs?: Care2xSyncUncheckedUpdateManyWithoutFacilityNestedInput
+    recouvrementSyncs?: Care2xRecouvrementSyncUncheckedUpdateManyWithoutFacilityNestedInput
+  }
+
+  export type FacilityApiKeyUpsertWithoutRapportsJournaliersInput = {
+    update: XOR<FacilityApiKeyUpdateWithoutRapportsJournaliersInput, FacilityApiKeyUncheckedUpdateWithoutRapportsJournaliersInput>
+    create: XOR<FacilityApiKeyCreateWithoutRapportsJournaliersInput, FacilityApiKeyUncheckedCreateWithoutRapportsJournaliersInput>
+    where?: FacilityApiKeyWhereInput
+  }
+
+  export type FacilityApiKeyUpdateToOneWithWhereWithoutRapportsJournaliersInput = {
+    where?: FacilityApiKeyWhereInput
+    data: XOR<FacilityApiKeyUpdateWithoutRapportsJournaliersInput, FacilityApiKeyUncheckedUpdateWithoutRapportsJournaliersInput>
+  }
+
+  export type FacilityApiKeyUpdateWithoutRapportsJournaliersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    keyHash?: StringFieldUpdateOperationsInput | string
+    keyPreview?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastUsedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    facility?: FacilityUpdateOneRequiredWithoutApiKeyNestedInput
+    care2xSyncs?: Care2xSyncUpdateManyWithoutApiKeyNestedInput
+    recouvrementSyncs?: Care2xRecouvrementSyncUpdateManyWithoutApiKeyNestedInput
+  }
+
+  export type FacilityApiKeyUncheckedUpdateWithoutRapportsJournaliersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    facilityId?: StringFieldUpdateOperationsInput | string
+    keyHash?: StringFieldUpdateOperationsInput | string
+    keyPreview?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastUsedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    care2xSyncs?: Care2xSyncUncheckedUpdateManyWithoutApiKeyNestedInput
+    recouvrementSyncs?: Care2xRecouvrementSyncUncheckedUpdateManyWithoutApiKeyNestedInput
   }
 
   export type UserCreateWithoutPlanningEventsInput = {
@@ -56691,6 +58792,7 @@ export namespace Prisma {
     apiKey?: FacilityApiKeyCreateNestedOneWithoutFacilityInput
     care2xSyncs?: Care2xSyncCreateNestedManyWithoutFacilityInput
     recouvrementSyncs?: Care2xRecouvrementSyncCreateNestedManyWithoutFacilityInput
+    rapportsJournaliers?: Care2xRapportJournalierCreateNestedManyWithoutFacilityInput
   }
 
   export type FacilityUncheckedCreateWithoutPlanningEventsInput = {
@@ -56716,6 +58818,7 @@ export namespace Prisma {
     apiKey?: FacilityApiKeyUncheckedCreateNestedOneWithoutFacilityInput
     care2xSyncs?: Care2xSyncUncheckedCreateNestedManyWithoutFacilityInput
     recouvrementSyncs?: Care2xRecouvrementSyncUncheckedCreateNestedManyWithoutFacilityInput
+    rapportsJournaliers?: Care2xRapportJournalierUncheckedCreateNestedManyWithoutFacilityInput
   }
 
   export type FacilityCreateOrConnectWithoutPlanningEventsInput = {
@@ -56859,6 +58962,7 @@ export namespace Prisma {
     apiKey?: FacilityApiKeyUpdateOneWithoutFacilityNestedInput
     care2xSyncs?: Care2xSyncUpdateManyWithoutFacilityNestedInput
     recouvrementSyncs?: Care2xRecouvrementSyncUpdateManyWithoutFacilityNestedInput
+    rapportsJournaliers?: Care2xRapportJournalierUpdateManyWithoutFacilityNestedInput
   }
 
   export type FacilityUncheckedUpdateWithoutPlanningEventsInput = {
@@ -56884,6 +58988,7 @@ export namespace Prisma {
     apiKey?: FacilityApiKeyUncheckedUpdateOneWithoutFacilityNestedInput
     care2xSyncs?: Care2xSyncUncheckedUpdateManyWithoutFacilityNestedInput
     recouvrementSyncs?: Care2xRecouvrementSyncUncheckedUpdateManyWithoutFacilityNestedInput
+    rapportsJournaliers?: Care2xRapportJournalierUncheckedUpdateManyWithoutFacilityNestedInput
   }
 
   export type RegionUpsertWithoutPlanningEventsInput = {
@@ -57160,6 +59265,7 @@ export namespace Prisma {
     apiKey?: FacilityApiKeyUpdateOneWithoutFacilityNestedInput
     care2xSyncs?: Care2xSyncUpdateManyWithoutFacilityNestedInput
     recouvrementSyncs?: Care2xRecouvrementSyncUpdateManyWithoutFacilityNestedInput
+    rapportsJournaliers?: Care2xRapportJournalierUpdateManyWithoutFacilityNestedInput
   }
 
   export type FacilityUncheckedUpdateWithoutRegionInput = {
@@ -57185,6 +59291,7 @@ export namespace Prisma {
     apiKey?: FacilityApiKeyUncheckedUpdateOneWithoutFacilityNestedInput
     care2xSyncs?: Care2xSyncUncheckedUpdateManyWithoutFacilityNestedInput
     recouvrementSyncs?: Care2xRecouvrementSyncUncheckedUpdateManyWithoutFacilityNestedInput
+    rapportsJournaliers?: Care2xRapportJournalierUncheckedUpdateManyWithoutFacilityNestedInput
   }
 
   export type FacilityUncheckedUpdateManyWithoutRegionInput = {
@@ -57525,6 +59632,22 @@ export namespace Prisma {
     totalRecouvre: Decimal | DecimalJsLike | number | string
     rapport: JsonNullValueInput | InputJsonValue
     receivedAt?: Date | string
+  }
+
+  export type Care2xRapportJournalierCreateManyFacilityInput = {
+    id?: string
+    date: Date | string
+    parGroupe: JsonNullValueInput | InputJsonValue
+    parPaiement: JsonNullValueInput | InputJsonValue
+    parAvance: JsonNullValueInput | InputJsonValue
+    rembParMode: JsonNullValueInput | InputJsonValue
+    totRow: JsonNullValueInput | InputJsonValue
+    openRow: JsonNullValueInput | InputJsonValue
+    credits: JsonNullValueInput | InputJsonValue
+    rembRow: JsonNullValueInput | InputJsonValue
+    caissiers: JsonNullValueInput | InputJsonValue
+    receivedAt?: Date | string
+    apiKeyId: string
   }
 
   export type UserUpdateWithoutFacilityInput = {
@@ -57937,6 +60060,54 @@ export namespace Prisma {
     totalRecouvre?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     rapport?: JsonNullValueInput | InputJsonValue
     receivedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type Care2xRapportJournalierUpdateWithoutFacilityInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    parGroupe?: JsonNullValueInput | InputJsonValue
+    parPaiement?: JsonNullValueInput | InputJsonValue
+    parAvance?: JsonNullValueInput | InputJsonValue
+    rembParMode?: JsonNullValueInput | InputJsonValue
+    totRow?: JsonNullValueInput | InputJsonValue
+    openRow?: JsonNullValueInput | InputJsonValue
+    credits?: JsonNullValueInput | InputJsonValue
+    rembRow?: JsonNullValueInput | InputJsonValue
+    caissiers?: JsonNullValueInput | InputJsonValue
+    receivedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    apiKey?: FacilityApiKeyUpdateOneRequiredWithoutRapportsJournaliersNestedInput
+  }
+
+  export type Care2xRapportJournalierUncheckedUpdateWithoutFacilityInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    parGroupe?: JsonNullValueInput | InputJsonValue
+    parPaiement?: JsonNullValueInput | InputJsonValue
+    parAvance?: JsonNullValueInput | InputJsonValue
+    rembParMode?: JsonNullValueInput | InputJsonValue
+    totRow?: JsonNullValueInput | InputJsonValue
+    openRow?: JsonNullValueInput | InputJsonValue
+    credits?: JsonNullValueInput | InputJsonValue
+    rembRow?: JsonNullValueInput | InputJsonValue
+    caissiers?: JsonNullValueInput | InputJsonValue
+    receivedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    apiKeyId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type Care2xRapportJournalierUncheckedUpdateManyWithoutFacilityInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    parGroupe?: JsonNullValueInput | InputJsonValue
+    parPaiement?: JsonNullValueInput | InputJsonValue
+    parAvance?: JsonNullValueInput | InputJsonValue
+    rembParMode?: JsonNullValueInput | InputJsonValue
+    totRow?: JsonNullValueInput | InputJsonValue
+    openRow?: JsonNullValueInput | InputJsonValue
+    credits?: JsonNullValueInput | InputJsonValue
+    rembRow?: JsonNullValueInput | InputJsonValue
+    caissiers?: JsonNullValueInput | InputJsonValue
+    receivedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    apiKeyId?: StringFieldUpdateOperationsInput | string
   }
 
   export type DeclarationCreateManySubmittedByInput = {
@@ -58908,6 +61079,22 @@ export namespace Prisma {
     receivedAt?: Date | string
   }
 
+  export type Care2xRapportJournalierCreateManyApiKeyInput = {
+    id?: string
+    facilityId: string
+    date: Date | string
+    parGroupe: JsonNullValueInput | InputJsonValue
+    parPaiement: JsonNullValueInput | InputJsonValue
+    parAvance: JsonNullValueInput | InputJsonValue
+    rembParMode: JsonNullValueInput | InputJsonValue
+    totRow: JsonNullValueInput | InputJsonValue
+    openRow: JsonNullValueInput | InputJsonValue
+    credits: JsonNullValueInput | InputJsonValue
+    rembRow: JsonNullValueInput | InputJsonValue
+    caissiers: JsonNullValueInput | InputJsonValue
+    receivedAt?: Date | string
+  }
+
   export type Care2xSyncUpdateWithoutApiKeyInput = {
     id?: StringFieldUpdateOperationsInput | string
     batchRef?: StringFieldUpdateOperationsInput | string
@@ -58970,6 +61157,54 @@ export namespace Prisma {
     totalFacture?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     totalRecouvre?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     rapport?: JsonNullValueInput | InputJsonValue
+    receivedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type Care2xRapportJournalierUpdateWithoutApiKeyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    parGroupe?: JsonNullValueInput | InputJsonValue
+    parPaiement?: JsonNullValueInput | InputJsonValue
+    parAvance?: JsonNullValueInput | InputJsonValue
+    rembParMode?: JsonNullValueInput | InputJsonValue
+    totRow?: JsonNullValueInput | InputJsonValue
+    openRow?: JsonNullValueInput | InputJsonValue
+    credits?: JsonNullValueInput | InputJsonValue
+    rembRow?: JsonNullValueInput | InputJsonValue
+    caissiers?: JsonNullValueInput | InputJsonValue
+    receivedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    facility?: FacilityUpdateOneRequiredWithoutRapportsJournaliersNestedInput
+  }
+
+  export type Care2xRapportJournalierUncheckedUpdateWithoutApiKeyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    facilityId?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    parGroupe?: JsonNullValueInput | InputJsonValue
+    parPaiement?: JsonNullValueInput | InputJsonValue
+    parAvance?: JsonNullValueInput | InputJsonValue
+    rembParMode?: JsonNullValueInput | InputJsonValue
+    totRow?: JsonNullValueInput | InputJsonValue
+    openRow?: JsonNullValueInput | InputJsonValue
+    credits?: JsonNullValueInput | InputJsonValue
+    rembRow?: JsonNullValueInput | InputJsonValue
+    caissiers?: JsonNullValueInput | InputJsonValue
+    receivedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type Care2xRapportJournalierUncheckedUpdateManyWithoutApiKeyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    facilityId?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    parGroupe?: JsonNullValueInput | InputJsonValue
+    parPaiement?: JsonNullValueInput | InputJsonValue
+    parAvance?: JsonNullValueInput | InputJsonValue
+    rembParMode?: JsonNullValueInput | InputJsonValue
+    totRow?: JsonNullValueInput | InputJsonValue
+    openRow?: JsonNullValueInput | InputJsonValue
+    credits?: JsonNullValueInput | InputJsonValue
+    rembRow?: JsonNullValueInput | InputJsonValue
+    caissiers?: JsonNullValueInput | InputJsonValue
     receivedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 

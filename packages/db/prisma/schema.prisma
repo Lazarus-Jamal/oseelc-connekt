@@ -154,6 +154,7 @@ model Facility {
   apiKey              FacilityApiKey?
   care2xSyncs         Care2xSync[]
   recouvrementSyncs   Care2xRecouvrementSync[]
+  rapportsJournaliers Care2xRapportJournalier[]
 
   @@map("facilities")
 }
@@ -574,6 +575,7 @@ model FacilityApiKey {
   facility             Facility                  @relation(fields: [facilityId], references: [id], onDelete: Cascade)
   care2xSyncs          Care2xSync[]
   recouvrementSyncs    Care2xRecouvrementSync[]
+  rapportsJournaliers  Care2xRapportJournalier[]
 
   @@map("facility_api_keys")
 }
@@ -627,6 +629,30 @@ model Care2xRecouvrementSync {
 
   @@index([facilityId])
   @@map("care2x_recouvrement_syncs")
+}
+
+model Care2xRapportJournalier {
+  id          String   @id @default(cuid())
+  facilityId  String
+  date        DateTime  // Date du rapport (00:00:00 UTC du jour concerné)
+  parGroupe   Json      // [{ groupe, total, quantite }]
+  parPaiement Json      // [{ mode, total }] — ventes payées
+  parAvance   Json      // [{ mode, total }] — avances sur factures ouvertes
+  rembParMode Json      // [{ mode, total }] — remboursements par mode
+  totRow      Json      // { nb, total_facture, total_encaisse, total_remise, total_assurance }
+  openRow     Json      // { nb, total_avance, total_restant, total_facture }
+  credits     Json      // [{ assurance, total }]
+  rembRow     Json      // { total_rembourse, nb_remboursements }
+  caissiers   Json      // string[]
+  receivedAt  DateTime  @default(now())
+  apiKeyId    String
+
+  facility Facility       @relation(fields: [facilityId], references: [id])
+  apiKey   FacilityApiKey @relation(fields: [apiKeyId], references: [id])
+
+  @@unique([facilityId, date])
+  @@index([facilityId])
+  @@map("care2x_rapports_journaliers")
 }
 
 model Care2xVersion {

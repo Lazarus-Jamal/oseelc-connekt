@@ -14,6 +14,7 @@ import {
 } from 'lucide-react'
 import { PageHeader } from '@/components/ui/page-header'
 import { usePermissions } from '@/contexts/permissions-context'
+import ResetDbModal from './reset-db-modal'
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -188,6 +189,8 @@ export function Care2xKeysPage() {
   const RAPPORT_PER = 10
   const KEYS_PER    = 10
   const SYNCS_PER   = 15
+
+  const [showResetModal, setShowResetModal] = useState(false)
 
   // Upload
   const [uploadVersion, setUploadVersion] = useState('')
@@ -527,6 +530,12 @@ ${(r.rembParMode as any[]).map(p => `<div class="row ind red"><span>${ML[p.mode]
             </button>
           ))}
         </div>
+        <button
+          onClick={() => setShowResetModal(true)}
+          className="mb-1 flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-red-600 border border-red-200 rounded-lg hover:bg-red-50 hover:border-red-400 transition-colors"
+        >
+          <Trash2 size={12} /> Réinitialiser la BD
+        </button>
       </div>
 
       {loading ? (
@@ -1169,6 +1178,9 @@ ${(r.rembParMode as any[]).map(p => `<div class="row ind red"><span>${ML[p.mode]
         </div>
       )}
 
+      {showResetModal && (
+        <ResetDbModal onClose={() => setShowResetModal(false)} />
+      )}
     </div>
   )
 }

@@ -446,6 +446,23 @@ exports.Prisma.Care2xRecouvrementSyncScalarFieldEnum = {
   receivedAt: 'receivedAt'
 };
 
+exports.Prisma.Care2xRapportJournalierScalarFieldEnum = {
+  id: 'id',
+  facilityId: 'facilityId',
+  date: 'date',
+  parGroupe: 'parGroupe',
+  parPaiement: 'parPaiement',
+  parAvance: 'parAvance',
+  rembParMode: 'rembParMode',
+  totRow: 'totRow',
+  openRow: 'openRow',
+  credits: 'credits',
+  rembRow: 'rembRow',
+  caissiers: 'caissiers',
+  receivedAt: 'receivedAt',
+  apiKeyId: 'apiKeyId'
+};
+
 exports.Prisma.Care2xVersionScalarFieldEnum = {
   id: 'id',
   version: 'version',
@@ -629,6 +646,7 @@ exports.Prisma.ModelName = {
   Care2xSync: 'Care2xSync',
   Care2xSyncEntry: 'Care2xSyncEntry',
   Care2xRecouvrementSync: 'Care2xRecouvrementSync',
+  Care2xRapportJournalier: 'Care2xRapportJournalier',
   Care2xVersion: 'Care2xVersion',
   PagePermission: 'PagePermission',
   PlanningEvent: 'PlanningEvent'
