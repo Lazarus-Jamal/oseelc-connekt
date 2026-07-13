@@ -11,7 +11,7 @@ import {
   LayoutDashboard, FileText, TrendingDown, BarChart3, FileBarChart,
   FileCheck, Tag, Users, Building2, Settings, Bell, X, ChevronRight,
   MapPin, MessageSquare, FlaskConical, CalendarClock, Shield, FileUp,
-  Trophy, Globe, Wifi, ShieldCheck,
+  Trophy, Globe, Wifi, ShieldCheck, Info,
 } from 'lucide-react'
 import { usePermissions } from '@/contexts/permissions-context'
 
@@ -154,6 +154,20 @@ export function Sidebar({ session, isOpen, onClose }: SidebarProps) {
           </>
         )}
       </nav>
+
+      <div className="px-3 pb-2">
+        <Link
+          href="/about"
+          onClick={onClose}
+          className={cn(
+            'flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-colors',
+            pathname === '/about' ? 'bg-brand-500/20 text-brand-200' : 'text-slate-500 hover:bg-white/5 hover:text-slate-100'
+          )}
+        >
+          <Info className={cn('w-4 h-4 flex-shrink-0', pathname === '/about' ? 'text-brand-400' : 'text-slate-600')} />
+          <span>À propos</span>
+        </Link>
+      </div>
 
       <div className="px-3 py-3 border-t border-white/5">
         <Link href="/profile" onClick={onClose} className="flex items-center gap-3 p-2 rounded-xl bg-white/5 hover:bg-white/10 transition-colors">
