@@ -28,6 +28,7 @@ const DIRECTION = [
 const CONSULTANTS = [
   { name: 'SANDA Benjamin',    initials: 'SB' },
   { name: 'Dr SALPOU Daniel',  initials: 'SD' },
+  { name: 'SANDA Guilbert',    initials: 'SG' },
 ]
 
 export default function AboutPage() {
