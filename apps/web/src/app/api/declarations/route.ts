@@ -95,7 +95,7 @@ export async function POST(req: NextRequest) {
 
   const { role, id: userId, facilityId: userFacilityId } = session.user
 
-  if (!['FINANCIER', 'FACILITY_CHIEF', 'SUPER_ADMIN'].includes(role)) {
+  if (!['FINANCIER', 'FACILITY_CHIEF', 'REGIONAL_DIRECTOR', 'SUPER_ADMIN'].includes(role)) {
     return NextResponse.json({ success: false, error: 'Action non autorisée' }, { status: 403 })
   }
 
@@ -113,9 +113,18 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ success: false, error: 'Les dates de la période ne peuvent pas être dans le futur' }, { status: 400 })
   }
 
-  // Financier et chef de centre ne peuvent déclarer que pour leur propre centre
+  // Financier et chef de centre : seulement leur propre centre
   if (['FINANCIER', 'FACILITY_CHIEF'].includes(role) && facilityId !== userFacilityId) {
     return NextResponse.json({ success: false, error: 'Non autorisé pour ce centre' }, { status: 403 })
+  }
+
+  // Directeur régional : seulement les centres de sa région
+  if (role === 'REGIONAL_DIRECTOR') {
+    const { regionId: userRegionId } = session.user
+    const fac = await prisma.facility.findUnique({ where: { id: facilityId }, select: { regionId: true } })
+    if (!fac || fac.regionId !== userRegionId) {
+      return NextResponse.json({ success: false, error: 'Non autorisé pour ce centre' }, { status: 403 })
+    }
   }
 
   const prefix = declarationType === 'EXPENSE' ? 'DEP' : 'DEC'
