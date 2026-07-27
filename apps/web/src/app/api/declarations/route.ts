@@ -95,7 +95,7 @@ export async function POST(req: NextRequest) {
 
   const { role, id: userId, facilityId: userFacilityId } = session.user
 
-  if (!['FINANCIER', 'SUPER_ADMIN'].includes(role)) {
+  if (!['FINANCIER', 'FACILITY_CHIEF', 'SUPER_ADMIN'].includes(role)) {
     return NextResponse.json({ success: false, error: 'Action non autorisée' }, { status: 403 })
   }
 
@@ -112,8 +112,8 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ success: false, error: 'Les dates de la période ne peuvent pas être dans le futur' }, { status: 400 })
   }
 
-  // Un financier ne peut déclarer que pour son centre
-  if (role === 'FINANCIER' && facilityId !== userFacilityId) {
+  // Financier et chef de centre ne peuvent déclarer que pour leur propre centre
+  if (['FINANCIER', 'FACILITY_CHIEF'].includes(role) && facilityId !== userFacilityId) {
     return NextResponse.json({ success: false, error: 'Non autorisé pour ce centre' }, { status: 403 })
   }
 

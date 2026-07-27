@@ -30,7 +30,7 @@ export function StatisticsListPage() {
   const [statusFilter, setStatusFilter] = useState('')
 
   const role = session?.user?.role
-  const canCreate = ['DATA_MANAGER', 'SUPER_ADMIN'].includes(role || '')
+  const canCreate = ['DATA_MANAGER', 'FACILITY_CHIEF', 'SUPER_ADMIN'].includes(role || '')
 
   useEffect(() => {
     const params = new URLSearchParams()

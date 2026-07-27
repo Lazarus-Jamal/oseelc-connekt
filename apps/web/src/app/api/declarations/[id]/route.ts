@@ -119,7 +119,7 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
   let updateData: Record<string, unknown> = {}
 
   if (action === 'submit') {
-    if (!['FINANCIER', 'SUPER_ADMIN'].includes(role)) {
+    if (!['FINANCIER', 'FACILITY_CHIEF', 'SUPER_ADMIN'].includes(role)) {
       return NextResponse.json({ success: false, error: 'Non autorisé' }, { status: 403 })
     }
     if (declaration.status !== 'DRAFT') {

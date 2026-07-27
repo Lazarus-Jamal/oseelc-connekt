@@ -167,7 +167,7 @@ export function DeclarationsListPage({ userRole = '', userRegionId }: { userRole
     },
   ]
 
-  const canCreate = ['FINANCIER', 'SUPER_ADMIN'].includes(role)
+  const canCreate = ['FINANCIER', 'FACILITY_CHIEF', 'SUPER_ADMIN'].includes(role)
 
   return (
     <div className="space-y-4">
