@@ -107,8 +107,9 @@ export async function POST(req: NextRequest) {
 
   const { facilityId, declarationType, periodType, periodStart, periodEnd, notes, items } = parsed.data
 
-  const now = new Date()
-  if (new Date(periodStart) > now || new Date(periodEnd) > now) {
+  const endOfToday = new Date()
+  endOfToday.setHours(23, 59, 59, 999)
+  if (new Date(periodStart) > endOfToday || new Date(periodEnd) > endOfToday) {
     return NextResponse.json({ success: false, error: 'Les dates de la période ne peuvent pas être dans le futur' }, { status: 400 })
   }
 
