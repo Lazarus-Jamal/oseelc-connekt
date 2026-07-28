@@ -78,7 +78,7 @@ export async function POST(req: NextRequest) {
 
   const { role, id: userId, regionId: userRegionId, facilityId: userFacilityId } = session.user
 
-  if (!['DATA_MANAGER', 'DATA_ADMIN', 'SUPER_ADMIN', 'FACILITY_CHIEF'].includes(role)) {
+  if (!['DATA_MANAGER', 'DATA_ADMIN', 'SUPER_ADMIN', 'FACILITY_CHIEF', 'REGIONAL_DIRECTOR'].includes(role)) {
     return NextResponse.json({ success: false, error: 'Action non autorisée' }, { status: 403 })
   }
 
@@ -108,6 +108,14 @@ export async function POST(req: NextRequest) {
       }
     }
     // national DM (neither set): allowed everywhere
+  }
+
+  // Directeur régional : tous les centres de sa région
+  if (role === 'REGIONAL_DIRECTOR') {
+    const fac = await prisma.facility.findUnique({ where: { id: facilityId }, select: { regionId: true } })
+    if (!fac || fac.regionId !== userRegionId) {
+      return NextResponse.json({ success: false, error: 'Non autorisé pour ce centre' }, { status: 403 })
+    }
   }
 
   const existing = await prisma.statSheet.findUnique({ where: { facilityId_month_year: { facilityId, month, year } } })
