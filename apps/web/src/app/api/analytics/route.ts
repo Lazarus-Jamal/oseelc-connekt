@@ -79,7 +79,7 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
       for (const sheet of allSheets) {
         for (const val of sheet.values) {
           if (val.value !== null && val.indicator.category === 'Maladies notifiables') {
-            const disease = val.indicator.code.replace(/^MAL_/, '').replace(/_ENF$|_ADO$|_ADU$|_AGE$/, '')
+            const disease = val.indicator.code.replace(/^MAL_/, '').replace(/_(M5|5_14|15_24|25_49|50P)_(M|F)$/, '')
             diseaseTotals[disease] = (diseaseTotals[disease] || 0) + val.value
           }
         }
@@ -218,11 +218,13 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
 
       // Build time series per indicator for trend charts
       const timeSeries: Record<string, Array<{ year: number; month: number; value: number }>> = {}
+      const indicatorLabels: Record<string, string> = {}
       for (const sheet of sheets) {
         for (const val of sheet.values) {
           if (val.value !== null) {
             if (!timeSeries[val.indicator.code]) timeSeries[val.indicator.code] = []
             timeSeries[val.indicator.code].push({ year: sheet.year, month: sheet.month, value: val.value })
+            if (!indicatorLabels[val.indicator.code]) indicatorLabels[val.indicator.code] = val.indicator.label
           }
         }
       }
@@ -234,7 +236,7 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
 
       return NextResponse.json({
         success: true,
-        data: { facility: { id: facility.id, name: facility.name, region: facility.region }, sheets: sheets.map((s) => ({ id: s.id, year: s.year, month: s.month, completeness: s.completeness, status: s.status })), currentSheet, timeSeries },
+        data: { facility: { id: facility.id, name: facility.name, region: facility.region }, sheets: sheets.map((s) => ({ id: s.id, year: s.year, month: s.month, completeness: s.completeness, status: s.status })), currentSheet, timeSeries, indicatorLabels },
       })
     }
 
@@ -275,11 +277,11 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
           if (val.value === null) continue
           const code = val.indicator.code
           if (val.indicator.category === 'Maladies notifiables') {
-            const disease = code.replace(/^MAL_/, '').replace(/_ENF$|_ADO$|_ADU$|_AGE$/, '')
+            const disease = code.replace(/^MAL_/, '').replace(/_(M5|5_14|15_24|25_49|50P)_(M|F)$/, '')
             diseaseTotals[disease] = (diseaseTotals[disease] || 0) + val.value
           }
           if (code.startsWith('CONS_')) totalConsultations += val.value
-          if (code.startsWith('HOSP_DECES_')) totalDeaths += val.value
+          if (code.startsWith('MORB_DECES_H')) totalDeaths += val.value
           if (code === 'PGM_ACCOU') totalBirths += val.value
           if (code === 'PGM_CESAR') totalCesareans += val.value
           if (code === 'PGM_PEV') totalPEV += val.value
@@ -378,8 +380,8 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
         include: { indicator: { select: { code: true, category: true } } },
       })
 
-      const AGE_GROUPS = ['ENF', 'ADO', 'ADU', 'AGE']
-      const AGE_LABELS: Record<string, string> = { ENF: 'Enfants (0-14)', ADO: 'Adolescents (15-19)', ADU: 'Adultes (20-59)', AGE: 'Âgés (60+)' }
+      const AGE_GROUPS = ['M5', '5_14', '15_24', '25_49', '50P']
+      const AGE_LABELS: Record<string, string> = { M5: '< 5 ans', '5_14': '5-14 ans', '15_24': '15-24 ans', '25_49': '25-49 ans', '50P': '50+ ans' }
       const sum = (cat: string, grp: string, sex: string) =>
         Math.round(values.filter((v) => v.indicator.category === cat && v.indicator.code.includes(`_${grp}_`) && v.indicator.code.endsWith(`_${sex}`)).reduce((s, v) => s + (v.value ?? 0), 0))
 

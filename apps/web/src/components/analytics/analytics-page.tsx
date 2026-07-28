@@ -494,6 +494,7 @@ function FacilitiesTab({ year, month, forcedRegionId, forcedFacilityId }: {
   }, [selectedFacility, year, month])
 
   const indicatorOptions = data ? Object.keys(data.timeSeries) : []
+  const indicatorLabels: Record<string, string> = data?.indicatorLabels ?? {}
   const trendData = (selectedIndicator && data?.timeSeries?.[selectedIndicator])
     ? (data.timeSeries[selectedIndicator] as any[]).map((p: any) => ({
         label: `${MONTHS_FR[p.month - 1]?.slice(0, 3)} ${p.year}`,
@@ -543,7 +544,7 @@ function FacilitiesTab({ year, month, forcedRegionId, forcedFacilityId }: {
               <select value={selectedIndicator} onChange={(e) => setSelectedIndicator(e.target.value)}
                 className="px-3 py-1.5 text-xs border border-gray-200 dark:border-gray-700 rounded-xl bg-white dark:bg-gray-800 focus:outline-none max-w-xs">
                 <option value="">-- Sélectionner un indicateur --</option>
-                {indicatorOptions.map((code) => <option key={code} value={code}>{code}</option>)}
+                {indicatorOptions.map((code) => <option key={code} value={code}>{indicatorLabels[code] || code}</option>)}
               </select>
             </div>
             {trendData.length > 0 ? (
@@ -553,7 +554,7 @@ function FacilitiesTab({ year, month, forcedRegionId, forcedFacilityId }: {
                   <XAxis dataKey="label" tick={{ fontSize: 11 }} />
                   <YAxis tick={{ fontSize: 11 }} />
                   <Tooltip />
-                  <Line type="monotone" dataKey="value" stroke="#0ea5e9" strokeWidth={2} dot={{ r: 4 }} name={selectedIndicator} />
+                  <Line type="monotone" dataKey="value" stroke="#0ea5e9" strokeWidth={2} dot={{ r: 4 }} name={indicatorLabels[selectedIndicator] || selectedIndicator} />
                 </LineChart>
               </ResponsiveContainer>
             ) : (
