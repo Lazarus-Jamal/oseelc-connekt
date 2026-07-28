@@ -88,7 +88,9 @@ export function DeclarationDetailPage({ id }: DeclarationDetailPageProps) {
   }
 
   const role = session?.user?.role || ''
-  const canSubmit = ['FINANCIER', 'FACILITY_CHIEF', 'REGIONAL_DIRECTOR', 'DATA_MANAGER', 'SUPER_ADMIN'].includes(role) && declaration.status === 'DRAFT'
+  const isCreator = session?.user?.id === declaration.submittedBy?.id
+  // Le créateur peut toujours soumettre son brouillon, quel que soit son rôle actuel
+  const canSubmit = (isCreator || ['FINANCIER', 'FACILITY_CHIEF', 'REGIONAL_DIRECTOR', 'DATA_MANAGER', 'SUPER_ADMIN'].includes(role)) && declaration.status === 'DRAFT'
   const canReview = ['FACILITY_CHIEF', 'REGIONAL_DIRECTOR', 'SUPER_ADMIN'].includes(role) && declaration.status === 'SUBMITTED'
   const canValidate = ['REGIONAL_DIRECTOR', 'DIRECTION', 'SUPER_ADMIN'].includes(role) && ['SUBMITTED', 'REVIEWED'].includes(declaration.status)
   const canReject = ['FACILITY_CHIEF', 'REGIONAL_DIRECTOR', 'DIRECTION', 'SUPER_ADMIN'].includes(role) && !['VALIDATED', 'REJECTED'].includes(declaration.status)

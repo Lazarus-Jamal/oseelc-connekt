@@ -56,10 +56,13 @@ export async function GET(req: NextRequest) {
   // DIRECTION, SUPER_ADMIN, CONTROLEUR, DATA_ADMIN voient tout
 
   // Les brouillons sont privés : seul le soumettant voit les siens
-  where.OR = [
-    { status: { not: 'DRAFT' as DeclarationStatus } },
-    { submittedById: userId },
-  ]
+  // Sauf les rôles d'administration qui voient tout
+  if (!['SUPER_ADMIN', 'DATA_ADMIN', 'DIRECTION'].includes(role)) {
+    where.OR = [
+      { status: { not: 'DRAFT' as DeclarationStatus } },
+      { submittedById: userId },
+    ]
+  }
 
   if (declarationType) where.declarationType = declarationType
   if (facilityId) where.facilityId = facilityId
