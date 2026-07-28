@@ -110,7 +110,7 @@ export function ExpenseListPage({ userRole = '', userRegionId }: { userRole?: st
 
   const years = Array.from({ length: 6 }, (_, i) => String(new Date().getFullYear() - i))
 
-  const canCreate = ['FINANCIER', 'SUPER_ADMIN'].includes(role)
+  const canCreate = ['FINANCIER', 'FACILITY_CHIEF', 'REGIONAL_DIRECTOR', 'DATA_MANAGER', 'SUPER_ADMIN'].includes(role)
 
   return (
     <div className="space-y-4">

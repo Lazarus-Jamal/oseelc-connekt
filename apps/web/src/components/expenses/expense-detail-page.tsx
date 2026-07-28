@@ -88,11 +88,12 @@ export function ExpenseDetailPage({ id }: ExpenseDetailPageProps) {
   }
 
   const role = session?.user?.role || ''
-  const canSubmit = ['FINANCIER', 'SUPER_ADMIN'].includes(role) && declaration.status === 'DRAFT'
+  const isCreator = session?.user?.id === declaration.submittedBy?.id
+  const canSubmit = (isCreator || ['FINANCIER', 'FACILITY_CHIEF', 'REGIONAL_DIRECTOR', 'DATA_MANAGER', 'SUPER_ADMIN'].includes(role)) && declaration.status === 'DRAFT'
   const canReview = ['FACILITY_CHIEF', 'REGIONAL_DIRECTOR', 'SUPER_ADMIN'].includes(role) && declaration.status === 'SUBMITTED'
   const canValidate = ['REGIONAL_DIRECTOR', 'DIRECTION', 'SUPER_ADMIN'].includes(role) && ['SUBMITTED', 'REVIEWED'].includes(declaration.status)
   const canReject = ['FACILITY_CHIEF', 'REGIONAL_DIRECTOR', 'DIRECTION', 'SUPER_ADMIN'].includes(role) && !['VALIDATED', 'REJECTED'].includes(declaration.status)
-  const canUpload = role === 'FINANCIER' && ['DRAFT', 'REJECTED'].includes(declaration.status)
+  const canUpload = ['FINANCIER', 'FACILITY_CHIEF', 'REGIONAL_DIRECTOR', 'DATA_MANAGER'].includes(role) && ['DRAFT', 'REJECTED'].includes(declaration.status)
 
   return (
     <div className="max-w-5xl space-y-6">

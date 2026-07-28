@@ -51,14 +51,17 @@ export function ExpenseFormPage() {
 
   useEffect(() => {
     if (!session?.user?.facilityId) {
-      fetch('/api/facilities?limit=100')
+      const userRegionId = (session?.user as any)?.regionId as string | undefined
+      const params = new URLSearchParams({ limit: '100' })
+      if (userRegionId) params.set('regionId', userRegionId)
+      fetch(`/api/facilities?${params}`)
         .then((r) => r.json())
         .then((d) => { if (d.success) setFacilities(d.data) })
     }
     fetch('/api/categories?type=EXPENSE')
       .then((r) => r.json())
       .then((d) => { if (d.success) setCategories(d.data.map((c: { name: string }) => c.name)) })
-  }, [session?.user?.facilityId])
+  }, [session?.user?.facilityId, (session?.user as any)?.regionId])
 
   const addCategory = async () => {
     const name = newCatName.trim()
