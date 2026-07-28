@@ -48,8 +48,12 @@ export async function GET(req: NextRequest) {
     where.facilityId = userFacilityId || undefined
   } else if (role === 'REGIONAL_DIRECTOR' || role === 'CONTROLEUR_REGIONAL') {
     where.facility = { regionId: userRegionId || undefined }
+  } else if (role === 'DATA_MANAGER') {
+    if (userFacilityId) where.facilityId = userFacilityId          // DM de centre
+    else if (userRegionId) where.facility = { regionId: userRegionId } // DM régional
+    // DM national (ni facilityId ni regionId) : voit tout
   }
-  // DIRECTION, SUPER_ADMIN, CONTROLEUR voient tout
+  // DIRECTION, SUPER_ADMIN, CONTROLEUR, DATA_ADMIN voient tout
 
   // Les brouillons sont privés : seul le soumettant voit les siens
   where.OR = [
@@ -95,7 +99,7 @@ export async function POST(req: NextRequest) {
 
   const { role, id: userId, facilityId: userFacilityId } = session.user
 
-  if (!['FINANCIER', 'FACILITY_CHIEF', 'REGIONAL_DIRECTOR', 'SUPER_ADMIN'].includes(role)) {
+  if (!['FINANCIER', 'FACILITY_CHIEF', 'REGIONAL_DIRECTOR', 'DATA_MANAGER', 'SUPER_ADMIN'].includes(role)) {
     return NextResponse.json({ success: false, error: 'Action non autorisée' }, { status: 403 })
   }
 
@@ -106,6 +110,7 @@ export async function POST(req: NextRequest) {
   }
 
   const { facilityId, declarationType, periodType, periodStart, periodEnd, notes, items } = parsed.data
+  const { regionId: userRegionId } = session.user
 
   const endOfToday = new Date()
   endOfToday.setHours(23, 59, 59, 999)
@@ -120,11 +125,23 @@ export async function POST(req: NextRequest) {
 
   // Directeur régional : seulement les centres de sa région
   if (role === 'REGIONAL_DIRECTOR') {
-    const { regionId: userRegionId } = session.user
     const fac = await prisma.facility.findUnique({ where: { id: facilityId }, select: { regionId: true } })
     if (!fac || fac.regionId !== userRegionId) {
       return NextResponse.json({ success: false, error: 'Non autorisé pour ce centre' }, { status: 403 })
     }
+  }
+
+  // Responsable Data : scope selon son niveau (centre, région ou national)
+  if (role === 'DATA_MANAGER') {
+    if (userFacilityId && facilityId !== userFacilityId) {
+      return NextResponse.json({ success: false, error: 'Non autorisé pour ce centre' }, { status: 403 })
+    } else if (!userFacilityId && userRegionId) {
+      const fac = await prisma.facility.findUnique({ where: { id: facilityId }, select: { regionId: true } })
+      if (!fac || fac.regionId !== userRegionId) {
+        return NextResponse.json({ success: false, error: 'Non autorisé pour ce centre' }, { status: 403 })
+      }
+    }
+    // DM national (aucun scope) : autorisé partout
   }
 
   const prefix = declarationType === 'EXPENSE' ? 'DEP' : 'DEC'

@@ -24,7 +24,7 @@ interface Declaration {
 }
 
 const SCOPE_SHOW_REGION   = ['SUPER_ADMIN', 'DIRECTION']
-const SCOPE_SHOW_FACILITY = ['SUPER_ADMIN', 'DIRECTION', 'REGIONAL_DIRECTOR']
+const SCOPE_SHOW_FACILITY = ['SUPER_ADMIN', 'DIRECTION', 'REGIONAL_DIRECTOR', 'DATA_MANAGER']
 
 export function DeclarationsListPage({ userRole = '', userRegionId }: { userRole?: string; userRegionId?: string | null }) {
   const router = useRouter()
@@ -62,7 +62,7 @@ export function DeclarationsListPage({ userRole = '', userRegionId }: { userRole
     if (!showFacilityFilter) return
     const params = new URLSearchParams({ limit: '100' })
     if (regionId) params.set('regionId', regionId)
-    else if (role === 'REGIONAL_DIRECTOR' && userRegionId) {
+    else if (['REGIONAL_DIRECTOR', 'DATA_MANAGER'].includes(role) && userRegionId) {
       params.set('regionId', userRegionId)
     }
     fetch(`/api/facilities?${params}`).then((r) => r.json()).then((d) => {
@@ -167,7 +167,7 @@ export function DeclarationsListPage({ userRole = '', userRegionId }: { userRole
     },
   ]
 
-  const canCreate = ['FINANCIER', 'FACILITY_CHIEF', 'REGIONAL_DIRECTOR', 'SUPER_ADMIN'].includes(role)
+  const canCreate = ['FINANCIER', 'FACILITY_CHIEF', 'REGIONAL_DIRECTOR', 'DATA_MANAGER', 'SUPER_ADMIN'].includes(role)
 
   return (
     <div className="space-y-4">
