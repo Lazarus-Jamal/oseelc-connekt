@@ -11,6 +11,8 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ id:
   const session = await getServerSession(authOptions)
   if (!session) return NextResponse.json({ success: false, error: 'Non autorisé' }, { status: 401 })
 
+  const { id: userId, role, facilityId: userFacilityId, regionId: userRegionId } = session.user
+
   const declaration = await prisma.declaration.findUnique({
     where: { id },
     include: {
@@ -25,6 +27,34 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ id:
 
   if (!declaration) {
     return NextResponse.json({ success: false, error: 'Déclaration introuvable' }, { status: 404 })
+  }
+
+  // Vérification du scope géographique
+  if (['FINANCIER', 'FACILITY_CHIEF', 'CAISSIER'].includes(role)) {
+    if (declaration.facilityId !== userFacilityId) {
+      return NextResponse.json({ success: false, error: 'Non autorisé' }, { status: 403 })
+    }
+  } else if (['REGIONAL_DIRECTOR', 'CONTROLEUR_REGIONAL'].includes(role)) {
+    const facRegion = (declaration as any).facility?.region?.id
+    if (facRegion !== userRegionId) {
+      return NextResponse.json({ success: false, error: 'Non autorisé' }, { status: 403 })
+    }
+  } else if (role === 'DATA_MANAGER') {
+    if (userFacilityId && declaration.facilityId !== userFacilityId) {
+      return NextResponse.json({ success: false, error: 'Non autorisé' }, { status: 403 })
+    } else if (!userFacilityId && userRegionId) {
+      const facRegion = (declaration as any).facility?.region?.id
+      if (facRegion !== userRegionId) {
+        return NextResponse.json({ success: false, error: 'Non autorisé' }, { status: 403 })
+      }
+    }
+  }
+
+  // Brouillons privés : seul le créateur ou les admins voient les brouillons des autres
+  if (declaration.status === 'DRAFT' && !['SUPER_ADMIN', 'DATA_ADMIN', 'DIRECTION'].includes(role)) {
+    if (declaration.submittedById !== userId) {
+      return NextResponse.json({ success: false, error: 'Non autorisé' }, { status: 403 })
+    }
   }
 
   return NextResponse.json({ success: true, data: declaration })
@@ -106,12 +136,26 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
   const session = await getServerSession(authOptions)
   if (!session) return NextResponse.json({ success: false, error: 'Non autorisé' }, { status: 401 })
 
-  const { role, id: userId } = session.user
+  const { role, id: userId, facilityId: userFacilityId, regionId: userRegionId } = session.user
   const body = await req.json()
 
-  const declaration = await prisma.declaration.findUnique({ where: { id } })
+  const declaration = await prisma.declaration.findUnique({
+    where: { id },
+    include: { facility: { select: { regionId: true } } },
+  })
   if (!declaration) {
     return NextResponse.json({ success: false, error: 'Déclaration introuvable' }, { status: 404 })
+  }
+
+  // Vérification du scope géographique avant toute action
+  if (['FINANCIER', 'FACILITY_CHIEF'].includes(role)) {
+    if (declaration.facilityId !== userFacilityId) {
+      return NextResponse.json({ success: false, error: 'Non autorisé' }, { status: 403 })
+    }
+  } else if (role === 'REGIONAL_DIRECTOR') {
+    if ((declaration as any).facility?.regionId !== userRegionId) {
+      return NextResponse.json({ success: false, error: 'Non autorisé' }, { status: 403 })
+    }
   }
 
   const action = body.action as string
@@ -196,12 +240,18 @@ export async function DELETE(_req: NextRequest, { params }: { params: Promise<{ 
   const session = await getServerSession(authOptions)
   if (!session) return NextResponse.json({ success: false, error: 'Non autorisé' }, { status: 401 })
 
+  const { id: userId, role } = session.user
+
   const declaration = await prisma.declaration.findUnique({ where: { id } })
   if (!declaration) {
     return NextResponse.json({ success: false, error: 'Introuvable' }, { status: 404 })
   }
   if (declaration.status !== 'DRAFT') {
     return NextResponse.json({ success: false, error: 'Seul un brouillon peut être supprimé' }, { status: 400 })
+  }
+  // Seul le créateur de la déclaration ou un SUPER_ADMIN peut la supprimer
+  if (declaration.submittedById !== userId && role !== 'SUPER_ADMIN') {
+    return NextResponse.json({ success: false, error: 'Non autorisé' }, { status: 403 })
   }
 
   await prisma.declaration.delete({ where: { id } })

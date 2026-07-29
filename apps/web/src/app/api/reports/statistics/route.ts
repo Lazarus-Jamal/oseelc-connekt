@@ -94,11 +94,12 @@ export async function GET(req: NextRequest) {
     if (!facilityId) return NextResponse.json({ success: false, error: 'FOSA requise' }, { status: 400 })
     if (!month)      return NextResponse.json({ success: false, error: 'Mois requis' }, { status: 400 })
 
-    const facility = await prisma.facility.findUnique({
-      where: { id: facilityId },
+    // Utiliser facilityWhere pour valider que l'utilisateur a accès à cette FOSA
+    const facility = await prisma.facility.findFirst({
+      where: { ...facilityWhere, id: facilityId },
       select: { id: true, name: true, code: true, type: true, region: { select: { name: true } } },
     })
-    if (!facility) return NextResponse.json({ success: false, error: 'FOSA introuvable' }, { status: 404 })
+    if (!facility) return NextResponse.json({ success: false, error: 'FOSA introuvable ou accès non autorisé' }, { status: 404 })
 
     const sheet = await prisma.statSheet.findUnique({
       where: { facilityId_month_year: { facilityId, month, year: yearFrom } },

@@ -16,11 +16,31 @@ export async function GET(req: NextRequest) {
 
   const { role, facilityId: userFacilityId, regionId: userRegionId } = session.user
 
-  const baseWhere: any = { status: 'VALIDATED' }
-  if (role === 'FINANCIER' || role === 'FACILITY_CHIEF' || role === 'CAISSIER') baseWhere.facilityId = userFacilityId
-  else if (role === 'REGIONAL_DIRECTOR' || role === 'CONTROLEUR_REGIONAL') baseWhere.facility = { regionId: userRegionId }
-  if (facilityId) baseWhere.facilityId = facilityId
-  if (regionId) baseWhere.facility = { regionId }
+  const baseWhere: any = { status: { in: ['SUBMITTED', 'REVIEWED', 'VALIDATED'] } }
+
+  // Scope géographique selon le rôle — non contournable par les params URL
+  if (['FINANCIER', 'FACILITY_CHIEF', 'CAISSIER'].includes(role)) {
+    baseWhere.facilityId = userFacilityId
+    // facilityId/regionId URL params ignorés : scope verrouillé
+  } else if (['REGIONAL_DIRECTOR', 'CONTROLEUR_REGIONAL'].includes(role)) {
+    baseWhere.facility = { regionId: userRegionId }
+    if (facilityId) baseWhere.facilityId = facilityId // narrowing sûr dans leur région
+    // regionId param ignoré
+  } else if (role === 'DATA_MANAGER') {
+    if (userFacilityId) {
+      baseWhere.facilityId = userFacilityId
+    } else if (userRegionId) {
+      baseWhere.facility = { regionId: userRegionId }
+      if (facilityId) baseWhere.facilityId = facilityId
+    } else {
+      if (facilityId) baseWhere.facilityId = facilityId
+      if (regionId) baseWhere.facility = { regionId }
+    }
+  } else {
+    // DIRECTION, SUPER_ADMIN, CONTROLEUR, DATA_ADMIN : voient tout, peuvent filtrer
+    if (facilityId) baseWhere.facilityId = facilityId
+    if (regionId) baseWhere.facility = { regionId }
+  }
   if (from || to) {
     baseWhere.periodStart = {}
     if (from) baseWhere.periodStart.gte = new Date(from)

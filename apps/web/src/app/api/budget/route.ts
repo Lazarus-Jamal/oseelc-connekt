@@ -20,11 +20,12 @@ export async function GET(req: NextRequest) {
 
   const { searchParams } = req.nextUrl
   const facilityId = searchParams.get('facilityId')
+  const regionId   = searchParams.get('regionId')
   const year = searchParams.get('year') ? Number(searchParams.get('year')) : new Date().getFullYear()
   const month = searchParams.get('month') ? Number(searchParams.get('month')) : null
   const declarationType = searchParams.get('declarationType') as 'REVENUE' | 'EXPENSE' | null
 
-  const { role, facilityId: userFacilityId } = session.user
+  const { role, facilityId: userFacilityId, regionId: userRegionId } = session.user
   const viewRoles = ['SUPER_ADMIN', 'DIRECTION', 'REGIONAL_DIRECTOR', 'CONTROLEUR', 'CONTROLEUR_REGIONAL', 'FINANCIER', 'FACILITY_CHIEF']
   if (!viewRoles.includes(role)) {
     return NextResponse.json({ success: false, error: 'Accès non autorisé' }, { status: 403 })
@@ -33,10 +34,17 @@ export async function GET(req: NextRequest) {
   const where: any = { year }
   if (declarationType) where.declarationType = declarationType
   if (month !== null) where.month = month
-  if (facilityId) {
-    where.facilityId = facilityId
-  } else if (role === 'FINANCIER' || role === 'FACILITY_CHIEF') {
+
+  // Scope géographique selon le rôle — non contournable par les params URL
+  if (['FINANCIER', 'FACILITY_CHIEF', 'CAISSIER'].includes(role)) {
     where.facilityId = userFacilityId
+  } else if (['REGIONAL_DIRECTOR', 'CONTROLEUR_REGIONAL'].includes(role)) {
+    where.facility = { regionId: userRegionId }
+    if (facilityId) where.facilityId = facilityId // narrowing dans leur région
+  } else {
+    // Admins : peuvent filtrer librement
+    if (facilityId) where.facilityId = facilityId
+    else if (regionId) where.facility = { regionId }
   }
 
   const budgets = await prisma.budget.findMany({
@@ -48,10 +56,11 @@ export async function GET(req: NextRequest) {
   // Also fetch actuals for comparison
   const actualWhere: any = {
     periodStart: { gte: new Date(year, month ? month - 1 : 0, 1) },
-    status: 'VALIDATED',
+    status: { in: ['SUBMITTED', 'REVIEWED', 'VALIDATED'] },
   }
   if (declarationType) actualWhere.declarationType = declarationType
   if (where.facilityId) actualWhere.facilityId = where.facilityId
+  else if (where.facility) actualWhere.facility = where.facility
 
   const actuals = await prisma.declarationItem.findMany({
     where: {
@@ -80,7 +89,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
   const session = await getServerSession(authOptions)
   if (!session) return NextResponse.json({ success: false, error: 'Non autorisé' }, { status: 401 })
 
-  const { role } = session.user
+  const { role, regionId: userRegionId } = session.user
   if (!['SUPER_ADMIN', 'DIRECTION', 'REGIONAL_DIRECTOR'].includes(role)) {
     return NextResponse.json({ success: false, error: 'Action non autorisée' }, { status: 403 })
   }
@@ -92,6 +101,14 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
   }
 
   const { facilityId, declarationType, year, month, category, planned, notes } = parsed.data
+
+  // REGIONAL_DIRECTOR : vérifier que le centre appartient bien à sa région
+  if (role === 'REGIONAL_DIRECTOR') {
+    const fac = await prisma.facility.findUnique({ where: { id: facilityId }, select: { regionId: true } })
+    if (!fac || fac.regionId !== userRegionId) {
+      return NextResponse.json({ success: false, error: 'Non autorisé pour ce centre' }, { status: 403 })
+    }
+  }
 
   const budget = await prisma.budget.upsert({
     where: { facilityId_declarationType_year_month_category: { facilityId, declarationType, year, month: (month ?? null) as number, category } },
@@ -106,7 +123,7 @@ export async function DELETE(req: NextRequest) {
   const session = await getServerSession(authOptions)
   if (!session) return NextResponse.json({ success: false, error: 'Non autorisé' }, { status: 401 })
 
-  const { role } = session.user
+  const { role, regionId: userRegionId } = session.user
   if (!['SUPER_ADMIN', 'DIRECTION', 'REGIONAL_DIRECTOR'].includes(role)) {
     return NextResponse.json({ success: false, error: 'Non autorisé' }, { status: 403 })
   }
@@ -114,6 +131,18 @@ export async function DELETE(req: NextRequest) {
   const { searchParams } = req.nextUrl
   const id = searchParams.get('id')
   if (!id) return NextResponse.json({ success: false, error: 'ID manquant' }, { status: 400 })
+
+  // REGIONAL_DIRECTOR : vérifier que le budget appartient à un centre de sa région
+  if (role === 'REGIONAL_DIRECTOR') {
+    const budget = await prisma.budget.findUnique({
+      where: { id },
+      include: { facility: { select: { regionId: true } } },
+    })
+    if (!budget) return NextResponse.json({ success: false, error: 'Budget introuvable' }, { status: 404 })
+    if ((budget.facility as any).regionId !== userRegionId) {
+      return NextResponse.json({ success: false, error: 'Non autorisé' }, { status: 403 })
+    }
+  }
 
   await prisma.budget.delete({ where: { id } })
   return NextResponse.json({ success: true })

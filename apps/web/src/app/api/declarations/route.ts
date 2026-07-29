@@ -43,17 +43,32 @@ export async function GET(req: NextRequest) {
 
   const where: Prisma.DeclarationWhereInput = {}
 
-  // Filtrage selon le rôle
-  if (role === 'FINANCIER' || role === 'FACILITY_CHIEF' || role === 'CAISSIER') {
+  // Scope géographique selon le rôle — non contournable par les params URL
+  if (['FINANCIER', 'FACILITY_CHIEF', 'CAISSIER'].includes(role)) {
     where.facilityId = userFacilityId || undefined
-  } else if (role === 'REGIONAL_DIRECTOR' || role === 'CONTROLEUR_REGIONAL') {
+    // facilityId/regionId URL params ignorés : scope verrouillé sur leur FOSA
+  } else if (['REGIONAL_DIRECTOR', 'CONTROLEUR_REGIONAL'].includes(role)) {
     where.facility = { regionId: userRegionId || undefined }
+    // Narrowing possible vers une FOSA de leur région (AND condition sûre)
+    if (facilityId) where.facilityId = facilityId
+    // regionId param ignoré : ne peuvent pas changer de région
   } else if (role === 'DATA_MANAGER') {
-    if (userFacilityId) where.facilityId = userFacilityId          // DM de centre
-    else if (userRegionId) where.facility = { regionId: userRegionId } // DM régional
-    // DM national (ni facilityId ni regionId) : voit tout
+    if (userFacilityId) {
+      where.facilityId = userFacilityId
+      // Scope FOSA verrouillé
+    } else if (userRegionId) {
+      where.facility = { regionId: userRegionId }
+      if (facilityId) where.facilityId = facilityId // narrowing dans leur région
+    } else {
+      // DM national (ni facilityId ni regionId) : peut filtrer librement
+      if (facilityId) where.facilityId = facilityId
+      if (regionId) where.facility = { regionId }
+    }
+  } else {
+    // DIRECTION, SUPER_ADMIN, CONTROLEUR, DATA_ADMIN : voient tout, peuvent filtrer
+    if (facilityId) where.facilityId = facilityId
+    if (regionId) where.facility = { regionId }
   }
-  // DIRECTION, SUPER_ADMIN, CONTROLEUR, DATA_ADMIN voient tout
 
   // Les brouillons sont privés : seul le soumettant voit les siens
   // Sauf les rôles d'administration qui voient tout
@@ -65,8 +80,6 @@ export async function GET(req: NextRequest) {
   }
 
   if (declarationType) where.declarationType = declarationType
-  if (facilityId) where.facilityId = facilityId
-  if (regionId) where.facility = { regionId }
   if (status) where.status = status
   if (from || to) {
     where.periodStart = {}
