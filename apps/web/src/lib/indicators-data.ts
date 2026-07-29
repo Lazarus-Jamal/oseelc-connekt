@@ -79,6 +79,8 @@ export const INDICATORS_DATA: IndicatorSeed[] = [
   { code: 'PGM_PTME',      label: 'PTME – Femmes enceintes testées VIH', category: 'Programmes de santé', unit: 'femmes',        isRequired: true,  sortOrder: 6 },
   { code: 'PGM_CDT',       label: 'CDT – Cas tuberculose',               category: 'Programmes de santé', unit: 'cas',           isRequired: true,  sortOrder: 7 },
   { code: 'PGM_DECES_MAT', label: 'Décès maternels',                     category: 'Programmes de santé', unit: 'décès',         isRequired: true,  sortOrder: 8 },
+  { code: 'PGM_MORT_NEON', label: 'Décès néonatals (<28 jours)',         category: 'Programmes de santé', unit: 'décès',         isRequired: true,  sortOrder: 9 },
+  { code: 'PGM_PEV_1AN',   label: 'Enfants <1 an complètement vaccinés', category: 'Programmes de santé', unit: 'enfants',       isRequired: true,  sortOrder: 10 },
 
   // ── MALADIES NOTIFIABLES (age × sexe — MINSANTE) ─────────────────────────
   ...ageSex('MAL_PALU',  'Paludisme',         'Maladies notifiables', 'cas', true, 1),
