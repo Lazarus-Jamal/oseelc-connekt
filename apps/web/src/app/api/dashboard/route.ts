@@ -4,6 +4,7 @@ import { authOptions } from '@/lib/auth'
 import { prisma } from '@/lib/db'
 
 export async function GET(req: NextRequest) {
+  try {
   const session = await getServerSession(authOptions)
   if (!session) return NextResponse.json({ success: false, error: 'Non autorisé' }, { status: 401 })
 
@@ -70,8 +71,8 @@ export async function GET(req: NextRequest) {
     const facilityWhere = { regionId: regionId! }
     const [facilities, revenueAgg, expenseAgg, pendingReview, facilitiesStatus, monthlyTrend] = await Promise.all([
       prisma.facility.count({ where: facilityWhere }),
-      prisma.declaration.aggregate({ where: { facility: facilityWhere, periodStart: { gte: startOfMonth }, declarationType: 'REVENUE', status: 'VALIDATED' }, _sum: { totalAmount: true } }),
-      prisma.declaration.aggregate({ where: { facility: facilityWhere, periodStart: { gte: startOfMonth }, declarationType: 'EXPENSE', status: 'VALIDATED' }, _sum: { totalAmount: true } }),
+      prisma.declaration.aggregate({ where: { facility: facilityWhere, periodStart: { gte: startOfMonth }, declarationType: 'REVENUE', status: { in: ['SUBMITTED', 'REVIEWED', 'VALIDATED'] } }, _sum: { totalAmount: true } }),
+      prisma.declaration.aggregate({ where: { facility: facilityWhere, periodStart: { gte: startOfMonth }, declarationType: 'EXPENSE', status: { in: ['SUBMITTED', 'REVIEWED', 'VALIDATED'] } }, _sum: { totalAmount: true } }),
       prisma.declaration.count({ where: { facility: facilityWhere, status: 'SUBMITTED' } }),
       prisma.facility.findMany({
         where: facilityWhere,
@@ -89,7 +90,7 @@ export async function GET(req: NextRequest) {
         select: {
           id: true, name: true, type: true,
           declarations: {
-            where: { periodStart: { gte: new Date(now.getFullYear(), now.getMonth() - 5, 1) }, declarationType: 'REVENUE', status: 'VALIDATED' },
+            where: { periodStart: { gte: new Date(now.getFullYear(), now.getMonth() - 5, 1) }, declarationType: 'REVENUE', status: { in: ['SUBMITTED', 'REVIEWED', 'VALIDATED'] } },
             select: { totalAmount: true, periodStart: true, status: true },
           },
         },
@@ -100,8 +101,8 @@ export async function GET(req: NextRequest) {
     const facilitiesRevExp = await Promise.all(
       facilitiesStatus.map(async (f) => {
         const [rev, exp] = await Promise.all([
-          prisma.declaration.aggregate({ where: { facilityId: f.id, periodStart: { gte: startOfMonth }, declarationType: 'REVENUE', status: 'VALIDATED' }, _sum: { totalAmount: true } }),
-          prisma.declaration.aggregate({ where: { facilityId: f.id, periodStart: { gte: startOfMonth }, declarationType: 'EXPENSE', status: 'VALIDATED' }, _sum: { totalAmount: true } }),
+          prisma.declaration.aggregate({ where: { facilityId: f.id, periodStart: { gte: startOfMonth }, declarationType: 'REVENUE', status: { in: ['SUBMITTED', 'REVIEWED', 'VALIDATED'] } }, _sum: { totalAmount: true } }),
+          prisma.declaration.aggregate({ where: { facilityId: f.id, periodStart: { gte: startOfMonth }, declarationType: 'EXPENSE', status: { in: ['SUBMITTED', 'REVIEWED', 'VALIDATED'] } }, _sum: { totalAmount: true } }),
         ])
         return { ...f, revenue: Number(rev._sum.totalAmount || 0), expense: Number(exp._sum.totalAmount || 0) }
       })
@@ -148,8 +149,8 @@ export async function GET(req: NextRequest) {
       ? { gte: startDate, lte: endDate }
       : { gte: startDate }
 
-    // Inclure SUBMITTED + VALIDATED pour une vue complète
-    const statusFilter = { in: ['SUBMITTED', 'VALIDATED'] as string[] } as any
+    // Inclure SUBMITTED + REVIEWED + VALIDATED pour une vue complète
+    const statusFilter = { in: ['SUBMITTED', 'REVIEWED', 'VALIDATED'] as string[] } as any
 
     // Scope géographique selon les filtres
     const facilityScope: any = { isActive: true }
@@ -264,4 +265,8 @@ export async function GET(req: NextRequest) {
   }
 
   return NextResponse.json({ success: true, data: {} })
+  } catch (error) {
+    console.error('[dashboard] API error:', error)
+    return NextResponse.json({ success: false, error: 'Erreur serveur' }, { status: 500 })
+  }
 }

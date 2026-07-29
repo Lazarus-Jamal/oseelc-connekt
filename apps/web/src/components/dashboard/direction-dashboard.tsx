@@ -86,8 +86,15 @@ export function DirectionDashboardPage() {
     else if (regionId) params.set('regionId', regionId)
     fetch(`/api/dashboard?${params}`)
       .then((r) => r.json())
-      .then((d) => { setData(d.data ?? null); setLoading(false) })
-      .catch(() => setLoading(false))
+      .then((d) => {
+        if (!d.success) throw new Error(d.error || 'Erreur API')
+        setData(d.data ?? null)
+        setLoading(false)
+      })
+      .catch((err) => {
+        console.error('[direction-dashboard] fetch error:', err)
+        setLoading(false)
+      })
   }, [])
 
   // Re-fetch quand la période ou les filtres géo changent

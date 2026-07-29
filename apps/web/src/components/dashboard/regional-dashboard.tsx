@@ -14,18 +14,35 @@ import {
 export function RegionalDashboardPage() {
   const [data, setData] = useState<any>(null)
   const [loading, setLoading] = useState(true)
+  const [error, setError]   = useState(false)
 
-  useEffect(() => {
+  const load = () => {
+    setLoading(true)
+    setError(false)
     fetch('/api/dashboard')
       .then((r) => r.json())
-      .then((d) => { setData(d.data); setLoading(false) })
-      .catch(() => setLoading(false))
-  }, [])
+      .then((d) => { setData(d.data ?? null); setLoading(false) })
+      .catch(() => { setError(true); setLoading(false) })
+  }
+
+  useEffect(() => { load() }, [])
 
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
         <div className="w-8 h-8 border-2 border-brand-500 border-t-transparent rounded-full animate-spin" />
+      </div>
+    )
+  }
+
+  if (error) {
+    return (
+      <div className="flex flex-col items-center justify-center h-64 gap-4 text-gray-500">
+        <p>Impossible de charger le tableau de bord.</p>
+        <button onClick={load}
+          className="px-4 py-2 text-sm bg-brand-500 text-white rounded-xl hover:bg-brand-600 transition">
+          Réessayer
+        </button>
       </div>
     )
   }
