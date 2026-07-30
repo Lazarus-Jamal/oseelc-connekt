@@ -218,10 +218,14 @@ export function ReportsPage() {
             <div className="bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800 p-5">
               <div className="flex items-center gap-2 mb-1">
                 <TrendingUp className="w-4 h-4 text-teal-500" />
-                <p className="text-sm text-gray-500">Recettes totales validées</p>
+                <p className="text-sm text-gray-500">Recettes nettes (cash)</p>
               </div>
               <p className="text-2xl font-bold text-teal-600 dark:text-teal-400">{formatCurrency(report?.summary?.totalRevenue || 0)}</p>
-              <p className="text-xs text-gray-400 mt-1">{report?.summary?.revenueCount || 0} déclarations</p>
+              {(report?.summary?.totalCredits || 0) > 0 ? (
+                <p className="text-xs text-orange-500 mt-1">Brut {formatCurrency(report?.summary?.totalRevenueBrut || 0)} − crédits {formatCurrency(report?.summary?.totalCredits || 0)}</p>
+              ) : (
+                <p className="text-xs text-gray-400 mt-1">{report?.summary?.revenueCount || 0} déclarations</p>
+              )}
             </div>
             <div className="bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800 p-5">
               <div className="flex items-center gap-2 mb-1">

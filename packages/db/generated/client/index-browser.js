@@ -219,6 +219,15 @@ exports.Prisma.DeclarationScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.DeclarationCreditScalarFieldEnum = {
+  id: 'id',
+  declarationId: 'declarationId',
+  debtor: 'debtor',
+  amount: 'amount',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.DeclarationItemScalarFieldEnum = {
   id: 'id',
   declarationId: 'declarationId',
@@ -249,6 +258,13 @@ exports.Prisma.DeclarationHistoryScalarFieldEnum = {
   changedById: 'changedById',
   comment: 'comment',
   changedAt: 'changedAt'
+};
+
+exports.Prisma.DebtorScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  isActive: 'isActive',
+  createdAt: 'createdAt'
 };
 
 exports.Prisma.CategoryScalarFieldEnum = {
@@ -626,9 +642,11 @@ exports.Prisma.ModelName = {
   Session: 'Session',
   DeclarationPeriodConfig: 'DeclarationPeriodConfig',
   Declaration: 'Declaration',
+  DeclarationCredit: 'DeclarationCredit',
   DeclarationItem: 'DeclarationItem',
   DeclarationDocument: 'DeclarationDocument',
   DeclarationHistory: 'DeclarationHistory',
+  Debtor: 'Debtor',
   Category: 'Category',
   Budget: 'Budget',
   StatSheet: 'StatSheet',

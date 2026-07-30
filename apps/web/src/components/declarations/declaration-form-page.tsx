@@ -31,6 +31,8 @@ const schema = z.object({
   items: z.array(itemSchema).min(1, 'Au moins une ligne requise'),
 })
 
+type CreditLine = { debtor: string; amount: string }
+
 type FormData = z.infer<typeof schema>
 
 const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'application/pdf']
@@ -52,6 +54,8 @@ export function DeclarationFormPage({ editId }: DeclarationFormPageProps = {}) {
   const [newCatName, setNewCatName] = useState('')
   const [addingCat, setAddingCat] = useState(false)
   const [showAddCat, setShowAddCat] = useState(false)
+  const [credits, setCredits] = useState<CreditLine[]>([])
+  const [debtorOptions, setDebtorOptions] = useState<string[]>([])
   const fileInputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
@@ -63,6 +67,9 @@ export function DeclarationFormPage({ editId }: DeclarationFormPageProps = {}) {
     fetch('/api/categories?type=REVENUE')
       .then((r) => r.json())
       .then((d) => { if (d.success) setCategories(d.data.map((c: { name: string }) => c.name)) })
+    fetch('/api/debtors')
+      .then((r) => r.json())
+      .then((d) => { if (d.success) setDebtorOptions(d.data.map((deb: { name: string }) => deb.name)) })
   }, [session?.user?.facilityId])
 
   const addCategory = async () => {
@@ -116,6 +123,9 @@ export function DeclarationFormPage({ editId }: DeclarationFormPageProps = {}) {
               note: item.note || '',
             })),
           })
+          if (dec.credits?.length) {
+            setCredits(dec.credits.map((c: any) => ({ debtor: c.debtor, amount: String(c.amount) })))
+          }
         }
       })
       .finally(() => setLoadingEdit(false))
@@ -164,6 +174,10 @@ export function DeclarationFormPage({ editId }: DeclarationFormPageProps = {}) {
     }
     setSubmitting(true)
     try {
+      const validCredits = credits
+        .filter((c) => c.debtor.trim() && Number(c.amount) > 0)
+        .map((c) => ({ debtor: c.debtor.trim(), amount: Number(c.amount) }))
+
       const payload = {
         ...(editId ? {} : { facilityId: finalFacilityId }),
         declarationType: 'REVENUE',
@@ -172,6 +186,7 @@ export function DeclarationFormPage({ editId }: DeclarationFormPageProps = {}) {
         periodEnd: new Date(data.periodEnd + 'T23:59:59').toISOString(),
         notes: data.notes,
         items: data.items,
+        credits: validCredits,
       }
 
       // Mode hors ligne : sauvegarder localement
@@ -451,6 +466,86 @@ export function DeclarationFormPage({ editId }: DeclarationFormPageProps = {}) {
             placeholder="Remarques générales sur cette déclaration, contexte particulier, informations complémentaires..."
             className="w-full px-3 py-2.5 border border-gray-200 dark:border-gray-700 rounded-lg text-sm bg-white dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-brand-500 resize-none"
           />
+        </div>
+
+        {/* Recettes à crédit (assurances, entreprises…) */}
+        <div className="bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800 p-5">
+          <div className="flex items-center justify-between mb-3">
+            <div>
+              <h3 className="font-semibold text-gray-900 dark:text-white">Recettes à crédit</h3>
+              <p className="text-xs text-gray-400 mt-0.5">Assurances, entreprises, mutuelles — montants inclus dans les lignes ci-dessus</p>
+            </div>
+            <button
+              type="button"
+              onClick={() => setCredits((prev) => [...prev, { debtor: '', amount: '' }])}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-brand-600 border border-brand-200 dark:border-brand-700 rounded-lg hover:bg-brand-50 dark:hover:bg-brand-900/20 transition"
+            >
+              <Plus className="w-3.5 h-3.5" /> Ajouter un débiteur
+            </button>
+          </div>
+
+          {credits.length === 0 && (
+            <p className="text-sm text-gray-400 text-center py-3">Aucun crédit — toutes les recettes sont en cash.</p>
+          )}
+
+          <div className="space-y-2">
+            {credits.map((credit, idx) => {
+              const isOther = credit.debtor === '__other__' || (!debtorOptions.includes(credit.debtor) && credit.debtor !== '')
+              return (
+                <div key={idx} className="flex items-center gap-2 flex-wrap">
+                  <select
+                    value={debtorOptions.includes(credit.debtor) ? credit.debtor : (credit.debtor === '' ? '' : '__other__')}
+                    onChange={(e) => {
+                      const val = e.target.value
+                      setCredits((prev) => prev.map((c, i) => i === idx ? { ...c, debtor: val === '__other__' ? '' : val } : c))
+                    }}
+                    className="flex-1 min-w-[180px] px-3 py-2 text-sm border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-brand-500"
+                  >
+                    <option value="">-- Choisir un débiteur --</option>
+                    {debtorOptions.map((name) => (
+                      <option key={name} value={name}>{name}</option>
+                    ))}
+                    <option value="__other__">Autre…</option>
+                  </select>
+                  {(isOther || (!debtorOptions.includes(credit.debtor) && credit.debtor !== '')) && (
+                    <input
+                      type="text"
+                      value={credit.debtor}
+                      onChange={(e) => setCredits((prev) => prev.map((c, i) => i === idx ? { ...c, debtor: e.target.value } : c))}
+                      placeholder="Préciser le débiteur…"
+                      className="flex-1 min-w-[160px] px-3 py-2 text-sm border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-brand-500"
+                      autoFocus
+                    />
+                  )}
+                  <input
+                    type="number"
+                    min="0"
+                    step="1"
+                    value={credit.amount}
+                    onChange={(e) => setCredits((prev) => prev.map((c, i) => i === idx ? { ...c, amount: e.target.value } : c))}
+                    placeholder="Montant"
+                    className="w-36 px-3 py-2 text-sm border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-brand-500"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setCredits((prev) => prev.filter((_, i) => i !== idx))}
+                    className="p-2 text-red-400 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition"
+                  >
+                    <Trash2 className="w-4 h-4" />
+                  </button>
+                </div>
+              )
+            })}
+          </div>
+
+          {credits.length > 0 && (
+            <div className="mt-3 pt-3 border-t border-gray-100 dark:border-gray-800 flex justify-between text-sm">
+              <span className="text-gray-500">Total crédits</span>
+              <span className="font-semibold text-orange-600">
+                {credits.reduce((s, c) => s + (Number(c.amount) || 0), 0).toLocaleString('fr-FR')} F
+              </span>
+            </div>
+          )}
         </div>
 
         {/* Pièces justificatives */}

@@ -50,11 +50,12 @@ export async function GET(req: NextRequest) {
   const revenueWhere = { ...baseWhere, declarationType: 'REVENUE' }
   const expenseWhere = { ...baseWhere, declarationType: 'EXPENSE' }
 
-  const [revenues, expenses] = await Promise.all([
+  const [revenues, expenses, creditsAgg] = await Promise.all([
     type !== 'EXPENSE' ? prisma.declaration.findMany({
       where: revenueWhere,
       include: {
         items: true,
+        credits: true,
         facility: { select: { id: true, name: true, code: true, type: true, region: { select: { id: true, name: true } } } },
       },
       orderBy: { periodStart: 'asc' },
@@ -67,19 +68,26 @@ export async function GET(req: NextRequest) {
       },
       orderBy: { periodStart: 'asc' },
     }) : Promise.resolve([]),
+    type !== 'EXPENSE' ? prisma.declarationCredit.aggregate({
+      where: { declaration: revenueWhere },
+      _sum: { amount: true },
+    }) : Promise.resolve(null),
   ])
 
   const aggregate = (decls: any[]) => {
-    const byMonth: Record<string, { period: string; label: string; total: number; count: number }> = {}
+    const byMonth: Record<string, { period: string; label: string; total: number; totalCredits: number; netCash: number; count: number }> = {}
     const byCategory: Record<string, number> = {}
-    const byFacility: Record<string, { facilityId: string; name: string; type: string; total: number; count: number }> = {}
+    const byFacility: Record<string, { facilityId: string; name: string; type: string; total: number; totalCredits: number; netCash: number; count: number }> = {}
 
     for (const decl of decls) {
       const month = decl.periodStart.getMonth()
       const year = decl.periodStart.getFullYear()
       const key = `${year}-${String(month + 1).padStart(2, '0')}`
-      if (!byMonth[key]) byMonth[key] = { period: key, label: `${['Jan','Fév','Mar','Avr','Mai','Jun','Jul','Aoû','Sep','Oct','Nov','Déc'][month]} ${year}`, total: 0, count: 0 }
+      const declCredits = decl.credits ? decl.credits.reduce((s: number, c: any) => s + Number(c.amount), 0) : 0
+      if (!byMonth[key]) byMonth[key] = { period: key, label: `${['Jan','Fév','Mar','Avr','Mai','Jun','Jul','Aoû','Sep','Oct','Nov','Déc'][month]} ${year}`, total: 0, totalCredits: 0, netCash: 0, count: 0 }
       byMonth[key].total += Number(decl.totalAmount)
+      byMonth[key].totalCredits += declCredits
+      byMonth[key].netCash += Number(decl.totalAmount) - declCredits
       byMonth[key].count++
 
       for (const item of decl.items) {
@@ -87,13 +95,19 @@ export async function GET(req: NextRequest) {
       }
 
       const fk = decl.facilityId
-      if (!byFacility[fk]) byFacility[fk] = { facilityId: fk, name: decl.facility.name, type: decl.facility.type, total: 0, count: 0 }
+      if (!byFacility[fk]) byFacility[fk] = { facilityId: fk, name: decl.facility.name, type: decl.facility.type, total: 0, totalCredits: 0, netCash: 0, count: 0 }
       byFacility[fk].total += Number(decl.totalAmount)
+      byFacility[fk].totalCredits += declCredits
+      byFacility[fk].netCash += Number(decl.totalAmount) - declCredits
       byFacility[fk].count++
     }
 
+    const totalBrut = decls.reduce((s, d) => s + Number(d.totalAmount), 0)
+    const totalCreditsSum = decls.reduce((s, d) => s + (d.credits ? d.credits.reduce((cs: number, c: any) => cs + Number(c.amount), 0) : 0), 0)
     return {
-      total: decls.reduce((s, d) => s + Number(d.totalAmount), 0),
+      total: totalBrut,
+      totalCredits: totalCreditsSum,
+      netCash: totalBrut - totalCreditsSum,
       count: decls.length,
       byMonth: Object.values(byMonth).sort((a, b) => a.period.localeCompare(b.period)),
       byCategory: Object.entries(byCategory).map(([category, total]) => ({ category, total })).sort((a, b) => b.total - a.total),
@@ -103,6 +117,7 @@ export async function GET(req: NextRequest) {
 
   const revenueData = aggregate(revenues)
   const expenseData = aggregate(expenses)
+  const totalCredits = Number(creditsAgg?._sum?.amount || 0)
 
   // Fusion par mois pour le graphique comparatif
   const allMonths = new Set([
@@ -113,16 +128,18 @@ export async function GET(req: NextRequest) {
     const r = revenueData.byMonth.find((m) => m.period === period)
     const e = expenseData.byMonth.find((m) => m.period === period)
     const label = r?.label || e?.label || period
-    return { period, label, revenue: r?.total || 0, expense: e?.total || 0, net: (r?.total || 0) - (e?.total || 0) }
+    return { period, label, revenueBrut: r?.total || 0, revenue: r?.netCash || 0, expense: e?.total || 0, net: (r?.netCash || 0) - (e?.total || 0) }
   })
 
   return NextResponse.json({
     success: true,
     data: {
       summary: {
-        totalRevenue: revenueData.total,
+        totalRevenueBrut: revenueData.total,
+        totalCredits,
+        totalRevenue: revenueData.netCash,
         totalExpense: expenseData.total,
-        netBalance: revenueData.total - expenseData.total,
+        netBalance: revenueData.netCash - expenseData.total,
         revenueCount: revenueData.count,
         expenseCount: expenseData.count,
       },

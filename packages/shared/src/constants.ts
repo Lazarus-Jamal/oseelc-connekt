@@ -66,6 +66,20 @@ export const MONTHS_FR = [
   'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre',
 ]
 
+export const DEFAULT_DEBTORS = [
+  'CNPS',
+  'CNAMGS',
+  'Mutuelle Générale des Agents de l\'État',
+  'Assurance Privée',
+  'HPGB 30/70',
+  'HPGB Entreprise',
+  'CIMA',
+  'Sunu Assurances',
+  'AXA Assurances',
+] as const
+
+export type DefaultDebtor = (typeof DEFAULT_DEBTORS)[number]
+
 export const EXPENSE_CATEGORIES = [
   'Personnel',
   'Médicaments et consommables',

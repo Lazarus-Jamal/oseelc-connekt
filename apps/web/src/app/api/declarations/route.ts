@@ -6,6 +6,11 @@ import { z } from 'zod'
 import { generateReference } from '@care-connekt/shared'
 import { DeclarationStatus, Prisma } from '@care-connekt/db'
 
+const creditSchema = z.object({
+  debtor: z.string().min(1),
+  amount: z.number().nonnegative(),
+})
+
 const createSchema = z.object({
   facilityId: z.string(),
   declarationType: z.enum(['REVENUE', 'EXPENSE']).default('REVENUE'),
@@ -23,6 +28,7 @@ const createSchema = z.object({
       note: z.string().optional(),
     })
   ).min(1),
+  credits: z.array(creditSchema).optional(),
 })
 
 export async function GET(req: NextRequest) {
@@ -125,7 +131,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ success: false, error: 'Données invalides', details: parsed.error.flatten().fieldErrors }, { status: 400 })
   }
 
-  const { facilityId, declarationType, periodType, periodStart, periodEnd, notes, items } = parsed.data
+  const { facilityId, declarationType, periodType, periodStart, periodEnd, notes, items, credits } = parsed.data
   const { regionId: userRegionId } = session.user
 
   const endOfToday = new Date()
@@ -184,9 +190,13 @@ export async function POST(req: NextRequest) {
       status: 'DRAFT',
       ...(notes && { comment: notes }),
       items: { create: items },
+      ...(declarationType === 'REVENUE' && credits?.length
+        ? { credits: { create: credits } }
+        : {}),
     },
     include: {
       items: true,
+      credits: true,
       facility: { select: { id: true, name: true } },
     },
   })

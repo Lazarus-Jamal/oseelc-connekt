@@ -3,7 +3,7 @@
 import { useEffect, useState, useCallback } from 'react'
 import { useSession } from 'next-auth/react'
 import { PageHeader } from '@/components/ui/page-header'
-import { Plus, Trash2, Tag, ShieldCheck, Loader2, TrendingUp, TrendingDown } from 'lucide-react'
+import { Plus, Trash2, Tag, ShieldCheck, Loader2, TrendingUp, TrendingDown, Building2 } from 'lucide-react'
 
 interface Category {
   id: string | null
@@ -13,45 +13,48 @@ interface Category {
   isActive?: boolean
 }
 
+interface Debtor {
+  id: string | null
+  name: string
+  isDefault: boolean
+  isActive?: boolean
+}
+
 const CAN_DELETE = ['SUPER_ADMIN', 'DIRECTION']
 
-function CategoryRow({
-  cat,
+function ItemRow({
+  name,
+  isDefault,
+  id,
   canDelete,
+  accentColor,
   onDelete,
 }: {
-  cat: Category
+  name: string
+  isDefault: boolean
+  id: string | null
   canDelete: boolean
+  accentColor: string
   onDelete: (id: string) => void
 }) {
   const [deleting, setDeleting] = useState(false)
-
-  const handleDelete = async () => {
-    if (!cat.id) return
-    setDeleting(true)
-    await onDelete(cat.id)
-    setDeleting(false)
-  }
-
   return (
     <div className="flex items-center gap-3 px-4 py-3 hover:bg-gray-50 dark:hover:bg-gray-800/30 transition group">
-      <div className={`w-2 h-2 rounded-full flex-shrink-0 ${
-        cat.declarationType === 'REVENUE' ? 'bg-teal-400' : 'bg-orange-400'
-      }`} />
-      <span className="flex-1 text-sm text-gray-900 dark:text-white font-medium">{cat.name}</span>
-      {cat.isDefault ? (
+      <div className={`w-2 h-2 rounded-full flex-shrink-0 ${accentColor}`} />
+      <span className="flex-1 text-sm text-gray-900 dark:text-white font-medium">{name}</span>
+      {isDefault ? (
         <span className="flex items-center gap-1 text-xs text-gray-400 dark:text-gray-500 px-2 py-0.5 rounded-full bg-gray-100 dark:bg-gray-800">
           <ShieldCheck className="w-3 h-3" />
           Système
         </span>
       ) : (
         <span className="text-xs text-brand-600 dark:text-brand-400 px-2 py-0.5 rounded-full bg-brand-50 dark:bg-brand-900/20">
-          Personnalisée
+          Personnalisé
         </span>
       )}
-      {canDelete && !cat.isDefault && cat.id && (
+      {canDelete && !isDefault && id && (
         <button
-          onClick={handleDelete}
+          onClick={async () => { setDeleting(true); await onDelete(id); setDeleting(false) }}
           disabled={deleting}
           className="opacity-0 group-hover:opacity-100 p-1.5 rounded-lg text-red-400 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 transition"
         >
@@ -62,12 +65,14 @@ function CategoryRow({
   )
 }
 
-function AddCategoryForm({
-  type,
+function AddItemForm({
+  placeholder,
+  buttonColor,
   onAdd,
 }: {
-  type: 'REVENUE' | 'EXPENSE'
-  onAdd: (name: string, type: 'REVENUE' | 'EXPENSE') => Promise<{ ok: boolean; error?: string }>
+  placeholder: string
+  buttonColor: string
+  onAdd: (name: string) => Promise<{ ok: boolean; error?: string }>
 }) {
   const [name, setName] = useState('')
   const [loading, setLoading] = useState(false)
@@ -78,12 +83,9 @@ function AddCategoryForm({
     if (!trimmed) return
     setLoading(true)
     setError('')
-    const result = await onAdd(trimmed, type)
-    if (result.ok) {
-      setName('')
-    } else {
-      setError(result.error || 'Erreur')
-    }
+    const result = await onAdd(trimmed)
+    if (result.ok) setName('')
+    else setError(result.error || 'Erreur')
     setLoading(false)
   }
 
@@ -95,17 +97,13 @@ function AddCategoryForm({
           value={name}
           onChange={(e) => { setName(e.target.value); setError('') }}
           onKeyDown={(e) => e.key === 'Enter' && submit()}
-          placeholder="Nom de la nouvelle catégorie…"
+          placeholder={placeholder}
           className="flex-1 px-3 py-2 text-sm border border-gray-200 dark:border-gray-700 rounded-xl bg-white dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-brand-400 focus:border-transparent transition"
         />
         <button
           onClick={submit}
           disabled={loading || !name.trim()}
-          className={`inline-flex items-center gap-1.5 px-4 py-2 text-sm font-medium rounded-xl transition disabled:opacity-50 ${
-            type === 'REVENUE'
-              ? 'bg-teal-600 hover:bg-teal-700 text-white'
-              : 'bg-orange-500 hover:bg-orange-600 text-white'
-          }`}
+          className={`inline-flex items-center gap-1.5 px-4 py-2 text-sm font-medium rounded-xl transition disabled:opacity-50 ${buttonColor}`}
         >
           {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Plus className="w-4 h-4" />}
           Ajouter
@@ -116,32 +114,36 @@ function AddCategoryForm({
   )
 }
 
+type Tab = 'REVENUE' | 'EXPENSE' | 'DEBTORS'
+
 export function CategoriesPage() {
   const { data: session } = useSession()
   const [revenue, setRevenue] = useState<Category[]>([])
   const [expense, setExpense] = useState<Category[]>([])
+  const [debtors, setDebtors] = useState<Debtor[]>([])
   const [loading, setLoading] = useState(true)
-  const [activeTab, setActiveTab] = useState<'REVENUE' | 'EXPENSE'>('REVENUE')
+  const [activeTab, setActiveTab] = useState<Tab>('REVENUE')
 
   const role = session?.user?.role || ''
-  const canCreate = ['SUPER_ADMIN', 'DIRECTION', 'FINANCIER'].includes(role)
+  const canCreate = ['SUPER_ADMIN', 'DIRECTION', 'FINANCIER', 'FACILITY_CHIEF'].includes(role)
   const canDelete = CAN_DELETE.includes(role)
 
   const load = useCallback(() => {
-    fetch('/api/categories')
-      .then((r) => r.json())
-      .then((d) => {
-        if (d.success) {
-          setRevenue(d.data.REVENUE || [])
-          setExpense(d.data.EXPENSE || [])
-        }
-      })
-      .finally(() => setLoading(false))
+    Promise.all([
+      fetch('/api/categories').then((r) => r.json()),
+      fetch('/api/debtors').then((r) => r.json()),
+    ]).then(([cats, deb]) => {
+      if (cats.success) {
+        setRevenue(cats.data.REVENUE || [])
+        setExpense(cats.data.EXPENSE || [])
+      }
+      if (deb.success) setDebtors(deb.data || [])
+    }).finally(() => setLoading(false))
   }, [])
 
   useEffect(() => { load() }, [load])
 
-  const handleAdd = async (name: string, type: 'REVENUE' | 'EXPENSE') => {
+  const handleAddCategory = async (name: string, type: 'REVENUE' | 'EXPENSE') => {
     const res = await fetch('/api/categories', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -156,7 +158,7 @@ export function CategoriesPage() {
     return { ok: false, error: data.error }
   }
 
-  const handleDelete = async (id: string) => {
+  const handleDeleteCategory = async (id: string) => {
     const res = await fetch(`/api/categories?id=${id}`, { method: 'DELETE' })
     const data = await res.json()
     if (data.success) {
@@ -165,9 +167,25 @@ export function CategoriesPage() {
     }
   }
 
-  const current = activeTab === 'REVENUE' ? revenue : expense
-  const defaultCount = current.filter((c) => c.isDefault).length
-  const customCount = current.filter((c) => !c.isDefault).length
+  const handleAddDebtor = async (name: string) => {
+    const res = await fetch('/api/debtors', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name }),
+    })
+    const data = await res.json()
+    if (data.success) {
+      setDebtors((prev) => [...prev, data.data])
+      return { ok: true }
+    }
+    return { ok: false, error: data.error }
+  }
+
+  const handleDeleteDebtor = async (id: string) => {
+    const res = await fetch(`/api/debtors?id=${id}`, { method: 'DELETE' })
+    const data = await res.json()
+    if (data.success) setDebtors((prev) => prev.filter((d) => d.id !== id))
+  }
 
   if (loading) {
     return (
@@ -181,7 +199,7 @@ export function CategoriesPage() {
     <div className="space-y-6 max-w-3xl">
       <PageHeader
         title="Gestion des catégories"
-        description="Catégories disponibles pour les déclarations de recettes et de dépenses"
+        description="Catégories et débiteurs disponibles pour les déclarations"
       />
 
       {/* Stats */}
@@ -204,21 +222,19 @@ export function CategoriesPage() {
         </div>
         <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 p-4">
           <div className="flex items-center gap-2 mb-1">
-            <ShieldCheck className="w-4 h-4 text-gray-400" />
-            <span className="text-xs text-gray-500">Système</span>
+            <Building2 className="w-4 h-4 text-purple-500" />
+            <span className="text-xs text-gray-500">Débiteurs</span>
           </div>
-          <p className="text-2xl font-bold text-gray-900 dark:text-white">
-            {revenue.filter((c) => c.isDefault).length + expense.filter((c) => c.isDefault).length}
-          </p>
-          <p className="text-xs text-gray-400 mt-0.5">Non modifiables</p>
+          <p className="text-2xl font-bold text-gray-900 dark:text-white">{debtors.length}</p>
+          <p className="text-xs text-gray-400 mt-0.5">{debtors.filter((d) => !d.isDefault).length} personnalisés</p>
         </div>
         <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 p-4">
           <div className="flex items-center gap-2 mb-1">
             <Tag className="w-4 h-4 text-brand-500" />
             <span className="text-xs text-gray-500">Total</span>
           </div>
-          <p className="text-2xl font-bold text-gray-900 dark:text-white">{revenue.length + expense.length}</p>
-          <p className="text-xs text-gray-400 mt-0.5">Toutes catégories</p>
+          <p className="text-2xl font-bold text-gray-900 dark:text-white">{revenue.length + expense.length + debtors.length}</p>
+          <p className="text-xs text-gray-400 mt-0.5">Toutes entrées</p>
         </div>
       </div>
 
@@ -248,36 +264,85 @@ export function CategoriesPage() {
             <TrendingDown className="w-4 h-4" />
             Dépenses ({expense.length})
           </button>
+          <button
+            onClick={() => setActiveTab('DEBTORS')}
+            className={`flex-1 flex items-center justify-center gap-2 px-4 py-3.5 text-sm font-medium transition-colors ${
+              activeTab === 'DEBTORS'
+                ? 'text-purple-700 dark:text-purple-400 border-b-2 border-purple-500 bg-purple-50/50 dark:bg-purple-900/10'
+                : 'text-gray-500 hover:text-gray-700 dark:hover:text-gray-300'
+            }`}
+          >
+            <Building2 className="w-4 h-4" />
+            Débiteurs ({debtors.length})
+          </button>
         </div>
 
         {/* Summary bar */}
         <div className="px-4 py-2.5 bg-gray-50 dark:bg-gray-800/40 flex items-center gap-4 text-xs text-gray-500">
-          <span>{defaultCount} catégories système</span>
-          <span className="w-px h-3 bg-gray-200 dark:bg-gray-700" />
-          <span>{customCount} catégories personnalisées</span>
+          {activeTab === 'DEBTORS' ? (
+            <>
+              <span>{debtors.filter((d) => d.isDefault).length} débiteurs système</span>
+              <span className="w-px h-3 bg-gray-200 dark:bg-gray-700" />
+              <span>{debtors.filter((d) => !d.isDefault).length} débiteurs personnalisés</span>
+            </>
+          ) : (
+            <>
+              <span>{(activeTab === 'REVENUE' ? revenue : expense).filter((c) => c.isDefault).length} catégories système</span>
+              <span className="w-px h-3 bg-gray-200 dark:bg-gray-700" />
+              <span>{(activeTab === 'REVENUE' ? revenue : expense).filter((c) => !c.isDefault).length} catégories personnalisées</span>
+            </>
+          )}
         </div>
 
         {/* List */}
         <div className="divide-y divide-gray-50 dark:divide-gray-800/50">
-          {current.map((cat) => (
-            <CategoryRow
-              key={cat.id ?? cat.name}
-              cat={cat}
-              canDelete={canDelete}
-              onDelete={handleDelete}
-            />
-          ))}
+          {activeTab === 'DEBTORS' ? (
+            debtors.map((d) => (
+              <ItemRow
+                key={d.id ?? d.name}
+                name={d.name}
+                isDefault={d.isDefault}
+                id={d.id}
+                canDelete={canDelete}
+                accentColor="bg-purple-400"
+                onDelete={handleDeleteDebtor}
+              />
+            ))
+          ) : (
+            (activeTab === 'REVENUE' ? revenue : expense).map((cat) => (
+              <ItemRow
+                key={cat.id ?? cat.name}
+                name={cat.name}
+                isDefault={cat.isDefault}
+                id={cat.id}
+                canDelete={canDelete}
+                accentColor={activeTab === 'REVENUE' ? 'bg-teal-400' : 'bg-orange-400'}
+                onDelete={handleDeleteCategory}
+              />
+            ))
+          )}
         </div>
 
         {/* Add form */}
-        {canCreate && (
-          <AddCategoryForm type={activeTab} onAdd={handleAdd} />
+        {canCreate && activeTab === 'DEBTORS' && (
+          <AddItemForm
+            placeholder="Nom du débiteur (ex: CNPS, Mutuelle XYZ…)"
+            buttonColor="bg-purple-600 hover:bg-purple-700 text-white"
+            onAdd={handleAddDebtor}
+          />
+        )}
+        {canCreate && activeTab !== 'DEBTORS' && (
+          <AddItemForm
+            placeholder="Nom de la nouvelle catégorie…"
+            buttonColor={activeTab === 'REVENUE' ? 'bg-teal-600 hover:bg-teal-700 text-white' : 'bg-orange-500 hover:bg-orange-600 text-white'}
+            onAdd={(name) => handleAddCategory(name, activeTab)}
+          />
         )}
       </div>
 
       {!canDelete && canCreate && (
         <p className="text-xs text-gray-400 text-center">
-          Vous pouvez créer des catégories. La suppression est réservée aux administrateurs.
+          Vous pouvez créer des entrées. La suppression est réservée aux administrateurs.
         </p>
       )}
     </div>

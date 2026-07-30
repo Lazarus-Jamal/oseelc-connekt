@@ -261,10 +261,25 @@ model Declaration {
   items       DeclarationItem[]
   documents   DeclarationDocument[]
   history     DeclarationHistory[]
+  credits     DeclarationCredit[]
 
   @@index([facilityId, periodStart])
   @@index([status])
   @@map("declarations")
+}
+
+model DeclarationCredit {
+  id            String      @id @default(cuid())
+  declarationId String
+  debtor        String      // ex: "HPGB 30/70", "CNPS", "Entreprise X"
+  amount        Decimal     @db.Decimal(15, 2)
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+
+  declaration Declaration @relation(fields: [declarationId], references: [id], onDelete: Cascade)
+
+  @@index([declarationId])
+  @@map("declaration_credits")
 }
 
 model DeclarationItem {
@@ -309,6 +324,17 @@ model DeclarationHistory {
   declaration Declaration @relation(fields: [declarationId], references: [id], onDelete: Cascade)
 
   @@map("declaration_history")
+}
+
+// ─── DÉBITEURS (assurances, mutuelles, entreprises) ──────────────────────────
+
+model Debtor {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+
+  @@map("debtors")
 }
 
 // ─── CATÉGORIES ──────────────────────────────────────────────────────────────

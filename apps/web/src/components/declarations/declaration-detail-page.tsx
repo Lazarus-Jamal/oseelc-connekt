@@ -209,9 +209,30 @@ export function DeclarationDetailPage({ id }: DeclarationDetailPageProps) {
                   </tr>
                 ))}
                 <tr className="bg-gray-50 dark:bg-gray-800/50 font-semibold">
-                  <td className="px-4 py-3 text-gray-900 dark:text-white" colSpan={2}>Total</td>
+                  <td className="px-4 py-3 text-gray-900 dark:text-white" colSpan={2}>{declaration.credits?.length ? 'Total brut' : 'Total'}</td>
                   <td className="px-4 py-3 text-right text-brand-600 dark:text-brand-400 text-base">{formatCurrency(declaration.totalAmount)}</td>
                 </tr>
+                {declaration.declarationType === 'REVENUE' && declaration.credits?.length > 0 && (() => {
+                  const totalCredits = declaration.credits.reduce((s: number, c: any) => s + Number(c.amount), 0)
+                  return (
+                    <>
+                      {declaration.credits.map((c: any) => (
+                        <tr key={c.id} className="text-sm">
+                          <td className="px-4 py-2 text-orange-700 dark:text-orange-400 pl-8" colSpan={2}>↳ Crédit — {c.debtor}</td>
+                          <td className="px-4 py-2 text-right text-orange-600 dark:text-orange-400">−{formatCurrency(c.amount)}</td>
+                        </tr>
+                      ))}
+                      <tr className="bg-orange-50 dark:bg-orange-900/20 font-semibold text-sm">
+                        <td className="px-4 py-2 text-orange-800 dark:text-orange-300" colSpan={2}>Total crédits</td>
+                        <td className="px-4 py-2 text-right text-orange-600 dark:text-orange-400">−{formatCurrency(totalCredits)}</td>
+                      </tr>
+                      <tr className="bg-green-50 dark:bg-green-900/20 font-bold">
+                        <td className="px-4 py-3 text-green-800 dark:text-green-300" colSpan={2}>Net cash</td>
+                        <td className="px-4 py-3 text-right text-green-700 dark:text-green-400 text-base">{formatCurrency(Number(declaration.totalAmount) - totalCredits)}</td>
+                      </tr>
+                    </>
+                  )
+                })()}
               </tbody>
             </table>
           </div>

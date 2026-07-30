@@ -49,6 +49,11 @@ export type DeclarationPeriodConfig = $Result.DefaultSelection<Prisma.$Declarati
  */
 export type Declaration = $Result.DefaultSelection<Prisma.$DeclarationPayload>
 /**
+ * Model DeclarationCredit
+ * 
+ */
+export type DeclarationCredit = $Result.DefaultSelection<Prisma.$DeclarationCreditPayload>
+/**
  * Model DeclarationItem
  * 
  */
@@ -63,6 +68,11 @@ export type DeclarationDocument = $Result.DefaultSelection<Prisma.$DeclarationDo
  * 
  */
 export type DeclarationHistory = $Result.DefaultSelection<Prisma.$DeclarationHistoryPayload>
+/**
+ * Model Debtor
+ * 
+ */
+export type Debtor = $Result.DefaultSelection<Prisma.$DebtorPayload>
 /**
  * Model Category
  * 
@@ -529,6 +539,16 @@ export class PrismaClient<
   get declaration(): Prisma.DeclarationDelegate<ExtArgs, ClientOptions>;
 
   /**
+   * `prisma.declarationCredit`: Exposes CRUD operations for the **DeclarationCredit** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more DeclarationCredits
+    * const declarationCredits = await prisma.declarationCredit.findMany()
+    * ```
+    */
+  get declarationCredit(): Prisma.DeclarationCreditDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.declarationItem`: Exposes CRUD operations for the **DeclarationItem** model.
     * Example usage:
     * ```ts
@@ -557,6 +577,16 @@ export class PrismaClient<
     * ```
     */
   get declarationHistory(): Prisma.DeclarationHistoryDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.debtor`: Exposes CRUD operations for the **Debtor** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Debtors
+    * const debtors = await prisma.debtor.findMany()
+    * ```
+    */
+  get debtor(): Prisma.DebtorDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.category`: Exposes CRUD operations for the **Category** model.
@@ -1215,9 +1245,11 @@ export namespace Prisma {
     Session: 'Session',
     DeclarationPeriodConfig: 'DeclarationPeriodConfig',
     Declaration: 'Declaration',
+    DeclarationCredit: 'DeclarationCredit',
     DeclarationItem: 'DeclarationItem',
     DeclarationDocument: 'DeclarationDocument',
     DeclarationHistory: 'DeclarationHistory',
+    Debtor: 'Debtor',
     Category: 'Category',
     Budget: 'Budget',
     StatSheet: 'StatSheet',
@@ -1257,7 +1289,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "organization" | "region" | "facility" | "user" | "session" | "declarationPeriodConfig" | "declaration" | "declarationItem" | "declarationDocument" | "declarationHistory" | "category" | "budget" | "statSheet" | "statIndicator" | "statValue" | "statDocument" | "statDeadline" | "notification" | "pushSubscription" | "adminMessage" | "adminMessageRecipient" | "adminMessageDocument" | "auditLog" | "facilityApiKey" | "care2xSync" | "care2xSyncEntry" | "care2xRecouvrementSync" | "care2xRapportJournalier" | "care2xVersion" | "pagePermission" | "planningEvent"
+      modelProps: "organization" | "region" | "facility" | "user" | "session" | "declarationPeriodConfig" | "declaration" | "declarationCredit" | "declarationItem" | "declarationDocument" | "declarationHistory" | "debtor" | "category" | "budget" | "statSheet" | "statIndicator" | "statValue" | "statDocument" | "statDeadline" | "notification" | "pushSubscription" | "adminMessage" | "adminMessageRecipient" | "adminMessageDocument" | "auditLog" | "facilityApiKey" | "care2xSync" | "care2xSyncEntry" | "care2xRecouvrementSync" | "care2xRapportJournalier" | "care2xVersion" | "pagePermission" | "planningEvent"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1779,6 +1811,80 @@ export namespace Prisma {
           }
         }
       }
+      DeclarationCredit: {
+        payload: Prisma.$DeclarationCreditPayload<ExtArgs>
+        fields: Prisma.DeclarationCreditFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.DeclarationCreditFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DeclarationCreditPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.DeclarationCreditFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DeclarationCreditPayload>
+          }
+          findFirst: {
+            args: Prisma.DeclarationCreditFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DeclarationCreditPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.DeclarationCreditFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DeclarationCreditPayload>
+          }
+          findMany: {
+            args: Prisma.DeclarationCreditFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DeclarationCreditPayload>[]
+          }
+          create: {
+            args: Prisma.DeclarationCreditCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DeclarationCreditPayload>
+          }
+          createMany: {
+            args: Prisma.DeclarationCreditCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.DeclarationCreditCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DeclarationCreditPayload>[]
+          }
+          delete: {
+            args: Prisma.DeclarationCreditDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DeclarationCreditPayload>
+          }
+          update: {
+            args: Prisma.DeclarationCreditUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DeclarationCreditPayload>
+          }
+          deleteMany: {
+            args: Prisma.DeclarationCreditDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.DeclarationCreditUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.DeclarationCreditUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DeclarationCreditPayload>[]
+          }
+          upsert: {
+            args: Prisma.DeclarationCreditUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DeclarationCreditPayload>
+          }
+          aggregate: {
+            args: Prisma.DeclarationCreditAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateDeclarationCredit>
+          }
+          groupBy: {
+            args: Prisma.DeclarationCreditGroupByArgs<ExtArgs>
+            result: $Utils.Optional<DeclarationCreditGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.DeclarationCreditCountArgs<ExtArgs>
+            result: $Utils.Optional<DeclarationCreditCountAggregateOutputType> | number
+          }
+        }
+      }
       DeclarationItem: {
         payload: Prisma.$DeclarationItemPayload<ExtArgs>
         fields: Prisma.DeclarationItemFieldRefs
@@ -1998,6 +2104,80 @@ export namespace Prisma {
           count: {
             args: Prisma.DeclarationHistoryCountArgs<ExtArgs>
             result: $Utils.Optional<DeclarationHistoryCountAggregateOutputType> | number
+          }
+        }
+      }
+      Debtor: {
+        payload: Prisma.$DebtorPayload<ExtArgs>
+        fields: Prisma.DebtorFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.DebtorFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DebtorPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.DebtorFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DebtorPayload>
+          }
+          findFirst: {
+            args: Prisma.DebtorFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DebtorPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.DebtorFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DebtorPayload>
+          }
+          findMany: {
+            args: Prisma.DebtorFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DebtorPayload>[]
+          }
+          create: {
+            args: Prisma.DebtorCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DebtorPayload>
+          }
+          createMany: {
+            args: Prisma.DebtorCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.DebtorCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DebtorPayload>[]
+          }
+          delete: {
+            args: Prisma.DebtorDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DebtorPayload>
+          }
+          update: {
+            args: Prisma.DebtorUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DebtorPayload>
+          }
+          deleteMany: {
+            args: Prisma.DebtorDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.DebtorUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.DebtorUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DebtorPayload>[]
+          }
+          upsert: {
+            args: Prisma.DebtorUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DebtorPayload>
+          }
+          aggregate: {
+            args: Prisma.DebtorAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateDebtor>
+          }
+          groupBy: {
+            args: Prisma.DebtorGroupByArgs<ExtArgs>
+            result: $Utils.Optional<DebtorGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.DebtorCountArgs<ExtArgs>
+            result: $Utils.Optional<DebtorCountAggregateOutputType> | number
           }
         }
       }
@@ -3658,9 +3838,11 @@ export namespace Prisma {
     session?: SessionOmit
     declarationPeriodConfig?: DeclarationPeriodConfigOmit
     declaration?: DeclarationOmit
+    declarationCredit?: DeclarationCreditOmit
     declarationItem?: DeclarationItemOmit
     declarationDocument?: DeclarationDocumentOmit
     declarationHistory?: DeclarationHistoryOmit
+    debtor?: DebtorOmit
     category?: CategoryOmit
     budget?: BudgetOmit
     statSheet?: StatSheetOmit
@@ -4105,12 +4287,14 @@ export namespace Prisma {
     items: number
     documents: number
     history: number
+    credits: number
   }
 
   export type DeclarationCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     items?: boolean | DeclarationCountOutputTypeCountItemsArgs
     documents?: boolean | DeclarationCountOutputTypeCountDocumentsArgs
     history?: boolean | DeclarationCountOutputTypeCountHistoryArgs
+    credits?: boolean | DeclarationCountOutputTypeCountCreditsArgs
   }
 
   // Custom InputTypes
@@ -4143,6 +4327,13 @@ export namespace Prisma {
    */
   export type DeclarationCountOutputTypeCountHistoryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: DeclarationHistoryWhereInput
+  }
+
+  /**
+   * DeclarationCountOutputType without action
+   */
+  export type DeclarationCountOutputTypeCountCreditsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DeclarationCreditWhereInput
   }
 
 
@@ -12376,6 +12567,7 @@ export namespace Prisma {
     items?: boolean | Declaration$itemsArgs<ExtArgs>
     documents?: boolean | Declaration$documentsArgs<ExtArgs>
     history?: boolean | Declaration$historyArgs<ExtArgs>
+    credits?: boolean | Declaration$creditsArgs<ExtArgs>
     _count?: boolean | DeclarationCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["declaration"]>
 
@@ -12453,6 +12645,7 @@ export namespace Prisma {
     items?: boolean | Declaration$itemsArgs<ExtArgs>
     documents?: boolean | Declaration$documentsArgs<ExtArgs>
     history?: boolean | Declaration$historyArgs<ExtArgs>
+    credits?: boolean | Declaration$creditsArgs<ExtArgs>
     _count?: boolean | DeclarationCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type DeclarationIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -12475,6 +12668,7 @@ export namespace Prisma {
       items: Prisma.$DeclarationItemPayload<ExtArgs>[]
       documents: Prisma.$DeclarationDocumentPayload<ExtArgs>[]
       history: Prisma.$DeclarationHistoryPayload<ExtArgs>[]
+      credits: Prisma.$DeclarationCreditPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -12894,6 +13088,7 @@ export namespace Prisma {
     items<T extends Declaration$itemsArgs<ExtArgs> = {}>(args?: Subset<T, Declaration$itemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DeclarationItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     documents<T extends Declaration$documentsArgs<ExtArgs> = {}>(args?: Subset<T, Declaration$documentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DeclarationDocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     history<T extends Declaration$historyArgs<ExtArgs> = {}>(args?: Subset<T, Declaration$historyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DeclarationHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    credits<T extends Declaration$creditsArgs<ExtArgs> = {}>(args?: Subset<T, Declaration$creditsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DeclarationCreditPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -13427,6 +13622,30 @@ export namespace Prisma {
   }
 
   /**
+   * Declaration.credits
+   */
+  export type Declaration$creditsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DeclarationCredit
+     */
+    select?: DeclarationCreditSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DeclarationCredit
+     */
+    omit?: DeclarationCreditOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DeclarationCreditInclude<ExtArgs> | null
+    where?: DeclarationCreditWhereInput
+    orderBy?: DeclarationCreditOrderByWithRelationInput | DeclarationCreditOrderByWithRelationInput[]
+    cursor?: DeclarationCreditWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: DeclarationCreditScalarFieldEnum | DeclarationCreditScalarFieldEnum[]
+  }
+
+  /**
    * Declaration without action
    */
   export type DeclarationDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -13442,6 +13661,1111 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: DeclarationInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model DeclarationCredit
+   */
+
+  export type AggregateDeclarationCredit = {
+    _count: DeclarationCreditCountAggregateOutputType | null
+    _avg: DeclarationCreditAvgAggregateOutputType | null
+    _sum: DeclarationCreditSumAggregateOutputType | null
+    _min: DeclarationCreditMinAggregateOutputType | null
+    _max: DeclarationCreditMaxAggregateOutputType | null
+  }
+
+  export type DeclarationCreditAvgAggregateOutputType = {
+    amount: Decimal | null
+  }
+
+  export type DeclarationCreditSumAggregateOutputType = {
+    amount: Decimal | null
+  }
+
+  export type DeclarationCreditMinAggregateOutputType = {
+    id: string | null
+    declarationId: string | null
+    debtor: string | null
+    amount: Decimal | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type DeclarationCreditMaxAggregateOutputType = {
+    id: string | null
+    declarationId: string | null
+    debtor: string | null
+    amount: Decimal | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type DeclarationCreditCountAggregateOutputType = {
+    id: number
+    declarationId: number
+    debtor: number
+    amount: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type DeclarationCreditAvgAggregateInputType = {
+    amount?: true
+  }
+
+  export type DeclarationCreditSumAggregateInputType = {
+    amount?: true
+  }
+
+  export type DeclarationCreditMinAggregateInputType = {
+    id?: true
+    declarationId?: true
+    debtor?: true
+    amount?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type DeclarationCreditMaxAggregateInputType = {
+    id?: true
+    declarationId?: true
+    debtor?: true
+    amount?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type DeclarationCreditCountAggregateInputType = {
+    id?: true
+    declarationId?: true
+    debtor?: true
+    amount?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type DeclarationCreditAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which DeclarationCredit to aggregate.
+     */
+    where?: DeclarationCreditWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DeclarationCredits to fetch.
+     */
+    orderBy?: DeclarationCreditOrderByWithRelationInput | DeclarationCreditOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: DeclarationCreditWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DeclarationCredits from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DeclarationCredits.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned DeclarationCredits
+    **/
+    _count?: true | DeclarationCreditCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: DeclarationCreditAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: DeclarationCreditSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: DeclarationCreditMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: DeclarationCreditMaxAggregateInputType
+  }
+
+  export type GetDeclarationCreditAggregateType<T extends DeclarationCreditAggregateArgs> = {
+        [P in keyof T & keyof AggregateDeclarationCredit]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateDeclarationCredit[P]>
+      : GetScalarType<T[P], AggregateDeclarationCredit[P]>
+  }
+
+
+
+
+  export type DeclarationCreditGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DeclarationCreditWhereInput
+    orderBy?: DeclarationCreditOrderByWithAggregationInput | DeclarationCreditOrderByWithAggregationInput[]
+    by: DeclarationCreditScalarFieldEnum[] | DeclarationCreditScalarFieldEnum
+    having?: DeclarationCreditScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: DeclarationCreditCountAggregateInputType | true
+    _avg?: DeclarationCreditAvgAggregateInputType
+    _sum?: DeclarationCreditSumAggregateInputType
+    _min?: DeclarationCreditMinAggregateInputType
+    _max?: DeclarationCreditMaxAggregateInputType
+  }
+
+  export type DeclarationCreditGroupByOutputType = {
+    id: string
+    declarationId: string
+    debtor: string
+    amount: Decimal
+    createdAt: Date
+    updatedAt: Date
+    _count: DeclarationCreditCountAggregateOutputType | null
+    _avg: DeclarationCreditAvgAggregateOutputType | null
+    _sum: DeclarationCreditSumAggregateOutputType | null
+    _min: DeclarationCreditMinAggregateOutputType | null
+    _max: DeclarationCreditMaxAggregateOutputType | null
+  }
+
+  type GetDeclarationCreditGroupByPayload<T extends DeclarationCreditGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<DeclarationCreditGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof DeclarationCreditGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], DeclarationCreditGroupByOutputType[P]>
+            : GetScalarType<T[P], DeclarationCreditGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type DeclarationCreditSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    declarationId?: boolean
+    debtor?: boolean
+    amount?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    declaration?: boolean | DeclarationDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["declarationCredit"]>
+
+  export type DeclarationCreditSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    declarationId?: boolean
+    debtor?: boolean
+    amount?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    declaration?: boolean | DeclarationDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["declarationCredit"]>
+
+  export type DeclarationCreditSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    declarationId?: boolean
+    debtor?: boolean
+    amount?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    declaration?: boolean | DeclarationDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["declarationCredit"]>
+
+  export type DeclarationCreditSelectScalar = {
+    id?: boolean
+    declarationId?: boolean
+    debtor?: boolean
+    amount?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type DeclarationCreditOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "declarationId" | "debtor" | "amount" | "createdAt" | "updatedAt", ExtArgs["result"]["declarationCredit"]>
+  export type DeclarationCreditInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    declaration?: boolean | DeclarationDefaultArgs<ExtArgs>
+  }
+  export type DeclarationCreditIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    declaration?: boolean | DeclarationDefaultArgs<ExtArgs>
+  }
+  export type DeclarationCreditIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    declaration?: boolean | DeclarationDefaultArgs<ExtArgs>
+  }
+
+  export type $DeclarationCreditPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "DeclarationCredit"
+    objects: {
+      declaration: Prisma.$DeclarationPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      declarationId: string
+      debtor: string
+      amount: Prisma.Decimal
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["declarationCredit"]>
+    composites: {}
+  }
+
+  type DeclarationCreditGetPayload<S extends boolean | null | undefined | DeclarationCreditDefaultArgs> = $Result.GetResult<Prisma.$DeclarationCreditPayload, S>
+
+  type DeclarationCreditCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<DeclarationCreditFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: DeclarationCreditCountAggregateInputType | true
+    }
+
+  export interface DeclarationCreditDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['DeclarationCredit'], meta: { name: 'DeclarationCredit' } }
+    /**
+     * Find zero or one DeclarationCredit that matches the filter.
+     * @param {DeclarationCreditFindUniqueArgs} args - Arguments to find a DeclarationCredit
+     * @example
+     * // Get one DeclarationCredit
+     * const declarationCredit = await prisma.declarationCredit.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends DeclarationCreditFindUniqueArgs>(args: SelectSubset<T, DeclarationCreditFindUniqueArgs<ExtArgs>>): Prisma__DeclarationCreditClient<$Result.GetResult<Prisma.$DeclarationCreditPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one DeclarationCredit that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {DeclarationCreditFindUniqueOrThrowArgs} args - Arguments to find a DeclarationCredit
+     * @example
+     * // Get one DeclarationCredit
+     * const declarationCredit = await prisma.declarationCredit.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends DeclarationCreditFindUniqueOrThrowArgs>(args: SelectSubset<T, DeclarationCreditFindUniqueOrThrowArgs<ExtArgs>>): Prisma__DeclarationCreditClient<$Result.GetResult<Prisma.$DeclarationCreditPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first DeclarationCredit that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DeclarationCreditFindFirstArgs} args - Arguments to find a DeclarationCredit
+     * @example
+     * // Get one DeclarationCredit
+     * const declarationCredit = await prisma.declarationCredit.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends DeclarationCreditFindFirstArgs>(args?: SelectSubset<T, DeclarationCreditFindFirstArgs<ExtArgs>>): Prisma__DeclarationCreditClient<$Result.GetResult<Prisma.$DeclarationCreditPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first DeclarationCredit that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DeclarationCreditFindFirstOrThrowArgs} args - Arguments to find a DeclarationCredit
+     * @example
+     * // Get one DeclarationCredit
+     * const declarationCredit = await prisma.declarationCredit.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends DeclarationCreditFindFirstOrThrowArgs>(args?: SelectSubset<T, DeclarationCreditFindFirstOrThrowArgs<ExtArgs>>): Prisma__DeclarationCreditClient<$Result.GetResult<Prisma.$DeclarationCreditPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more DeclarationCredits that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DeclarationCreditFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all DeclarationCredits
+     * const declarationCredits = await prisma.declarationCredit.findMany()
+     * 
+     * // Get first 10 DeclarationCredits
+     * const declarationCredits = await prisma.declarationCredit.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const declarationCreditWithIdOnly = await prisma.declarationCredit.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends DeclarationCreditFindManyArgs>(args?: SelectSubset<T, DeclarationCreditFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DeclarationCreditPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a DeclarationCredit.
+     * @param {DeclarationCreditCreateArgs} args - Arguments to create a DeclarationCredit.
+     * @example
+     * // Create one DeclarationCredit
+     * const DeclarationCredit = await prisma.declarationCredit.create({
+     *   data: {
+     *     // ... data to create a DeclarationCredit
+     *   }
+     * })
+     * 
+     */
+    create<T extends DeclarationCreditCreateArgs>(args: SelectSubset<T, DeclarationCreditCreateArgs<ExtArgs>>): Prisma__DeclarationCreditClient<$Result.GetResult<Prisma.$DeclarationCreditPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many DeclarationCredits.
+     * @param {DeclarationCreditCreateManyArgs} args - Arguments to create many DeclarationCredits.
+     * @example
+     * // Create many DeclarationCredits
+     * const declarationCredit = await prisma.declarationCredit.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends DeclarationCreditCreateManyArgs>(args?: SelectSubset<T, DeclarationCreditCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many DeclarationCredits and returns the data saved in the database.
+     * @param {DeclarationCreditCreateManyAndReturnArgs} args - Arguments to create many DeclarationCredits.
+     * @example
+     * // Create many DeclarationCredits
+     * const declarationCredit = await prisma.declarationCredit.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many DeclarationCredits and only return the `id`
+     * const declarationCreditWithIdOnly = await prisma.declarationCredit.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends DeclarationCreditCreateManyAndReturnArgs>(args?: SelectSubset<T, DeclarationCreditCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DeclarationCreditPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a DeclarationCredit.
+     * @param {DeclarationCreditDeleteArgs} args - Arguments to delete one DeclarationCredit.
+     * @example
+     * // Delete one DeclarationCredit
+     * const DeclarationCredit = await prisma.declarationCredit.delete({
+     *   where: {
+     *     // ... filter to delete one DeclarationCredit
+     *   }
+     * })
+     * 
+     */
+    delete<T extends DeclarationCreditDeleteArgs>(args: SelectSubset<T, DeclarationCreditDeleteArgs<ExtArgs>>): Prisma__DeclarationCreditClient<$Result.GetResult<Prisma.$DeclarationCreditPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one DeclarationCredit.
+     * @param {DeclarationCreditUpdateArgs} args - Arguments to update one DeclarationCredit.
+     * @example
+     * // Update one DeclarationCredit
+     * const declarationCredit = await prisma.declarationCredit.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends DeclarationCreditUpdateArgs>(args: SelectSubset<T, DeclarationCreditUpdateArgs<ExtArgs>>): Prisma__DeclarationCreditClient<$Result.GetResult<Prisma.$DeclarationCreditPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more DeclarationCredits.
+     * @param {DeclarationCreditDeleteManyArgs} args - Arguments to filter DeclarationCredits to delete.
+     * @example
+     * // Delete a few DeclarationCredits
+     * const { count } = await prisma.declarationCredit.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends DeclarationCreditDeleteManyArgs>(args?: SelectSubset<T, DeclarationCreditDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more DeclarationCredits.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DeclarationCreditUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many DeclarationCredits
+     * const declarationCredit = await prisma.declarationCredit.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends DeclarationCreditUpdateManyArgs>(args: SelectSubset<T, DeclarationCreditUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more DeclarationCredits and returns the data updated in the database.
+     * @param {DeclarationCreditUpdateManyAndReturnArgs} args - Arguments to update many DeclarationCredits.
+     * @example
+     * // Update many DeclarationCredits
+     * const declarationCredit = await prisma.declarationCredit.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more DeclarationCredits and only return the `id`
+     * const declarationCreditWithIdOnly = await prisma.declarationCredit.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends DeclarationCreditUpdateManyAndReturnArgs>(args: SelectSubset<T, DeclarationCreditUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DeclarationCreditPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one DeclarationCredit.
+     * @param {DeclarationCreditUpsertArgs} args - Arguments to update or create a DeclarationCredit.
+     * @example
+     * // Update or create a DeclarationCredit
+     * const declarationCredit = await prisma.declarationCredit.upsert({
+     *   create: {
+     *     // ... data to create a DeclarationCredit
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the DeclarationCredit we want to update
+     *   }
+     * })
+     */
+    upsert<T extends DeclarationCreditUpsertArgs>(args: SelectSubset<T, DeclarationCreditUpsertArgs<ExtArgs>>): Prisma__DeclarationCreditClient<$Result.GetResult<Prisma.$DeclarationCreditPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of DeclarationCredits.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DeclarationCreditCountArgs} args - Arguments to filter DeclarationCredits to count.
+     * @example
+     * // Count the number of DeclarationCredits
+     * const count = await prisma.declarationCredit.count({
+     *   where: {
+     *     // ... the filter for the DeclarationCredits we want to count
+     *   }
+     * })
+    **/
+    count<T extends DeclarationCreditCountArgs>(
+      args?: Subset<T, DeclarationCreditCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], DeclarationCreditCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a DeclarationCredit.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DeclarationCreditAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends DeclarationCreditAggregateArgs>(args: Subset<T, DeclarationCreditAggregateArgs>): Prisma.PrismaPromise<GetDeclarationCreditAggregateType<T>>
+
+    /**
+     * Group by DeclarationCredit.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DeclarationCreditGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends DeclarationCreditGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: DeclarationCreditGroupByArgs['orderBy'] }
+        : { orderBy?: DeclarationCreditGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, DeclarationCreditGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetDeclarationCreditGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the DeclarationCredit model
+   */
+  readonly fields: DeclarationCreditFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for DeclarationCredit.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__DeclarationCreditClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    declaration<T extends DeclarationDefaultArgs<ExtArgs> = {}>(args?: Subset<T, DeclarationDefaultArgs<ExtArgs>>): Prisma__DeclarationClient<$Result.GetResult<Prisma.$DeclarationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the DeclarationCredit model
+   */
+  interface DeclarationCreditFieldRefs {
+    readonly id: FieldRef<"DeclarationCredit", 'String'>
+    readonly declarationId: FieldRef<"DeclarationCredit", 'String'>
+    readonly debtor: FieldRef<"DeclarationCredit", 'String'>
+    readonly amount: FieldRef<"DeclarationCredit", 'Decimal'>
+    readonly createdAt: FieldRef<"DeclarationCredit", 'DateTime'>
+    readonly updatedAt: FieldRef<"DeclarationCredit", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * DeclarationCredit findUnique
+   */
+  export type DeclarationCreditFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DeclarationCredit
+     */
+    select?: DeclarationCreditSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DeclarationCredit
+     */
+    omit?: DeclarationCreditOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DeclarationCreditInclude<ExtArgs> | null
+    /**
+     * Filter, which DeclarationCredit to fetch.
+     */
+    where: DeclarationCreditWhereUniqueInput
+  }
+
+  /**
+   * DeclarationCredit findUniqueOrThrow
+   */
+  export type DeclarationCreditFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DeclarationCredit
+     */
+    select?: DeclarationCreditSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DeclarationCredit
+     */
+    omit?: DeclarationCreditOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DeclarationCreditInclude<ExtArgs> | null
+    /**
+     * Filter, which DeclarationCredit to fetch.
+     */
+    where: DeclarationCreditWhereUniqueInput
+  }
+
+  /**
+   * DeclarationCredit findFirst
+   */
+  export type DeclarationCreditFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DeclarationCredit
+     */
+    select?: DeclarationCreditSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DeclarationCredit
+     */
+    omit?: DeclarationCreditOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DeclarationCreditInclude<ExtArgs> | null
+    /**
+     * Filter, which DeclarationCredit to fetch.
+     */
+    where?: DeclarationCreditWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DeclarationCredits to fetch.
+     */
+    orderBy?: DeclarationCreditOrderByWithRelationInput | DeclarationCreditOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for DeclarationCredits.
+     */
+    cursor?: DeclarationCreditWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DeclarationCredits from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DeclarationCredits.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of DeclarationCredits.
+     */
+    distinct?: DeclarationCreditScalarFieldEnum | DeclarationCreditScalarFieldEnum[]
+  }
+
+  /**
+   * DeclarationCredit findFirstOrThrow
+   */
+  export type DeclarationCreditFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DeclarationCredit
+     */
+    select?: DeclarationCreditSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DeclarationCredit
+     */
+    omit?: DeclarationCreditOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DeclarationCreditInclude<ExtArgs> | null
+    /**
+     * Filter, which DeclarationCredit to fetch.
+     */
+    where?: DeclarationCreditWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DeclarationCredits to fetch.
+     */
+    orderBy?: DeclarationCreditOrderByWithRelationInput | DeclarationCreditOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for DeclarationCredits.
+     */
+    cursor?: DeclarationCreditWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DeclarationCredits from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DeclarationCredits.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of DeclarationCredits.
+     */
+    distinct?: DeclarationCreditScalarFieldEnum | DeclarationCreditScalarFieldEnum[]
+  }
+
+  /**
+   * DeclarationCredit findMany
+   */
+  export type DeclarationCreditFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DeclarationCredit
+     */
+    select?: DeclarationCreditSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DeclarationCredit
+     */
+    omit?: DeclarationCreditOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DeclarationCreditInclude<ExtArgs> | null
+    /**
+     * Filter, which DeclarationCredits to fetch.
+     */
+    where?: DeclarationCreditWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DeclarationCredits to fetch.
+     */
+    orderBy?: DeclarationCreditOrderByWithRelationInput | DeclarationCreditOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing DeclarationCredits.
+     */
+    cursor?: DeclarationCreditWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DeclarationCredits from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DeclarationCredits.
+     */
+    skip?: number
+    distinct?: DeclarationCreditScalarFieldEnum | DeclarationCreditScalarFieldEnum[]
+  }
+
+  /**
+   * DeclarationCredit create
+   */
+  export type DeclarationCreditCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DeclarationCredit
+     */
+    select?: DeclarationCreditSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DeclarationCredit
+     */
+    omit?: DeclarationCreditOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DeclarationCreditInclude<ExtArgs> | null
+    /**
+     * The data needed to create a DeclarationCredit.
+     */
+    data: XOR<DeclarationCreditCreateInput, DeclarationCreditUncheckedCreateInput>
+  }
+
+  /**
+   * DeclarationCredit createMany
+   */
+  export type DeclarationCreditCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many DeclarationCredits.
+     */
+    data: DeclarationCreditCreateManyInput | DeclarationCreditCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * DeclarationCredit createManyAndReturn
+   */
+  export type DeclarationCreditCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DeclarationCredit
+     */
+    select?: DeclarationCreditSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the DeclarationCredit
+     */
+    omit?: DeclarationCreditOmit<ExtArgs> | null
+    /**
+     * The data used to create many DeclarationCredits.
+     */
+    data: DeclarationCreditCreateManyInput | DeclarationCreditCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DeclarationCreditIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * DeclarationCredit update
+   */
+  export type DeclarationCreditUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DeclarationCredit
+     */
+    select?: DeclarationCreditSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DeclarationCredit
+     */
+    omit?: DeclarationCreditOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DeclarationCreditInclude<ExtArgs> | null
+    /**
+     * The data needed to update a DeclarationCredit.
+     */
+    data: XOR<DeclarationCreditUpdateInput, DeclarationCreditUncheckedUpdateInput>
+    /**
+     * Choose, which DeclarationCredit to update.
+     */
+    where: DeclarationCreditWhereUniqueInput
+  }
+
+  /**
+   * DeclarationCredit updateMany
+   */
+  export type DeclarationCreditUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update DeclarationCredits.
+     */
+    data: XOR<DeclarationCreditUpdateManyMutationInput, DeclarationCreditUncheckedUpdateManyInput>
+    /**
+     * Filter which DeclarationCredits to update
+     */
+    where?: DeclarationCreditWhereInput
+    /**
+     * Limit how many DeclarationCredits to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * DeclarationCredit updateManyAndReturn
+   */
+  export type DeclarationCreditUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DeclarationCredit
+     */
+    select?: DeclarationCreditSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the DeclarationCredit
+     */
+    omit?: DeclarationCreditOmit<ExtArgs> | null
+    /**
+     * The data used to update DeclarationCredits.
+     */
+    data: XOR<DeclarationCreditUpdateManyMutationInput, DeclarationCreditUncheckedUpdateManyInput>
+    /**
+     * Filter which DeclarationCredits to update
+     */
+    where?: DeclarationCreditWhereInput
+    /**
+     * Limit how many DeclarationCredits to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DeclarationCreditIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * DeclarationCredit upsert
+   */
+  export type DeclarationCreditUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DeclarationCredit
+     */
+    select?: DeclarationCreditSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DeclarationCredit
+     */
+    omit?: DeclarationCreditOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DeclarationCreditInclude<ExtArgs> | null
+    /**
+     * The filter to search for the DeclarationCredit to update in case it exists.
+     */
+    where: DeclarationCreditWhereUniqueInput
+    /**
+     * In case the DeclarationCredit found by the `where` argument doesn't exist, create a new DeclarationCredit with this data.
+     */
+    create: XOR<DeclarationCreditCreateInput, DeclarationCreditUncheckedCreateInput>
+    /**
+     * In case the DeclarationCredit was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<DeclarationCreditUpdateInput, DeclarationCreditUncheckedUpdateInput>
+  }
+
+  /**
+   * DeclarationCredit delete
+   */
+  export type DeclarationCreditDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DeclarationCredit
+     */
+    select?: DeclarationCreditSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DeclarationCredit
+     */
+    omit?: DeclarationCreditOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DeclarationCreditInclude<ExtArgs> | null
+    /**
+     * Filter which DeclarationCredit to delete.
+     */
+    where: DeclarationCreditWhereUniqueInput
+  }
+
+  /**
+   * DeclarationCredit deleteMany
+   */
+  export type DeclarationCreditDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which DeclarationCredits to delete
+     */
+    where?: DeclarationCreditWhereInput
+    /**
+     * Limit how many DeclarationCredits to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * DeclarationCredit without action
+   */
+  export type DeclarationCreditDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DeclarationCredit
+     */
+    select?: DeclarationCreditSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DeclarationCredit
+     */
+    omit?: DeclarationCreditOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DeclarationCreditInclude<ExtArgs> | null
   }
 
 
@@ -16796,6 +18120,988 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: DeclarationHistoryInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Debtor
+   */
+
+  export type AggregateDebtor = {
+    _count: DebtorCountAggregateOutputType | null
+    _min: DebtorMinAggregateOutputType | null
+    _max: DebtorMaxAggregateOutputType | null
+  }
+
+  export type DebtorMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    isActive: boolean | null
+    createdAt: Date | null
+  }
+
+  export type DebtorMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    isActive: boolean | null
+    createdAt: Date | null
+  }
+
+  export type DebtorCountAggregateOutputType = {
+    id: number
+    name: number
+    isActive: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type DebtorMinAggregateInputType = {
+    id?: true
+    name?: true
+    isActive?: true
+    createdAt?: true
+  }
+
+  export type DebtorMaxAggregateInputType = {
+    id?: true
+    name?: true
+    isActive?: true
+    createdAt?: true
+  }
+
+  export type DebtorCountAggregateInputType = {
+    id?: true
+    name?: true
+    isActive?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type DebtorAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Debtor to aggregate.
+     */
+    where?: DebtorWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Debtors to fetch.
+     */
+    orderBy?: DebtorOrderByWithRelationInput | DebtorOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: DebtorWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Debtors from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Debtors.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Debtors
+    **/
+    _count?: true | DebtorCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: DebtorMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: DebtorMaxAggregateInputType
+  }
+
+  export type GetDebtorAggregateType<T extends DebtorAggregateArgs> = {
+        [P in keyof T & keyof AggregateDebtor]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateDebtor[P]>
+      : GetScalarType<T[P], AggregateDebtor[P]>
+  }
+
+
+
+
+  export type DebtorGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DebtorWhereInput
+    orderBy?: DebtorOrderByWithAggregationInput | DebtorOrderByWithAggregationInput[]
+    by: DebtorScalarFieldEnum[] | DebtorScalarFieldEnum
+    having?: DebtorScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: DebtorCountAggregateInputType | true
+    _min?: DebtorMinAggregateInputType
+    _max?: DebtorMaxAggregateInputType
+  }
+
+  export type DebtorGroupByOutputType = {
+    id: string
+    name: string
+    isActive: boolean
+    createdAt: Date
+    _count: DebtorCountAggregateOutputType | null
+    _min: DebtorMinAggregateOutputType | null
+    _max: DebtorMaxAggregateOutputType | null
+  }
+
+  type GetDebtorGroupByPayload<T extends DebtorGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<DebtorGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof DebtorGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], DebtorGroupByOutputType[P]>
+            : GetScalarType<T[P], DebtorGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type DebtorSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+  }, ExtArgs["result"]["debtor"]>
+
+  export type DebtorSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+  }, ExtArgs["result"]["debtor"]>
+
+  export type DebtorSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+  }, ExtArgs["result"]["debtor"]>
+
+  export type DebtorSelectScalar = {
+    id?: boolean
+    name?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+  }
+
+  export type DebtorOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "isActive" | "createdAt", ExtArgs["result"]["debtor"]>
+
+  export type $DebtorPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Debtor"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      isActive: boolean
+      createdAt: Date
+    }, ExtArgs["result"]["debtor"]>
+    composites: {}
+  }
+
+  type DebtorGetPayload<S extends boolean | null | undefined | DebtorDefaultArgs> = $Result.GetResult<Prisma.$DebtorPayload, S>
+
+  type DebtorCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<DebtorFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: DebtorCountAggregateInputType | true
+    }
+
+  export interface DebtorDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Debtor'], meta: { name: 'Debtor' } }
+    /**
+     * Find zero or one Debtor that matches the filter.
+     * @param {DebtorFindUniqueArgs} args - Arguments to find a Debtor
+     * @example
+     * // Get one Debtor
+     * const debtor = await prisma.debtor.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends DebtorFindUniqueArgs>(args: SelectSubset<T, DebtorFindUniqueArgs<ExtArgs>>): Prisma__DebtorClient<$Result.GetResult<Prisma.$DebtorPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Debtor that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {DebtorFindUniqueOrThrowArgs} args - Arguments to find a Debtor
+     * @example
+     * // Get one Debtor
+     * const debtor = await prisma.debtor.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends DebtorFindUniqueOrThrowArgs>(args: SelectSubset<T, DebtorFindUniqueOrThrowArgs<ExtArgs>>): Prisma__DebtorClient<$Result.GetResult<Prisma.$DebtorPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Debtor that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DebtorFindFirstArgs} args - Arguments to find a Debtor
+     * @example
+     * // Get one Debtor
+     * const debtor = await prisma.debtor.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends DebtorFindFirstArgs>(args?: SelectSubset<T, DebtorFindFirstArgs<ExtArgs>>): Prisma__DebtorClient<$Result.GetResult<Prisma.$DebtorPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Debtor that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DebtorFindFirstOrThrowArgs} args - Arguments to find a Debtor
+     * @example
+     * // Get one Debtor
+     * const debtor = await prisma.debtor.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends DebtorFindFirstOrThrowArgs>(args?: SelectSubset<T, DebtorFindFirstOrThrowArgs<ExtArgs>>): Prisma__DebtorClient<$Result.GetResult<Prisma.$DebtorPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Debtors that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DebtorFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Debtors
+     * const debtors = await prisma.debtor.findMany()
+     * 
+     * // Get first 10 Debtors
+     * const debtors = await prisma.debtor.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const debtorWithIdOnly = await prisma.debtor.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends DebtorFindManyArgs>(args?: SelectSubset<T, DebtorFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DebtorPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Debtor.
+     * @param {DebtorCreateArgs} args - Arguments to create a Debtor.
+     * @example
+     * // Create one Debtor
+     * const Debtor = await prisma.debtor.create({
+     *   data: {
+     *     // ... data to create a Debtor
+     *   }
+     * })
+     * 
+     */
+    create<T extends DebtorCreateArgs>(args: SelectSubset<T, DebtorCreateArgs<ExtArgs>>): Prisma__DebtorClient<$Result.GetResult<Prisma.$DebtorPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Debtors.
+     * @param {DebtorCreateManyArgs} args - Arguments to create many Debtors.
+     * @example
+     * // Create many Debtors
+     * const debtor = await prisma.debtor.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends DebtorCreateManyArgs>(args?: SelectSubset<T, DebtorCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Debtors and returns the data saved in the database.
+     * @param {DebtorCreateManyAndReturnArgs} args - Arguments to create many Debtors.
+     * @example
+     * // Create many Debtors
+     * const debtor = await prisma.debtor.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Debtors and only return the `id`
+     * const debtorWithIdOnly = await prisma.debtor.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends DebtorCreateManyAndReturnArgs>(args?: SelectSubset<T, DebtorCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DebtorPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Debtor.
+     * @param {DebtorDeleteArgs} args - Arguments to delete one Debtor.
+     * @example
+     * // Delete one Debtor
+     * const Debtor = await prisma.debtor.delete({
+     *   where: {
+     *     // ... filter to delete one Debtor
+     *   }
+     * })
+     * 
+     */
+    delete<T extends DebtorDeleteArgs>(args: SelectSubset<T, DebtorDeleteArgs<ExtArgs>>): Prisma__DebtorClient<$Result.GetResult<Prisma.$DebtorPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Debtor.
+     * @param {DebtorUpdateArgs} args - Arguments to update one Debtor.
+     * @example
+     * // Update one Debtor
+     * const debtor = await prisma.debtor.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends DebtorUpdateArgs>(args: SelectSubset<T, DebtorUpdateArgs<ExtArgs>>): Prisma__DebtorClient<$Result.GetResult<Prisma.$DebtorPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Debtors.
+     * @param {DebtorDeleteManyArgs} args - Arguments to filter Debtors to delete.
+     * @example
+     * // Delete a few Debtors
+     * const { count } = await prisma.debtor.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends DebtorDeleteManyArgs>(args?: SelectSubset<T, DebtorDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Debtors.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DebtorUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Debtors
+     * const debtor = await prisma.debtor.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends DebtorUpdateManyArgs>(args: SelectSubset<T, DebtorUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Debtors and returns the data updated in the database.
+     * @param {DebtorUpdateManyAndReturnArgs} args - Arguments to update many Debtors.
+     * @example
+     * // Update many Debtors
+     * const debtor = await prisma.debtor.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Debtors and only return the `id`
+     * const debtorWithIdOnly = await prisma.debtor.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends DebtorUpdateManyAndReturnArgs>(args: SelectSubset<T, DebtorUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DebtorPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Debtor.
+     * @param {DebtorUpsertArgs} args - Arguments to update or create a Debtor.
+     * @example
+     * // Update or create a Debtor
+     * const debtor = await prisma.debtor.upsert({
+     *   create: {
+     *     // ... data to create a Debtor
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Debtor we want to update
+     *   }
+     * })
+     */
+    upsert<T extends DebtorUpsertArgs>(args: SelectSubset<T, DebtorUpsertArgs<ExtArgs>>): Prisma__DebtorClient<$Result.GetResult<Prisma.$DebtorPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Debtors.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DebtorCountArgs} args - Arguments to filter Debtors to count.
+     * @example
+     * // Count the number of Debtors
+     * const count = await prisma.debtor.count({
+     *   where: {
+     *     // ... the filter for the Debtors we want to count
+     *   }
+     * })
+    **/
+    count<T extends DebtorCountArgs>(
+      args?: Subset<T, DebtorCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], DebtorCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Debtor.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DebtorAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends DebtorAggregateArgs>(args: Subset<T, DebtorAggregateArgs>): Prisma.PrismaPromise<GetDebtorAggregateType<T>>
+
+    /**
+     * Group by Debtor.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DebtorGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends DebtorGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: DebtorGroupByArgs['orderBy'] }
+        : { orderBy?: DebtorGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, DebtorGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetDebtorGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Debtor model
+   */
+  readonly fields: DebtorFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Debtor.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__DebtorClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Debtor model
+   */
+  interface DebtorFieldRefs {
+    readonly id: FieldRef<"Debtor", 'String'>
+    readonly name: FieldRef<"Debtor", 'String'>
+    readonly isActive: FieldRef<"Debtor", 'Boolean'>
+    readonly createdAt: FieldRef<"Debtor", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Debtor findUnique
+   */
+  export type DebtorFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Debtor
+     */
+    select?: DebtorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Debtor
+     */
+    omit?: DebtorOmit<ExtArgs> | null
+    /**
+     * Filter, which Debtor to fetch.
+     */
+    where: DebtorWhereUniqueInput
+  }
+
+  /**
+   * Debtor findUniqueOrThrow
+   */
+  export type DebtorFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Debtor
+     */
+    select?: DebtorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Debtor
+     */
+    omit?: DebtorOmit<ExtArgs> | null
+    /**
+     * Filter, which Debtor to fetch.
+     */
+    where: DebtorWhereUniqueInput
+  }
+
+  /**
+   * Debtor findFirst
+   */
+  export type DebtorFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Debtor
+     */
+    select?: DebtorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Debtor
+     */
+    omit?: DebtorOmit<ExtArgs> | null
+    /**
+     * Filter, which Debtor to fetch.
+     */
+    where?: DebtorWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Debtors to fetch.
+     */
+    orderBy?: DebtorOrderByWithRelationInput | DebtorOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Debtors.
+     */
+    cursor?: DebtorWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Debtors from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Debtors.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Debtors.
+     */
+    distinct?: DebtorScalarFieldEnum | DebtorScalarFieldEnum[]
+  }
+
+  /**
+   * Debtor findFirstOrThrow
+   */
+  export type DebtorFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Debtor
+     */
+    select?: DebtorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Debtor
+     */
+    omit?: DebtorOmit<ExtArgs> | null
+    /**
+     * Filter, which Debtor to fetch.
+     */
+    where?: DebtorWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Debtors to fetch.
+     */
+    orderBy?: DebtorOrderByWithRelationInput | DebtorOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Debtors.
+     */
+    cursor?: DebtorWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Debtors from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Debtors.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Debtors.
+     */
+    distinct?: DebtorScalarFieldEnum | DebtorScalarFieldEnum[]
+  }
+
+  /**
+   * Debtor findMany
+   */
+  export type DebtorFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Debtor
+     */
+    select?: DebtorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Debtor
+     */
+    omit?: DebtorOmit<ExtArgs> | null
+    /**
+     * Filter, which Debtors to fetch.
+     */
+    where?: DebtorWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Debtors to fetch.
+     */
+    orderBy?: DebtorOrderByWithRelationInput | DebtorOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Debtors.
+     */
+    cursor?: DebtorWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Debtors from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Debtors.
+     */
+    skip?: number
+    distinct?: DebtorScalarFieldEnum | DebtorScalarFieldEnum[]
+  }
+
+  /**
+   * Debtor create
+   */
+  export type DebtorCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Debtor
+     */
+    select?: DebtorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Debtor
+     */
+    omit?: DebtorOmit<ExtArgs> | null
+    /**
+     * The data needed to create a Debtor.
+     */
+    data: XOR<DebtorCreateInput, DebtorUncheckedCreateInput>
+  }
+
+  /**
+   * Debtor createMany
+   */
+  export type DebtorCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Debtors.
+     */
+    data: DebtorCreateManyInput | DebtorCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Debtor createManyAndReturn
+   */
+  export type DebtorCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Debtor
+     */
+    select?: DebtorSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Debtor
+     */
+    omit?: DebtorOmit<ExtArgs> | null
+    /**
+     * The data used to create many Debtors.
+     */
+    data: DebtorCreateManyInput | DebtorCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Debtor update
+   */
+  export type DebtorUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Debtor
+     */
+    select?: DebtorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Debtor
+     */
+    omit?: DebtorOmit<ExtArgs> | null
+    /**
+     * The data needed to update a Debtor.
+     */
+    data: XOR<DebtorUpdateInput, DebtorUncheckedUpdateInput>
+    /**
+     * Choose, which Debtor to update.
+     */
+    where: DebtorWhereUniqueInput
+  }
+
+  /**
+   * Debtor updateMany
+   */
+  export type DebtorUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Debtors.
+     */
+    data: XOR<DebtorUpdateManyMutationInput, DebtorUncheckedUpdateManyInput>
+    /**
+     * Filter which Debtors to update
+     */
+    where?: DebtorWhereInput
+    /**
+     * Limit how many Debtors to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Debtor updateManyAndReturn
+   */
+  export type DebtorUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Debtor
+     */
+    select?: DebtorSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Debtor
+     */
+    omit?: DebtorOmit<ExtArgs> | null
+    /**
+     * The data used to update Debtors.
+     */
+    data: XOR<DebtorUpdateManyMutationInput, DebtorUncheckedUpdateManyInput>
+    /**
+     * Filter which Debtors to update
+     */
+    where?: DebtorWhereInput
+    /**
+     * Limit how many Debtors to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Debtor upsert
+   */
+  export type DebtorUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Debtor
+     */
+    select?: DebtorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Debtor
+     */
+    omit?: DebtorOmit<ExtArgs> | null
+    /**
+     * The filter to search for the Debtor to update in case it exists.
+     */
+    where: DebtorWhereUniqueInput
+    /**
+     * In case the Debtor found by the `where` argument doesn't exist, create a new Debtor with this data.
+     */
+    create: XOR<DebtorCreateInput, DebtorUncheckedCreateInput>
+    /**
+     * In case the Debtor was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<DebtorUpdateInput, DebtorUncheckedUpdateInput>
+  }
+
+  /**
+   * Debtor delete
+   */
+  export type DebtorDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Debtor
+     */
+    select?: DebtorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Debtor
+     */
+    omit?: DebtorOmit<ExtArgs> | null
+    /**
+     * Filter which Debtor to delete.
+     */
+    where: DebtorWhereUniqueInput
+  }
+
+  /**
+   * Debtor deleteMany
+   */
+  export type DebtorDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Debtors to delete
+     */
+    where?: DebtorWhereInput
+    /**
+     * Limit how many Debtors to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Debtor without action
+   */
+  export type DebtorDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Debtor
+     */
+    select?: DebtorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Debtor
+     */
+    omit?: DebtorOmit<ExtArgs> | null
   }
 
 
@@ -40831,6 +43137,18 @@ export namespace Prisma {
   export type DeclarationScalarFieldEnum = (typeof DeclarationScalarFieldEnum)[keyof typeof DeclarationScalarFieldEnum]
 
 
+  export const DeclarationCreditScalarFieldEnum: {
+    id: 'id',
+    declarationId: 'declarationId',
+    debtor: 'debtor',
+    amount: 'amount',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type DeclarationCreditScalarFieldEnum = (typeof DeclarationCreditScalarFieldEnum)[keyof typeof DeclarationCreditScalarFieldEnum]
+
+
   export const DeclarationItemScalarFieldEnum: {
     id: 'id',
     declarationId: 'declarationId',
@@ -40870,6 +43188,16 @@ export namespace Prisma {
   };
 
   export type DeclarationHistoryScalarFieldEnum = (typeof DeclarationHistoryScalarFieldEnum)[keyof typeof DeclarationHistoryScalarFieldEnum]
+
+
+  export const DebtorScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    isActive: 'isActive',
+    createdAt: 'createdAt'
+  };
+
+  export type DebtorScalarFieldEnum = (typeof DebtorScalarFieldEnum)[keyof typeof DebtorScalarFieldEnum]
 
 
   export const CategoryScalarFieldEnum: {
@@ -42089,6 +44417,7 @@ export namespace Prisma {
     items?: DeclarationItemListRelationFilter
     documents?: DeclarationDocumentListRelationFilter
     history?: DeclarationHistoryListRelationFilter
+    credits?: DeclarationCreditListRelationFilter
   }
 
   export type DeclarationOrderByWithRelationInput = {
@@ -42115,6 +44444,7 @@ export namespace Prisma {
     items?: DeclarationItemOrderByRelationAggregateInput
     documents?: DeclarationDocumentOrderByRelationAggregateInput
     history?: DeclarationHistoryOrderByRelationAggregateInput
+    credits?: DeclarationCreditOrderByRelationAggregateInput
   }
 
   export type DeclarationWhereUniqueInput = Prisma.AtLeast<{
@@ -42144,6 +44474,7 @@ export namespace Prisma {
     items?: DeclarationItemListRelationFilter
     documents?: DeclarationDocumentListRelationFilter
     history?: DeclarationHistoryListRelationFilter
+    credits?: DeclarationCreditListRelationFilter
   }, "id" | "reference">
 
   export type DeclarationOrderByWithAggregationInput = {
@@ -42192,6 +44523,68 @@ export namespace Prisma {
     validatedAt?: DateTimeNullableWithAggregatesFilter<"Declaration"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Declaration"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Declaration"> | Date | string
+  }
+
+  export type DeclarationCreditWhereInput = {
+    AND?: DeclarationCreditWhereInput | DeclarationCreditWhereInput[]
+    OR?: DeclarationCreditWhereInput[]
+    NOT?: DeclarationCreditWhereInput | DeclarationCreditWhereInput[]
+    id?: StringFilter<"DeclarationCredit"> | string
+    declarationId?: StringFilter<"DeclarationCredit"> | string
+    debtor?: StringFilter<"DeclarationCredit"> | string
+    amount?: DecimalFilter<"DeclarationCredit"> | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFilter<"DeclarationCredit"> | Date | string
+    updatedAt?: DateTimeFilter<"DeclarationCredit"> | Date | string
+    declaration?: XOR<DeclarationScalarRelationFilter, DeclarationWhereInput>
+  }
+
+  export type DeclarationCreditOrderByWithRelationInput = {
+    id?: SortOrder
+    declarationId?: SortOrder
+    debtor?: SortOrder
+    amount?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    declaration?: DeclarationOrderByWithRelationInput
+  }
+
+  export type DeclarationCreditWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: DeclarationCreditWhereInput | DeclarationCreditWhereInput[]
+    OR?: DeclarationCreditWhereInput[]
+    NOT?: DeclarationCreditWhereInput | DeclarationCreditWhereInput[]
+    declarationId?: StringFilter<"DeclarationCredit"> | string
+    debtor?: StringFilter<"DeclarationCredit"> | string
+    amount?: DecimalFilter<"DeclarationCredit"> | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFilter<"DeclarationCredit"> | Date | string
+    updatedAt?: DateTimeFilter<"DeclarationCredit"> | Date | string
+    declaration?: XOR<DeclarationScalarRelationFilter, DeclarationWhereInput>
+  }, "id">
+
+  export type DeclarationCreditOrderByWithAggregationInput = {
+    id?: SortOrder
+    declarationId?: SortOrder
+    debtor?: SortOrder
+    amount?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: DeclarationCreditCountOrderByAggregateInput
+    _avg?: DeclarationCreditAvgOrderByAggregateInput
+    _max?: DeclarationCreditMaxOrderByAggregateInput
+    _min?: DeclarationCreditMinOrderByAggregateInput
+    _sum?: DeclarationCreditSumOrderByAggregateInput
+  }
+
+  export type DeclarationCreditScalarWhereWithAggregatesInput = {
+    AND?: DeclarationCreditScalarWhereWithAggregatesInput | DeclarationCreditScalarWhereWithAggregatesInput[]
+    OR?: DeclarationCreditScalarWhereWithAggregatesInput[]
+    NOT?: DeclarationCreditScalarWhereWithAggregatesInput | DeclarationCreditScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"DeclarationCredit"> | string
+    declarationId?: StringWithAggregatesFilter<"DeclarationCredit"> | string
+    debtor?: StringWithAggregatesFilter<"DeclarationCredit"> | string
+    amount?: DecimalWithAggregatesFilter<"DeclarationCredit"> | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeWithAggregatesFilter<"DeclarationCredit"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"DeclarationCredit"> | Date | string
   }
 
   export type DeclarationItemWhereInput = {
@@ -42401,6 +44794,53 @@ export namespace Prisma {
     changedById?: StringWithAggregatesFilter<"DeclarationHistory"> | string
     comment?: StringNullableWithAggregatesFilter<"DeclarationHistory"> | string | null
     changedAt?: DateTimeWithAggregatesFilter<"DeclarationHistory"> | Date | string
+  }
+
+  export type DebtorWhereInput = {
+    AND?: DebtorWhereInput | DebtorWhereInput[]
+    OR?: DebtorWhereInput[]
+    NOT?: DebtorWhereInput | DebtorWhereInput[]
+    id?: StringFilter<"Debtor"> | string
+    name?: StringFilter<"Debtor"> | string
+    isActive?: BoolFilter<"Debtor"> | boolean
+    createdAt?: DateTimeFilter<"Debtor"> | Date | string
+  }
+
+  export type DebtorOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type DebtorWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    name?: string
+    AND?: DebtorWhereInput | DebtorWhereInput[]
+    OR?: DebtorWhereInput[]
+    NOT?: DebtorWhereInput | DebtorWhereInput[]
+    isActive?: BoolFilter<"Debtor"> | boolean
+    createdAt?: DateTimeFilter<"Debtor"> | Date | string
+  }, "id" | "name">
+
+  export type DebtorOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    _count?: DebtorCountOrderByAggregateInput
+    _max?: DebtorMaxOrderByAggregateInput
+    _min?: DebtorMinOrderByAggregateInput
+  }
+
+  export type DebtorScalarWhereWithAggregatesInput = {
+    AND?: DebtorScalarWhereWithAggregatesInput | DebtorScalarWhereWithAggregatesInput[]
+    OR?: DebtorScalarWhereWithAggregatesInput[]
+    NOT?: DebtorScalarWhereWithAggregatesInput | DebtorScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Debtor"> | string
+    name?: StringWithAggregatesFilter<"Debtor"> | string
+    isActive?: BoolWithAggregatesFilter<"Debtor"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"Debtor"> | Date | string
   }
 
   export type CategoryWhereInput = {
@@ -44718,6 +47158,7 @@ export namespace Prisma {
     items?: DeclarationItemCreateNestedManyWithoutDeclarationInput
     documents?: DeclarationDocumentCreateNestedManyWithoutDeclarationInput
     history?: DeclarationHistoryCreateNestedManyWithoutDeclarationInput
+    credits?: DeclarationCreditCreateNestedManyWithoutDeclarationInput
   }
 
   export type DeclarationUncheckedCreateInput = {
@@ -44741,6 +47182,7 @@ export namespace Prisma {
     items?: DeclarationItemUncheckedCreateNestedManyWithoutDeclarationInput
     documents?: DeclarationDocumentUncheckedCreateNestedManyWithoutDeclarationInput
     history?: DeclarationHistoryUncheckedCreateNestedManyWithoutDeclarationInput
+    credits?: DeclarationCreditUncheckedCreateNestedManyWithoutDeclarationInput
   }
 
   export type DeclarationUpdateInput = {
@@ -44764,6 +47206,7 @@ export namespace Prisma {
     items?: DeclarationItemUpdateManyWithoutDeclarationNestedInput
     documents?: DeclarationDocumentUpdateManyWithoutDeclarationNestedInput
     history?: DeclarationHistoryUpdateManyWithoutDeclarationNestedInput
+    credits?: DeclarationCreditUpdateManyWithoutDeclarationNestedInput
   }
 
   export type DeclarationUncheckedUpdateInput = {
@@ -44787,6 +47230,7 @@ export namespace Prisma {
     items?: DeclarationItemUncheckedUpdateManyWithoutDeclarationNestedInput
     documents?: DeclarationDocumentUncheckedUpdateManyWithoutDeclarationNestedInput
     history?: DeclarationHistoryUncheckedUpdateManyWithoutDeclarationNestedInput
+    credits?: DeclarationCreditUncheckedUpdateManyWithoutDeclarationNestedInput
   }
 
   export type DeclarationCreateManyInput = {
@@ -44842,6 +47286,68 @@ export namespace Prisma {
     submittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     validatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DeclarationCreditCreateInput = {
+    id?: string
+    debtor: string
+    amount: Decimal | DecimalJsLike | number | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    declaration: DeclarationCreateNestedOneWithoutCreditsInput
+  }
+
+  export type DeclarationCreditUncheckedCreateInput = {
+    id?: string
+    declarationId: string
+    debtor: string
+    amount: Decimal | DecimalJsLike | number | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type DeclarationCreditUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    debtor?: StringFieldUpdateOperationsInput | string
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    declaration?: DeclarationUpdateOneRequiredWithoutCreditsNestedInput
+  }
+
+  export type DeclarationCreditUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    declarationId?: StringFieldUpdateOperationsInput | string
+    debtor?: StringFieldUpdateOperationsInput | string
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DeclarationCreditCreateManyInput = {
+    id?: string
+    declarationId: string
+    debtor: string
+    amount: Decimal | DecimalJsLike | number | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type DeclarationCreditUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    debtor?: StringFieldUpdateOperationsInput | string
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DeclarationCreditUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    declarationId?: StringFieldUpdateOperationsInput | string
+    debtor?: StringFieldUpdateOperationsInput | string
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -45065,6 +47571,55 @@ export namespace Prisma {
     changedById?: StringFieldUpdateOperationsInput | string
     comment?: NullableStringFieldUpdateOperationsInput | string | null
     changedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DebtorCreateInput = {
+    id?: string
+    name: string
+    isActive?: boolean
+    createdAt?: Date | string
+  }
+
+  export type DebtorUncheckedCreateInput = {
+    id?: string
+    name: string
+    isActive?: boolean
+    createdAt?: Date | string
+  }
+
+  export type DebtorUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DebtorUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DebtorCreateManyInput = {
+    id?: string
+    name: string
+    isActive?: boolean
+    createdAt?: Date | string
+  }
+
+  export type DebtorUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DebtorUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CategoryCreateInput = {
@@ -47581,6 +50136,12 @@ export namespace Prisma {
     none?: DeclarationHistoryWhereInput
   }
 
+  export type DeclarationCreditListRelationFilter = {
+    every?: DeclarationCreditWhereInput
+    some?: DeclarationCreditWhereInput
+    none?: DeclarationCreditWhereInput
+  }
+
   export type DeclarationItemOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -47590,6 +50151,10 @@ export namespace Prisma {
   }
 
   export type DeclarationHistoryOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type DeclarationCreditOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -47697,6 +50262,46 @@ export namespace Prisma {
     _max?: NestedEnumDeclarationStatusFilter<$PrismaModel>
   }
 
+  export type DeclarationScalarRelationFilter = {
+    is?: DeclarationWhereInput
+    isNot?: DeclarationWhereInput
+  }
+
+  export type DeclarationCreditCountOrderByAggregateInput = {
+    id?: SortOrder
+    declarationId?: SortOrder
+    debtor?: SortOrder
+    amount?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type DeclarationCreditAvgOrderByAggregateInput = {
+    amount?: SortOrder
+  }
+
+  export type DeclarationCreditMaxOrderByAggregateInput = {
+    id?: SortOrder
+    declarationId?: SortOrder
+    debtor?: SortOrder
+    amount?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type DeclarationCreditMinOrderByAggregateInput = {
+    id?: SortOrder
+    declarationId?: SortOrder
+    debtor?: SortOrder
+    amount?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type DeclarationCreditSumOrderByAggregateInput = {
+    amount?: SortOrder
+  }
+
   export type IntNullableFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel> | null
     in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
@@ -47717,11 +50322,6 @@ export namespace Prisma {
     gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
     gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
     not?: NestedDecimalNullableFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
-  }
-
-  export type DeclarationScalarRelationFilter = {
-    is?: DeclarationWhereInput
-    isNot?: DeclarationWhereInput
   }
 
   export type DeclarationItemCountOrderByAggregateInput = {
@@ -47870,6 +50470,27 @@ export namespace Prisma {
     changedById?: SortOrder
     comment?: SortOrder
     changedAt?: SortOrder
+  }
+
+  export type DebtorCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type DebtorMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type DebtorMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
   }
 
   export type CategoryNameDeclarationTypeCompoundUniqueInput = {
@@ -50427,6 +53048,13 @@ export namespace Prisma {
     connect?: DeclarationHistoryWhereUniqueInput | DeclarationHistoryWhereUniqueInput[]
   }
 
+  export type DeclarationCreditCreateNestedManyWithoutDeclarationInput = {
+    create?: XOR<DeclarationCreditCreateWithoutDeclarationInput, DeclarationCreditUncheckedCreateWithoutDeclarationInput> | DeclarationCreditCreateWithoutDeclarationInput[] | DeclarationCreditUncheckedCreateWithoutDeclarationInput[]
+    connectOrCreate?: DeclarationCreditCreateOrConnectWithoutDeclarationInput | DeclarationCreditCreateOrConnectWithoutDeclarationInput[]
+    createMany?: DeclarationCreditCreateManyDeclarationInputEnvelope
+    connect?: DeclarationCreditWhereUniqueInput | DeclarationCreditWhereUniqueInput[]
+  }
+
   export type DeclarationItemUncheckedCreateNestedManyWithoutDeclarationInput = {
     create?: XOR<DeclarationItemCreateWithoutDeclarationInput, DeclarationItemUncheckedCreateWithoutDeclarationInput> | DeclarationItemCreateWithoutDeclarationInput[] | DeclarationItemUncheckedCreateWithoutDeclarationInput[]
     connectOrCreate?: DeclarationItemCreateOrConnectWithoutDeclarationInput | DeclarationItemCreateOrConnectWithoutDeclarationInput[]
@@ -50446,6 +53074,13 @@ export namespace Prisma {
     connectOrCreate?: DeclarationHistoryCreateOrConnectWithoutDeclarationInput | DeclarationHistoryCreateOrConnectWithoutDeclarationInput[]
     createMany?: DeclarationHistoryCreateManyDeclarationInputEnvelope
     connect?: DeclarationHistoryWhereUniqueInput | DeclarationHistoryWhereUniqueInput[]
+  }
+
+  export type DeclarationCreditUncheckedCreateNestedManyWithoutDeclarationInput = {
+    create?: XOR<DeclarationCreditCreateWithoutDeclarationInput, DeclarationCreditUncheckedCreateWithoutDeclarationInput> | DeclarationCreditCreateWithoutDeclarationInput[] | DeclarationCreditUncheckedCreateWithoutDeclarationInput[]
+    connectOrCreate?: DeclarationCreditCreateOrConnectWithoutDeclarationInput | DeclarationCreditCreateOrConnectWithoutDeclarationInput[]
+    createMany?: DeclarationCreditCreateManyDeclarationInputEnvelope
+    connect?: DeclarationCreditWhereUniqueInput | DeclarationCreditWhereUniqueInput[]
   }
 
   export type EnumDeclarationTypeFieldUpdateOperationsInput = {
@@ -50532,6 +53167,20 @@ export namespace Prisma {
     deleteMany?: DeclarationHistoryScalarWhereInput | DeclarationHistoryScalarWhereInput[]
   }
 
+  export type DeclarationCreditUpdateManyWithoutDeclarationNestedInput = {
+    create?: XOR<DeclarationCreditCreateWithoutDeclarationInput, DeclarationCreditUncheckedCreateWithoutDeclarationInput> | DeclarationCreditCreateWithoutDeclarationInput[] | DeclarationCreditUncheckedCreateWithoutDeclarationInput[]
+    connectOrCreate?: DeclarationCreditCreateOrConnectWithoutDeclarationInput | DeclarationCreditCreateOrConnectWithoutDeclarationInput[]
+    upsert?: DeclarationCreditUpsertWithWhereUniqueWithoutDeclarationInput | DeclarationCreditUpsertWithWhereUniqueWithoutDeclarationInput[]
+    createMany?: DeclarationCreditCreateManyDeclarationInputEnvelope
+    set?: DeclarationCreditWhereUniqueInput | DeclarationCreditWhereUniqueInput[]
+    disconnect?: DeclarationCreditWhereUniqueInput | DeclarationCreditWhereUniqueInput[]
+    delete?: DeclarationCreditWhereUniqueInput | DeclarationCreditWhereUniqueInput[]
+    connect?: DeclarationCreditWhereUniqueInput | DeclarationCreditWhereUniqueInput[]
+    update?: DeclarationCreditUpdateWithWhereUniqueWithoutDeclarationInput | DeclarationCreditUpdateWithWhereUniqueWithoutDeclarationInput[]
+    updateMany?: DeclarationCreditUpdateManyWithWhereWithoutDeclarationInput | DeclarationCreditUpdateManyWithWhereWithoutDeclarationInput[]
+    deleteMany?: DeclarationCreditScalarWhereInput | DeclarationCreditScalarWhereInput[]
+  }
+
   export type DeclarationItemUncheckedUpdateManyWithoutDeclarationNestedInput = {
     create?: XOR<DeclarationItemCreateWithoutDeclarationInput, DeclarationItemUncheckedCreateWithoutDeclarationInput> | DeclarationItemCreateWithoutDeclarationInput[] | DeclarationItemUncheckedCreateWithoutDeclarationInput[]
     connectOrCreate?: DeclarationItemCreateOrConnectWithoutDeclarationInput | DeclarationItemCreateOrConnectWithoutDeclarationInput[]
@@ -50572,6 +53221,34 @@ export namespace Prisma {
     update?: DeclarationHistoryUpdateWithWhereUniqueWithoutDeclarationInput | DeclarationHistoryUpdateWithWhereUniqueWithoutDeclarationInput[]
     updateMany?: DeclarationHistoryUpdateManyWithWhereWithoutDeclarationInput | DeclarationHistoryUpdateManyWithWhereWithoutDeclarationInput[]
     deleteMany?: DeclarationHistoryScalarWhereInput | DeclarationHistoryScalarWhereInput[]
+  }
+
+  export type DeclarationCreditUncheckedUpdateManyWithoutDeclarationNestedInput = {
+    create?: XOR<DeclarationCreditCreateWithoutDeclarationInput, DeclarationCreditUncheckedCreateWithoutDeclarationInput> | DeclarationCreditCreateWithoutDeclarationInput[] | DeclarationCreditUncheckedCreateWithoutDeclarationInput[]
+    connectOrCreate?: DeclarationCreditCreateOrConnectWithoutDeclarationInput | DeclarationCreditCreateOrConnectWithoutDeclarationInput[]
+    upsert?: DeclarationCreditUpsertWithWhereUniqueWithoutDeclarationInput | DeclarationCreditUpsertWithWhereUniqueWithoutDeclarationInput[]
+    createMany?: DeclarationCreditCreateManyDeclarationInputEnvelope
+    set?: DeclarationCreditWhereUniqueInput | DeclarationCreditWhereUniqueInput[]
+    disconnect?: DeclarationCreditWhereUniqueInput | DeclarationCreditWhereUniqueInput[]
+    delete?: DeclarationCreditWhereUniqueInput | DeclarationCreditWhereUniqueInput[]
+    connect?: DeclarationCreditWhereUniqueInput | DeclarationCreditWhereUniqueInput[]
+    update?: DeclarationCreditUpdateWithWhereUniqueWithoutDeclarationInput | DeclarationCreditUpdateWithWhereUniqueWithoutDeclarationInput[]
+    updateMany?: DeclarationCreditUpdateManyWithWhereWithoutDeclarationInput | DeclarationCreditUpdateManyWithWhereWithoutDeclarationInput[]
+    deleteMany?: DeclarationCreditScalarWhereInput | DeclarationCreditScalarWhereInput[]
+  }
+
+  export type DeclarationCreateNestedOneWithoutCreditsInput = {
+    create?: XOR<DeclarationCreateWithoutCreditsInput, DeclarationUncheckedCreateWithoutCreditsInput>
+    connectOrCreate?: DeclarationCreateOrConnectWithoutCreditsInput
+    connect?: DeclarationWhereUniqueInput
+  }
+
+  export type DeclarationUpdateOneRequiredWithoutCreditsNestedInput = {
+    create?: XOR<DeclarationCreateWithoutCreditsInput, DeclarationUncheckedCreateWithoutCreditsInput>
+    connectOrCreate?: DeclarationCreateOrConnectWithoutCreditsInput
+    upsert?: DeclarationUpsertWithoutCreditsInput
+    connect?: DeclarationWhereUniqueInput
+    update?: XOR<XOR<DeclarationUpdateToOneWithWhereWithoutCreditsInput, DeclarationUpdateWithoutCreditsInput>, DeclarationUncheckedUpdateWithoutCreditsInput>
   }
 
   export type DeclarationCreateNestedOneWithoutItemsInput = {
@@ -52737,6 +55414,7 @@ export namespace Prisma {
     items?: DeclarationItemCreateNestedManyWithoutDeclarationInput
     documents?: DeclarationDocumentCreateNestedManyWithoutDeclarationInput
     history?: DeclarationHistoryCreateNestedManyWithoutDeclarationInput
+    credits?: DeclarationCreditCreateNestedManyWithoutDeclarationInput
   }
 
   export type DeclarationUncheckedCreateWithoutFacilityInput = {
@@ -52759,6 +55437,7 @@ export namespace Prisma {
     items?: DeclarationItemUncheckedCreateNestedManyWithoutDeclarationInput
     documents?: DeclarationDocumentUncheckedCreateNestedManyWithoutDeclarationInput
     history?: DeclarationHistoryUncheckedCreateNestedManyWithoutDeclarationInput
+    credits?: DeclarationCreditUncheckedCreateNestedManyWithoutDeclarationInput
   }
 
   export type DeclarationCreateOrConnectWithoutFacilityInput = {
@@ -53576,6 +56255,7 @@ export namespace Prisma {
     items?: DeclarationItemCreateNestedManyWithoutDeclarationInput
     documents?: DeclarationDocumentCreateNestedManyWithoutDeclarationInput
     history?: DeclarationHistoryCreateNestedManyWithoutDeclarationInput
+    credits?: DeclarationCreditCreateNestedManyWithoutDeclarationInput
   }
 
   export type DeclarationUncheckedCreateWithoutSubmittedByInput = {
@@ -53598,6 +56278,7 @@ export namespace Prisma {
     items?: DeclarationItemUncheckedCreateNestedManyWithoutDeclarationInput
     documents?: DeclarationDocumentUncheckedCreateNestedManyWithoutDeclarationInput
     history?: DeclarationHistoryUncheckedCreateNestedManyWithoutDeclarationInput
+    credits?: DeclarationCreditUncheckedCreateNestedManyWithoutDeclarationInput
   }
 
   export type DeclarationCreateOrConnectWithoutSubmittedByInput = {
@@ -53630,6 +56311,7 @@ export namespace Prisma {
     items?: DeclarationItemCreateNestedManyWithoutDeclarationInput
     documents?: DeclarationDocumentCreateNestedManyWithoutDeclarationInput
     history?: DeclarationHistoryCreateNestedManyWithoutDeclarationInput
+    credits?: DeclarationCreditCreateNestedManyWithoutDeclarationInput
   }
 
   export type DeclarationUncheckedCreateWithoutReviewedByInput = {
@@ -53652,6 +56334,7 @@ export namespace Prisma {
     items?: DeclarationItemUncheckedCreateNestedManyWithoutDeclarationInput
     documents?: DeclarationDocumentUncheckedCreateNestedManyWithoutDeclarationInput
     history?: DeclarationHistoryUncheckedCreateNestedManyWithoutDeclarationInput
+    credits?: DeclarationCreditUncheckedCreateNestedManyWithoutDeclarationInput
   }
 
   export type DeclarationCreateOrConnectWithoutReviewedByInput = {
@@ -54979,6 +57662,32 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type DeclarationCreditCreateWithoutDeclarationInput = {
+    id?: string
+    debtor: string
+    amount: Decimal | DecimalJsLike | number | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type DeclarationCreditUncheckedCreateWithoutDeclarationInput = {
+    id?: string
+    debtor: string
+    amount: Decimal | DecimalJsLike | number | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type DeclarationCreditCreateOrConnectWithoutDeclarationInput = {
+    where: DeclarationCreditWhereUniqueInput
+    create: XOR<DeclarationCreditCreateWithoutDeclarationInput, DeclarationCreditUncheckedCreateWithoutDeclarationInput>
+  }
+
+  export type DeclarationCreditCreateManyDeclarationInputEnvelope = {
+    data: DeclarationCreditCreateManyDeclarationInput | DeclarationCreditCreateManyDeclarationInput[]
+    skipDuplicates?: boolean
+  }
+
   export type FacilityUpsertWithoutDeclarationsInput = {
     update: XOR<FacilityUpdateWithoutDeclarationsInput, FacilityUncheckedUpdateWithoutDeclarationsInput>
     create: XOR<FacilityCreateWithoutDeclarationsInput, FacilityUncheckedCreateWithoutDeclarationsInput>
@@ -55273,6 +57982,142 @@ export namespace Prisma {
     changedAt?: DateTimeFilter<"DeclarationHistory"> | Date | string
   }
 
+  export type DeclarationCreditUpsertWithWhereUniqueWithoutDeclarationInput = {
+    where: DeclarationCreditWhereUniqueInput
+    update: XOR<DeclarationCreditUpdateWithoutDeclarationInput, DeclarationCreditUncheckedUpdateWithoutDeclarationInput>
+    create: XOR<DeclarationCreditCreateWithoutDeclarationInput, DeclarationCreditUncheckedCreateWithoutDeclarationInput>
+  }
+
+  export type DeclarationCreditUpdateWithWhereUniqueWithoutDeclarationInput = {
+    where: DeclarationCreditWhereUniqueInput
+    data: XOR<DeclarationCreditUpdateWithoutDeclarationInput, DeclarationCreditUncheckedUpdateWithoutDeclarationInput>
+  }
+
+  export type DeclarationCreditUpdateManyWithWhereWithoutDeclarationInput = {
+    where: DeclarationCreditScalarWhereInput
+    data: XOR<DeclarationCreditUpdateManyMutationInput, DeclarationCreditUncheckedUpdateManyWithoutDeclarationInput>
+  }
+
+  export type DeclarationCreditScalarWhereInput = {
+    AND?: DeclarationCreditScalarWhereInput | DeclarationCreditScalarWhereInput[]
+    OR?: DeclarationCreditScalarWhereInput[]
+    NOT?: DeclarationCreditScalarWhereInput | DeclarationCreditScalarWhereInput[]
+    id?: StringFilter<"DeclarationCredit"> | string
+    declarationId?: StringFilter<"DeclarationCredit"> | string
+    debtor?: StringFilter<"DeclarationCredit"> | string
+    amount?: DecimalFilter<"DeclarationCredit"> | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFilter<"DeclarationCredit"> | Date | string
+    updatedAt?: DateTimeFilter<"DeclarationCredit"> | Date | string
+  }
+
+  export type DeclarationCreateWithoutCreditsInput = {
+    id?: string
+    reference: string
+    declarationType?: $Enums.DeclarationType
+    periodType: $Enums.DeclarationPeriodType
+    periodStart: Date | string
+    periodEnd: Date | string
+    totalAmount: Decimal | DecimalJsLike | number | string
+    status?: $Enums.DeclarationStatus
+    comment?: string | null
+    submittedAt?: Date | string | null
+    reviewedAt?: Date | string | null
+    validatedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    facility: FacilityCreateNestedOneWithoutDeclarationsInput
+    submittedBy: UserCreateNestedOneWithoutDeclarationsInput
+    reviewedBy?: UserCreateNestedOneWithoutReviewedDeclarationsInput
+    items?: DeclarationItemCreateNestedManyWithoutDeclarationInput
+    documents?: DeclarationDocumentCreateNestedManyWithoutDeclarationInput
+    history?: DeclarationHistoryCreateNestedManyWithoutDeclarationInput
+  }
+
+  export type DeclarationUncheckedCreateWithoutCreditsInput = {
+    id?: string
+    reference: string
+    declarationType?: $Enums.DeclarationType
+    facilityId: string
+    submittedById: string
+    reviewedById?: string | null
+    periodType: $Enums.DeclarationPeriodType
+    periodStart: Date | string
+    periodEnd: Date | string
+    totalAmount: Decimal | DecimalJsLike | number | string
+    status?: $Enums.DeclarationStatus
+    comment?: string | null
+    submittedAt?: Date | string | null
+    reviewedAt?: Date | string | null
+    validatedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    items?: DeclarationItemUncheckedCreateNestedManyWithoutDeclarationInput
+    documents?: DeclarationDocumentUncheckedCreateNestedManyWithoutDeclarationInput
+    history?: DeclarationHistoryUncheckedCreateNestedManyWithoutDeclarationInput
+  }
+
+  export type DeclarationCreateOrConnectWithoutCreditsInput = {
+    where: DeclarationWhereUniqueInput
+    create: XOR<DeclarationCreateWithoutCreditsInput, DeclarationUncheckedCreateWithoutCreditsInput>
+  }
+
+  export type DeclarationUpsertWithoutCreditsInput = {
+    update: XOR<DeclarationUpdateWithoutCreditsInput, DeclarationUncheckedUpdateWithoutCreditsInput>
+    create: XOR<DeclarationCreateWithoutCreditsInput, DeclarationUncheckedCreateWithoutCreditsInput>
+    where?: DeclarationWhereInput
+  }
+
+  export type DeclarationUpdateToOneWithWhereWithoutCreditsInput = {
+    where?: DeclarationWhereInput
+    data: XOR<DeclarationUpdateWithoutCreditsInput, DeclarationUncheckedUpdateWithoutCreditsInput>
+  }
+
+  export type DeclarationUpdateWithoutCreditsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    declarationType?: EnumDeclarationTypeFieldUpdateOperationsInput | $Enums.DeclarationType
+    periodType?: EnumDeclarationPeriodTypeFieldUpdateOperationsInput | $Enums.DeclarationPeriodType
+    periodStart?: DateTimeFieldUpdateOperationsInput | Date | string
+    periodEnd?: DateTimeFieldUpdateOperationsInput | Date | string
+    totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    status?: EnumDeclarationStatusFieldUpdateOperationsInput | $Enums.DeclarationStatus
+    comment?: NullableStringFieldUpdateOperationsInput | string | null
+    submittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    validatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    facility?: FacilityUpdateOneRequiredWithoutDeclarationsNestedInput
+    submittedBy?: UserUpdateOneRequiredWithoutDeclarationsNestedInput
+    reviewedBy?: UserUpdateOneWithoutReviewedDeclarationsNestedInput
+    items?: DeclarationItemUpdateManyWithoutDeclarationNestedInput
+    documents?: DeclarationDocumentUpdateManyWithoutDeclarationNestedInput
+    history?: DeclarationHistoryUpdateManyWithoutDeclarationNestedInput
+  }
+
+  export type DeclarationUncheckedUpdateWithoutCreditsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    declarationType?: EnumDeclarationTypeFieldUpdateOperationsInput | $Enums.DeclarationType
+    facilityId?: StringFieldUpdateOperationsInput | string
+    submittedById?: StringFieldUpdateOperationsInput | string
+    reviewedById?: NullableStringFieldUpdateOperationsInput | string | null
+    periodType?: EnumDeclarationPeriodTypeFieldUpdateOperationsInput | $Enums.DeclarationPeriodType
+    periodStart?: DateTimeFieldUpdateOperationsInput | Date | string
+    periodEnd?: DateTimeFieldUpdateOperationsInput | Date | string
+    totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    status?: EnumDeclarationStatusFieldUpdateOperationsInput | $Enums.DeclarationStatus
+    comment?: NullableStringFieldUpdateOperationsInput | string | null
+    submittedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    validatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    items?: DeclarationItemUncheckedUpdateManyWithoutDeclarationNestedInput
+    documents?: DeclarationDocumentUncheckedUpdateManyWithoutDeclarationNestedInput
+    history?: DeclarationHistoryUncheckedUpdateManyWithoutDeclarationNestedInput
+  }
+
   export type DeclarationCreateWithoutItemsInput = {
     id?: string
     reference: string
@@ -55293,6 +58138,7 @@ export namespace Prisma {
     reviewedBy?: UserCreateNestedOneWithoutReviewedDeclarationsInput
     documents?: DeclarationDocumentCreateNestedManyWithoutDeclarationInput
     history?: DeclarationHistoryCreateNestedManyWithoutDeclarationInput
+    credits?: DeclarationCreditCreateNestedManyWithoutDeclarationInput
   }
 
   export type DeclarationUncheckedCreateWithoutItemsInput = {
@@ -55315,6 +58161,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     documents?: DeclarationDocumentUncheckedCreateNestedManyWithoutDeclarationInput
     history?: DeclarationHistoryUncheckedCreateNestedManyWithoutDeclarationInput
+    credits?: DeclarationCreditUncheckedCreateNestedManyWithoutDeclarationInput
   }
 
   export type DeclarationCreateOrConnectWithoutItemsInput = {
@@ -55353,6 +58200,7 @@ export namespace Prisma {
     reviewedBy?: UserUpdateOneWithoutReviewedDeclarationsNestedInput
     documents?: DeclarationDocumentUpdateManyWithoutDeclarationNestedInput
     history?: DeclarationHistoryUpdateManyWithoutDeclarationNestedInput
+    credits?: DeclarationCreditUpdateManyWithoutDeclarationNestedInput
   }
 
   export type DeclarationUncheckedUpdateWithoutItemsInput = {
@@ -55375,6 +58223,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     documents?: DeclarationDocumentUncheckedUpdateManyWithoutDeclarationNestedInput
     history?: DeclarationHistoryUncheckedUpdateManyWithoutDeclarationNestedInput
+    credits?: DeclarationCreditUncheckedUpdateManyWithoutDeclarationNestedInput
   }
 
   export type DeclarationCreateWithoutDocumentsInput = {
@@ -55397,6 +58246,7 @@ export namespace Prisma {
     reviewedBy?: UserCreateNestedOneWithoutReviewedDeclarationsInput
     items?: DeclarationItemCreateNestedManyWithoutDeclarationInput
     history?: DeclarationHistoryCreateNestedManyWithoutDeclarationInput
+    credits?: DeclarationCreditCreateNestedManyWithoutDeclarationInput
   }
 
   export type DeclarationUncheckedCreateWithoutDocumentsInput = {
@@ -55419,6 +58269,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     items?: DeclarationItemUncheckedCreateNestedManyWithoutDeclarationInput
     history?: DeclarationHistoryUncheckedCreateNestedManyWithoutDeclarationInput
+    credits?: DeclarationCreditUncheckedCreateNestedManyWithoutDeclarationInput
   }
 
   export type DeclarationCreateOrConnectWithoutDocumentsInput = {
@@ -55457,6 +58308,7 @@ export namespace Prisma {
     reviewedBy?: UserUpdateOneWithoutReviewedDeclarationsNestedInput
     items?: DeclarationItemUpdateManyWithoutDeclarationNestedInput
     history?: DeclarationHistoryUpdateManyWithoutDeclarationNestedInput
+    credits?: DeclarationCreditUpdateManyWithoutDeclarationNestedInput
   }
 
   export type DeclarationUncheckedUpdateWithoutDocumentsInput = {
@@ -55479,6 +58331,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     items?: DeclarationItemUncheckedUpdateManyWithoutDeclarationNestedInput
     history?: DeclarationHistoryUncheckedUpdateManyWithoutDeclarationNestedInput
+    credits?: DeclarationCreditUncheckedUpdateManyWithoutDeclarationNestedInput
   }
 
   export type DeclarationCreateWithoutHistoryInput = {
@@ -55501,6 +58354,7 @@ export namespace Prisma {
     reviewedBy?: UserCreateNestedOneWithoutReviewedDeclarationsInput
     items?: DeclarationItemCreateNestedManyWithoutDeclarationInput
     documents?: DeclarationDocumentCreateNestedManyWithoutDeclarationInput
+    credits?: DeclarationCreditCreateNestedManyWithoutDeclarationInput
   }
 
   export type DeclarationUncheckedCreateWithoutHistoryInput = {
@@ -55523,6 +58377,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     items?: DeclarationItemUncheckedCreateNestedManyWithoutDeclarationInput
     documents?: DeclarationDocumentUncheckedCreateNestedManyWithoutDeclarationInput
+    credits?: DeclarationCreditUncheckedCreateNestedManyWithoutDeclarationInput
   }
 
   export type DeclarationCreateOrConnectWithoutHistoryInput = {
@@ -55561,6 +58416,7 @@ export namespace Prisma {
     reviewedBy?: UserUpdateOneWithoutReviewedDeclarationsNestedInput
     items?: DeclarationItemUpdateManyWithoutDeclarationNestedInput
     documents?: DeclarationDocumentUpdateManyWithoutDeclarationNestedInput
+    credits?: DeclarationCreditUpdateManyWithoutDeclarationNestedInput
   }
 
   export type DeclarationUncheckedUpdateWithoutHistoryInput = {
@@ -55583,6 +58439,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     items?: DeclarationItemUncheckedUpdateManyWithoutDeclarationNestedInput
     documents?: DeclarationDocumentUncheckedUpdateManyWithoutDeclarationNestedInput
+    credits?: DeclarationCreditUncheckedUpdateManyWithoutDeclarationNestedInput
   }
 
   export type FacilityCreateWithoutBudgetsInput = {
@@ -59749,6 +62606,7 @@ export namespace Prisma {
     items?: DeclarationItemUpdateManyWithoutDeclarationNestedInput
     documents?: DeclarationDocumentUpdateManyWithoutDeclarationNestedInput
     history?: DeclarationHistoryUpdateManyWithoutDeclarationNestedInput
+    credits?: DeclarationCreditUpdateManyWithoutDeclarationNestedInput
   }
 
   export type DeclarationUncheckedUpdateWithoutFacilityInput = {
@@ -59771,6 +62629,7 @@ export namespace Prisma {
     items?: DeclarationItemUncheckedUpdateManyWithoutDeclarationNestedInput
     documents?: DeclarationDocumentUncheckedUpdateManyWithoutDeclarationNestedInput
     history?: DeclarationHistoryUncheckedUpdateManyWithoutDeclarationNestedInput
+    credits?: DeclarationCreditUncheckedUpdateManyWithoutDeclarationNestedInput
   }
 
   export type DeclarationUncheckedUpdateManyWithoutFacilityInput = {
@@ -60276,6 +63135,7 @@ export namespace Prisma {
     items?: DeclarationItemUpdateManyWithoutDeclarationNestedInput
     documents?: DeclarationDocumentUpdateManyWithoutDeclarationNestedInput
     history?: DeclarationHistoryUpdateManyWithoutDeclarationNestedInput
+    credits?: DeclarationCreditUpdateManyWithoutDeclarationNestedInput
   }
 
   export type DeclarationUncheckedUpdateWithoutSubmittedByInput = {
@@ -60298,6 +63158,7 @@ export namespace Prisma {
     items?: DeclarationItemUncheckedUpdateManyWithoutDeclarationNestedInput
     documents?: DeclarationDocumentUncheckedUpdateManyWithoutDeclarationNestedInput
     history?: DeclarationHistoryUncheckedUpdateManyWithoutDeclarationNestedInput
+    credits?: DeclarationCreditUncheckedUpdateManyWithoutDeclarationNestedInput
   }
 
   export type DeclarationUncheckedUpdateManyWithoutSubmittedByInput = {
@@ -60339,6 +63200,7 @@ export namespace Prisma {
     items?: DeclarationItemUpdateManyWithoutDeclarationNestedInput
     documents?: DeclarationDocumentUpdateManyWithoutDeclarationNestedInput
     history?: DeclarationHistoryUpdateManyWithoutDeclarationNestedInput
+    credits?: DeclarationCreditUpdateManyWithoutDeclarationNestedInput
   }
 
   export type DeclarationUncheckedUpdateWithoutReviewedByInput = {
@@ -60361,6 +63223,7 @@ export namespace Prisma {
     items?: DeclarationItemUncheckedUpdateManyWithoutDeclarationNestedInput
     documents?: DeclarationDocumentUncheckedUpdateManyWithoutDeclarationNestedInput
     history?: DeclarationHistoryUncheckedUpdateManyWithoutDeclarationNestedInput
+    credits?: DeclarationCreditUncheckedUpdateManyWithoutDeclarationNestedInput
   }
 
   export type DeclarationUncheckedUpdateManyWithoutReviewedByInput = {
@@ -60745,6 +63608,14 @@ export namespace Prisma {
     changedAt?: Date | string
   }
 
+  export type DeclarationCreditCreateManyDeclarationInput = {
+    id?: string
+    debtor: string
+    amount: Decimal | DecimalJsLike | number | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type DeclarationItemUpdateWithoutDeclarationInput = {
     id?: StringFieldUpdateOperationsInput | string
     label?: StringFieldUpdateOperationsInput | string
@@ -60830,6 +63701,30 @@ export namespace Prisma {
     changedById?: StringFieldUpdateOperationsInput | string
     comment?: NullableStringFieldUpdateOperationsInput | string | null
     changedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DeclarationCreditUpdateWithoutDeclarationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    debtor?: StringFieldUpdateOperationsInput | string
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DeclarationCreditUncheckedUpdateWithoutDeclarationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    debtor?: StringFieldUpdateOperationsInput | string
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DeclarationCreditUncheckedUpdateManyWithoutDeclarationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    debtor?: StringFieldUpdateOperationsInput | string
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type StatValueCreateManyStatSheetInput = {

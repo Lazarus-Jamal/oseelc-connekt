@@ -27,14 +27,13 @@ export async function exportPDF({
   const pageW = doc.internal.pageSize.getWidth()
   const now = new Date()
 
-  // ── En-tête ────────────────────────────────────────────────────────────────
   doc.setFillColor(15, 118, 110)
   doc.rect(0, 0, pageW, 28, 'F')
 
   doc.setTextColor(255, 255, 255)
   doc.setFontSize(16)
   doc.setFont('helvetica', 'bold')
-  doc.text("L'Oeuvre de Santé — Oseelc-connekt", 14, 11)
+  doc.text("L'Oeuvre de Sante - Oseelc-connekt", 14, 11)
 
   doc.setFontSize(11)
   doc.setFont('helvetica', 'normal')
@@ -42,13 +41,12 @@ export async function exportPDF({
 
   doc.setFontSize(8)
   doc.text(
-    `Généré le ${now.toLocaleDateString('fr-FR')} à ${now.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}`,
+    `Genere le ${now.toLocaleDateString('fr-FR')} a ${now.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}`,
     pageW - 14, 19, { align: 'right' }
   )
 
   let y = 36
 
-  // ── Sous-titre ─────────────────────────────────────────────────────────────
   if (subtitle) {
     doc.setTextColor(100, 116, 139)
     doc.setFontSize(9)
@@ -57,7 +55,6 @@ export async function exportPDF({
     y += 8
   }
 
-  // ── Résumé KPIs ────────────────────────────────────────────────────────────
   if (summary && summary.length > 0) {
     const boxW = (pageW - 28 - (summary.length - 1) * 4) / summary.length
     summary.forEach((item, i) => {
@@ -80,7 +77,6 @@ export async function exportPDF({
     y += 22
   }
 
-  // ── Sections / tableaux ────────────────────────────────────────────────────
   for (const section of sections) {
     if (section.body.length === 0) continue
 
@@ -102,61 +98,79 @@ export async function exportPDF({
 
     y = (doc as any).lastAutoTable.finalY + 8
 
-    // Nouvelle page si nécessaire
     if (y > 260) {
       doc.addPage()
       y = 20
     }
   }
 
-  // ── Pied de page sur chaque page ───────────────────────────────────────────
   const pageCount = doc.getNumberOfPages()
   for (let i = 1; i <= pageCount; i++) {
     doc.setPage(i)
     doc.setTextColor(148, 163, 184)
     doc.setFontSize(7)
     doc.setFont('helvetica', 'normal')
-    doc.text(`Oseelc-connekt — Document confidentiel`, 14, 292)
+    doc.text('Oseelc-connekt - Document confidentiel', 14, 292)
     doc.text(`Page ${i} / ${pageCount}`, pageW - 14, 292, { align: 'right' })
   }
 
   doc.save(filename)
 }
 
+// Formate un nombre sans espaces insecables (U+202F / U+00A0) incompatibles avec jsPDF
+function fmtAmount(n: number): string {
+  return n.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
+}
+
+function fmtCurrency(n: number): string {
+  return fmtAmount(n) + ' F CFA'
+}
+
+const STATUS_LABELS: Record<string, string> = {
+  DRAFT: 'Brouillon', SUBMITTED: 'Soumis', REVIEWED: 'En revue', VALIDATED: 'Valide', REJECTED: 'Rejete',
+}
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function exportDeclarationPDF(declaration: any) {
-  const type = declaration.declarationType === 'REVENUE' ? 'Recettes' : 'Dépenses'
+  const type = declaration.declarationType === 'REVENUE' ? 'Recettes' : 'Depenses'
   const period = declaration.periodStart
-    ? `${new Date(declaration.periodStart).toLocaleDateString('fr-FR')} — ${new Date(declaration.periodEnd).toLocaleDateString('fr-FR')}`
+    ? `${new Date(declaration.periodStart).toLocaleDateString('fr-FR')} - ${new Date(declaration.periodEnd).toLocaleDateString('fr-FR')}`
     : ''
 
-  const STATUS_LABELS: Record<string, string> = {
-    DRAFT: 'Brouillon', SUBMITTED: 'Soumis', REVIEWED: 'En revue', VALIDATED: 'Validé', REJECTED: 'Rejeté',
-  }
+  const totalCredits = (declaration.credits ?? []).reduce((s: number, c: any) => s + Number(c.amount), 0)
 
   await exportPDF({
     filename: `declaration-${declaration.reference ?? 'export'}.pdf`,
-    title: `Déclaration ${type} — ${declaration.reference ?? ''}`,
+    title: `Declaration ${type} - ${declaration.reference ?? ''}`,
     subtitle: `${declaration.facility?.name ?? ''} | ${period}`,
     summary: [
-      { label: 'Référence', value: declaration.reference ?? '-' },
+      { label: 'Reference', value: declaration.reference ?? '-' },
       { label: 'Type', value: type },
       { label: 'Statut', value: STATUS_LABELS[declaration.status] ?? declaration.status },
-      { label: 'Montant total', value: new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'XAF', maximumFractionDigits: 0 }).format(Number(declaration.totalAmount ?? 0)) },
+      { label: 'Montant total', value: fmtCurrency(Number(declaration.totalAmount ?? 0)) },
     ],
     sections: [
       {
-        title: 'Détail des lignes',
-        head: [['Libellé', 'Catégorie', 'Qté', 'Prix unitaire', 'Montant', 'Note']],
+        title: 'Detail des lignes',
+        head: [['Libelle', 'Categorie', 'Qte', 'Prix unitaire', 'Montant', 'Note']],
         body: (declaration.items ?? []).map((item: any) => [
           item.label,
           item.category,
           item.quantity ?? '-',
-          item.unitPrice ? new Intl.NumberFormat('fr-FR').format(Number(item.unitPrice)) : '-',
-          new Intl.NumberFormat('fr-FR').format(Number(item.amount)),
+          item.unitPrice ? fmtAmount(Number(item.unitPrice)) : '-',
+          fmtAmount(Number(item.amount)),
           item.note ?? '',
         ]),
       },
+      ...(declaration.credits?.length ? [{
+        title: 'Recettes a credit',
+        head: [['Debiteur', 'Montant']],
+        body: [
+          ...(declaration.credits ?? []).map((c: any) => [c.debtor, fmtAmount(Number(c.amount))]),
+          ['Total credits', fmtAmount(totalCredits)],
+          ['Net cash', fmtCurrency(Number(declaration.totalAmount ?? 0) - totalCredits)],
+        ],
+      }] : []),
       {
         title: 'Historique des statuts',
         head: [['Date', 'De', 'Vers', 'Par', 'Commentaire']],

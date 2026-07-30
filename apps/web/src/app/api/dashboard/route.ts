@@ -15,9 +15,10 @@ export async function GET(req: NextRequest) {
   // ── FINANCIER ────────────────────────────────────────────────────────────────
   if (role === 'FINANCIER') {
     const baseWhere = { facilityId: facilityId!, periodStart: { gte: startOfMonth }, status: 'VALIDATED' as const }
-    const [revenueAgg, expenseAgg, submitted, validated, rejected, recentDecls, recentExpenses] = await Promise.all([
+    const [revenueAgg, expenseAgg, creditsAgg, submitted, validated, rejected, recentDecls, recentExpenses] = await Promise.all([
       prisma.declaration.aggregate({ where: { ...baseWhere, declarationType: 'REVENUE' }, _sum: { totalAmount: true } }),
       prisma.declaration.aggregate({ where: { ...baseWhere, declarationType: 'EXPENSE' }, _sum: { totalAmount: true } }),
+      prisma.declarationCredit.aggregate({ where: { declaration: { ...baseWhere, declarationType: 'REVENUE' } }, _sum: { amount: true } }),
       prisma.declaration.count({ where: { facilityId: facilityId!, status: 'SUBMITTED', declarationType: 'REVENUE' } }),
       prisma.declaration.count({ where: { facilityId: facilityId!, status: 'VALIDATED', declarationType: 'REVENUE' } }),
       prisma.declaration.count({ where: { facilityId: facilityId!, status: 'REJECTED', declarationType: 'REVENUE' } }),
@@ -32,10 +33,13 @@ export async function GET(req: NextRequest) {
         select: { id: true, reference: true, periodStart: true, totalAmount: true, status: true },
       }),
     ])
-    const totalRevenue = Number(revenueAgg._sum?.totalAmount || 0)
-    const totalExpense = Number(expenseAgg._sum?.totalAmount || 0)
+    const totalRevenueBrut = Number(revenueAgg._sum?.totalAmount || 0)
+    const totalCredits     = Number(creditsAgg._sum?.amount || 0)
+    const totalRevenue     = totalRevenueBrut - totalCredits
+    const totalExpense     = Number(expenseAgg._sum?.totalAmount || 0)
     return NextResponse.json({ success: true, data: {
-      totalRevenueMTD: totalRevenue, totalExpenseMTD: totalExpense,
+      totalRevenueMTD: totalRevenue, totalRevenueBrutMTD: totalRevenueBrut, totalCreditsMTD: totalCredits,
+      totalExpenseMTD: totalExpense,
       netBalance: totalRevenue - totalExpense,
       pendingDeclarations: submitted, validatedDeclarations: validated, rejectedDeclarations: rejected,
       recentDeclarations: recentDecls, recentExpenses,
@@ -45,9 +49,10 @@ export async function GET(req: NextRequest) {
   // ── FACILITY_CHIEF ───────────────────────────────────────────────────────────
   if (role === 'FACILITY_CHIEF') {
     const baseWhere = { facilityId: facilityId!, periodStart: { gte: startOfMonth }, status: 'VALIDATED' as const }
-    const [revenueAgg, expenseAgg, submitted, validated, rejected, recentDecls] = await Promise.all([
+    const [revenueAgg, expenseAgg, creditsAgg, submitted, validated, rejected, recentDecls] = await Promise.all([
       prisma.declaration.aggregate({ where: { ...baseWhere, declarationType: 'REVENUE' }, _sum: { totalAmount: true } }),
       prisma.declaration.aggregate({ where: { ...baseWhere, declarationType: 'EXPENSE' }, _sum: { totalAmount: true } }),
+      prisma.declarationCredit.aggregate({ where: { declaration: { ...baseWhere, declarationType: 'REVENUE' } }, _sum: { amount: true } }),
       prisma.declaration.count({ where: { facilityId: facilityId!, status: 'SUBMITTED' } }),
       prisma.declaration.count({ where: { facilityId: facilityId!, status: 'VALIDATED' } }),
       prisma.declaration.count({ where: { facilityId: facilityId!, status: 'REJECTED' } }),
@@ -56,10 +61,13 @@ export async function GET(req: NextRequest) {
         select: { id: true, reference: true, periodStart: true, totalAmount: true, status: true, declarationType: true },
       }),
     ])
-    const totalRevenue = Number(revenueAgg._sum?.totalAmount || 0)
-    const totalExpense = Number(expenseAgg._sum?.totalAmount || 0)
+    const totalRevenueBrut = Number(revenueAgg._sum?.totalAmount || 0)
+    const totalCredits     = Number(creditsAgg._sum?.amount || 0)
+    const totalRevenue     = totalRevenueBrut - totalCredits
+    const totalExpense     = Number(expenseAgg._sum?.totalAmount || 0)
     return NextResponse.json({ success: true, data: {
-      totalRevenueMTD: totalRevenue, totalExpenseMTD: totalExpense,
+      totalRevenueMTD: totalRevenue, totalRevenueBrutMTD: totalRevenueBrut, totalCreditsMTD: totalCredits,
+      totalExpenseMTD: totalExpense,
       netBalance: totalRevenue - totalExpense,
       pendingDeclarations: submitted, validatedDeclarations: validated, rejectedDeclarations: rejected,
       recentDeclarations: recentDecls,
@@ -69,10 +77,11 @@ export async function GET(req: NextRequest) {
   // ── REGIONAL_DIRECTOR / CONTROLEUR_REGIONAL ──────────────────────────────────
   if (role === 'REGIONAL_DIRECTOR' || role === 'CONTROLEUR_REGIONAL') {
     const facilityWhere = { regionId: regionId! }
-    const [facilities, revenueAgg, expenseAgg, pendingReview, facilitiesStatus, monthlyTrend] = await Promise.all([
+    const [facilities, revenueAgg, expenseAgg, creditsAgg, pendingReview, facilitiesStatus, monthlyTrend] = await Promise.all([
       prisma.facility.count({ where: facilityWhere }),
       prisma.declaration.aggregate({ where: { facility: facilityWhere, periodStart: { gte: startOfMonth }, declarationType: 'REVENUE', status: { in: ['SUBMITTED', 'REVIEWED', 'VALIDATED'] } }, _sum: { totalAmount: true } }),
       prisma.declaration.aggregate({ where: { facility: facilityWhere, periodStart: { gte: startOfMonth }, declarationType: 'EXPENSE', status: { in: ['SUBMITTED', 'REVIEWED', 'VALIDATED'] } }, _sum: { totalAmount: true } }),
+      prisma.declarationCredit.aggregate({ where: { declaration: { facility: facilityWhere, periodStart: { gte: startOfMonth }, declarationType: 'REVENUE', status: { in: ['SUBMITTED', 'REVIEWED', 'VALIDATED'] } } }, _sum: { amount: true } }),
       prisma.declaration.count({ where: { facility: facilityWhere, status: 'SUBMITTED' } }),
       prisma.facility.findMany({
         where: facilityWhere,
@@ -96,8 +105,10 @@ export async function GET(req: NextRequest) {
         },
       }),
     ])
-    const totalRevenue = Number(revenueAgg._sum?.totalAmount || 0)
-    const totalExpense = Number(expenseAgg._sum?.totalAmount || 0)
+    const totalRevenueBrut = Number(revenueAgg._sum?.totalAmount || 0)
+    const totalCredits     = Number(creditsAgg._sum?.amount || 0)
+    const totalRevenue     = totalRevenueBrut - totalCredits
+    const totalExpense     = Number(expenseAgg._sum?.totalAmount || 0)
     const facilitiesRevExp = await Promise.all(
       facilitiesStatus.map(async (f) => {
         const [rev, exp] = await Promise.all([
@@ -111,7 +122,8 @@ export async function GET(req: NextRequest) {
     const onTimeDeclarations = await prisma.declaration.count({ where: { facility: facilityWhere, periodStart: { gte: startOfMonth }, status: { in: ['SUBMITTED', 'REVIEWED', 'VALIDATED'] } } })
     return NextResponse.json({ success: true, data: {
       facilitiesCount: facilities,
-      totalRegionalRevenue: totalRevenue, totalRegionalExpense: totalExpense,
+      totalRegionalRevenue: totalRevenue, totalRegionalRevenueBrut: totalRevenueBrut, totalRegionalCredits: totalCredits,
+      totalRegionalExpense: totalExpense,
       netBalance: totalRevenue - totalExpense,
       pendingReview,
       complianceRate: totalDeclarations > 0 ? Math.round((onTimeDeclarations / totalDeclarations) * 100) : 0,
@@ -166,7 +178,7 @@ export async function GET(req: NextRequest) {
         : {}
     const regionScope = filterRegionId ? { id: filterRegionId } : {}
 
-    const [totalFacilities, revenueAgg, expenseAgg, pendingValidations, regionsOverview] = await Promise.all([
+    const [totalFacilities, revenueAgg, expenseAgg, creditsAgg, pendingValidations, regionsOverview] = await Promise.all([
       prisma.facility.count({ where: facilityScope }),
       prisma.declaration.aggregate({
         where: { ...declFacilityScope, periodStart: periodFilter, declarationType: 'REVENUE', status: statusFilter },
@@ -175,6 +187,10 @@ export async function GET(req: NextRequest) {
       prisma.declaration.aggregate({
         where: { ...declFacilityScope, periodStart: periodFilter, declarationType: 'EXPENSE', status: statusFilter },
         _sum: { totalAmount: true },
+      }),
+      prisma.declarationCredit.aggregate({
+        where: { declaration: { ...declFacilityScope, periodStart: periodFilter, declarationType: 'REVENUE', status: statusFilter } },
+        _sum: { amount: true },
       }),
       prisma.declaration.count({ where: { ...declFacilityScope, status: { in: ['SUBMITTED', 'REVIEWED'] } } }),
       prisma.region.findMany({
@@ -196,8 +212,10 @@ export async function GET(req: NextRequest) {
       }) as Promise<any[]>,
     ])
 
-    const totalRevenue = Number(revenueAgg._sum?.totalAmount || 0)
-    const totalExpense = Number(expenseAgg._sum?.totalAmount || 0)
+    const totalRevenueBrut = Number(revenueAgg._sum?.totalAmount || 0)
+    const totalCredits     = Number(creditsAgg._sum?.amount || 0)
+    const totalRevenue     = totalRevenueBrut - totalCredits
+    const totalExpense     = Number(expenseAgg._sum?.totalAmount || 0)
 
     const regionsData = regionsOverview.map((r) => {
       const allDecls = r.facilities.flatMap((f: any) => f.declarations)
@@ -235,7 +253,9 @@ export async function GET(req: NextRequest) {
       .slice(0, 10)
 
     return NextResponse.json({ success: true, data: {
-      totalFacilities, totalNationalRevenue: totalRevenue, totalNationalExpense: totalExpense,
+      totalFacilities,
+      totalNationalRevenue: totalRevenue, totalNationalRevenueBrut: totalRevenueBrut, totalNationalCredits: totalCredits,
+      totalNationalExpense: totalExpense,
       netBalance: totalRevenue - totalExpense,
       pendingValidations, regionsOverview: regionsData, facilitiesPerf,
     }})

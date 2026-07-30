@@ -20,6 +20,7 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ id:
       submittedBy: { select: { id: true, name: true, email: true } },
       reviewedBy: { select: { id: true, name: true, email: true } },
       items: true,
+      credits: { orderBy: { createdAt: 'asc' } },
       documents: true,
       history: { orderBy: { changedAt: 'desc' } },
     },
@@ -73,6 +74,10 @@ const updateSchema = z.object({
     unitPrice: z.number().nonnegative().optional(),
     note: z.string().optional(),
   })).min(1),
+  credits: z.array(z.object({
+    debtor: z.string().min(1),
+    amount: z.number().nonnegative(),
+  })).optional(),
 })
 
 const submitSchema = z.object({ action: z.enum(['submit', 'review', 'validate', 'reject']) })
@@ -103,7 +108,7 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: 
     return NextResponse.json({ success: false, error: 'Données invalides', details: parsed.error.flatten().fieldErrors }, { status: 400 })
   }
 
-  const { periodType, periodStart, periodEnd, notes, items } = parsed.data
+  const { periodType, periodStart, periodEnd, notes, items, credits } = parsed.data
 
   const now = new Date()
   if (new Date(periodStart) > now || new Date(periodEnd) > now) {
@@ -115,6 +120,7 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: 
   const wasRejected = declaration.status === 'REJECTED'
   const updated = await prisma.$transaction(async (tx) => {
     await tx.declarationItem.deleteMany({ where: { declarationId: id } })
+    await tx.declarationCredit.deleteMany({ where: { declarationId: id } })
     return tx.declaration.update({
       where: { id },
       data: {
@@ -124,10 +130,12 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: 
         totalAmount,
         comment: notes ?? null,
         items: { create: items },
-        // Remettre en brouillon si c'était rejeté, pour que le soumettant puisse re-soumettre
+        ...(declaration.declarationType === 'REVENUE' && credits?.length
+          ? { credits: { create: credits } }
+          : {}),
         ...(wasRejected ? { status: 'DRAFT' } : {}),
       },
-      include: { items: true },
+      include: { items: true, credits: true },
     })
   })
 
