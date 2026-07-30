@@ -11,7 +11,7 @@ import {
 } from 'recharts'
 
 // ── Types ──────────────────────────────────────────────────────────────────────
-type ReportTab = 'category' | 'consolidated' | 'comparison' | 'completeness'
+type ReportTab = 'category' | 'consolidated' | 'comparison' | 'completeness' | 'synthesis'
 
 const ADMIN_ROLES    = ['SUPER_ADMIN', 'DATA_ADMIN', 'DIRECTION', 'REGIONAL_DIRECTOR', 'CONTROLEUR', 'CONTROLEUR_REGIONAL']
 const FAC_SCOPED     = ['FACILITY_CHIEF', 'FINANCIER', 'CAISSIER']
@@ -66,6 +66,7 @@ export function StatisticsReport() {
     { key: 'category',     label: 'Par catégorie' },
     { key: 'consolidated', label: 'Fiche FOSA' },
     { key: 'comparison',   label: 'Comparaison annuelle' },
+    { key: 'synthesis',    label: 'Synthèse annuelle' },
     { key: 'completeness', label: 'Taux de complétude', adminOnly: true },
   ]
 
@@ -100,6 +101,7 @@ export function StatisticsReport() {
       {tab === 'category'     && <CategoryReport ctx={ctx} />}
       {tab === 'consolidated' && <ConsolidatedReport ctx={ctx} />}
       {tab === 'comparison'   && <ComparisonReport ctx={ctx} />}
+      {tab === 'synthesis'    && <SynthesisReport ctx={ctx} />}
       {tab === 'completeness' && ctx.isAdmin && <CompletenessReport ctx={ctx} />}
     </div>
   )
@@ -1034,6 +1036,163 @@ function CompletenessReport({ ctx }: { ctx: UserCtx }) {
             </div>
           </div>
         </>
+      )}
+      {!data && !loading && <Empty />}
+    </div>
+  )
+}
+
+// ── Rapport 5 : Synthèse annuelle (style MINSANTE PEV) ────────────────────────
+const SYNTH_MONTHS = [
+  { key: 'm1', label: 'JAN' }, { key: 'm2', label: 'FÉV' }, { key: 'm3', label: 'MAR' },
+  { key: 'm4', label: 'AVR' }, { key: 'm5', label: 'MAI' }, { key: 'm6', label: 'JUN' },
+  { key: 'm7', label: 'JUL' }, { key: 'm8', label: 'AOÛ' }, { key: 'm9', label: 'SEP' },
+  { key: 'm10', label: 'OCT' }, { key: 'm11', label: 'NOV' }, { key: 'm12', label: 'DÉC' },
+]
+
+function SynthesisReport({ ctx }: { ctx: UserCtx }) {
+  const { categories, regions } = useReferenceData(ctx)
+  const [data,    setData]    = useState<any>(null)
+  const [loading, setLoading] = useState(false)
+
+  const [category, setCategory] = useState('')
+  const [year,     setYear]     = useState(String(new Date().getFullYear()))
+  const [regionId, setRegionId] = useState('')
+
+  useEffect(() => {
+    if (categories.length > 0 && !category) setCategory(categories[0])
+  }, [categories, category])
+
+  const generate = useCallback(() => {
+    if (!category) { toast.error('Sélectionnez une catégorie'); return }
+    const params = new URLSearchParams({ type: 'synthesis', category, yearFrom: year })
+    if (!ctx.isFacilityScoped && !ctx.isRegionScoped && regionId) params.set('regionId', regionId)
+    setLoading(true); setData(null)
+    fetch(`/api/reports/statistics?${params}`)
+      .then((r) => r.json())
+      .then((d) => { if (d.success) setData(d.data); else toast.error(d.error || 'Erreur'); setLoading(false) })
+      .catch(() => { toast.error('Erreur réseau'); setLoading(false) })
+  }, [category, year, regionId, ctx])
+
+  const handleCSV = () => {
+    if (!data) return
+    const colKeys = [...SYNTH_MONTHS.map((c) => c.key), 'T1','T2','T3','T4','S1','S2','TG']
+    const colLabels = [...SYNTH_MONTHS.map((c) => c.label), 'T1','T2','T3','T4','S1','S2','TOTAL']
+    const header = ['Code', 'Indicateur', 'Unité', ...colLabels]
+    const rows = data.table.map((r: any) => [
+      r.code, r.label, r.unit,
+      ...colKeys.map((k) => r[k] ?? ''),
+    ])
+    downloadCSV(`synthese_${category.replace(/[^a-zA-Z0-9]/g, '_')}_${year}.csv`, [header, ...rows])
+  }
+
+  const scopeLabel = ctx.isFacilityScoped ? 'votre FOSA'
+    : ctx.isRegionScoped ? 'votre région'
+    : regionId
+      ? (regions.find((r: any) => r.id === regionId)?.name || 'région sélectionnée')
+      : 'toutes les FOSA'
+
+  return (
+    <div className="space-y-5">
+      <FilterBar>
+        <Field label="Catégorie">
+          <select value={category} onChange={(e) => setCategory(e.target.value)} className={inputCls}>
+            {categories.map((c) => <option key={c} value={c}>{c}</option>)}
+          </select>
+        </Field>
+        <Field label="Année">
+          <select value={year} onChange={(e) => setYear(e.target.value)} className={inputCls}>
+            {YEAR_OPTIONS.map((y) => <option key={y} value={y}>{y}</option>)}
+          </select>
+        </Field>
+        {!ctx.isFacilityScoped && !ctx.isRegionScoped && (
+          <Field label="Région">
+            <select value={regionId} onChange={(e) => setRegionId(e.target.value)} className={inputCls}>
+              <option value="">Toutes les régions</option>
+              {regions.map((r: any) => <option key={r.id} value={r.id}>{r.name}</option>)}
+            </select>
+          </Field>
+        )}
+        <button onClick={generate} disabled={loading || !category} className={btnPrimary}>
+          {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Générer'}
+        </button>
+      </FilterBar>
+
+      {loading && (
+        <div className="flex items-center justify-center py-20">
+          <Loader2 className="w-8 h-8 text-brand-500 animate-spin" />
+        </div>
+      )}
+
+      {data && (
+        <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm">
+          <SectionHeader
+            title={`Synthèse ${category} — ${year}`}
+            subtitle={`${data.facilitiesCount} FOSA · ${scopeLabel}`}
+            actions={
+              <>
+                <button onClick={handleCSV} className={btnCSV}><Download className="w-3.5 h-3.5" /> CSV</button>
+                <button onClick={() => window.print()} className={btnPrint}><Printer className="w-3.5 h-3.5" /> Imprimer</button>
+              </>
+            }
+          />
+
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm" style={{ minWidth: '1280px' }}>
+              <thead>
+                <tr className="border-b border-gray-100 dark:border-gray-800 bg-gray-50 dark:bg-gray-800/30">
+                  <th className="sticky left-0 z-10 bg-gray-50 dark:bg-gray-800/50 text-left px-4 py-3 font-semibold text-gray-700 dark:text-gray-300 w-72">
+                    Indicateur
+                  </th>
+                  {SYNTH_MONTHS.map((c) => (
+                    <th key={c.key} className="px-2 py-3 text-center font-semibold text-gray-500 dark:text-gray-400 text-xs w-12">{c.label}</th>
+                  ))}
+                  <th className="px-2 py-3 text-center font-bold text-teal-700 dark:text-teal-400 text-xs w-12 bg-teal-50 dark:bg-teal-900/20">T1</th>
+                  <th className="px-2 py-3 text-center font-bold text-teal-700 dark:text-teal-400 text-xs w-12 bg-teal-50 dark:bg-teal-900/20">T2</th>
+                  <th className="px-2 py-3 text-center font-bold text-teal-700 dark:text-teal-400 text-xs w-12 bg-teal-50 dark:bg-teal-900/20">T3</th>
+                  <th className="px-2 py-3 text-center font-bold text-teal-700 dark:text-teal-400 text-xs w-12 bg-teal-50 dark:bg-teal-900/20">T4</th>
+                  <th className="px-2 py-3 text-center font-bold text-blue-700 dark:text-blue-400 text-xs w-14 bg-blue-50 dark:bg-blue-900/20">S1</th>
+                  <th className="px-2 py-3 text-center font-bold text-blue-700 dark:text-blue-400 text-xs w-14 bg-blue-50 dark:bg-blue-900/20">S2</th>
+                  <th className="px-3 py-3 text-center font-bold text-brand-700 dark:text-brand-400 text-xs w-16 bg-brand-50 dark:bg-brand-900/20">TOTAL</th>
+                </tr>
+              </thead>
+              <tbody>
+                {data.table.map((row: any, idx: number) => (
+                  <tr key={row.id} className={`border-b border-gray-50 dark:border-gray-800/50 ${idx % 2 === 1 ? 'bg-gray-50/40 dark:bg-gray-800/10' : ''}`}>
+                    <td className="sticky left-0 z-10 bg-inherit px-4 py-2.5">
+                      <span className="block font-medium text-gray-900 dark:text-white leading-tight">{row.label}</span>
+                      <span className="text-[10px] text-gray-400 font-mono">{row.code}</span>
+                    </td>
+                    {SYNTH_MONTHS.map((c) => (
+                      <td key={c.key} className="px-2 py-2.5 text-center tabular-nums text-xs text-gray-700 dark:text-gray-300">
+                        {row[c.key] !== null ? Number(row[c.key]).toLocaleString('fr-FR') : <span className="text-gray-200 dark:text-gray-700">—</span>}
+                      </td>
+                    ))}
+                    {(['T1','T2','T3','T4'] as const).map((k) => (
+                      <td key={k} className="px-2 py-2.5 text-center font-semibold tabular-nums text-xs bg-teal-50/40 dark:bg-teal-900/5 text-teal-800 dark:text-teal-300">
+                        {row[k] !== null ? Number(row[k]).toLocaleString('fr-FR') : <span className="text-gray-200 dark:text-gray-700 font-normal">—</span>}
+                      </td>
+                    ))}
+                    {(['S1','S2'] as const).map((k) => (
+                      <td key={k} className="px-2 py-2.5 text-center font-bold tabular-nums text-xs bg-blue-50/40 dark:bg-blue-900/5 text-blue-800 dark:text-blue-300">
+                        {row[k] !== null ? Number(row[k]).toLocaleString('fr-FR') : <span className="text-gray-200 dark:text-gray-700 font-normal">—</span>}
+                      </td>
+                    ))}
+                    <td className="px-3 py-2.5 text-center font-bold tabular-nums text-sm bg-brand-50/40 dark:bg-brand-900/5 text-brand-800 dark:text-brand-300">
+                      {row.TG !== null ? Number(row.TG).toLocaleString('fr-FR') : <span className="text-gray-200 dark:text-gray-700 font-normal text-xs">—</span>}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <div className="px-5 py-3 border-t border-gray-100 dark:border-gray-800 text-xs text-gray-400 flex flex-wrap gap-x-5 gap-y-1">
+            <span>T1 = Jan–Mar · T2 = Avr–Jun · T3 = Jul–Sep · T4 = Oct–Déc</span>
+            <span>S1 = T1+T2 · S2 = T3+T4 · TOTAL = S1+S2</span>
+            {!ctx.isFacilityScoped && <span>Données agrégées sur {data.facilitiesCount} FOSA</span>}
+          </div>
+        </div>
       )}
       {!data && !loading && <Empty />}
     </div>

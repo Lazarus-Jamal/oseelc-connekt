@@ -90,8 +90,8 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: 
   if (!declaration) {
     return NextResponse.json({ success: false, error: 'Déclaration introuvable' }, { status: 404 })
   }
-  if (declaration.status !== 'DRAFT') {
-    return NextResponse.json({ success: false, error: 'Seul un brouillon peut être modifié' }, { status: 400 })
+  if (!['DRAFT', 'REJECTED'].includes(declaration.status)) {
+    return NextResponse.json({ success: false, error: 'Seule une déclaration en brouillon ou rejetée peut être modifiée' }, { status: 400 })
   }
   if (declaration.submittedById !== userId && role !== 'SUPER_ADMIN') {
     return NextResponse.json({ success: false, error: 'Non autorisé' }, { status: 403 })
@@ -112,6 +112,7 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: 
 
   const totalAmount = items.reduce((s, i) => s + i.amount, 0)
 
+  const wasRejected = declaration.status === 'REJECTED'
   const updated = await prisma.$transaction(async (tx) => {
     await tx.declarationItem.deleteMany({ where: { declarationId: id } })
     return tx.declaration.update({
@@ -123,6 +124,8 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: 
         totalAmount,
         comment: notes ?? null,
         items: { create: items },
+        // Remettre en brouillon si c'était rejeté, pour que le soumettant puisse re-soumettre
+        ...(wasRejected ? { status: 'DRAFT' } : {}),
       },
       include: { items: true },
     })

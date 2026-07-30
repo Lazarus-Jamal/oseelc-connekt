@@ -129,4 +129,44 @@ export const INDICATORS_DATA: IndicatorSeed[] = [
   { code: 'SOC_SENSI',  label: 'Séances de sensibilisation communautaire',  category: 'Activités sociales', unit: 'séances',   isRequired: false, sortOrder: 5 },
   { code: 'SOC_VISITE', label: 'Visites pastorales / à domicile',           category: 'Activités sociales', unit: 'visites',   isRequired: false, sortOrder: 6 },
   { code: 'SOC_BENEF',  label: 'Nombre de bénéficiaires des activités',     category: 'Activités sociales', unit: 'personnes', isRequired: false, sortOrder: 7 },
+
+  // ── MATERNITÉ & NÉONATOLOGIE (plat — MINSANTE) ───────────────────────────────
+  // Accouchements
+  { code: 'MAT_ACCOU_TOT',    label: 'Accouchements totaux',                          category: 'Maternité & Néonatologie', unit: 'accouchements', isRequired: true,  sortOrder: 1  },
+  { code: 'MAT_ACCOU_EUT',    label: 'Accouchements eutociques (voie basse normale)', category: 'Maternité & Néonatologie', unit: 'accouchements', isRequired: true,  sortOrder: 2  },
+  { code: 'MAT_ACCOU_DYS',    label: 'Accouchements dystociques',                     category: 'Maternité & Néonatologie', unit: 'accouchements', isRequired: true,  sortOrder: 3  },
+  { code: 'MAT_CESAR_PROG',   label: 'Césariennes programmées',                       category: 'Maternité & Néonatologie', unit: 'interventions', isRequired: true,  sortOrder: 4  },
+  { code: 'MAT_CESAR_URG',    label: 'Césariennes d\'urgence',                        category: 'Maternité & Néonatologie', unit: 'interventions', isRequired: true,  sortOrder: 5  },
+  { code: 'MAT_CESAR_TOT',    label: 'Césariennes totales',                           category: 'Maternité & Néonatologie', unit: 'interventions', isRequired: true,  sortOrder: 6  },
+  // Naissances
+  { code: 'MAT_NAISS_VIV',    label: 'Naissances vivantes',                           category: 'Maternité & Néonatologie', unit: 'naissances',    isRequired: true,  sortOrder: 7  },
+  { code: 'MAT_MORT_NEO',     label: 'Mort-nés (mortinatalité)',                      category: 'Maternité & Néonatologie', unit: 'cas',           isRequired: true,  sortOrder: 8  },
+  { code: 'MAT_NAISS_PREM',   label: 'Naissances prématurées (<37 semaines)',         category: 'Maternité & Néonatologie', unit: 'naissances',    isRequired: true,  sortOrder: 9  },
+  { code: 'MAT_FAIBLE_POIDS', label: 'Naissances faible poids (<2 500 g)',            category: 'Maternité & Néonatologie', unit: 'naissances',    isRequired: true,  sortOrder: 10 },
+  // Mortalité & complications
+  { code: 'MAT_ECLAMPSI',     label: 'Éclampsie / Pré-éclampsie sévère',             category: 'Maternité & Néonatologie', unit: 'cas',           isRequired: true,  sortOrder: 11 },
+  { code: 'MAT_HEMORR',       label: 'Hémorragies du post-partum',                    category: 'Maternité & Néonatologie', unit: 'cas',           isRequired: true,  sortOrder: 12 },
+  { code: 'MAT_INFECT',       label: 'Infections puerpérales',                        category: 'Maternité & Néonatologie', unit: 'cas',           isRequired: false, sortOrder: 13 },
+  // Consultations pré/post-natales
+  { code: 'MAT_CPN1',         label: 'CPN1 – Première consultation prénatale',        category: 'Maternité & Néonatologie', unit: 'consultations', isRequired: true,  sortOrder: 14 },
+  { code: 'MAT_CPN4',         label: 'CPN4+ – 4 consultations prénatales ou plus',   category: 'Maternité & Néonatologie', unit: 'consultations', isRequired: true,  sortOrder: 15 },
+  { code: 'MAT_CPON',         label: 'Consultations post-natales (CPoN)',             category: 'Maternité & Néonatologie', unit: 'consultations', isRequired: true,  sortOrder: 16 },
+  // Références
+  { code: 'MAT_REF_ENV',      label: 'Références obstétricales envoyées',             category: 'Maternité & Néonatologie', unit: 'références',    isRequired: false, sortOrder: 17 },
+  { code: 'MAT_REF_RECU',     label: 'Références obstétricales reçues',               category: 'Maternité & Néonatologie', unit: 'références',    isRequired: false, sortOrder: 18 },
+
+  // ── PERFORMANCE MÉDICALE (plat — saisie par responsable statistique) ─────────
+  { code: 'PERF_CONS_GENE',   label: 'Consultations — Médecins généralistes',         category: 'Performance médicale', unit: 'consultations', isRequired: true,  sortOrder: 1  },
+  { code: 'PERF_CONS_CHIR',   label: 'Consultations — Chirurgiens',                  category: 'Performance médicale', unit: 'consultations', isRequired: false, sortOrder: 2  },
+  { code: 'PERF_CONS_GYNE',   label: 'Consultations — Gynéco-obstétriciens',         category: 'Performance médicale', unit: 'consultations', isRequired: false, sortOrder: 3  },
+  { code: 'PERF_CONS_PED',    label: 'Consultations — Pédiatres',                    category: 'Performance médicale', unit: 'consultations', isRequired: false, sortOrder: 4  },
+  { code: 'PERF_CONS_MINT',   label: 'Consultations — Médecine interne',             category: 'Performance médicale', unit: 'consultations', isRequired: false, sortOrder: 5  },
+  { code: 'PERF_CONS_OPHT',   label: 'Consultations — Ophtalmologues',               category: 'Performance médicale', unit: 'consultations', isRequired: false, sortOrder: 6  },
+  { code: 'PERF_CONS_ORL',    label: 'Consultations — ORL',                          category: 'Performance médicale', unit: 'consultations', isRequired: false, sortOrder: 7  },
+  { code: 'PERF_CONS_DERM',   label: 'Consultations — Dermatologues',                category: 'Performance médicale', unit: 'consultations', isRequired: false, sortOrder: 8  },
+  { code: 'PERF_CONS_NEURO',  label: 'Consultations — Neurologues',                  category: 'Performance médicale', unit: 'consultations', isRequired: false, sortOrder: 9  },
+  { code: 'PERF_CONS_CARD',   label: 'Consultations — Cardiologues',                 category: 'Performance médicale', unit: 'consultations', isRequired: false, sortOrder: 10 },
+  { code: 'PERF_CONS_URO',    label: 'Consultations — Urologues',                    category: 'Performance médicale', unit: 'consultations', isRequired: false, sortOrder: 11 },
+  { code: 'PERF_ACTE_CHIR',   label: 'Actes chirurgicaux réalisés',                  category: 'Performance médicale', unit: 'actes',         isRequired: false, sortOrder: 12 },
+  { code: 'PERF_ACTE_ACCOU',  label: 'Accouchements assistés (personnel médical)',   category: 'Performance médicale', unit: 'actes',         isRequired: false, sortOrder: 13 },
 ]

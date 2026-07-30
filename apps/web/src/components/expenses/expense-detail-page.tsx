@@ -4,7 +4,7 @@ import { useEffect, useState, useRef } from 'react'
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 import { toast } from 'sonner'
-import { ArrowLeft, Upload, Send, CheckCircle, XCircle, Eye, Loader2, FileText, Image, TrendingDown, Download } from 'lucide-react'
+import { ArrowLeft, Upload, Send, CheckCircle, XCircle, Eye, Loader2, FileText, Image, TrendingDown, Download, Pencil } from 'lucide-react'
 import { StatusBadge } from '@/components/ui/status-badge'
 import { formatCurrency, formatDate, formatDateTime, formatFileSize, FACILITY_TYPE_LABELS, DECLARATION_STATUS_LABELS } from '@care-connekt/shared'
 
@@ -94,6 +94,7 @@ export function ExpenseDetailPage({ id }: ExpenseDetailPageProps) {
   const canValidate = ['REGIONAL_DIRECTOR', 'DIRECTION', 'SUPER_ADMIN'].includes(role) && ['SUBMITTED', 'REVIEWED'].includes(declaration.status)
   const canReject = ['FACILITY_CHIEF', 'REGIONAL_DIRECTOR', 'DIRECTION', 'SUPER_ADMIN'].includes(role) && !['VALIDATED', 'REJECTED'].includes(declaration.status)
   const canUpload = ['FINANCIER', 'FACILITY_CHIEF', 'REGIONAL_DIRECTOR', 'DATA_MANAGER'].includes(role) && ['DRAFT', 'REJECTED'].includes(declaration.status)
+  const canEdit   = ['DRAFT', 'REJECTED'].includes(declaration.status) && (isCreator || role === 'SUPER_ADMIN')
 
   return (
     <div className="max-w-5xl space-y-6">
@@ -124,6 +125,15 @@ export function ExpenseDetailPage({ id }: ExpenseDetailPageProps) {
             <Download className="w-4 h-4" />
             PDF
           </button>
+          {canEdit && (
+            <Link
+              href={`/expenses/${id}/edit`}
+              className="inline-flex items-center gap-2 px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-400 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition"
+            >
+              <Pencil className="w-4 h-4" />
+              Modifier
+            </Link>
+          )}
           {canSubmit && (
             <button
               onClick={() => doAction('submit')}

@@ -172,6 +172,14 @@
       "namedRegex": "^/expenses/(?<nxtPid>[^/]+?)(?:/)?$"
     },
     {
+      "page": "/expenses/[id]/edit",
+      "regex": "^/expenses/([^/]+?)/edit(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/expenses/(?<nxtPid>[^/]+?)/edit(?:/)?$"
+    },
+    {
       "page": "/messages/[id]",
       "regex": "^/messages/([^/]+?)(?:/)?$",
       "routeKeys": {

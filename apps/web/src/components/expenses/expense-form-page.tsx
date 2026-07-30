@@ -36,10 +36,15 @@ type FormData = z.infer<typeof schema>
 const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'application/pdf']
 const MAX_SIZE = 10 * 1024 * 1024
 
-export function ExpenseFormPage() {
+interface ExpenseFormPageProps {
+  editId?: string
+}
+
+export function ExpenseFormPage({ editId }: ExpenseFormPageProps = {}) {
   const router = useRouter()
   const { data: session } = useSession()
   const [submitting, setSubmitting] = useState(false)
+  const [loadingEdit, setLoadingEdit] = useState(!!editId)
   const [files, setFiles] = useState<File[]>([])
   const [facilityId, setFacilityId] = useState('')
   const [facilities, setFacilities] = useState<{ id: string; name: string; type: string }[]>([])
@@ -81,7 +86,7 @@ export function ExpenseFormPage() {
     setAddingCat(false)
   }
 
-  const { register, control, handleSubmit, watch, setValue, formState: { errors } } = useForm<FormData>({
+  const { register, control, handleSubmit, watch, setValue, reset, formState: { errors } } = useForm<FormData>({
     resolver: zodResolver(schema),
     defaultValues: {
       periodType: 'DAILY',
@@ -91,6 +96,33 @@ export function ExpenseFormPage() {
       items: [{ label: '', category: EXPENSE_CATEGORIES[0], amount: 0, note: '' }],
     },
   })
+
+  useEffect(() => {
+    if (!editId) return
+    setLoadingEdit(true)
+    fetch(`/api/declarations/${editId}`)
+      .then((r) => r.json())
+      .then((d) => {
+        if (d.success) {
+          const dec = d.data
+          setFacilityId(dec.facilityId)
+          reset({
+            periodType: dec.periodType,
+            periodStart: dec.periodStart.split('T')[0],
+            periodEnd: dec.periodEnd.split('T')[0],
+            notes: dec.comment || '',
+            items: dec.items.map((item: any) => ({
+              label: item.label,
+              category: item.category,
+              amount: Number(item.amount),
+              quantity: item.quantity ?? undefined,
+              note: item.note || '',
+            })),
+          })
+        }
+      })
+      .finally(() => setLoadingEdit(false))
+  }, [editId, reset])
 
   const { fields, append, remove } = useFieldArray({ control, name: 'items' })
   const items = watch('items')
@@ -120,8 +152,7 @@ export function ExpenseFormPage() {
     setSubmitting(true)
     try {
       const payload = {
-        facilityId: finalFacilityId,
-        declarationType: 'EXPENSE',
+        ...(editId ? {} : { facilityId: finalFacilityId, declarationType: 'EXPENSE' }),
         periodType: data.periodType,
         periodStart: new Date(data.periodStart).toISOString(),
         periodEnd: new Date(data.periodEnd + 'T23:59:59').toISOString(),
@@ -130,37 +161,39 @@ export function ExpenseFormPage() {
       }
 
       // Mode hors ligne : sauvegarder localement
-      if (!navigator.onLine) {
+      if (!navigator.onLine && !editId) {
         await savePending({
           type: 'expense',
           label: `Dépense du ${data.periodStart} — ${data.items.length} ligne(s)`,
           endpoint: '/api/declarations',
           method: 'POST',
-          body: payload,
+          body: { ...payload, facilityId: finalFacilityId, declarationType: 'EXPENSE' },
         })
         toast.success('Saisie sauvegardée localement — elle sera envoyée dès le retour du réseau', { icon: <WifiOff className="w-4 h-4" /> })
         router.push('/expenses')
         return
       }
 
-      const res = await fetch('/api/declarations', {
-        method: 'POST',
+      const res = await fetch(editId ? `/api/declarations/${editId}` : '/api/declarations', {
+        method: editId ? 'PUT' : 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
       })
       const result = await res.json()
       if (!result.success) throw new Error(result.error)
 
+      const declarationId = editId || result.data.id
+
       if (files.length > 0) {
         await Promise.all(files.map((file) => {
           const formData = new FormData()
           formData.append('file', file)
-          return fetch(`/api/declarations/${result.data.id}/documents`, { method: 'POST', body: formData })
+          return fetch(`/api/declarations/${declarationId}/documents`, { method: 'POST', body: formData })
         }))
       }
 
-      toast.success('Déclaration de dépenses créée')
-      router.push(`/expenses/${result.data.id}`)
+      toast.success(editId ? 'Dépense modifiée avec succès' : 'Déclaration de dépenses créée')
+      router.push(`/expenses/${declarationId}`)
     } catch (e: any) {
       toast.error(e.message || 'Erreur lors de la création')
     } finally {
@@ -174,7 +207,10 @@ export function ExpenseFormPage() {
         <Link href="/expenses" className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-500">
           <ArrowLeft className="w-4 h-4" />
         </Link>
-        <PageHeader title="Nouvelle déclaration de dépenses" description="Saisissez les lignes de dépenses et joignez les justificatifs" />
+        <PageHeader
+          title={editId ? 'Modifier la déclaration de dépenses' : 'Nouvelle déclaration de dépenses'}
+          description={editId ? 'Corrigez les informations et soumettez à nouveau' : 'Saisissez les lignes de dépenses et joignez les justificatifs'}
+        />
       </div>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
@@ -367,13 +403,13 @@ export function ExpenseFormPage() {
         </div>
 
         <div className="flex items-center justify-end gap-3">
-          <Link href="/expenses" className="px-4 py-2 text-sm font-medium text-gray-600 dark:text-gray-400 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition">
+          <Link href={editId ? `/expenses/${editId}` : '/expenses'} className="px-4 py-2 text-sm font-medium text-gray-600 dark:text-gray-400 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition">
             Annuler
           </Link>
           <button type="submit" disabled={submitting}
             className="inline-flex items-center gap-2 px-6 py-2.5 bg-orange-500 hover:bg-orange-600 disabled:opacity-50 text-white text-sm font-medium rounded-lg transition">
             {submitting && <Loader2 className="w-4 h-4 animate-spin" />}
-            {submitting ? 'Enregistrement...' : 'Enregistrer en brouillon'}
+            {submitting ? 'Enregistrement...' : editId ? 'Enregistrer les modifications' : 'Enregistrer en brouillon'}
           </button>
         </div>
       </form>

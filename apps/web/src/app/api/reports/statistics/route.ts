@@ -238,5 +238,75 @@ export async function GET(req: NextRequest) {
     })
   }
 
+  // ── Rapport 4 : Synthèse annuelle (style MINSANTE PEV) ────────────────────────
+  if (reportType === 'synthesis') {
+    if (!category) return NextResponse.json({ success: false, error: 'Catégorie requise' }, { status: 400 })
+
+    const year = yearFrom
+
+    const indicators = await prisma.statIndicator.findMany({
+      where: { category, isActive: true },
+      orderBy: { sortOrder: 'asc' },
+    })
+
+    const facilities = await prisma.facility.findMany({
+      where: facilityWhere,
+      select: { id: true, name: true },
+    })
+
+    const sheets = await prisma.statSheet.findMany({
+      where: {
+        facilityId: { in: facilities.map((f) => f.id) },
+        year,
+        status: { in: ['SUBMITTED', 'VALIDATED'] },
+      },
+      include: {
+        values: {
+          where: { indicatorId: { in: indicators.map((i) => i.id) } },
+        },
+      },
+    })
+
+    const MONTHS = [1,2,3,4,5,6,7,8,9,10,11,12] as const
+
+    const table = indicators.map((ind) => {
+      const monthly: Record<number, number | null> = {}
+      let hasAny = false
+      for (const m of MONTHS) {
+        const vals = sheets
+          .filter((s) => s.month === m)
+          .flatMap((s) => s.values.filter((v) => v.indicatorId === ind.id && v.value !== null))
+        if (vals.length > 0) {
+          monthly[m] = vals.reduce((sum, v) => sum + (v.value ?? 0), 0)
+          hasAny = true
+        } else {
+          monthly[m] = null
+        }
+      }
+      const T1 = [1,2,3].reduce((s,m) => s + (monthly[m] ?? 0), 0)
+      const T2 = [4,5,6].reduce((s,m) => s + (monthly[m] ?? 0), 0)
+      const T3 = [7,8,9].reduce((s,m) => s + (monthly[m] ?? 0), 0)
+      const T4 = [10,11,12].reduce((s,m) => s + (monthly[m] ?? 0), 0)
+      const S1 = T1 + T2
+      const S2 = T3 + T4
+      const TG = S1 + S2
+      return {
+        id: ind.id, code: ind.code, label: ind.label, unit: ind.unit, isRequired: ind.isRequired,
+        m1: monthly[1], m2: monthly[2], m3: monthly[3], m4: monthly[4],
+        m5: monthly[5], m6: monthly[6], m7: monthly[7], m8: monthly[8],
+        m9: monthly[9], m10: monthly[10], m11: monthly[11], m12: monthly[12],
+        T1: hasAny ? T1 : null, T2: hasAny ? T2 : null,
+        T3: hasAny ? T3 : null, T4: hasAny ? T4 : null,
+        S1: hasAny ? S1 : null, S2: hasAny ? S2 : null,
+        TG: hasAny ? TG : null,
+      }
+    })
+
+    return NextResponse.json({
+      success: true,
+      data: { type: 'synthesis', category, year, facilitiesCount: facilities.length, table },
+    })
+  }
+
   return NextResponse.json({ success: false, error: 'Type de rapport inconnu' }, { status: 400 })
 }

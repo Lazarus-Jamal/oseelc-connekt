@@ -95,7 +95,7 @@ export function DeclarationDetailPage({ id }: DeclarationDetailPageProps) {
   const canValidate = ['REGIONAL_DIRECTOR', 'DIRECTION', 'SUPER_ADMIN'].includes(role) && ['SUBMITTED', 'REVIEWED'].includes(declaration.status)
   const canReject = ['FACILITY_CHIEF', 'REGIONAL_DIRECTOR', 'DIRECTION', 'SUPER_ADMIN'].includes(role) && !['VALIDATED', 'REJECTED'].includes(declaration.status)
   const canUpload = ['FINANCIER', 'FACILITY_CHIEF', 'REGIONAL_DIRECTOR', 'DATA_MANAGER'].includes(role) && ['DRAFT', 'REJECTED'].includes(declaration.status)
-  const canEdit = declaration.status === 'DRAFT' && (session?.user?.id === declaration.submittedBy.id || role === 'SUPER_ADMIN')
+  const canEdit = ['DRAFT', 'REJECTED'].includes(declaration.status) && (session?.user?.id === declaration.submittedBy.id || role === 'SUPER_ADMIN')
 
   return (
     <div className="max-w-5xl space-y-6">
