@@ -24,10 +24,18 @@ export async function GET(req: NextRequest) {
   const type       = searchParams.get('type')
   const search     = searchParams.get('search') || ''
 
+  const { role, regionId: userRegionId } = session.user
+
   const where: any = {}
   if (facilityId) where.id = facilityId
-  if (regionId)   where.regionId = regionId
   if (type)       where.type = type
+
+  // Scope géographique non contournable côté serveur
+  if (['REGIONAL_DIRECTOR', 'CONTROLEUR_REGIONAL'].includes(role)) {
+    where.regionId = userRegionId
+  } else if (regionId) {
+    where.regionId = regionId
+  }
   if (search) where.OR = [
     { name: { contains: search, mode: 'insensitive' } },
     { code: { contains: search, mode: 'insensitive' } },

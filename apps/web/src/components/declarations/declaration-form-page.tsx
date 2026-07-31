@@ -60,7 +60,8 @@ export function DeclarationFormPage({ editId }: DeclarationFormPageProps = {}) {
 
   useEffect(() => {
     if (!session?.user?.facilityId) {
-      fetch('/api/facilities?limit=100')
+      const regionParam = session?.user?.regionId ? `&regionId=${session.user.regionId}` : ''
+      fetch(`/api/facilities?limit=200${regionParam}`)
         .then((r) => r.json())
         .then((d) => { if (d.success) setFacilities(d.data) })
     }
