@@ -134,22 +134,31 @@ export async function POST(req: NextRequest) {
   const count = await prisma.statSheet.count({ where: { facilityId } })
   const reference = generateReference('STAT', count + 1)
 
-  const sheet = await prisma.statSheet.create({
-    data: {
-      reference,
-      facilityId,
-      dataManagerId: userId,
-      month,
-      year,
-      completeness,
-      status: 'DRAFT',
-      values: { create: values },
-    },
-    include: {
-      values: { include: { indicator: true } },
-      facility: { select: { id: true, name: true } },
-    },
-  })
+  let sheet: any
+  try {
+    sheet = await prisma.statSheet.create({
+      data: {
+        reference,
+        facilityId,
+        dataManagerId: userId,
+        month,
+        year,
+        completeness,
+        status: 'DRAFT',
+        values: { create: values },
+      },
+      include: {
+        values: { include: { indicator: true } },
+        facility: { select: { id: true, name: true } },
+      },
+    })
+  } catch (err: any) {
+    console.error('[POST /api/statistics]', err)
+    if (err?.code === 'P2002') {
+      return NextResponse.json({ success: false, error: 'Une fiche existe déjà pour cette période' }, { status: 409 })
+    }
+    return NextResponse.json({ success: false, error: err?.message || 'Erreur serveur lors de la création' }, { status: 500 })
+  }
 
   const { ipAddress, userAgent } = getClientInfo(req)
   recordAudit({

@@ -67,6 +67,12 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
     updateData = { completeness, values: { create: body.values } }
   }
 
-  const updated = await prisma.statSheet.update({ where: { id }, data: updateData })
+  let updated: any
+  try {
+    updated = await prisma.statSheet.update({ where: { id }, data: updateData })
+  } catch (err: any) {
+    console.error('[PATCH /api/statistics/:id]', err)
+    return NextResponse.json({ success: false, error: err?.message || 'Erreur serveur' }, { status: 500 })
+  }
   return NextResponse.json({ success: true, data: updated })
 }

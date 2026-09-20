@@ -137,7 +137,12 @@ export function StatSheetFormPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
       })
-      const result = await res.json()
+      let result: any
+      try {
+        result = await res.json()
+      } catch {
+        throw new Error(`Erreur serveur (${res.status}) — veuillez réessayer`)
+      }
       if (!result.success) throw new Error(result.error)
 
       if (submit) {
