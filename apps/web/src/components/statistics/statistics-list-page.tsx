@@ -30,7 +30,7 @@ export function StatisticsListPage() {
   const [statusFilter, setStatusFilter] = useState('')
 
   const role = session?.user?.role
-  const canCreate = ['DATA_MANAGER', 'FACILITY_CHIEF', 'REGIONAL_DIRECTOR', 'SUPER_ADMIN'].includes(role || '')
+  const canCreate = ['DATA_MANAGER', 'DATA_ADMIN', 'FACILITY_CHIEF', 'REGIONAL_DIRECTOR', 'SUPER_ADMIN'].includes(role || '')
 
   useEffect(() => {
     if (!session) return

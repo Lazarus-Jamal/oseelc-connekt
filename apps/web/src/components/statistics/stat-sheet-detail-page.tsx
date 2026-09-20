@@ -64,10 +64,10 @@ export function StatSheetDetailPage({ id }: { id: string }) {
   if (!sheet) return <div className="text-center py-16"><p className="text-gray-500">Fiche introuvable</p></div>
 
   const role = session?.user?.role || ''
-  const canSubmit = ['DATA_MANAGER', 'FACILITY_CHIEF', 'REGIONAL_DIRECTOR', 'SUPER_ADMIN'].includes(role) && sheet.status === 'DRAFT'
+  const canSubmit = ['DATA_MANAGER', 'DATA_ADMIN', 'FACILITY_CHIEF', 'REGIONAL_DIRECTOR', 'SUPER_ADMIN'].includes(role) && sheet.status === 'DRAFT'
   const canValidate = ['REGIONAL_DIRECTOR', 'DIRECTION', 'SUPER_ADMIN'].includes(role) && sheet.status === 'SUBMITTED'
   const canReject = ['REGIONAL_DIRECTOR', 'DIRECTION', 'SUPER_ADMIN'].includes(role) && sheet.status === 'SUBMITTED'
-  const canUpload = ['DATA_MANAGER', 'FACILITY_CHIEF', 'REGIONAL_DIRECTOR', 'SUPER_ADMIN'].includes(role) && ['DRAFT', 'REJECTED'].includes(sheet.status)
+  const canUpload = ['DATA_MANAGER', 'DATA_ADMIN', 'FACILITY_CHIEF', 'REGIONAL_DIRECTOR', 'SUPER_ADMIN'].includes(role) && ['DRAFT', 'REJECTED'].includes(sheet.status)
   const canDelete = ['SUPER_ADMIN', 'DIRECTION'].includes(role)
 
   const doDelete = async () => {
