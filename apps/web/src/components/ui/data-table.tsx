@@ -1,5 +1,6 @@
 'use client'
 
+import React from 'react'
 import { cn } from '@/lib/utils'
 
 export interface Column<T> {
@@ -53,22 +54,27 @@ export function DataTable<T>({ columns, data, isLoading, emptyMessage = 'Aucune 
                 </td>
               </tr>
             ) : (
-              data.map((row, i) => (
-                <tr
-                  key={i}
-                  onClick={() => onRowClick?.(row)}
-                  className={cn(
-                    'transition-colors',
-                    onRowClick ? 'cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800/50' : ''
-                  )}
-                >
-                  {columns.map((col) => (
-                    <td key={col.key} className={cn('px-4 py-3 text-gray-700 dark:text-gray-300', col.className)}>
-                      {col.cell(row)}
-                    </td>
-                  ))}
-                </tr>
-              ))
+              data.map((row, i) => {
+                let cells: React.ReactNode
+                try {
+                  cells = columns.map((col) => {
+                    let content: React.ReactNode
+                    try { content = col.cell(row) } catch { content = <span className="text-gray-400 text-xs">—</span> }
+                    return <td key={col.key} className={cn('px-4 py-3 text-gray-700 dark:text-gray-300', col.className)}>{content}</td>
+                  })
+                } catch {
+                  cells = <td colSpan={columns.length} className="px-4 py-3 text-xs text-gray-400">Données invalides</td>
+                }
+                return (
+                  <tr
+                    key={i}
+                    onClick={() => { try { onRowClick?.(row) } catch {} }}
+                    className={cn('transition-colors', onRowClick ? 'cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800/50' : '')}
+                  >
+                    {cells}
+                  </tr>
+                )
+              })
             )}
           </tbody>
         </table>

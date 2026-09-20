@@ -51,19 +51,26 @@ export async function GET(req: NextRequest) {
   if (month) where.month = month
   if (year) where.year = year
 
-  const [total, sheets] = await Promise.all([
-    prisma.statSheet.count({ where }),
-    prisma.statSheet.findMany({
-      where,
-      skip: (page - 1) * limit,
-      take: limit,
-      orderBy: [{ year: 'desc' }, { month: 'desc' }],
-      include: {
-        facility: { select: { id: true, name: true, code: true, type: true } },
-        dataManager: { select: { id: true, name: true } },
-      },
-    }),
-  ])
+  let total = 0
+  let sheets: any[] = []
+  try {
+    ;[total, sheets] = await Promise.all([
+      prisma.statSheet.count({ where }),
+      prisma.statSheet.findMany({
+        where,
+        skip: (page - 1) * limit,
+        take: limit,
+        orderBy: [{ year: 'desc' }, { month: 'desc' }],
+        include: {
+          facility: { select: { id: true, name: true, code: true, type: true } },
+          dataManager: { select: { id: true, name: true } },
+        },
+      }),
+    ])
+  } catch (err: any) {
+    console.error('[GET /api/statistics]', err)
+    return NextResponse.json({ success: false, error: err?.message || 'Erreur serveur' }, { status: 500 })
+  }
 
   return NextResponse.json({
     success: true,
