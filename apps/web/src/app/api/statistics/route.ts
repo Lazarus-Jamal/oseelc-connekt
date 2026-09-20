@@ -120,7 +120,11 @@ export async function POST(req: NextRequest) {
 
   const existing = await prisma.statSheet.findUnique({ where: { facilityId_month_year: { facilityId, month, year } } })
   if (existing) {
-    return NextResponse.json({ success: false, error: 'Une fiche existe déjà pour cette période' }, { status: 409 })
+    return NextResponse.json({
+      success: false,
+      error: 'Une fiche existe déjà pour cette période',
+      existing: { id: existing.id, reference: existing.reference, status: existing.status },
+    }, { status: 409 })
   }
 
   // Calcul completeness

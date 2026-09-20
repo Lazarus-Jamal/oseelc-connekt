@@ -36,7 +36,7 @@ export function StatSheetFormPage() {
   const [loading, setLoading] = useState(true)
   const [submitting, setSubmitting] = useState(false)
   const [currentStep, setCurrentStep] = useState(0)
-  const [existingDraft, setExistingDraft] = useState<{ id: string; reference: string } | null>(null)
+  const [existingDraft, setExistingDraft] = useState<{ id: string; reference: string; status: string } | null>(null)
 
   useEffect(() => {
     if (!session) return
@@ -78,12 +78,12 @@ export function StatSheetFormPage() {
 
   useEffect(() => {
     if (!facilityId) { setExistingDraft(null); return }
-    const params = new URLSearchParams({ facilityId, month: String(month), year: String(year), status: 'DRAFT' })
+    const params = new URLSearchParams({ facilityId, month: String(month), year: String(year) })
     fetch(`/api/statistics?${params}`)
       .then((r) => r.json())
       .then((d) => {
-        const draft = (d.data || [])[0]
-        setExistingDraft(draft ? { id: draft.id, reference: draft.reference } : null)
+        const found = (d.data || [])[0]
+        setExistingDraft(found ? { id: found.id, reference: found.reference, status: found.status } : null)
       })
       .catch(() => setExistingDraft(null))
   }, [facilityId, month, year])
@@ -143,7 +143,17 @@ export function StatSheetFormPage() {
       } catch {
         throw new Error(`Erreur serveur (${res.status}) — veuillez réessayer`)
       }
-      if (!result.success) throw new Error(result.error)
+      if (!result.success) {
+        if (res.status === 409 && result.existing?.id) {
+          const dest = result.existing.status === 'DRAFT'
+            ? `/statistics/${result.existing.id}/edit`
+            : `/statistics/${result.existing.id}`
+          toast.error(`Fiche ${result.existing.reference} déjà existante — redirection…`)
+          setTimeout(() => router.push(dest), 1500)
+          return
+        }
+        throw new Error(result.error)
+      }
 
       if (submit) {
         await fetch(`/api/statistics/${result.data.id}`, {
@@ -249,17 +259,23 @@ export function StatSheetFormPage() {
           <AlertCircle className="w-5 h-5 text-amber-600 dark:text-amber-400 flex-shrink-0 mt-0.5" />
           <div className="flex-1">
             <p className="text-sm font-semibold text-amber-800 dark:text-amber-300">
-              Un brouillon existe déjà pour cette période ({existingDraft.reference})
+              Une fiche existe déjà pour cette période ({existingDraft.reference})
             </p>
             <p className="text-xs text-amber-600 dark:text-amber-500 mt-0.5">
-              Vous pouvez continuer la saisie de ce brouillon plutôt que d'en créer un nouveau.
+              {existingDraft.status === 'DRAFT'
+                ? 'Continuez la saisie de ce brouillon plutôt que d\'en créer un nouveau.'
+                : existingDraft.status === 'SUBMITTED'
+                ? 'Cette fiche a déjà été soumise. Consultez-la pour vérifier son état.'
+                : existingDraft.status === 'VALIDATED'
+                ? 'Cette fiche a été validée. Elle ne peut plus être modifiée.'
+                : 'Cette fiche a été rejetée. Ouvrez-la pour la corriger et la soumettre à nouveau.'}
             </p>
           </div>
           <Link
-            href={`/statistics/${existingDraft.id}/edit`}
+            href={existingDraft.status === 'DRAFT' ? `/statistics/${existingDraft.id}/edit` : `/statistics/${existingDraft.id}`}
             className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold bg-amber-600 hover:bg-amber-700 text-white rounded-lg transition flex-shrink-0"
           >
-            Continuer ce brouillon
+            {existingDraft.status === 'DRAFT' ? 'Continuer la saisie' : 'Voir la fiche'}
           </Link>
         </div>
       )}
