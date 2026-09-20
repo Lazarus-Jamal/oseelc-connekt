@@ -26,7 +26,7 @@ export async function GET(req: NextRequest) {
 
   const { searchParams } = req.nextUrl
   const page = Number(searchParams.get('page') || 1)
-  const limit = Math.min(Number(searchParams.get('limit') || 20), 100)
+  const limit = Math.min(Number(searchParams.get('limit') || 20), 500)
   const month = searchParams.get('month') ? Number(searchParams.get('month')) : undefined
   const year = searchParams.get('year') ? Number(searchParams.get('year')) : undefined
   const status = searchParams.get('status')

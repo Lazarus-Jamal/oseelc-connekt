@@ -33,13 +33,14 @@ export function StatisticsListPage() {
   const canCreate = ['DATA_MANAGER', 'FACILITY_CHIEF', 'REGIONAL_DIRECTOR', 'SUPER_ADMIN'].includes(role || '')
 
   useEffect(() => {
-    const params = new URLSearchParams()
+    if (!session) return
+    const params = new URLSearchParams({ limit: '200' })
     if (statusFilter) params.set('status', statusFilter)
     fetch(`/api/statistics?${params}`)
       .then((r) => r.json())
       .then((d) => { setSheets(d.data || []); setLoading(false) })
       .catch(() => setLoading(false))
-  }, [statusFilter])
+  }, [session, statusFilter])
 
   const columns: Column<StatSheet>[] = [
     { key: 'reference', header: 'Référence', cell: (row) => <span className="font-mono text-xs font-semibold">{row.reference}</span> },
@@ -48,8 +49,8 @@ export function StatisticsListPage() {
       header: 'Formation sanitaire',
       cell: (row) => (
         <div>
-          <p className="font-medium text-gray-900 dark:text-white text-sm">{row.facility.name}</p>
-          <p className="text-xs text-gray-500">{row.facility.type === 'HOSPITAL' ? 'Hôpital' : 'Centre de Santé'}</p>
+          <p className="font-medium text-gray-900 dark:text-white text-sm">{row.facility?.name ?? '—'}</p>
+          <p className="text-xs text-gray-500">{row.facility?.type === 'HOSPITAL' ? 'Hôpital' : 'Centre de Santé'}</p>
         </div>
       ),
     },
@@ -74,7 +75,7 @@ export function StatisticsListPage() {
       ),
     },
     { key: 'status', header: 'Statut', cell: (row) => <StatusBadge status={row.status} type="stat" />, className: 'text-center' },
-    { key: 'manager', header: 'Responsable', cell: (row) => <span className="text-sm text-gray-500">{row.dataManager.name}</span> },
+    { key: 'manager', header: 'Responsable', cell: (row) => <span className="text-sm text-gray-500">{row.dataManager?.name ?? '—'}</span> },
     {
       key: 'actions',
       header: '',
