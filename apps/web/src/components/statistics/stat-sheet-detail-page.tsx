@@ -3,16 +3,19 @@
 import { useEffect, useState, useRef } from 'react'
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
-import { ArrowLeft, Upload, Send, CheckCircle, XCircle, Loader2, FileSpreadsheet, Pencil } from 'lucide-react'
+import { ArrowLeft, Upload, Send, CheckCircle, XCircle, Loader2, FileSpreadsheet, Pencil, Trash2 } from 'lucide-react'
 import { StatusBadge } from '@/components/ui/status-badge'
 import { formatDate, formatPercentage, formatFileSize, getMonthLabel } from '@care-connekt/shared'
 
 export function StatSheetDetailPage({ id }: { id: string }) {
   const { data: session } = useSession()
+  const router = useRouter()
   const [sheet, setSheet] = useState<any>(null)
   const [loading, setLoading] = useState(true)
   const [actionLoading, setActionLoading] = useState(false)
+  const [deleteLoading, setDeleteLoading] = useState(false)
   const fileInputRef = useRef<HTMLInputElement>(null)
 
   const load = () => {
@@ -65,6 +68,23 @@ export function StatSheetDetailPage({ id }: { id: string }) {
   const canValidate = ['REGIONAL_DIRECTOR', 'DIRECTION', 'SUPER_ADMIN'].includes(role) && sheet.status === 'SUBMITTED'
   const canReject = ['REGIONAL_DIRECTOR', 'DIRECTION', 'SUPER_ADMIN'].includes(role) && sheet.status === 'SUBMITTED'
   const canUpload = ['DATA_MANAGER', 'FACILITY_CHIEF', 'REGIONAL_DIRECTOR', 'SUPER_ADMIN'].includes(role) && ['DRAFT', 'REJECTED'].includes(sheet.status)
+  const canDelete = ['SUPER_ADMIN', 'DIRECTION'].includes(role)
+
+  const doDelete = async () => {
+    if (!window.confirm(`Supprimer définitivement la fiche ${sheet.reference} ? Cette action est irréversible.`)) return
+    setDeleteLoading(true)
+    try {
+      const res = await fetch(`/api/statistics/${id}`, { method: 'DELETE' })
+      const result = await res.json()
+      if (!result.success) throw new Error(result.error)
+      toast.success(`Fiche ${sheet.reference} supprimée`)
+      router.push('/statistics')
+    } catch (e: any) {
+      toast.error(e.message)
+    } finally {
+      setDeleteLoading(false)
+    }
+  }
 
   // Grouper les valeurs par catégorie
   const byCategory = (sheet.values || []).reduce((acc: any, v: any) => {
@@ -112,6 +132,13 @@ export function StatSheetDetailPage({ id }: { id: string }) {
               className="inline-flex items-center gap-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white text-sm font-medium rounded-lg transition">
               <CheckCircle className="w-4 h-4" />
               Valider
+            </button>
+          )}
+          {canDelete && (
+            <button onClick={doDelete} disabled={deleteLoading}
+              className="inline-flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-sm font-medium rounded-lg transition disabled:opacity-50">
+              {deleteLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Trash2 className="w-4 h-4" />}
+              Supprimer
             </button>
           )}
         </div>

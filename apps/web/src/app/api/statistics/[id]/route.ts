@@ -3,6 +3,23 @@ import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 import { prisma } from '@/lib/db'
 
+export async function DELETE(_req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params
+  const session = await getServerSession(authOptions)
+  if (!session) return NextResponse.json({ success: false, error: 'Non autorisé' }, { status: 401 })
+  if (!['SUPER_ADMIN', 'DIRECTION'].includes(session.user.role)) {
+    return NextResponse.json({ success: false, error: 'Réservé à l\'administrateur' }, { status: 403 })
+  }
+  const sheet = await prisma.statSheet.findUnique({ where: { id } })
+  if (!sheet) return NextResponse.json({ success: false, error: 'Introuvable' }, { status: 404 })
+  try {
+    await prisma.statSheet.delete({ where: { id } })
+    return NextResponse.json({ success: true })
+  } catch (err: any) {
+    return NextResponse.json({ success: false, error: err?.message || 'Erreur serveur' }, { status: 500 })
+  }
+}
+
 export async function GET(_req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
   const session = await getServerSession(authOptions)
