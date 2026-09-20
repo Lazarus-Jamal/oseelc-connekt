@@ -142,7 +142,7 @@ export async function POST(req: NextRequest) {
   }).length
   const completeness = indicators.length > 0 ? (filledRequired / indicators.length) * 100 : 0
 
-  const count = await prisma.statSheet.count({ where: { facilityId } })
+  const count = await prisma.statSheet.count()
   const reference = generateReference('STAT', count + 1)
 
   let sheet: any
